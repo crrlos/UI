@@ -2,13 +2,15 @@
   <ul data-role="tabs" data-expand="fs">
     <li><a href="#ubicacion">Ubicación</a></li>
     <li><a href="#equipo">Equipos</a></li>
-    <li><a href="#">Materiales</a></li>
+    <li><a href="#material">Materiales</a></li>
   </ul>
   <div id="ubicacion">
     <app-ubicacion-child [ubicaciones]="ubicaciones"></app-ubicacion-child>
   </div>
   <div id="equipo">
-    <app-equipo-child [ubicaciones]="ubicaciones"></app-equipo-child>
+    <app-equipo-child [ubicaciones]="ubicaciones" [equipos]="equipos" [equiposUbicacion]="equipo_ubicacion"></app-equipo-child>
   </div>
-
+  <div id="material">
+    <app-material-child [ubicaciones]="ubicaciones" [equipos]="equipos" [equipo_ubicacion]="equipo_ubicacion"></app-material-child>
+  </div>
 </div>

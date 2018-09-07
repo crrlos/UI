@@ -15,3 +15,14 @@ export interface EquipoUbicacion {
   equipo;
   ubicacion;
 }
+export interface EquipoUbicacionMaterial{
+  codigo;
+  equipo_ubicacion;
+  material;
+  cantidad;
+}
+export interface Material{
+  codigo?;
+  nombre?;
+  precio?;
+}

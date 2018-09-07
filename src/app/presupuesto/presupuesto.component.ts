@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Ubicacion} from './clases';
+import {Ubicacion,Equipo,EquipoUbicacion} from './clases';
 @Component({
   selector: 'app-presupuesto',
   templateUrl: './presupuesto.component.html',
@@ -7,7 +7,7 @@ import {Ubicacion} from './clases';
 })
 export class PresupuestoComponent implements OnInit {
   ubicaciones: Ubicacion[] = [];
-  ngOnInit() {
-    this.ubicaciones.push({ codigo: 1, nombre: "Ubicacion 1", isEditable: false });
-  }
+  equipos: Equipo[] = [];
+  equipo_ubicacion: EquipoUbicacion[] = [];
+  ngOnInit() {}
 }

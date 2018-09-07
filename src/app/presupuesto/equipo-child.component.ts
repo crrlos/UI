@@ -8,14 +8,15 @@ import {Equipo,Ubicacion,EquipoUbicacion} from './clases';
 export class EquipoChildComponent implements OnInit {
 
   @Input() ubicaciones: Ubicacion[] = [];
+  @Input() equipos:Equipo[];
+  @Input() equiposUbicacion:EquipoUbicacion[] = [];
 
   txtBuscar: String;
   equipoSeleccionado: Equipo = {};
-  equipos: Equipo[] = [];
   equipos_filtro: Equipo[] = [];
   checked = false;
   ubicacionSeleccionada: Ubicacion;
-  equiposUbicacion: EquipoUbicacion[] = [];
+  //equiposUbicacion: EquipoUbicacion[] = [];
   cambioUbicacion: Ubicacion = {};
   detalle_equipo_ubi: any[] = [];
   equipoUbicacionSeleccionado: EquipoUbicacion;
@@ -73,15 +74,26 @@ export class EquipoChildComponent implements OnInit {
     });
     this.detalle_equipo_ubicacion();
   }
-  constructor() { this.equipos = this.data(); this.equipos_filtro = this.equipos; }
+  constructor() { }
 
   ngOnInit() {
 
+     this.data().forEach(d=>{
+       this.equipos.push(d);
+     });
+    this.equipos_filtro = this.equipos;
+    this.equiposUbicacion.push({
+      codigo:1,
+      equipo:1,
+      ubicacion:1
+    });
+    this.detalle_equipo_ubicacion();
+    //console.log(this.equipo_ubicacion)
   }
   obtener(equipo){
     this.equipoSeleccionado = equipo;
   }
-  data() {
+  data():any[] {
     let arreglo = [{
       "codigo": 1,
       "ubicacion": "quis",

@@ -4,7 +4,7 @@ import {Ubicacion} from './clases';
   selector: 'app-ubicacion-child',
   templateUrl: './ubicacion-child.component.html'
 })
-export class UbicacionChildComponent {
+export class UbicacionChildComponent implements OnInit {
 
   ubicacion: String;
   @Input() ubicaciones: Ubicacion[] = [];
@@ -32,6 +32,10 @@ export class UbicacionChildComponent {
   }
   constructor() {
 
+  }
+  ngOnInit(){
+    this.ubicaciones.push({ codigo: 1, nombre: "Ubicacion 1", isEditable: false },
+  { codigo: 2, nombre: "Ubicacion 2", isEditable: false });
   }
 
 

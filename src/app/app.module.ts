@@ -6,12 +6,14 @@ import { PresupuestoComponent } from './presupuesto/presupuesto.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { EquipoChildComponent } from './presupuesto/equipo-child.component';
 import { UbicacionChildComponent } from './presupuesto/ubicacion-child.component';
+import { MaterialChildComponent } from './presupuesto/material-child.component';
 @NgModule({
   declarations: [
     AppComponent,
     PresupuestoComponent,
     EquipoChildComponent,
-    UbicacionChildComponent
+    UbicacionChildComponent,
+    MaterialChildComponent
   ],
   imports: [
     BrowserModule,
