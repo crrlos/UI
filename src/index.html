@@ -7,8 +7,26 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
 </head>
 <body>
   <app-root></app-root>
+  <script>
+    function mostrar(){
+      var x = document.getElementById("ocultar");
+      var y = document.getElementById("toggle");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        y.classList.remove("mif-plus");
+        y.classList.add("mif-minus");
+    } else {
+        x.style.display = "none";
+        y.classList.remove("mif-minus");
+        y.classList.add("mif-plus");
+    }
+    }
+  </script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
 </body>
 </html>
