@@ -3,7 +3,7 @@ export interface Ubicacion {
   nombre?;
   isEditable?;
 }
-export interface Equipo{
+export interface Equipo {
   codigo?;
   ubicacion?;
   nombre?;
@@ -11,17 +11,17 @@ export interface Equipo{
   precio?;
 }
 export interface EquipoUbicacion {
-  codigo;
-  equipo;
-  ubicacion;
+  codigo?;
+  equipo?;
+  ubicacion?;
 }
-export interface EquipoUbicacionMaterial{
+export interface EquipoUbicacionMaterial {
   codigo;
-  equipo_ubicacion;
-  material;
+  equipo_ubicacion: EquipoUbicacion;
+  material: Material;
   cantidad;
 }
-export interface Material{
+export interface Material {
   codigo?;
   nombre?;
   precio?;
