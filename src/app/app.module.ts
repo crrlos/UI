@@ -7,6 +7,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { EquipoChildComponent } from './presupuesto/equipo-child/equipo-child.component';
 import { UbicacionChildComponent } from './presupuesto/ubicacion-child/ubicacion-child.component';
 import { MaterialChildComponent } from './presupuesto/material-child/material-child.component';
+import {SpinnerModule} from 'primeng/spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,6 +17,7 @@ import { MaterialChildComponent } from './presupuesto/material-child/material-ch
     MaterialChildComponent
   ],
   imports: [
+    SpinnerModule,
     BrowserModule,
     FormsModule,
     NgxPaginationModule
