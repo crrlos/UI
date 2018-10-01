@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Equipo, Ubicacion, EquipoUbicacion, EquipoUbicacionMaterial, Material } from '../interfaces';
+import {Ubicacion, EquipoUbicacion, EquipoUbicacionMaterial, Material } from '../interfaces';
 @Component({
   selector: 'app-material-child',
   templateUrl: './material-child.component.html'
 })
 export class MaterialChildComponent implements OnInit {
-  @Input() equipos: Equipo[];
   @Input() ubicaciones: Ubicacion[];
   @Input() equipo_ubicacion: EquipoUbicacion[];
 
