@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Ubicacion, EquipoUbicacion, EquipoUbicacionMaterial, Material } from '../interfaces';
+import { Ubicacion, EquipoUbicacion, EquipoUbicacionMaterial, Material } from '../interfaces';
 @Component({
   selector: 'app-material-child',
   templateUrl: './material-child.component.html'
@@ -37,13 +37,26 @@ export class MaterialChildComponent implements OnInit {
       this.equipo_ubicacion_material.filter(e => e.equipo_ubicacion === this.equipoUbicacionSeleccionado);
   }
   agregarMaterial() {
+    if (this.actualizarMaterialRepetido()) {
+      return;
+    }
     this.equipo_ubicacion_material.push({
       codigo: 1,
       equipo_ubicacion: this.equipoUbicacionSeleccionado,
       material: this.materialElegido,
-      cantidad: this.txtCantidad
+      cantidad: Number.parseInt(this.txtCantidad)
     });
     this.filtrarMaterialEquipo();
+  }
+  actualizarMaterialRepetido() {
+    const equipos = this.equipo_ubicacion_material.filter(e => e.equipo_ubicacion === this.equipoUbicacionSeleccionado);
+    if (equipos.length > 0) {
+      const material = equipos.find(e => e.material === this.materialElegido);
+      if (material) {
+        material.cantidad += Number.parseInt(this.txtCantidad);
+        return true;
+      }
+    }
   }
   obtenerMaterial(material: Material) {
     this.materialElegido = material;

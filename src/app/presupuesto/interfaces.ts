@@ -19,7 +19,7 @@ export interface EquipoUbicacionMaterial {
   codigo;
   equipo_ubicacion: EquipoUbicacion;
   material: Material;
-  cantidad;
+  cantidad: number;
 }
 export interface Material {
   codigo?;
