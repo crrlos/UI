@@ -10,34 +10,41 @@ export class MaterialChildComponent implements OnInit {
   @Input() equipo_ubicacion: EquipoUbicacion[];
 
   equipo_ubicacion_material: EquipoUbicacionMaterial[] = [];
+  equipo_ubicacion_material_filtrado: EquipoUbicacionMaterial[] = [];
   materiales: Material[] = [];
   materiales_copia: Material[] = [];
   ubicacionSeleccionada: Ubicacion = {};
-  equipoSeleccionado: EquipoUbicacion = {};
+  equipoUbicacionSeleccionado: EquipoUbicacion = {};
   materialElegido: Material = {};
-
-  equipos_ubicacion: Equipo[] = [];
+  // almacena los equipos que pertenecen a la ubicación seleccionada
+  equipos_ubicacion: EquipoUbicacion[] = [];
 
   txtBuscar;
   txtCantidad;
   mostrar = false;
 
   actualizarEquipos() {
+    this.equipo_ubicacion_material_filtrado = [];
     this.equipos_ubicacion = [];
     this.equipo_ubicacion.forEach(eu => {
-      if (eu.ubicacion === this.ubicacionSeleccionada.codigo) {
-        this.equipos_ubicacion.push(this.equipos.find(e => e.codigo === eu.equipo));
+      if (eu.ubicacion === this.ubicacionSeleccionada) {
+        this.equipos_ubicacion.push(eu);
       }
     });
+  }
+  filtrarMaterialEquipo() {
+    this.equipo_ubicacion_material_filtrado = [];
+    this.equipo_ubicacion_material_filtrado =
+      this.equipo_ubicacion_material.filter(e => e.equipo_ubicacion === this.equipoUbicacionSeleccionado);
   }
   agregarMaterial() {
     this.equipo_ubicacion_material.push({
       codigo: 1,
-      equipo_ubicacion: this.equipoSeleccionado,
+      equipo_ubicacion: this.equipoUbicacionSeleccionado,
       material: this.materialElegido,
       cantidad: this.txtCantidad
     });
-    console.log(this.equipo_ubicacion_material);
+    this.filtrarMaterialEquipo();
   }
   obtenerMaterial(material: Material) {
     this.materialElegido = material;
