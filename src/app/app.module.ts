@@ -8,6 +8,9 @@ import { EquipoChildComponent } from './presupuesto/equipo-child/equipo-child.co
 import { UbicacionChildComponent } from './presupuesto/ubicacion-child/ubicacion-child.component';
 import { MaterialChildComponent } from './presupuesto/material-child/material-child.component';
 import {SpinnerModule} from 'primeng/spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTreeModule} from '@angular/material/tree';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,10 +20,12 @@ import {SpinnerModule} from 'primeng/spinner';
     MaterialChildComponent
   ],
   imports: [
+    MatTreeModule,
     SpinnerModule,
     BrowserModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
