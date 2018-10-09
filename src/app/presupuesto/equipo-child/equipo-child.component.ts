@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Equipo, Ubicacion, EquipoUbicacion } from '../interfaces';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Ubicacion, Equipo } from '../interfaces';
 @Component({
   selector: 'app-equipo-child',
   templateUrl: './equipo-child.component.html',
@@ -7,20 +7,16 @@ import { Equipo, Ubicacion, EquipoUbicacion } from '../interfaces';
 })
 export class EquipoChildComponent implements OnInit {
 
-  @Input() ubicaciones: Ubicacion[] = [];
-  @Input() equipos: Equipo[];
-  @Input() equiposUbicacion: EquipoUbicacion[] = [];
+  @Input() ubicacion: Ubicacion;
+  @Output() notificar = new EventEmitter<boolean>();
 
+  equipos: Equipo[];
   txtBuscar: String;
   equipoSeleccionado: Equipo = {};
   equipos_filtro: Equipo[] = [];
   checked = false;
   ubicacionSeleccionada: Ubicacion;
   cambioUbicacion: Ubicacion = {};
-  detalle_equipo_ubi: any[] = [];
-  equipoUbicacionSeleccionado: EquipoUbicacion;
-
-
 
   editaEquipo = false;
   actualizar() {
@@ -28,69 +24,52 @@ export class EquipoChildComponent implements OnInit {
       return f.nombre.toLowerCase().includes(this.txtBuscar.toLowerCase());
     });
   }
-  detalle_equipo_ubicacion() {
-    this.detalle_equipo_ubi = [];
-    this.equiposUbicacion.forEach(e => {
-      this.detalle_equipo_ubi.push({
-        codigo: e.codigo,
-        equipo: e.equipo,
-        ubicacion: e.ubicacion,
-        editable: false
-      });
-    });
-    return this.detalle_equipo_ubi;
-  }
-  editarEquipo(codigo) {
-    this.equipoUbicacionSeleccionado = this.equiposUbicacion.find(e => e.codigo === codigo);
-    this.equipoSeleccionado = this.equipoUbicacionSeleccionado.equipo;
-    this.ubicacionSeleccionada = this.equipoUbicacionSeleccionado.ubicacion;
-    this.editaEquipo = true;
-    // marca como editable el registro seleccionado y como no editable cualquier registro que se encuentre en edición
-    this.detalle_equipo_ubi.forEach(u => { u.codigo === codigo ? u.editable = true : u.editable = false; });
-  }
-  cancelarEdicionEquipo(codigo) {
-    this.editaEquipo = false;
-    this.detalle_equipo_ubi.find(d => d.codigo === codigo).editable = false;
-  }
-  actualizarEquipoUbicacion() {
-    this.editaEquipo = false;
-    this.detalle_equipo_ubi.forEach(d => { d.editable = false; });
-    this.equipoUbicacionSeleccionado.ubicacion = this.ubicacionSeleccionada.codigo;
-    this.detalle_equipo_ubi.find(d => d.codigo === this.equipoUbicacionSeleccionado.codigo)
-      .ubicacion = this.ubicacionSeleccionada;
-  }
-  agregarEquipoUbicacion() {
-    this.equiposUbicacion.push({
-      codigo: this.equiposUbicacion.length === 0 ? 1 : this.equiposUbicacion[this.equiposUbicacion.length - 1].codigo + 1,
-      equipo: this.equipoSeleccionado,
-      ubicacion: this.ubicacionSeleccionada
-    });
-    this.detalle_equipo_ubicacion();
-  }
   constructor() { }
-
-  ngOnInit() {
-
-    this.data().forEach(d => {
-      this.equipos.push(d);
+  agregarEquipo() {
+    this.ubicacion.equipos.push({
+      nombre: 'eq 1',
+      precio: 1000,
+      porcentaje: 1,
+      total: 100,
+      materiales: []
     });
+    this.actualizarTotal();
+  }
+  agregarMaterial(equipo: Equipo) {
+    equipo.materiales.push({
+      cantidad: 10,
+      precio: 10,
+      nombre: 'material 1',
+      codigo: 1
+    });
+    this.actualizarTotal();
+  }
+  ngOnInit() {
     this.equipos_filtro = this.equipos;
   }
   obtener(equipo) {
     this.equipoSeleccionado = equipo;
   }
-  data(): any[] {
-    const arreglo = [{
-      'codigo': 1,
-      'nombre': 'Equipo 1',
-      'precio': 500
-    },
-    {
-      'codigo': 2,
-      'nombre': 'Equipo 2',
-      'precio': 1000
-    }];
-    return JSON.parse(JSON.stringify(arreglo));
+  totalMateriales(equipo: Equipo) {
+    let total = 0;
+    equipo.materiales.forEach(material => {
+        total += material.precio * material.cantidad;
+    });
+    return total;
   }
-
+  //  se actualiza el total($$) del área a la que pertenece el equipo, sumando valor de los equipos más los materiales
+  actualizarTotal() {
+    let total_general = 0;
+    this.ubicacion.equipos.forEach(e => {
+      let total_materiales_equipo = 0;
+      // se suman los materiales
+      e.materiales.forEach(m => {
+        total_materiales_equipo += m.cantidad * m.precio;
+      });
+      e.total = total_materiales_equipo + e.precio * e.porcentaje;
+      total_general += e.total; // valor del equipo
+    });
+    this.ubicacion.total = total_general; // se actualiza el total de la ubicación
+    this.notificar.emit(true); // notificar al padre para que actualice los totales
+  }
 }

@@ -1,28 +1,21 @@
 export interface Ubicacion {
   codigo?;
   nombre?;
-  isEditable?;
+  equipos?: Equipo[];
+  total?;
 }
 export interface Equipo {
   codigo?;
-  ubicacion?;
   nombre?;
   capacidad?;
   precio?;
-}
-export interface EquipoUbicacion {
-  codigo?;
-  equipo?;
-  ubicacion?;
-}
-export interface EquipoUbicacionMaterial {
-  codigo;
-  equipo_ubicacion: EquipoUbicacion;
-  material: Material;
-  cantidad: number;
+  porcentaje?;
+  materiales?: Material[];
+  total?;
 }
 export interface Material {
   codigo?;
   nombre?;
+  cantidad?;
   precio?;
 }

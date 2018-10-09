@@ -10,7 +10,7 @@ import { MaterialChildComponent } from './presupuesto/material-child/material-ch
 import {SpinnerModule} from 'primeng/spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTreeModule} from '@angular/material/tree';
-
+import {NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +20,7 @@ import {MatTreeModule} from '@angular/material/tree';
     MaterialChildComponent
   ],
   imports: [
+    NgbAccordionModule,
     MatTreeModule,
     SpinnerModule,
     BrowserModule,

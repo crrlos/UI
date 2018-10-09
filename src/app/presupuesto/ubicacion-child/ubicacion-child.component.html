@@ -1,34 +1,34 @@
-<div class="row m-5">
-  <div class="cell-1">
-    <div class="inline-form">
-      <input type="text" [(ngModel)]="ubicacion" /><button class="button" (click)="agregarUbicacion()">Agregar</button>
-    </div>
+total {{totalGeneral}}
+<div class="mt-5"></div>
+<div class="row">
+  <div class="cell">
+    <form class="inline-form">
+      <input type="text" [(ngModel)]="ubicacion" name="ubicacion">
+      <button class="button" (click)="agregarUbicacion()">Agregar</button>
+    </form>
   </div>
 </div>
-<div class="row mt-5">
-  <div class="cell-sm-12 cell-lg-6">
-    <table class="table striped compact table-border">
-      <tr *ngFor="let ubicacion of ubicaciones">
-        <td>
-          <div [hidden]="ubicacion.isEditable">
-            {{ubicacion.nombre}}
+<div class="mt-10"></div>
+<div data-role="accordion" data-one-frame="false"  data-show-active="false" data-active-heading-class="bg-cyan fg-white">
+  <div class="frame" *ngFor="let ubicacion of ubicaciones">
+    <div class="heading">{{ubicacion.nombre}}</div>
+    <div class="content" style="display:none">
+      <div class="row border bd-cyan">
+        <div class="cell-4 p-5">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" [(ngModel)]="ubicacion.nombre">
           </div>
-          <div class="input-control big-input" [hidden]="!ubicacion.isEditable">
-            <input type="text" [(ngModel)]="ubicacion.nombre" />
+        </div>
+        <div class="cell-4 p-5">
+          <div class="form-group">
+            <label>Total por ubicación</label>
+            <input disabled type="text" value="{{ubicacion.total | currency}}">
           </div>
-        </td>
-        <td>
-          <div [hidden]="ubicacion.isEditable">
-            <span class="mif-pencil fg-green" (click)="editar(ubicacion.codigo)"></span>
-            <span class="mif-bin fg-red ml-5" (click)="eliminar()"></span>
-          </div>
-          <div [hidden]="!ubicacion.isEditable">
-            <span class="mif-floppy-disk fg-blue " (click)="guardar(ubicacion.codigo)"></span>
-            <span class="mif-cancel fg-black  ml-5" (click)="cancelar()"></span>
-          </div>
-        </td>
-
-      </tr>
-    </table>
+        </div>
+      </div>
+      <app-equipo-child [ubicacion]="ubicacion" (notificar)="onNotificacion()"></app-equipo-child>
+    </div>
   </div>
+  
 </div>
