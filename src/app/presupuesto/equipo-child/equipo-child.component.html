@@ -31,6 +31,19 @@
             </div>
             <div class="cell">
               <div class="form-group">
+                <label>Porc</label>
+                <p-spinner (onChange)="actualizarTotal()" (keyup)="actualizarTotal()"
+                size="30" [(ngModel)]="equipo.porcentaje" [step]="0.25"></p-spinner>
+              </div>
+            </div>
+            <div class="cell">
+              <div class="form-group">
+                <label>Precio final</label>
+                <input disabled type="text" value="{{equipo.precio * equipo.porcentaje | currency}}">
+              </div>
+            </div>
+            <div class="cell">
+              <div class="form-group">
                 <label>Total equipo + materiales</label>
                 <input disabled type="text" value="{{equipo.total | currency}}">
               </div>

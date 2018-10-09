@@ -6,22 +6,16 @@ import { PresupuestoComponent } from './presupuesto/presupuesto.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { EquipoChildComponent } from './presupuesto/equipo-child/equipo-child.component';
 import { UbicacionChildComponent } from './presupuesto/ubicacion-child/ubicacion-child.component';
-import { MaterialChildComponent } from './presupuesto/material-child/material-child.component';
 import {SpinnerModule} from 'primeng/spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTreeModule} from '@angular/material/tree';
-import {NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
     PresupuestoComponent,
     EquipoChildComponent,
-    UbicacionChildComponent,
-    MaterialChildComponent
+    UbicacionChildComponent
   ],
   imports: [
-    NgbAccordionModule,
-    MatTreeModule,
     SpinnerModule,
     BrowserModule,
     FormsModule,
