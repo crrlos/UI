@@ -13,13 +13,11 @@
             <div class="cell">
               <div class="form-group">
                 <label>Ubicación</label>
-                <select>
-                  <option>
-                    ubicación 1
+                <select [(ngModel)]="ubicacionSeleccionada" (change)="moverEquipo(equipo)">
+                  <option *ngFor="let ubicacion of  ubicaciones" [ngValue]="ubicacion">
+                   {{ubicacion.nombre}}
                   </option>
-                  <option>
-                    ubicación 2
-                  </option>
+                  
                 </select>
               </div>
             </div>
@@ -93,82 +91,3 @@
     </div>
   </div>
 </div>
-
-
-<!--<div>
-  <div class="form-group">
-    <label>Equipo</label><span id="toggle" *ngIf="!editaEquipo" class="mif-plus mif-lg fg-blue ml-5 c-pointer" onclick="mostrar()"></span>
-    <input type="text" [(ngModel)]="equipoSeleccionado.nombre" disabled/>
-  </div>
-  <div id="ocultar" class="border bd-cyan" style="display:none">
-    <div class="m-10">
-      <input type="text" placeholder="Buscar Equipo" (keyup)="actualizar()" [(ngModel)]="txtBuscar" data-role="search" />
-      <table class="table compact row-border row-hover">
-        <thead>
-          <tr>
-            <th>
-              Nombre
-            </th>
-            <th>
-              Precio
-            </th>
-            
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let equipo of equipos_filtro | paginate: { itemsPerPage: 5, currentPage: p }" class="c-pointer" (click)="obtener(equipo)">
-            <td>
-              {{equipo.nombre}}
-            </td>
-            <td>
-              {{equipo.precio}}
-            </td>
-            
-          </tr>
-        </tbody>
-      </table>
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
-    </div>
-  
-  </div>
-  <div class="form-group">
-    <label>Ubicación</label>
-    <select [(ngModel)]="ubicacionSeleccionada">
-      <option *ngFor="let ubicacion of ubicaciones"[ngValue]="ubicacion" >
-        {{ubicacion.nombre}}
-      </option>
-    </select>
-  </div>
-  <button class="button mt-3 primary" (click)="agregarEquipoUbicacion()" *ngIf="!editaEquipo">Agregar</button>
-  <button class="button mt-3 primary" (click)="actualizarEquipoUbicacion()" *ngIf="editaEquipo">Guardar</button>
-</div>
-<table class="table">
-  <thead>
-    <tr>
-      <th>
-        Equipo
-      </th>
-      <th>
-        Ubicación
-      </th>
-      <th>
-        Editar
-      </th>
-    </tr>
-  </thead>
-  <tr *ngFor="let detalle of detalle_equipo_ubi">
-    <td>
-      {{detalle.equipo.nombre}}
-    </td>
-    <td>
-
-      {{detalle.ubicacion.nombre}}
-
-    </td>
-    <td>
-      <button (click)="editarEquipo(detalle.codigo)" *ngIf="!detalle.editable">editar</button>
-      <button (click)="cancelarEdicionEquipo(detalle.codigo)" *ngIf="detalle.editable">cancelar</button>
-    </td>
-  </tr>
-</table>
--->

@@ -7,15 +7,16 @@ import { Ubicacion, Equipo } from '../interfaces';
 })
 export class EquipoChildComponent implements OnInit {
 
+  @Input() ubicaciones: Ubicacion[];
   @Input() ubicacion: Ubicacion;
   @Output() notificar = new EventEmitter<boolean>();
+  ubicacionSeleccionada: Ubicacion;
 
   equipos: Equipo[];
   txtBuscar: String;
   equipoSeleccionado: Equipo = {};
   equipos_filtro: Equipo[] = [];
   checked = false;
-  ubicacionSeleccionada: Ubicacion;
   cambioUbicacion: Ubicacion = {};
 
   editaEquipo = false;
@@ -45,6 +46,7 @@ export class EquipoChildComponent implements OnInit {
     this.actualizarTotal();
   }
   ngOnInit() {
+    this.ubicacionSeleccionada = this.ubicacion;
     this.equipos_filtro = this.equipos;
   }
   obtener(equipo) {
@@ -53,23 +55,41 @@ export class EquipoChildComponent implements OnInit {
   totalMateriales(equipo: Equipo) {
     let total = 0;
     equipo.materiales.forEach(material => {
-        total += material.precio * material.cantidad;
+      total += material.precio * material.cantidad;
     });
     return total;
   }
-  //  se actualiza el total($$) del área a la que pertenece el equipo, sumando valor de los equipos más los materiales
+  // Se hace una actualización de totales($$$) a todas las áreas
   actualizarTotal() {
     let total_general = 0;
-    this.ubicacion.equipos.forEach(e => {
-      let total_materiales_equipo = 0;
-      // se suman los materiales
-      e.materiales.forEach(m => {
-        total_materiales_equipo += m.cantidad * m.precio;
+    // Se recorre cada área
+    this.ubicaciones.forEach(ubicacion => {
+      total_general = 0;
+      // Se recorren los equipos del área
+      ubicacion.equipos.forEach(equipo => {
+        let total_materiales_equipo = 0;
+        // se suman los materiales por equipo
+        equipo.materiales.forEach(m => {
+          total_materiales_equipo += m.cantidad * m.precio;
+        });
+        equipo.total = total_materiales_equipo + equipo.precio * equipo.porcentaje;
+        total_general += equipo.total; // valor del equipo
       });
-      e.total = total_materiales_equipo + e.precio * e.porcentaje;
-      total_general += e.total; // valor del equipo
+      ubicacion.total = total_general; // se actualiza el total de la ubicación
     });
-    this.ubicacion.total = total_general; // se actualiza el total de la ubicación
     this.notificar.emit(true); // notificar al padre para que actualice los totales
+  }
+  moverEquipo(equipo: Equipo) {
+    const r = confirm('está seguro que desea mover de área este equipo?');
+    if (!r) {
+      setTimeout(() => {
+        this.ubicacionSeleccionada = this.ubicacion;
+      });
+      return;
+    }
+    this.ubicacion.equipos.splice(this.ubicacion.equipos.indexOf(equipo));
+    this.ubicacionSeleccionada.equipos.push(equipo);
+    this.ubicacionSeleccionada = this.ubicacion;
+    this.actualizarTotal();
   }
 }
