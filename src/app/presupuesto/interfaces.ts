@@ -1,10 +1,11 @@
 export interface Ubicacion {
-  codigo?;
+  id?;
   nombre?;
   equipos?: Equipo[];
   total?;
 }
 export interface Equipo {
+  id?;
   codigo?;
   nombre?;
   capacidad?;
@@ -14,6 +15,7 @@ export interface Equipo {
   total?;
 }
 export interface Material {
+  id?;
   codigo?;
   nombre?;
   cantidad?;

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Ubicacion, Equipo } from '../interfaces';
+import { equipos } from '../datos';
+declare var Metro;
 @Component({
   selector: 'app-equipo-child',
   templateUrl: './equipo-child.component.html',
@@ -13,6 +15,7 @@ export class EquipoChildComponent implements OnInit {
   ubicacionSeleccionada: Ubicacion;
 
   equipos: Equipo[];
+  equipos_lista: Equipo[];
   txtBuscar: String;
   equipoSeleccionado: Equipo = {};
   equipos_filtro: Equipo[] = [];
@@ -20,20 +23,17 @@ export class EquipoChildComponent implements OnInit {
   cambioUbicacion: Ubicacion = {};
 
   editaEquipo = false;
+  f(eq) {
+    Metro.dialog.open(eq);
+  }
   actualizar() {
     this.equipos_filtro = this.equipos.filter(f => {
       return f.nombre.toLowerCase().includes(this.txtBuscar.toLowerCase());
     });
   }
   constructor() { }
-  agregarEquipo() {
-    this.ubicacion.equipos.push({
-      nombre: 'eq 1',
-      precio: 1000,
-      porcentaje: 1,
-      total: 100,
-      materiales: []
-    });
+  agregarEquipo(equipo) {
+    this.ubicacion.equipos.push(equipo);
     this.actualizarTotal();
   }
   agregarMaterial(equipo: Equipo) {
@@ -41,13 +41,14 @@ export class EquipoChildComponent implements OnInit {
       cantidad: 10,
       precio: 10,
       nombre: 'material 1',
-      codigo: 1
+      id: 1
     });
     this.actualizarTotal();
   }
   ngOnInit() {
     this.ubicacionSeleccionada = this.ubicacion;
     this.equipos_filtro = this.equipos;
+    this.equipos_lista = equipos;
   }
   obtener(equipo) {
     this.equipoSeleccionado = equipo;

@@ -1,6 +1,7 @@
 <div class="row">
   <div class="cell">
-    <button class="button primary m-2 small" (click)="agregarEquipo(equi)">Agregar Equipo</button>
+      
+   <button class="button primary m-2 small" (click)="f('#equipo_'+ubicacion.id)">Agregar Equipo</button>
   </div>
 </div>
 <div class="row">
@@ -90,4 +91,31 @@
       
     </div>
   </div>
+</div>
+
+<div class="dialog" data-role="dialog" id="equipo_{{ubicacion.id}}" data-width="1000">
+    <div class="dialog-title">Use Windows location service?</div>
+    <div class="dialog-content">
+        <table class="table compact striped">
+          <thead>
+            <th>codigo</th>
+            <th>nombre</th>
+            <th>precio</th>
+            <th>capacidad</th>
+            
+          </thead>
+          <tbody>
+            <tr *ngFor="let equipo of equipos_lista" (click)="agregarEquipo(equipo)">
+              <td>{{equipo.codigo}}</td>
+              <td>{{equipo.nombre}}</td>
+              <td>{{equipo.precio | currency}}</td>
+              <td>{{equipo.capacidad}}{{ubicacion.nombre}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div class="dialog-actions">
+        <button class="button js-dialog-close">Cancelar</button>
+        <button class="button primary js-dialog-close">Agregar</button>
+    </div>
 </div>

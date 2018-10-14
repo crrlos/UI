@@ -14,15 +14,15 @@ export class UbicacionChildComponent implements OnInit {
   totalGeneral = 0;
   agregarUbicacion() {
     this.ubicaciones.push({
-      codigo: this.ubicaciones[this.ubicaciones.length - 1].codigo + 1, nombre: this.ubicacion,
+      id: this.ubicaciones[this.ubicaciones.length - 1].id + 1, nombre: this.ubicacion,
       equipos: []
     });
   }
   constructor() { }
 
   ngOnInit() {
-    this.ubicaciones.push({ codigo: 1, nombre: 'Área 1', equipos: [] },
-      { codigo: 2, nombre: 'Área 2', equipos: [] });
+    this.ubicaciones.push({ id: 1, nombre: 'Área 1', equipos: [] },
+      { id: 2, nombre: 'Área 2', equipos: [] });
   }
   onNotificacion() {
     this.totalGeneral = 0;
