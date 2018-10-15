@@ -1,4 +1,4 @@
-import { Equipo } from './interfaces';
+import { Equipo, Material } from './interfaces';
 
 export const equipos: Equipo[] = [{
     id: 1,
@@ -26,4 +26,12 @@ export const equipos: Equipo[] = [{
     porcentaje: 1,
     capacidad: '10000 BTU',
     materiales: []
+}];
+
+export const materiales: Material[] = [{
+    id: 1,
+    codigo: 'M-0101',
+    nombre: 'material 1',
+    cantidad: 10,
+    precio: 100
 }];

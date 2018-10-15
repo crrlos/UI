@@ -51,7 +51,7 @@
           <hr>
           <div class="row">
             <div class="cell">
-              <button class="button primary m-2 small" (click)="agregarMaterial(equipo)">Agregar Material</button>
+              <button class="button primary m-2 small" (click)="f('#material_'+equipo.id)">Agregar Material</button>
             </div>
           </div>
           <div class="row">
@@ -64,6 +64,7 @@
                     <th>precio</th>
                     <th>cantidad</th>
                     <th>total</th>
+                    <th>Eliminar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -71,8 +72,11 @@
                     <td>{{material.codigo}}</td>
                     <td>{{material.nombre}}</td>
                     <td>{{material.precio}}</td>
-                    <td>{{material.cantidad}}</td>
-                    <td>{{material.precio * material.cantidad}}</td>
+                    <td><p-spinner (onChange)="actualizarTotal()" (keyup)="actualizarTotal()"
+                      size="10" [(ngModel)]="material.cantidad" [step]="1"></p-spinner></td>
+                    <td>{{material.precio * material.cantidad | currency}}</td>
+                    <td><span class="mif-bin mif-lg fg-red pointer" (click)="eliminarMaterial(equipo,material)"></span>
+                    </td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -80,12 +84,47 @@
                     <td>
                       Total
                     </td>
-                    <td></td><td></td><td></td><td>{{ totalMateriales(equipo) | currency}}</td>
+                    <td></td><td></td><td></td><td>{{ totalMateriales(equipo) | currency}}</td><td></td>
                   </tr>
                 </tfoot>
               </table>
             </div>
           </div>
+        </div>
+        <div class="dialog" data-role="dialog" id="material_{{equipo.id}}" data-width="1000">
+            <div class="dialog-title">Materiales</div>
+            <div class="dialog-content">
+              <div class="row">
+                <div class="cell">
+                  <input type="text" placeholder="buscar">
+                </div>
+              </div>
+                <div class="row">
+                  <div class="cell">
+                    <table class="table compact striped row-hover">
+                      <thead>
+                        <th>codigo</th>
+                        <th>nombre</th>
+                        <th>precio</th>
+                        <th>cantidad</th>
+                        
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let material of materiales_lista" (click)="agregarMaterial(material,equipo)" class="pointer">
+                          <td>{{material.codigo}}</td>
+                          <td>{{material.nombre}}</td>
+                          <td>{{material.precio | currency}}</td>
+                          <td>{{material.cantidad}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+            <div class="dialog-actions">
+                <button class="button js-dialog-close">Cerrar</button>
+               
+            </div>
         </div>
       </div>
       
@@ -94,28 +133,38 @@
 </div>
 
 <div class="dialog" data-role="dialog" id="equipo_{{ubicacion.id}}" data-width="1000">
-    <div class="dialog-title">Use Windows location service?</div>
+    <div class="dialog-title">Equipos</div>
     <div class="dialog-content">
-        <table class="table compact striped">
-          <thead>
-            <th>codigo</th>
-            <th>nombre</th>
-            <th>precio</th>
-            <th>capacidad</th>
-            
-          </thead>
-          <tbody>
-            <tr *ngFor="let equipo of equipos_lista" (click)="agregarEquipo(equipo)">
-              <td>{{equipo.codigo}}</td>
-              <td>{{equipo.nombre}}</td>
-              <td>{{equipo.precio | currency}}</td>
-              <td>{{equipo.capacidad}}{{ubicacion.nombre}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="cell">
+          <input type="text" placeholder="buscar">
+        </div>
+      </div>
+        <div class="row">
+          <div class="cell">
+            <table class="table compact striped row-hover">
+              <thead>
+                <th>codigo</th>
+                <th>nombre</th>
+                <th>precio</th>
+                <th>capacidad</th>
+                
+              </thead>
+              <tbody>
+                <tr *ngFor="let equipo of equipos_lista" (click)="agregarEquipo(equipo)" class="pointer">
+                  <td>{{equipo.codigo}}</td>
+                  <td>{{equipo.nombre}}</td>
+                  <td>{{equipo.precio | currency}}</td>
+                  <td>{{equipo.capacidad}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
     </div>
     <div class="dialog-actions">
-        <button class="button js-dialog-close">Cancelar</button>
-        <button class="button primary js-dialog-close">Agregar</button>
+        <button class="button js-dialog-close">Cerrar</button>
+       
     </div>
 </div>
+

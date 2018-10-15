@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Ubicacion, Equipo } from '../interfaces';
-import { equipos } from '../datos';
+import { Ubicacion, Equipo, Material } from '../interfaces';
+import { equipos, materiales } from '../datos';
 declare var Metro;
 @Component({
   selector: 'app-equipo-child',
@@ -16,6 +16,7 @@ export class EquipoChildComponent implements OnInit {
 
   equipos: Equipo[];
   equipos_lista: Equipo[];
+  materiales_lista: Material[];
   txtBuscar: String;
   equipoSeleccionado: Equipo = {};
   equipos_filtro: Equipo[] = [];
@@ -31,24 +32,26 @@ export class EquipoChildComponent implements OnInit {
       return f.nombre.toLowerCase().includes(this.txtBuscar.toLowerCase());
     });
   }
+  eliminarMaterial(equipo: Equipo, material: Material) {
+    equipo.materiales.splice(equipo.materiales.indexOf(material), 1);
+    this.actualizarTotal();
+  }
   constructor() { }
   agregarEquipo(equipo) {
     this.ubicacion.equipos.push(equipo);
     this.actualizarTotal();
   }
-  agregarMaterial(equipo: Equipo) {
-    equipo.materiales.push({
-      cantidad: 10,
-      precio: 10,
-      nombre: 'material 1',
-      id: 1
-    });
+  agregarMaterial(material: Material, equipo: Equipo) {
+    const m: Material = JSON.parse(JSON.stringify(material));
+    m.cantidad = 1;
+    equipo.materiales.push(m);
     this.actualizarTotal();
   }
   ngOnInit() {
     this.ubicacionSeleccionada = this.ubicacion;
     this.equipos_filtro = this.equipos;
     this.equipos_lista = equipos;
+    this.materiales_lista = materiales;
   }
   obtener(equipo) {
     this.equipoSeleccionado = equipo;
