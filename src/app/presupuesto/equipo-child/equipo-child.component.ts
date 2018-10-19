@@ -55,6 +55,7 @@ export class EquipoChildComponent implements OnInit {
   agregarMaterial(material: Material, equipo: Equipo) {
     const m: Material = JSON.parse(JSON.stringify(material));
     m.cantidad = 1;
+    m.porcentaje = 1;
     equipo.materiales.push(m);
     this.actualizarTotal();
   }
@@ -87,7 +88,7 @@ export class EquipoChildComponent implements OnInit {
         let total_materiales_equipo = 0;
         // se suman los materiales por equipo
         equipo.materiales.forEach(m => {
-          total_materiales_equipo += m.cantidad * m.precio;
+          total_materiales_equipo += m.cantidad * m.precio * m.porcentaje;
         });
         // evita que se sobreescriba el valor ingresado manualmente
         if (equipo.total_materiales_modificado < total_materiales_equipo) {

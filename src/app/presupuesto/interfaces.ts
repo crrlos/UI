@@ -21,4 +21,5 @@ export interface Material {
   nombre?;
   cantidad?;
   precio?;
+  porcentaje?;
 }
