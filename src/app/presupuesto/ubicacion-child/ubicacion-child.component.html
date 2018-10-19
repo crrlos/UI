@@ -11,7 +11,16 @@ total {{totalGeneral}}
 <div class="mt-10"></div>
 <div data-role="accordion" data-one-frame="false"  data-show-active="false" data-active-heading-class="bg-cyan fg-white">
   <div class="frame" *ngFor="let ubicacion of ubicaciones">
-    <div class="heading">{{ubicacion.nombre}}</div>
+    <div class="heading">
+      <div class="row">
+        <div class="cell">
+          {{ubicacion.nombre}}
+        </div>
+        <div class="cell text-right">
+          {{ubicacion.total | currency}}
+        </div>
+      </div>
+    </div>
     <div class="content" style="display:none">
       <div class="row border bd-cyan">
         <div class="cell-4 p-5">

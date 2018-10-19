@@ -17,15 +17,14 @@ export class EquipoChildComponent implements OnInit {
   equipos: Equipo[];
   equipos_lista: Equipo[];
   materiales_lista: Material[];
-  txtBuscar: String;
   equipoSeleccionado: Equipo = {};
   equipos_filtro: Equipo[] = [];
-  checked = false;
   cambioUbicacion: Ubicacion = {};
 
   timeout_id;
 
   editaEquipo = false;
+
   f(eq) {
     Metro.dialog.open(eq);
   }
@@ -35,11 +34,6 @@ export class EquipoChildComponent implements OnInit {
       this.timeout_id = null;
     }
     this.timeout_id = setTimeout(() => { this.actualizarTotal(); }, 1000);
-  }
-  actualizar() {
-    this.equipos_filtro = this.equipos.filter(f => {
-      return f.nombre.toLowerCase().includes(this.txtBuscar.toLowerCase());
-    });
   }
   eliminarMaterial(equipo: Equipo, material: Material) {
     equipo.materiales.splice(equipo.materiales.indexOf(material), 1);
@@ -80,28 +74,28 @@ export class EquipoChildComponent implements OnInit {
   // Se hace una actualización de totales($$$) a todas las áreas
   actualizarTotal() {
     let total_general = 0;
-    // Se recorre cada área
+
     this.ubicaciones.forEach(ubicacion => {
       total_general = 0;
-      // Se recorren los equipos del área
+
       ubicacion.equipos.forEach(equipo => {
         let total_materiales_equipo = 0;
-        // se suman los materiales por equipo
-        equipo.materiales.forEach(m => {
-          total_materiales_equipo += m.cantidad * m.precio * m.porcentaje;
+
+        equipo.materiales.forEach(material => {
+          total_materiales_equipo += material.cantidad * material.precio * material.porcentaje;
         });
         // evita que se sobreescriba el valor ingresado manualmente
         if (equipo.total_materiales_modificado < total_materiales_equipo) {
           equipo.total_materiales_modificado = total_materiales_equipo;
         }
-        // limpia el campo cuando la lista de materiales queda vacía
+
         if (total_materiales_equipo === 0) {
           equipo.total_materiales_modificado = 0;
         }
         equipo.total = Number.parseFloat(equipo.total_materiales_modificado) + equipo.precio * equipo.porcentaje;
         total_general += equipo.total; // valor del equipo
       });
-      ubicacion.total = total_general; // se actualiza el total de la ubicación
+      ubicacion.total = total_general;
     });
     this.notificar.emit(true); // notificar al padre para que actualice los totales
   }
