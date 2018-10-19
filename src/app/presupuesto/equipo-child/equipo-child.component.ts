@@ -23,9 +23,18 @@ export class EquipoChildComponent implements OnInit {
   checked = false;
   cambioUbicacion: Ubicacion = {};
 
+  timeout_id;
+
   editaEquipo = false;
   f(eq) {
     Metro.dialog.open(eq);
+  }
+  actualizar_total_personalizado() {
+    if (this.timeout_id) {
+      clearTimeout(this.timeout_id);
+      this.timeout_id = null;
+    }
+    this.timeout_id = setTimeout(() => { this.actualizarTotal(); }, 1000);
   }
   actualizar() {
     this.equipos_filtro = this.equipos.filter(f => {
@@ -37,8 +46,10 @@ export class EquipoChildComponent implements OnInit {
     this.actualizarTotal();
   }
   constructor() { }
-  agregarEquipo(equipo) {
-    this.ubicacion.equipos.push(equipo);
+  agregarEquipo(equipo: Equipo) {
+    const equi: Equipo = JSON.parse(JSON.stringify(equipo));
+    equi.total_materiales_modificado = 0;
+    this.ubicacion.equipos.push(equi);
     this.actualizarTotal();
   }
   agregarMaterial(material: Material, equipo: Equipo) {
@@ -52,6 +63,8 @@ export class EquipoChildComponent implements OnInit {
     this.equipos_filtro = this.equipos;
     this.equipos_lista = equipos;
     this.materiales_lista = materiales;
+
+
   }
   obtener(equipo) {
     this.equipoSeleccionado = equipo;
@@ -76,7 +89,15 @@ export class EquipoChildComponent implements OnInit {
         equipo.materiales.forEach(m => {
           total_materiales_equipo += m.cantidad * m.precio;
         });
-        equipo.total = total_materiales_equipo + equipo.precio * equipo.porcentaje;
+        // evita que se sobreescriba el valor ingresado manualmente
+        if (equipo.total_materiales_modificado < total_materiales_equipo) {
+          equipo.total_materiales_modificado = total_materiales_equipo;
+        }
+        // limpia el campo cuando la lista de materiales queda vacía
+        if (total_materiales_equipo === 0) {
+          equipo.total_materiales_modificado = 0;
+        }
+        equipo.total = Number.parseFloat(equipo.total_materiales_modificado) + equipo.precio * equipo.porcentaje;
         total_general += equipo.total; // valor del equipo
       });
       ubicacion.total = total_general; // se actualiza el total de la ubicación

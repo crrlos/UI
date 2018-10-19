@@ -13,6 +13,7 @@ export interface Equipo {
   porcentaje?;
   materiales?: Material[];
   total?;
+  total_materiales_modificado?;
 }
 export interface Material {
   id?;

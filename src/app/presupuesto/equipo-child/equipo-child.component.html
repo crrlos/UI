@@ -1,7 +1,7 @@
 <div class="row">
   <div class="cell">
       
-   <button class="button primary m-2 small" (click)="f('#equipo_'+ubicacion.id)">Agregar Equipo</button>
+   <button class="button primary m-2" (click)="f('#equipo_'+ubicacion.id)">Agregar Equipo</button>
   </div>
 </div>
 <div class="row">
@@ -51,7 +51,20 @@
           <hr>
           <div class="row">
             <div class="cell">
-              <button class="button primary m-2 small" (click)="f('#material_'+equipo.id)">Agregar Material</button>
+              <button class="button primary m-2" (click)="f('#material_'+equipo.id)">Agregar Material</button>
+              
+            </div>
+            <div class="cell">
+              <div class="form-group">
+                <label>Total materiales</label>
+                <input type="text" disabled value="{{ totalMateriales(equipo) | currency}}">
+              </div>
+            </div>
+            <div class="cell">
+              <div class="form-group">
+                <label>Total Personalizado</label>
+                <input type="text" id="total_personalizado" (keyup)="actualizar_total_personalizado()" name="total_personalizado" [(ngModel)]="equipo.total_materiales_modificado">
+              </div>
             </div>
           </div>
           <div class="row">
