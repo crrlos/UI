@@ -34,6 +34,8 @@
       <th>nombre</th>
       <th>cantidad</th>
       <th>precio</th>
+      <th>tipo</th>
+      <th>Uni Med</th>
     </tr>
   </thead>
   <tbody>
@@ -42,6 +44,8 @@
       <td>{{material.nombre}}</td>
       <td>{{material.cantidad}}</td>
       <td>{{material.precio}}</td>
+      <td>{{material.tipo?.nombre}}</td>
+      <td>{{material.unidad_medida.nombre}}</td>
     </tr>
   </tbody>
 </table>

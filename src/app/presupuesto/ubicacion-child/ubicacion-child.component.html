@@ -10,14 +10,14 @@ total {{totalGeneral}}
 </div>
 <div class="mt-10"></div>
 <div data-role="accordion" data-one-frame="false"  data-show-active="false" data-active-heading-class="bg-cyan fg-white">
-  <div class="frame" *ngFor="let ubicacion of ubicaciones">
+  <div class="frame" *ngFor="let area of areas">
     <div class="heading">
       <div class="row">
         <div class="cell">
-          {{ubicacion.nombre}}
+          {{area.nombre}}
         </div>
         <div class="cell text-right">
-          {{ubicacion.total | currency}}
+          {{area.total | currency}}
         </div>
       </div>
     </div>
@@ -26,17 +26,17 @@ total {{totalGeneral}}
         <div class="cell-4 p-5">
           <div class="form-group">
             <label>Nombre</label>
-            <input type="text" [(ngModel)]="ubicacion.nombre">
+            <input type="text" [(ngModel)]="area.nombre">
           </div>
         </div>
         <div class="cell-4 p-5">
           <div class="form-group">
             <label>Total por ubicación</label>
-            <input disabled type="text" value="{{ubicacion.total | currency}}">
+            <input disabled type="text" value="{{area.total | currency}}">
           </div>
         </div>
       </div>
-      <app-equipo-child [ubicacion]="ubicacion" [ubicaciones]="ubicaciones" (notificar)="onNotificacion()"></app-equipo-child>
+      <app-equipo-child [area]="area" [areas]="areas" (notificar)="onNotificacion()"></app-equipo-child>
     </div>
   </div>
   

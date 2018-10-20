@@ -12,6 +12,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { RouterModule, Routes } from '@angular/router';
 import { EquiposComponent } from './equipos/equipos.component';
 import { MaterialesComponent } from './materiales/materiales.component';
+import { HttpClientModule } from '@angular/common/http';
 const appRoutes: Routes = [
   { path: 'materiales', component: MaterialesComponent },
   { path: 'equipos',      component: EquiposComponent },
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
     EquiposComponent
   ],
   imports: [
+    HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only

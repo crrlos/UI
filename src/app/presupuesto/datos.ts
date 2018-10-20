@@ -33,33 +33,43 @@ export const materiales: Material[] = [{
     codigo: 'M-0101',
     nombre: 'material 1',
     cantidad: 10,
-    precio: 100
+    precio: 100,
+    tipo: { id: 1, nombre: 'electrico' },
+    unidad_medida: { id: 1, nombre: 'metro', abreviatura: 'm' }
 },
 {
     id: 1,
     codigo: 'M-0101',
     nombre: 'mano de obra',
     cantidad: 10,
-    precio: 100
+    precio: 100,
+    tipo: { id: 1, nombre: 'electrico' },
+    unidad_medida: { id: 1, nombre: 'metro', abreviatura: 'm' }
 },
 {
     id: 1,
     codigo: 'M-0101',
     nombre: 'mano de obra 12000 BTU',
     cantidad: 0,
-    precio: 150
+    precio: 150,
+    tipo: { id: 1, nombre: 'electrico' },
+    unidad_medida: { id: 1, nombre: 'metro', abreviatura: 'm' }
 },
 {
     id: 1,
     codigo: 'M-0101',
     nombre: 'mano de obra 18000 BTU',
     cantidad: 0,
-    precio: 150
+    precio: 150,
+    tipo: { id: 1, nombre: 'electrico' },
+    unidad_medida: { id: 1, nombre: 'metro', abreviatura: 'm' }
 },
 {
     id: 1,
     codigo: 'M-0101',
     nombre: 'mano de obra 24000 BTU',
     cantidad: 10,
-    precio: 175
+    precio: 175,
+    tipo: { id: 1, nombre: 'electrico' },
+    unidad_medida: { id: 1, nombre: 'metro', abreviatura: 'm' }
 }];

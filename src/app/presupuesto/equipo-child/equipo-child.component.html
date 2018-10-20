@@ -1,22 +1,22 @@
 <div class="row">
   <div class="cell">
 
-    <button class="button primary m-2" (click)="f('#equipo_'+ubicacion.id)">Agregar Equipo</button>
+    <button class="button primary m-2" (click)="f('#equipo_'+area.id)">Agregar Equipo</button>
   </div>
 </div>
 <div class="row">
   <div class="cell-10 offset-1">
     <div data-role="accordion" data-one-frame="false" data-show-active="false" data-active-heading-class="bg-pink fg-white">
-      <div class="frame" *ngFor="let equipo of ubicacion.equipos">
-        <div class="heading">{{equipo.nombre}}</div>
+      <div class="frame" *ngFor="let equipo of area.equipos">
+        <div class="heading">{{equipo.equipo.nombre}}</div>
         <div class="content" style="display:none">
           <div class="row">
             <div class="cell">
               <div class="form-group">
                 <label>Ubicación</label>
                 <select [(ngModel)]="ubicacionSeleccionada" (change)="moverEquipo(equipo)">
-                  <option *ngFor="let ubicacion of  ubicaciones" [ngValue]="ubicacion">
-                    {{ubicacion.nombre}}
+                  <option *ngFor="let area of  areas" [ngValue]="area">
+                    {{area.nombre}}
                   </option>
 
                 </select>
@@ -25,20 +25,20 @@
             <div class="cell">
               <div class="form-group">
                 <label>Precio</label>
-                <input disabled type="text" value="{{equipo.precio | currency}}">
+                <input disabled type="text" value="{{equipo.precio_equipo | currency}}">
               </div>
             </div>
             <div class="cell">
               <div class="form-group">
                 <label>Porc</label>
-                <p-spinner (onChange)="actualizarTotal()" (keyup)="actualizarTotal()" size="30" [(ngModel)]="equipo.porcentaje"
+                <p-spinner (onChange)="actualizarTotal()" (keyup)="actualizarTotal()" size="30" [(ngModel)]="equipo.porcentaje_ganancia"
                   [step]="0.25"></p-spinner>
               </div>
             </div>
             <div class="cell">
               <div class="form-group">
                 <label>Precio final</label>
-                <input disabled type="text" value="{{equipo.precio * equipo.porcentaje | currency}}">
+                <input disabled type="text" value="{{equipo.precio_equipo * equipo.porcentaje_ganancia | currency}}">
               </div>
             </div>
             <div class="cell">
@@ -64,7 +64,7 @@
               <div class="form-group">
                 <label>Total Personalizado</label>
                 <input type="text" id="total_personalizado" (keyup)="actualizar_total_personalizado()" name="total_personalizado"
-                  [(ngModel)]="equipo.total_materiales_modificado">
+                  [(ngModel)]="equipo.precio_materiales_equipo">
               </div>
             </div>
           </div>
@@ -84,11 +84,11 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let material of equipo.materiales">
-                    <td>{{material.codigo}}</td>
-                    <td>{{material.nombre}}</td>
+                    <td>{{material.material.codigo}}</td>
+                    <td>{{material.material.nombre}}</td>
                     <td>{{material.precio}}</td>
                     <td>
-                      <p-spinner (onChange)="actualizarTotal()" (keyup)="actualizarTotal()" size="10" [(ngModel)]="material.porcentaje"
+                      <p-spinner (onChange)="actualizarTotal()" (keyup)="actualizarTotal()" size="10" [(ngModel)]="material.porcentaje_ganancia"
                         [step]="0.25">
                       </p-spinner>
                     </td>
@@ -96,7 +96,7 @@
                       <p-spinner (onChange)="actualizarTotal()" (keyup)="actualizarTotal()" size="10" [(ngModel)]="material.cantidad"
                         [step]="1" min="1"></p-spinner>
                     </td>
-                    <td>{{material.precio * material.cantidad * material.porcentaje | currency}}</td>
+                    <td>{{material.precio * material.cantidad * material.porcentaje_ganancia | currency}}</td>
                     <td><span class="mif-bin mif-lg fg-red pointer" (click)="eliminarMaterial(equipo,material)"></span>
                     </td>
                   </tr>
@@ -106,6 +106,7 @@
                     <td>
                       Total
                     </td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -158,7 +159,7 @@
   </div>
 </div>
 
-<div class="dialog" data-role="dialog" id="equipo_{{ubicacion.id}}" data-width="1000">
+<div class="dialog" data-role="dialog" id="equipo_{{area.id}}" data-width="1000">
   <div class="dialog-title">Equipos</div>
   <div class="dialog-content">
     <div class="row">
@@ -178,10 +179,10 @@
           </thead>
           <tbody>
             <tr *ngFor="let equipo of equipos_lista" (click)="agregarEquipo(equipo)" class="pointer">
-              <td>{{equipo.codigo}}</td>
-              <td>{{equipo.nombre}}</td>
-              <td>{{equipo.precio | currency}}</td>
-              <td>{{equipo.capacidad}}</td>
+              <td>{{equipo.equipo?.codigo}}</td>
+              <td>{{equipo.equipo.nombre}}</td>
+              <td>{{equipo.equipo.precio | currency}}</td>
+              <td>{{equipo.equipo.capacidad}}</td>
             </tr>
           </tbody>
         </table>

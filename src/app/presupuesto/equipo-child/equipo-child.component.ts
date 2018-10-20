@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Ubicacion, Equipo, Material } from '../interfaces';
+import { Area, Equipo, Material, EquipoArea } from '../interfaces';
 import { equipos, materiales } from '../datos';
 declare var Metro;
 @Component({
@@ -9,17 +9,17 @@ declare var Metro;
 })
 export class EquipoChildComponent implements OnInit {
 
-  @Input() ubicaciones: Ubicacion[];
-  @Input() ubicacion: Ubicacion;
+  @Input() areas: Area[];
+  @Input() area: Area;
   @Output() notificar = new EventEmitter<boolean>();
-  ubicacionSeleccionada: Ubicacion;
+  ubicacionSeleccionada: Area;
 
   equipos: Equipo[];
-  equipos_lista: Equipo[];
+  equipos_lista: EquipoArea[];
   materiales_lista: Material[];
   equipoSeleccionado: Equipo = {};
   equipos_filtro: Equipo[] = [];
-  cambioUbicacion: Ubicacion = {};
+  cambioUbicacion: Area = {};
 
   timeout_id;
 
@@ -43,7 +43,7 @@ export class EquipoChildComponent implements OnInit {
   agregarEquipo(equipo: Equipo) {
     const equi: Equipo = JSON.parse(JSON.stringify(equipo));
     equi.total_materiales_modificado = 0;
-    this.ubicacion.equipos.push(equi);
+    this.area.equipos_area.push({ equipo: equipo });
     this.actualizarTotal();
   }
   agregarMaterial(material: Material, equipo: Equipo) {
@@ -54,9 +54,9 @@ export class EquipoChildComponent implements OnInit {
     this.actualizarTotal();
   }
   ngOnInit() {
-    this.ubicacionSeleccionada = this.ubicacion;
+    this.ubicacionSeleccionada = this.area;
     this.equipos_filtro = this.equipos;
-    this.equipos_lista = equipos;
+    this.equipos_lista = this.area.equipos_area;
     this.materiales_lista = materiales;
 
 
@@ -75,27 +75,28 @@ export class EquipoChildComponent implements OnInit {
   actualizarTotal() {
     let total_general = 0;
 
-    this.ubicaciones.forEach(ubicacion => {
+    this.areas.forEach(area => {
       total_general = 0;
 
-      ubicacion.equipos.forEach(equipo => {
+      area.equipos.forEach(equipo_area => {
         let total_materiales_equipo = 0;
 
-        equipo.materiales.forEach(material => {
-          total_materiales_equipo += material.cantidad * material.precio * material.porcentaje;
+        equipo_area.materiales.forEach(material => {
+          total_materiales_equipo += material.cantidad * material.precio * material.porcentaje_ganancia;
         });
         // evita que se sobreescriba el valor ingresado manualmente
-        if (equipo.total_materiales_modificado < total_materiales_equipo) {
-          equipo.total_materiales_modificado = total_materiales_equipo;
+        if (equipo_area.precio_materiales_equipo < total_materiales_equipo) {
+          equipo_area.precio_materiales_equipo = total_materiales_equipo;
         }
 
         if (total_materiales_equipo === 0) {
-          equipo.total_materiales_modificado = 0;
+          equipo_area.precio_materiales_equipo = 0;
         }
-        equipo.total = Number.parseFloat(equipo.total_materiales_modificado) + equipo.precio * equipo.porcentaje;
-        total_general += equipo.total; // valor del equipo
+        equipo_area.total = Number.parseFloat(equipo_area.precio_materiales_equipo)
+        + equipo_area.precio_equipo * equipo_area.porcentaje_ganancia;
+        total_general += equipo_area.total; // valor del equipo
       });
-      ubicacion.total = total_general;
+      area.total = total_general;
     });
     this.notificar.emit(true); // notificar al padre para que actualice los totales
   }
@@ -103,13 +104,13 @@ export class EquipoChildComponent implements OnInit {
     const r = confirm('está seguro que desea mover de área este equipo?');
     if (!r) {
       setTimeout(() => {
-        this.ubicacionSeleccionada = this.ubicacion;
+        this.ubicacionSeleccionada = this.area;
       });
       return;
     }
-    this.ubicacion.equipos.splice(this.ubicacion.equipos.indexOf(equipo));
-    this.ubicacionSeleccionada.equipos.push(equipo);
-    this.ubicacionSeleccionada = this.ubicacion;
+    this.area.equipos_area.splice(this.area.equipos_area.indexOf(equipo));
+    this.ubicacionSeleccionada.equipos_area.push(equipo);
+    this.ubicacionSeleccionada = this.area;
     this.actualizarTotal();
   }
 }
