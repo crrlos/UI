@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Material } from './presupuesto/interfaces';
-import { materiales } from './presupuesto/datos';
+import { Material } from './interfaces/interfaces';
+import { materiales } from './datos';
 
 @Injectable({
   providedIn: 'root'

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Material } from '../presupuesto/interfaces';
-import { materiales } from '../presupuesto/datos';
-import { MaterialService } from '../material.service';
+import { Material } from '../../interfaces/interfaces';
+import { materiales } from '../../datos';
+import { MaterialService } from '../../material.service';
 
 @Component({
   selector: 'app-materiales',
-  templateUrl: './materiales.component.html',
-  styleUrls: ['./materiales.component.css']
+  templateUrl: './materiales.component.html'
 })
 export class MaterialesComponent implements OnInit {
 

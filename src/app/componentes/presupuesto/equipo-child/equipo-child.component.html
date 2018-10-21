@@ -13,8 +13,8 @@
           <div class="row">
             <div class="cell">
               <div class="form-group">
-                <label>Ubicación</label>
-                <select [(ngModel)]="ubicacionSeleccionada" (change)="moverEquipo(equipo)">
+                <label>Área</label>
+                <select [(ngModel)]="areaSeleccionada" (change)="moverEquipo(equipo)">
                   <option *ngFor="let area of  areas" [ngValue]="area">
                     {{area.nombre}}
                   </option>
@@ -179,10 +179,10 @@
           </thead>
           <tbody>
             <tr *ngFor="let equipo of equipos_lista" (click)="agregarEquipo(equipo)" class="pointer">
-              <td>{{equipo.equipo?.codigo}}</td>
-              <td>{{equipo.equipo.nombre}}</td>
-              <td>{{equipo.equipo.precio | currency}}</td>
-              <td>{{equipo.equipo.capacidad}}</td>
+              <td>{{equipo.codigo}}</td>
+              <td>{{equipo.nombre}}</td>
+              <td>{{equipo.precio | currency}}</td>
+              <td>{{equipo.capacidad}}</td>
             </tr>
           </tbody>
         </table>

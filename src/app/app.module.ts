@@ -2,29 +2,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { PresupuestoComponent } from './presupuesto/presupuesto.component';
-import {NgxPaginationModule} from 'ngx-pagination';
-import { EquipoChildComponent } from './presupuesto/equipo-child/equipo-child.component';
-import { UbicacionChildComponent } from './presupuesto/ubicacion-child/ubicacion-child.component';
-import {SpinnerModule} from 'primeng/spinner';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { EquipoChildComponent } from './componentes/presupuesto/equipo-child/equipo-child.component';
+import { AreaComponent } from './componentes/presupuesto/area/area.component';
+import { SpinnerModule } from 'primeng/spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { RouterModule, Routes } from '@angular/router';
-import { EquiposComponent } from './equipos/equipos.component';
-import { MaterialesComponent } from './materiales/materiales.component';
+import { EquiposComponent } from './componentes/equipos/equipos.component';
+import { MaterialesComponent } from './componentes/materiales/materiales.component';
 import { HttpClientModule } from '@angular/common/http';
 const appRoutes: Routes = [
   { path: 'materiales', component: MaterialesComponent },
-  { path: 'equipos',      component: EquiposComponent },
-  { path: 'presupueto',      component: PresupuestoComponent }
+  { path: 'equipos', component: EquiposComponent },
+  { path: 'presupueto', component: AreaComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    PresupuestoComponent,
     EquipoChildComponent,
-    UbicacionChildComponent,
+    AreaComponent,
     MaterialesComponent,
     EquiposComponent
   ],

@@ -1,21 +1,20 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Area, Equipo, Material, EquipoArea } from '../interfaces';
-import { equipos, materiales } from '../datos';
+import { Area, Equipo, Material, EquipoArea } from '../../../interfaces/interfaces';
+import { equipos, materiales } from '../../../datos';
 declare var Metro;
 @Component({
   selector: 'app-equipo-child',
-  templateUrl: './equipo-child.component.html',
-  styleUrls: ['./equipo-child.component.css']
+  templateUrl: './equipo-child.component.html'
 })
 export class EquipoChildComponent implements OnInit {
 
   @Input() areas: Area[];
   @Input() area: Area;
   @Output() notificar = new EventEmitter<boolean>();
-  ubicacionSeleccionada: Area;
 
-  equipos: Equipo[];
-  equipos_lista: EquipoArea[];
+  areaSeleccionada: Area;
+
+  equipos_lista: Equipo[];
   materiales_lista: Material[];
   equipoSeleccionado: Equipo = {};
   equipos_filtro: Equipo[] = [];
@@ -41,9 +40,17 @@ export class EquipoChildComponent implements OnInit {
   }
   constructor() { }
   agregarEquipo(equipo: Equipo) {
-    const equi: Equipo = JSON.parse(JSON.stringify(equipo));
-    equi.total_materiales_modificado = 0;
-    this.area.equipos_area.push({ equipo: equipo });
+    const equipo_area: EquipoArea = {
+      id_equipo: equipo.id,
+      id_area: this.area.id,
+      precio_equipo: equipo.precio,
+      porcentaje_ganancia: 1,
+      precio_materiales_equipo: 0,
+      materiales: [],
+      equipo: equipo,
+      total: 0
+    };
+    this.area.equipos.push(equipo_area);
     this.actualizarTotal();
   }
   agregarMaterial(material: Material, equipo: Equipo) {
@@ -54,9 +61,8 @@ export class EquipoChildComponent implements OnInit {
     this.actualizarTotal();
   }
   ngOnInit() {
-    this.ubicacionSeleccionada = this.area;
-    this.equipos_filtro = this.equipos;
-    this.equipos_lista = this.area.equipos_area;
+    this.areaSeleccionada = this.area;
+    this.equipos_lista = equipos;
     this.materiales_lista = materiales;
 
 
@@ -93,7 +99,7 @@ export class EquipoChildComponent implements OnInit {
           equipo_area.precio_materiales_equipo = 0;
         }
         equipo_area.total = Number.parseFloat(equipo_area.precio_materiales_equipo)
-        + equipo_area.precio_equipo * equipo_area.porcentaje_ganancia;
+          + equipo_area.precio_equipo * equipo_area.porcentaje_ganancia;
         total_general += equipo_area.total; // valor del equipo
       });
       area.total = total_general;
@@ -104,13 +110,13 @@ export class EquipoChildComponent implements OnInit {
     const r = confirm('está seguro que desea mover de área este equipo?');
     if (!r) {
       setTimeout(() => {
-        this.ubicacionSeleccionada = this.area;
+        this.areaSeleccionada = this.area;
       });
       return;
     }
-    this.area.equipos_area.splice(this.area.equipos_area.indexOf(equipo));
-    this.ubicacionSeleccionada.equipos_area.push(equipo);
-    this.ubicacionSeleccionada = this.area;
+    this.area.equipos.splice(this.area.equipos.indexOf(equipo));
+    this.areaSeleccionada.equipos.push(equipo);
+    this.areaSeleccionada = this.area;
     this.actualizarTotal();
   }
 }

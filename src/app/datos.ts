@@ -1,4 +1,4 @@
-import { Equipo, Material } from './interfaces';
+import { Equipo, Material } from './interfaces/interfaces';
 
 export const equipos: Equipo[] = [{
     id: 1,

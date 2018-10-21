@@ -3,8 +3,8 @@ total {{totalGeneral}}
 <div class="row">
   <div class="cell">
     <form class="inline-form">
-      <input type="text" [(ngModel)]="ubicacion" name="ubicacion">
-      <button class="button" (click)="agregarUbicacion()">Agregar</button>
+      <input type="text" #area name="area">
+      <button class="button" (click)="agregarArea(area.value)">Agregar</button>
     </form>
   </div>
 </div>
