@@ -10,6 +10,7 @@ export interface Area {
   id_cotizacion?;
   total?;
   equipos?: EquipoArea[];
+  insertar_equipo?: boolean; // permite saber en cual area se insertará el equipo
 }
 export interface EquipoArea {
   id?;
