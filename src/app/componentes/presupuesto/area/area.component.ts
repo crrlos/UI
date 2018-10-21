@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Area, Equipo, EquipoArea, Material, MaterialEquipoArea } from '../../../interfaces/interfaces';
 import { isNumber } from 'util';
 import { HttpService } from '../../../servicios/http.service';
 import { equipos, materiales } from 'src/app/datos';
+import { EquipoChildComponent } from '../equipo-child/equipo-child.component';
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html'
 })
 export class AreaComponent implements OnInit {
+  @ViewChild(EquipoChildComponent)
+  private equipoChild: EquipoChildComponent;
 
   areas: Area[] = [];
   totalGeneral = 0;
@@ -39,6 +42,7 @@ export class AreaComponent implements OnInit {
         return;
       }
     });
+    this.equipoChild.actualizarTotal();
   }
   agregarMaterial(material: Material) {
     this.areas.forEach(area => {
@@ -57,7 +61,7 @@ export class AreaComponent implements OnInit {
         }
       });
     });
-
+    this.equipoChild.actualizarTotal();
   }
   constructor(private http: HttpService) { }
 
