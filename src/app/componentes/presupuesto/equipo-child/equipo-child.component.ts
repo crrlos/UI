@@ -64,7 +64,7 @@ export class EquipoChildComponent implements OnInit {
     this.areaSeleccionada = this.area;
     this.equipos_lista = equipos;
     this.materiales_lista = materiales;
-
+    this.actualizarTotal();
 
   }
   obtener(equipo) {
