@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Area, Equipo, EquipoArea } from '../../../interfaces/interfaces';
+import { Area, Equipo, EquipoArea, Material, MaterialEquipoArea } from '../../../interfaces/interfaces';
 import { isNumber } from 'util';
 import { HttpService } from '../../../servicios/http.service';
-import { equipos } from 'src/app/datos';
+import { equipos, materiales } from 'src/app/datos';
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html'
@@ -12,6 +12,7 @@ export class AreaComponent implements OnInit {
   areas: Area[] = [];
   totalGeneral = 0;
   equipos_lista: Equipo[];
+  materiales_lista: Material[];
 
   agregarArea(area: string) {
     this.areas.push({
@@ -39,10 +40,30 @@ export class AreaComponent implements OnInit {
       }
     });
   }
+  agregarMaterial(material: Material) {
+    this.areas.forEach(area => {
+      area.equipos.forEach(equipoArea => {
+        if (equipoArea.insertar_material) {
+          const material_equipo: MaterialEquipoArea = {
+            id_material: material.id,
+            id_equipo_area: equipoArea.id,
+            cantidad: 1,
+            precio: material.precio,
+            porcentaje_ganancia: 1,
+            material: material
+          };
+          equipoArea.materiales.push(material_equipo);
+          return;
+        }
+      });
+    });
+
+  }
   constructor(private http: HttpService) { }
 
   ngOnInit() {
     this.equipos_lista = equipos;
+    this.materiales_lista = materiales;
     this.http.areas().subscribe(success => {
       this.areas = success;
     });

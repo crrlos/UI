@@ -22,6 +22,7 @@ export interface EquipoArea {
   materiales?: MaterialEquipoArea[];
   equipo?: Equipo;
   total?;
+  insertar_material?: boolean;
 }
 export interface MaterialEquipoArea {
   id?;

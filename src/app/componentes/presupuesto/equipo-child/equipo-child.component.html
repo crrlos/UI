@@ -51,7 +51,7 @@
           <hr>
           <div class="row">
             <div class="cell">
-              <button class="button primary m-2" (click)="f('#material_'+equipo.id)">Agregar Material</button>
+              <button class="button primary m-2" (click)="f('#materiales_dialog',equipo)">Agregar Material</button>
 
             </div>
             <div class="cell">
@@ -118,41 +118,7 @@
             </div>
           </div>
         </div>
-        <div class="dialog" data-role="dialog" id="material_{{equipo.id}}" data-width="1000">
-          <div class="dialog-title">Materiales</div>
-          <div class="dialog-content">
-            <div class="row">
-              <div class="cell">
-                <input type="text" placeholder="buscar">
-              </div>
-            </div>
-            <div class="row">
-              <div class="cell">
-                <table class="table compact striped row-hover">
-                  <thead>
-                    <th>codigo</th>
-                    <th>nombre</th>
-                    <th>precio</th>
-                    <th>cantidad</th>
-
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let material of materiales_lista" (click)="agregarMaterial(material,equipo)" class="pointer">
-                      <td>{{material.codigo}}</td>
-                      <td>{{material.nombre}}</td>
-                      <td>{{material.precio | currency}}</td>
-                      <td>{{material.cantidad}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="dialog-actions">
-            <button class="button js-dialog-close">Cerrar</button>
-
-          </div>
-        </div>
+        
       </div>
 
     </div>

@@ -24,10 +24,17 @@ export class EquipoChildComponent implements OnInit {
 
   editaEquipo = false;
 
-  f(eq) {
-    this.areas.forEach(area => area.insertar_equipo = false);
+  f(eq, equipo?: EquipoArea) {
+    this.areas.forEach(area => {
+      area.insertar_equipo = false;
+      area.equipos.forEach(e => e.insertar_material = false);
+    });
 
     this.area.insertar_equipo = true;
+
+    if (equipo) {
+      equipo.insertar_material = true;
+    }
     Metro.dialog.open(eq);
   }
   actualizar_total_personalizado() {
@@ -42,13 +49,6 @@ export class EquipoChildComponent implements OnInit {
     this.actualizarTotal();
   }
   constructor() { }
-  agregarMaterial(material: Material, equipo: Equipo) {
-    const m: Material = JSON.parse(JSON.stringify(material));
-    m.cantidad = 1;
-    m.porcentaje = 1;
-    equipo.materiales.push(m);
-    this.actualizarTotal();
-  }
   ngOnInit() {
     this.areaSeleccionada = this.area;
 
