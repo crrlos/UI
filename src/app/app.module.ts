@@ -12,6 +12,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { EquiposComponent } from './componentes/equipos/equipos.component';
 import { MaterialesComponent } from './componentes/materiales/materiales.component';
 import { HttpClientModule } from '@angular/common/http';
+import {TableModule} from 'primeng/table';
+import {DialogModule} from 'primeng/dialog';
+import {ButtonModule} from 'primeng/button';
+import {InputTextModule} from 'primeng/inputtext';
+import {DropdownModule} from 'primeng/dropdown';
 const appRoutes: Routes = [
   { path: 'materiales', component: MaterialesComponent },
   { path: 'equipos', component: EquiposComponent },
@@ -27,6 +32,11 @@ const appRoutes: Routes = [
     EquiposComponent
   ],
   imports: [
+    TableModule,
+    DialogModule,
+    ButtonModule,
+    InputTextModule,
+    DropdownModule,
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes,

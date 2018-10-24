@@ -35,10 +35,10 @@ export interface MaterialEquipoArea {
 }
 export interface Equipo {
   id?;
-  codigo?;
-  nombre?;
+  equipo_codigo?;
+  equipo_nombre?;
   capacidad?;
-  precio?;
+  equipo_precio?;
   porcentaje?;
   materiales?: Material[];
   total?;
@@ -57,10 +57,19 @@ export interface Material {
 }
 export interface TipoUnidad {
   id?;
-  nombre;
+  tipo_nombre;
+}
+
+export interface Marca {
+  id?;
+  marca_nombre?;
 }
 export interface UnidadMedida {
   id?;
   nombre?;
   abreviatura?;
+}
+export interface EquiposResponse {
+  equipos: Equipo[];
+  totalRecords;
 }
