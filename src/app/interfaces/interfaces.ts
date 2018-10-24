@@ -44,6 +44,7 @@ export interface Equipo {
   total?;
   total_materiales_modificado?;
   tipo?: TipoUnidad;
+  equipo_activo?;
 }
 export interface Material {
   id?;

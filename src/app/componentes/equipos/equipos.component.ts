@@ -11,8 +11,8 @@ export class EquiposComponent implements OnInit {
   constructor(private http: HttpService) { }
   equipos: Equipo[] = [];
   equipo: Equipo;
-  tipos: TipoUnidad[];
-  marcas: Marca[];
+  tipos: TipoUnidad[] = [];
+  marcas: Marca[] = [];
   displayDialog = false;
   nuevoEquipo = false;
   equipoSeleccionado: Equipo;
@@ -20,11 +20,15 @@ export class EquiposComponent implements OnInit {
   totalRecords;
 
   ngOnInit() {
-    this.http.tipos().subscribe(tipos =>
-      this.tipos = tipos
+    this.http.tipos().subscribe(tipos => {
+      this.tipos.push({ id: 0, tipo_nombre: 'Seleccione' });
+      this.tipos = this.tipos.concat(tipos);
+    }
     );
-    this.http.marcas().subscribe(marcas =>
-      this.marcas = marcas
+    this.http.marcas().subscribe(marcas => {
+      this.marcas.push({ id: 0, marca_nombre: 'Seleccione' });
+      this.marcas = this.marcas.concat(marcas);
+    }
     );
     this.cols = [
       { field: 'equipo_codigo', header: 'codigo' },
@@ -55,7 +59,9 @@ export class EquiposComponent implements OnInit {
 
     const equipos = this.equipos;
     if (this.nuevoEquipo) {
-      equipos.push(this.equipo);
+      this.http.equipos_agregar(this.equipo).subscribe(() => {
+        equipos.push(this.equipo);
+      });
     } else {
       this.http.equipos_actualizar(this.equipo).subscribe(() =>
         equipos[this.equipos.indexOf(this.equipoSeleccionado)] = this.equipo);

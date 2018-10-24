@@ -21,6 +21,9 @@ export class HttpService {
   equipos_actualizar(equipo) {
     return this.http.put(`${this.HOST}/equipos`, equipo);
   }
+  equipos_agregar(equipo) {
+    return this.http.post(`${this.HOST}/equipos`, equipo);
+  }
   tipos() {
     return this.http.get<TipoUnidad[]>(`${this.HOST}/tipos`);
   }
