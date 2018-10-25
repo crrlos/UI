@@ -33,6 +33,9 @@
       <td>
         {{rowData.voltaje}}
       </td>
+      <td>
+        {{rowData.equipo_activo ? 'A' : 'I'}}
+      </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>

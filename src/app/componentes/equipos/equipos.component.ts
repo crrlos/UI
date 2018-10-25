@@ -41,7 +41,8 @@ export class EquiposComponent implements OnInit {
       { field: 'equipo_precio', header: 'precio' },
       { field: 'marca', header: 'marca' },
       { field: 'tipo', header: 'tipo' },
-      { field: 'voltaje', header: 'V' }
+      { field: 'voltaje', header: 'V' },
+      { field: 'equipo_activo', header: 'Estado' }
     ];
   }
   showDialogToAdd() {
