@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Area, Equipo, EquipoArea, Material, MaterialEquipoArea } from '../../../interfaces/interfaces';
 import { isNumber } from 'util';
 import { HttpService } from '../../../servicios/http.service';
-import { equipos, materiales } from 'src/app/datos';
 import { EquipoChildComponent } from '../equipo-child/equipo-child.component';
 @Component({
   selector: 'app-area',
@@ -30,7 +29,7 @@ export class AreaComponent implements OnInit {
         const equipo_area: EquipoArea = {
           id_equipo: equipo.id,
           id_area: area.id,
-          precio_equipo: equipo.precio,
+          precio_equipo: equipo.equipo_precio,
           porcentaje_ganancia: 1,
           precio_materiales_equipo: 0,
           materiales: [],
@@ -66,8 +65,7 @@ export class AreaComponent implements OnInit {
   constructor(private http: HttpService) { }
 
   ngOnInit() {
-    this.equipos_lista = equipos;
-    this.materiales_lista = materiales;
+
     this.http.areas().subscribe(success => {
       this.areas = success;
     });

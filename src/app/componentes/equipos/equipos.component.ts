@@ -19,15 +19,20 @@ export class EquiposComponent implements OnInit {
   cols: any[];
   totalRecords;
 
+  voltajes = [
+    { name: '0', code: '0' },
+    { name: '120V', code: '120V' },
+    { name: '240V', code: '240V' },
+    { name: '480V', code: '480V' }
+  ];
+
   ngOnInit() {
     this.http.tipos().subscribe(tipos => {
-      this.tipos.push({ id: 0, tipo_nombre: 'Seleccione' });
-      this.tipos = this.tipos.concat(tipos);
+      this.tipos = tipos;
     }
     );
     this.http.marcas().subscribe(marcas => {
-      this.marcas.push({ id: 0, marca_nombre: 'Seleccione' });
-      this.marcas = this.marcas.concat(marcas);
+      this.marcas = marcas;
     }
     );
     this.cols = [
@@ -35,7 +40,8 @@ export class EquiposComponent implements OnInit {
       { field: 'equipo_nombre', header: 'nombre' },
       { field: 'equipo_precio', header: 'precio' },
       { field: 'marca', header: 'marca' },
-      { field: 'tipo', header: 'tipo' }
+      { field: 'tipo', header: 'tipo' },
+      { field: 'voltaje', header: 'V' }
     ];
   }
   showDialogToAdd() {
@@ -56,10 +62,16 @@ export class EquiposComponent implements OnInit {
     });
   }
   save() {
+    // valores por defecto
+    this.equipo.equipo_activo = this.equipo.equipo_activo ? true : false;
+    this.equipo.tipo = this.equipo.tipo ? this.equipo.tipo : this.tipos.find(t => t.id === 1); // id = 1 [GENERICO]
+    this.equipo.marca = this.equipo.marca ? this.equipo.marca : this.marcas.find(t => t.id === 1);
+    this.equipo.voltaje = this.equipo.voltaje ? this.equipo.voltaje.name : '0';
 
     const equipos = this.equipos;
     if (this.nuevoEquipo) {
-      this.http.equipos_agregar(this.equipo).subscribe(() => {
+      this.http.equipos_agregar(this.equipo).subscribe((res) => {
+        this.equipo.id = JSON.parse(JSON.stringify(res)).id;
         equipos.push(this.equipo);
       });
     } else {

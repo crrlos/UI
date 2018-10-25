@@ -44,7 +44,9 @@ export interface Equipo {
   total?;
   total_materiales_modificado?;
   tipo?: TipoUnidad;
-  equipo_activo?;
+  marca?: Marca;
+  voltaje?;
+  equipo_activo?: boolean;
 }
 export interface Material {
   id?;
@@ -58,7 +60,7 @@ export interface Material {
 }
 export interface TipoUnidad {
   id?;
-  tipo_nombre;
+  tipo_nombre?;
 }
 
 export interface Marca {

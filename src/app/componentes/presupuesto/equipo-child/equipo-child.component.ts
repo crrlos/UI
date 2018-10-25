@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Area, Equipo, Material, EquipoArea } from '../../../interfaces/interfaces';
-import { equipos, materiales } from '../../../datos';
 declare var Metro;
 @Component({
   selector: 'app-equipo-child',
@@ -52,7 +51,6 @@ export class EquipoChildComponent implements OnInit {
   ngOnInit() {
     this.areaSeleccionada = this.area;
 
-    this.materiales_lista = materiales;
     this.actualizarTotal();
 
   }
