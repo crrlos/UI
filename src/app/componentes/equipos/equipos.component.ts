@@ -47,7 +47,7 @@ export class EquiposComponent implements OnInit {
   }
   showDialogToAdd() {
     this.nuevoEquipo = true;
-    this.equipo = {};
+    this.equipo = { equipo_activo: true, tipo: this.tipos[0], marca: this.marcas[0] };
     this.displayDialog = true;
   }
   onRowSelect(event) {
@@ -63,10 +63,7 @@ export class EquiposComponent implements OnInit {
     });
   }
   save() {
-    // valores por defecto
-    this.equipo.equipo_activo = this.equipo.equipo_activo ? true : false;
-    this.equipo.tipo = this.equipo.tipo ? this.equipo.tipo : this.tipos.find(t => t.id === 1); // id = 1 [GENERICO]
-    this.equipo.marca = this.equipo.marca ? this.equipo.marca : this.marcas.find(t => t.id === 1);
+
     this.equipo.voltaje = this.equipo.voltaje ? this.equipo.voltaje.name : '0';
 
     const equipos = this.equipos;
