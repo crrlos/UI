@@ -18,6 +18,7 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown';
 import {CheckboxModule} from 'primeng/checkbox';
+import {MultiSelectModule} from 'primeng/multiselect';
 const appRoutes: Routes = [
   { path: 'materiales', component: MaterialesComponent },
   { path: 'equipos', component: EquiposComponent },
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
     EquiposComponent
   ],
   imports: [
+    MultiSelectModule,
     CheckboxModule,
     TableModule,
     DialogModule,

@@ -1,13 +1,14 @@
-<p-table [globalFilterFields]="['tipo.nombre','nombre','codigo']" #tt [columns]="cols" [value]="equipos" selectionMode="single"
-  [(selection)]="equipoSeleccionado" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15"
-  [rowsPerPageOptions]="[10,20,30]" [lazy]="true" (onLazyLoad)="loadLazy($event)" [totalRecords]="totalRecords">
+<p-table [globalFilterFields]="['tipo.nombre','nombre','codigo']" #tt [columns]="selectedColumns" [value]="equipos"
+  selectionMode="single" [(selection)]="equipoSeleccionado" (onRowSelect)="onRowSelect($event)" [paginator]="true"
+  [rows]="15" [rowsPerPageOptions]="[10,20,30]" [lazy]="true" (onLazyLoad)="loadLazy($event)" [totalRecords]="totalRecords">
   <ng-template pTemplate="caption">
-      <div style="text-align:left">
-          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Agregar"></button>
-        </div>
-        <br>
+    <div style="text-align:left">
+      <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Agregar"></button>
+    </div>
+    <br>
     <input type="text" pInputText size="50" placeholder="Filtrar" (input)="tt.filterGlobal($event.target.value, 'contains')"
       style="width:auto">
+
   </ng-template>
   <ng-template pTemplate="header" let-columns>
     <tr>
@@ -19,28 +20,22 @@
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr [pSelectableRow]="rowData">
-      <td>
-        {{rowData.equipo_codigo}}
+      <td *ngFor="let col of columns">
+        {{
+        col.header === 'marca' ? rowData[col.field].marca_nombre :
+        col.header === 'tipo' ? rowData[col.field].tipo_nombre :
+        col.header === 'estado' ? rowData[col.field] === 1 ? 'A' : 'I' :
+        rowData[col.field]
+        }}
       </td>
-      <td>
-        {{rowData.equipo_nombre}}
-      </td>
-      <td>
-        {{rowData.equipo_precio}}
-      </td>
-      <td>
-        {{rowData.marca.marca_nombre}}
-      </td>
-      <td>
-        {{rowData.tipo.tipo_nombre}}
-      </td>
-      <td>
-        {{rowData.voltaje}}
-      </td>
-      <td>
-        {{rowData.equipo_activo ? 'A' : 'I'}}
-      </td>
+
     </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+      <div style="text-align:left">
+          <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" selectedItemsLabel="{0} columnas seleccionadas"
+            [style]="{minWidth: '200px'}" defaultLabel="Seleccionar columnas"></p-multiSelect>
+        </div>
   </ng-template>
 </p-table>
 
@@ -92,7 +87,8 @@
         <label for="year">Voltaje</label>
       </div>
       <div class="ui-g-8">
-        <p-dropdown appendTo="body" [options]="voltajes" [style]="{'width':'150px'}" [(ngModel)]="equipo.voltaje" optionLabel="name"></p-dropdown>
+        <p-dropdown appendTo="body" [options]="voltajes" [style]="{'width':'150px'}" [(ngModel)]="equipo.voltaje"
+          optionLabel="name"></p-dropdown>
       </div>
     </div>
     <div class="ui-g-12">
