@@ -1,51 +1,120 @@
-
-  <div class="row">
-    <div class="cell">
-        <div class="form-group">
-            <label>Codigo</label>
-            <input type="text" placeholder="codigo" [(ngModel)]="material.codigo"/>
-        </div>
-        <div class="form-group">
-            <label>nombre</label>
-            <input type="text" placeholder="nombre" [(ngModel)]="material.nombre"/>
-        </div>
+<p-table [globalFilterFields]="['tipo.nombre','nombre','codigo']" #tt [columns]="selectedColumns" [value]="materiales"
+  selectionMode="single" [(selection)]="materialSeleccionado" (onRowSelect)="onRowSelect($event)" [paginator]="true"
+  [rows]="15" [rowsPerPageOptions]="[10,20,30]" [lazy]="true" (onLazyLoad)="loadLazy($event)" [totalRecords]="totalRecords">
+  <ng-template pTemplate="caption">
+    <div style="text-align:left">
+      <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Agregar"></button>
     </div>
-    <div class="cell">
-        <div class="form-group">
-            <label>cantidad</label>
-            <input type="text" placeholder="cantidad" [(ngModel)]="material.cantidad"/>
-        </div>
-        <div class="form-group">
-            <label>precio</label>
-            <input type="text" placeholder="precio" [(ngModel)]="material.precio"/>
-        </div>
-    </div>
-  </div>
-    
-    
-  
-  <button class="button" (click)="Agregar()">Agregar</button>
+    <br>
+    <input type="text" pInputText size="50" placeholder="Filtrar" (input)="tt.filterGlobal($event.target.value, 'contains')"
+      style="width:auto">
 
-<hr>
-<table class="table striped">
-  <thead>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
     <tr>
-      <th>codigo</th>
-      <th>nombre</th>
-      <th>cantidad</th>
-      <th>precio</th>
-      <th>tipo</th>
-      <th>Uni Med</th>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
     </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let material of materiales">
-      <td>{{material.codigo}}</td>
-      <td>{{material.nombre}}</td>
-      <td>{{material.cantidad}}</td>
-      <td>{{material.precio}}</td>
-      <td>{{material.tipo?.nombre}}</td>
-      <td>{{material.unidad_medida.nombre}}</td>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns">
+        {{
+        col.header === 'unidad' ? rowData[col.field].unidad_nombre :
+        col.header === 'marca' ? rowData[col.field].marca_nombre :
+        col.header === 'tipo' ? rowData[col.field].tipo_nombre :
+        col.header === 'estado' ? rowData[col.field] === 1 ? 'A' : 'I' :
+        rowData[col.field]
+        }}
+      </td>
+
     </tr>
-  </tbody>
-</table>
+  </ng-template>
+  <ng-template pTemplate="summary">
+      <div style="text-align:left">
+          <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" selectedItemsLabel="{0} columnas seleccionadas"
+            [style]="{minWidth: '200px'}" defaultLabel="Seleccionar columnas"></p-multiSelect>
+        </div>
+  </ng-template>
+</p-table>
+
+<p-dialog header="Equipo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+  <div class="ui-g ui-fluid" *ngIf="equipo">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="vin">Codigo</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="vin" [(ngModel)]="equipo.equipo_codigo" />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Nombre</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="year" [(ngModel)]="equipo.equipo_nombre" />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Precio</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="year" [(ngModel)]="equipo.equipo_precio" />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Capacidad</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="year" [(ngModel)]="equipo.capacidad" />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Marca</label>
+      </div>
+      <div class="ui-g-8">
+        <p-dropdown appendTo="body" [options]="marcas" [style]="{'width':'150px'}" [(ngModel)]="equipo.marca"
+          optionLabel="marca_nombre"></p-dropdown>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Tipo</label>
+      </div>
+      <div class="ui-g-8">
+        <p-dropdown appendTo="body" [options]="tipos" [style]="{'width':'150px'}" [(ngModel)]="equipo.tipo" optionLabel="tipo_nombre"></p-dropdown>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Voltaje</label>
+      </div>
+      <div class="ui-g-8">
+        <p-dropdown appendTo="body" [options]="voltajes" [style]="{'width':'150px'}" [(ngModel)]="equipo.voltaje"
+          optionLabel="name"></p-dropdown>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Tipo</label>
+      </div>
+      <div class="ui-g-8">
+        <p-checkbox binary="true" label="Activo" [(ngModel)]="equipo.equipo_activo"></p-checkbox>
+      </div>
+    </div>
+
+
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+      <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+    </div>
+  </p-footer>
+</p-dialog>

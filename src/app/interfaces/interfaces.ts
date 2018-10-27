@@ -49,14 +49,16 @@ export interface Equipo {
   equipo_activo?: boolean;
 }
 export interface Material {
-  id?;
-  codigo?;
-  nombre?;
+  material_id?;
+  material_codigo?;
+  material_nombre?;
   cantidad?;
-  precio?;
+  material_precio?;
   porcentaje?;
   tipo?: TipoUnidad;
+  marca?: Marca;
   unidad_medida?: UnidadMedida;
+  material_activo?;
 }
 export interface TipoUnidad {
   id?;
@@ -74,5 +76,10 @@ export interface UnidadMedida {
 }
 export interface EquiposResponse {
   equipos: Equipo[];
+  totalRecords;
+}
+
+export interface MaterialResponse {
+  materiales: Material[];
   totalRecords;
 }
