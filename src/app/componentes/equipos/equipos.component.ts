@@ -40,6 +40,7 @@ export class EquiposComponent implements OnInit {
       { field: 'equipo_codigo', header: 'codigo' },
       { field: 'equipo_nombre', header: 'nombre' },
       { field: 'equipo_precio', header: 'precio' },
+      { field: 'capacidad', header: 'capacidad' },
       { field: 'marca', header: 'marca' },
       { field: 'tipo', header: 'tipo' },
       { field: 'voltaje', header: 'V' },
@@ -55,6 +56,7 @@ export class EquiposComponent implements OnInit {
   onRowSelect(event) {
     this.nuevoEquipo = false;
     this.equipo = JSON.parse(JSON.stringify(event.data));
+    console.log(this.equipo);
     this.equipo.voltaje = this.voltajes.find(v => v.code === this.equipo.voltaje);
     this.displayDialog = true;
   }
