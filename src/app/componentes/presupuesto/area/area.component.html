@@ -3,8 +3,8 @@ total {{totalGeneral}}
 <div class="row">
   <div class="cell">
     <form class="inline-form">
-      <input type="text" #area name="area">
-      <button class="button" (click)="agregarArea(area.value)">Agregar</button>
+      <input type="text" name="area" [(ngModel)] ="area.nombre">
+      <button class="button" (click)="agregarArea()">Agregar</button>
     </form>
   </div>
 </div>
@@ -31,9 +31,12 @@ total {{totalGeneral}}
         </div>
         <div class="cell-4 p-5">
           <div class="form-group">
-            <label>Total por ubicación</label>
+            <label>Total por área</label>
             <input disabled type="text" value="{{area.total | currency}}">
           </div>
+        </div>
+        <div class="cell text-right mr-3 fg-red pointer">
+          <fa name="trash" size='2x' (click)="eliminarArea(area)"></fa>
         </div>
       </div>
       <app-equipo-child [area]="area" [areas]="areas" (notificar)="onNotificacion()"></app-equipo-child>

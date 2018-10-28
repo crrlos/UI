@@ -15,12 +15,13 @@ export class AreaComponent implements OnInit {
   totalGeneral = 0;
   equipos_lista: Equipo[];
   materiales_lista: Material[];
+  area: Area = {};
 
-  agregarArea(area: string) {
-    this.http.areas_agregar(area).subscribe((id) => {
+  agregarArea() {
+    this.http.areas_agregar(this.area).subscribe((id) => {
       this.areas.push({
         area_id: JSON.parse(JSON.stringify(id)).id,
-        nombre: area,
+        nombre: this.area.nombre,
         equipos: []
       });
     });
@@ -28,6 +29,11 @@ export class AreaComponent implements OnInit {
   }
   actualizarArea(area) {
     this.http.areas_actualizar(area).subscribe();
+  }
+  eliminarArea(area: Area) {
+    this.http.areas_eliminar(area).subscribe(() => {
+      this.areas.splice(this.areas.indexOf(area), 1);
+    });
   }
   agregarEquipo(equipo: Equipo) {
     this.areas.forEach(area => {

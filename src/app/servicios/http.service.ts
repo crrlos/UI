@@ -19,6 +19,9 @@ export class HttpService {
   areas_actualizar(area) {
     return this.http.put(`${this.HOST}/areas`, area);
   }
+  areas_eliminar(area: Area) {
+    return this.http.delete(`${this.HOST}/areas`, { params: { area_id: area.area_id } });
+  }
   equipos(event?) {
     return this.http.get<EquiposResponse>(`${this.HOST}/equipos`, {
       params: event

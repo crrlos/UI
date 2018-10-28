@@ -36,6 +36,7 @@ const appRoutes: Routes = [
     EquiposTablaComponent
   ],
   imports: [
+    AngularFontAwesomeModule,
     MultiSelectModule,
     CheckboxModule,
     TableModule,
