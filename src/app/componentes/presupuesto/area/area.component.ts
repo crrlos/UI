@@ -48,15 +48,15 @@ export class AreaComponent implements OnInit {
           equipo: equipo,
           total: 0
         };
-        console.log(equipo_area);
         this.http.equipos_area_agregar(equipo_area).subscribe(() => {
           area.equipos.push(equipo_area);
           area.insertar_equipo = false;
+          this.equipoChild.actualizarTotal();
           return;
         });
       }
     });
-    this.equipoChild.actualizarTotal();
+
   }
   agregarMaterial(material: Material) {
     this.areas.forEach(area => {
