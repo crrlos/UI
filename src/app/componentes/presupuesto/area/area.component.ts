@@ -16,12 +16,6 @@ export class AreaComponent implements OnInit {
   equipos_lista: Equipo[];
   materiales_lista: Material[];
 
-  equipos: Equipo[];
-  equipo: Equipo;
-  cols: any[];
-  totalRecords;
-  selectedColumns: any[];
-
   agregarArea(area: string) {
     this.http.areas_agregar(area).subscribe((id) => {
       this.areas.push({
@@ -78,37 +72,17 @@ export class AreaComponent implements OnInit {
     this.equipoChild.actualizarTotal();
   }
   constructor(private http: HttpService) { }
-  loadLazy(event) {
-    this.http.equipos(event).subscribe(data => {
-      this.equipos = data.equipos;
-      this.totalRecords = data.totalRecords;
-    });
-  }
   ngOnInit() {
 
     this.http.areas().subscribe(success => {
       this.areas = success;
     });
-    this.cols = [
-      { field: 'equipo_codigo', header: 'codigo' },
-      { field: 'equipo_nombre', header: 'nombre' },
-      { field: 'equipo_precio', header: 'precio' },
-      { field: 'capacidad', header: 'capacidad' },
-      { field: 'marca', header: 'marca' },
-      { field: 'tipo', header: 'tipo' },
-      { field: 'voltaje', header: 'V' }
-    ];
-    this.selectedColumns = this.cols;
   }
   onNotificacion() {
     this.totalGeneral = 0;
     this.areas.forEach(area => {
       this.totalGeneral += isNumber(area.total) ? area.total : 0;
     });
-  }
-  onRowSelect(event) {
-    this.equipo = JSON.parse(JSON.stringify(event.data));
-    this.agregarEquipo(this.equipo);
   }
 
 
