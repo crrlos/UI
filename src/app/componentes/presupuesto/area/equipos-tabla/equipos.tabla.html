@@ -18,12 +18,13 @@ selectionMode="single" [(selection)]="equipoSeleccionado" (onRowSelect)="onRowSe
 <ng-template pTemplate="body" let-rowData let-columns="columns">
   <tr [pSelectableRow]="rowData">
     <td *ngFor="let col of columns">
-      {{
-      col.header === 'marca' ? rowData[col.field].marca_nombre :
-      col.header === 'tipo' ? rowData[col.field].tipo_nombre :
-      col.header === 'estado' ? rowData[col.field] === 1 ? 'A' : 'I' :
-      rowData[col.field]
-      }}
+        <div [ngSwitch]="col.header">
+            <div *ngSwitchCase="'marca'">{{rowData[col.field].marca_nombre}}</div>
+            <div *ngSwitchCase="'tipo'">{{rowData[col.field].tipo_nombre}}</div>
+            <div *ngSwitchCase="'estado'">{{rowData[col.field] === 1 ? 'A' : 'I'}}</div>
+            <div *ngSwitchDefault>{{rowData[col.field]}}</div>
+          </div>
+
     </td>
 
   </tr>
