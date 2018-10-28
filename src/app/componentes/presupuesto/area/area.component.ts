@@ -48,10 +48,10 @@ export class AreaComponent implements OnInit {
       area.equipos.forEach(equipoArea => {
         if (equipoArea.insertar_material) {
           const material_equipo: MaterialEquipoArea = {
-            id_material: material.id,
+            id_material: material.material_id,
             id_equipo_area: equipoArea.id,
             cantidad: 1,
-            precio: material.precio,
+            precio: material.material_precio,
             porcentaje_ganancia: 1,
             material: material
           };

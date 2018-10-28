@@ -22,10 +22,8 @@ export class MaterialesComponent implements OnInit {
   selectedColumns: any[];
 
   ngOnInit() {
-    console.log('oninit');
     this.http.tipos().subscribe(tipos => {
       this.tipos = tipos;
-      console.log(tipos);
     }
     );
     this.http.marcas().subscribe(marcas => {

@@ -40,14 +40,14 @@
   </ng-template>
 </p-table>
 
-<p-dialog header="Equipo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
-  <div class="ui-g ui-fluid" *ngIf="equipo">
+<p-dialog header="Material" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+  <div class="ui-g ui-fluid" *ngIf="material">
     <div class="ui-g-12">
       <div class="ui-g-4">
         <label for="vin">Codigo</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="vin" [(ngModel)]="equipo.equipo_codigo" />
+        <input pInputText id="vin" [(ngModel)]="material.material_codigo" />
       </div>
     </div>
     <div class="ui-g-12">
@@ -55,7 +55,7 @@
         <label for="year">Nombre</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="equipo.equipo_nombre" />
+        <input pInputText id="year" [(ngModel)]="material.material_nombre" />
       </div>
     </div>
     <div class="ui-g-12">
@@ -63,15 +63,7 @@
         <label for="year">Precio</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="equipo.equipo_precio" />
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="year">Capacidad</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="equipo.capacidad" />
+        <input pInputText id="year" [(ngModel)]="material.material_precio" />
       </div>
     </div>
     <div class="ui-g-12">
@@ -79,7 +71,7 @@
         <label for="year">Marca</label>
       </div>
       <div class="ui-g-8">
-        <p-dropdown appendTo="body" [options]="marcas" [style]="{'width':'150px'}" [(ngModel)]="equipo.marca"
+        <p-dropdown appendTo="body" [options]="marcas" [style]="{'width':'150px'}" [(ngModel)]="material.marca"
           optionLabel="marca_nombre"></p-dropdown>
       </div>
     </div>
@@ -88,16 +80,15 @@
         <label for="year">Tipo</label>
       </div>
       <div class="ui-g-8">
-        <p-dropdown appendTo="body" [options]="tipos" [style]="{'width':'150px'}" [(ngModel)]="equipo.tipo" optionLabel="tipo_nombre"></p-dropdown>
+        <p-dropdown appendTo="body" [options]="tipos" [style]="{'width':'150px'}" [(ngModel)]="material.tipo" optionLabel="tipo_nombre"></p-dropdown>
       </div>
     </div>
-    <div class="ui-g-12">
+<div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="year">Voltaje</label>
+        <label for="year">Unidad</label>
       </div>
       <div class="ui-g-8">
-        <p-dropdown appendTo="body" [options]="voltajes" [style]="{'width':'150px'}" [(ngModel)]="equipo.voltaje"
-          optionLabel="name"></p-dropdown>
+        <p-dropdown appendTo="body" [options]="unidades" [style]="{'width':'150px'}" [(ngModel)]="material.unidad_medida" optionLabel="unidad_nombre"></p-dropdown>
       </div>
     </div>
     <div class="ui-g-12">
@@ -105,7 +96,7 @@
         <label for="year">Tipo</label>
       </div>
       <div class="ui-g-8">
-        <p-checkbox binary="true" label="Activo" [(ngModel)]="equipo.equipo_activo"></p-checkbox>
+        <p-checkbox binary="true" label="Activo" [(ngModel)]="material.material_activo"></p-checkbox>
       </div>
     </div>
 
