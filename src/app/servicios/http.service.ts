@@ -13,6 +13,12 @@ export class HttpService {
   areas() {
     return this.http.get<Area[]>(`${this.HOST}/areas`);
   }
+  areas_agregar(area) {
+    return this.http.post(`${this.HOST}/areas`, area);
+  }
+  areas_actualizar(area) {
+    return this.http.put(`${this.HOST}/areas`, area);
+  }
   equipos(event?) {
     return this.http.get<EquiposResponse>(`${this.HOST}/equipos`, {
       params: event
@@ -40,5 +46,8 @@ export class HttpService {
   }
   materiales_actualizar(material) {
     return this.http.put(`${this.HOST}/materiales`, material);
+  }
+  equipos_area_agregar(equipo_area) {
+    return this.http.post(`${this.HOST}/equipos_area`, equipo_area);
   }
 }

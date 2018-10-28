@@ -23,18 +23,24 @@ export class AreaComponent implements OnInit {
   selectedColumns: any[];
 
   agregarArea(area: string) {
-    this.areas.push({
-      id: Number.parseInt((Math.random() * 1000).toString()),
-      nombre: area,
-      equipos: []
+    this.http.areas_agregar(area).subscribe((id) => {
+      this.areas.push({
+        area_id: JSON.parse(JSON.stringify(id)).id,
+        nombre: area,
+        equipos: []
+      });
     });
+
+  }
+  actualizarArea(area) {
+    this.http.areas_actualizar(area).subscribe();
   }
   agregarEquipo(equipo: Equipo) {
     this.areas.forEach(area => {
       if (area.insertar_equipo) {
         const equipo_area: EquipoArea = {
-          id_equipo: equipo.id,
-          id_area: area.id,
+          id_equipo: equipo.equipo_id,
+          id_area: area.area_id,
           precio_equipo: equipo.equipo_precio,
           porcentaje_ganancia: 1,
           precio_materiales_equipo: 0,
@@ -42,9 +48,12 @@ export class AreaComponent implements OnInit {
           equipo: equipo,
           total: 0
         };
-        area.equipos.push(equipo_area);
-        area.insertar_equipo = false;
-        return;
+        console.log(equipo_area);
+        this.http.equipos_area_agregar(equipo_area).subscribe(() => {
+          area.equipos.push(equipo_area);
+          area.insertar_equipo = false;
+          return;
+        });
       }
     });
     this.equipoChild.actualizarTotal();

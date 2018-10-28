@@ -26,7 +26,7 @@ total {{totalGeneral}}
         <div class="cell-4 p-5">
           <div class="form-group">
             <label>Nombre</label>
-            <input type="text" [(ngModel)]="area.nombre">
+            <input type="text" (keyup)="actualizarArea(area)" [(ngModel)]="area.nombre">
           </div>
         </div>
         <div class="cell-4 p-5">

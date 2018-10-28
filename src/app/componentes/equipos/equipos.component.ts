@@ -71,7 +71,7 @@ export class EquiposComponent implements OnInit {
     const equipos = this.equipos;
     if (this.nuevoEquipo) {
       this.http.equipos_agregar(this.equipo).subscribe((res) => {
-        this.equipo.id = JSON.parse(JSON.stringify(res)).id;
+        this.equipo.equipo_id = JSON.parse(JSON.stringify(res)).id;
         equipos.push(this.equipo);
       });
     } else {

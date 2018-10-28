@@ -5,7 +5,7 @@ export interface Ubicacion {
   total?;
 }
 export interface Area {
-  id?;
+  area_id?;
   nombre?;
   id_cotizacion?;
   total?;
@@ -34,7 +34,7 @@ export interface MaterialEquipoArea {
   material?: Material;
 }
 export interface Equipo {
-  id?;
+  equipo_id?;
   equipo_codigo?;
   equipo_nombre?;
   capacidad?;
