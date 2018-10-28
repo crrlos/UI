@@ -50,4 +50,7 @@ export class HttpService {
   equipos_area_agregar(equipo_area) {
     return this.http.post(`${this.HOST}/equipos_area`, equipo_area);
   }
+  equipos_area_actualizar(equipo_area) {
+    return this.http.put(`${this.HOST}/equipos_area`, equipo_area);
+  }
 }

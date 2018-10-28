@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Area, Equipo, Material, EquipoArea } from '../../../interfaces/interfaces';
+import { HttpService } from 'src/app/servicios/http.service';
 declare var Metro;
 @Component({
   selector: 'app-equipo-child',
@@ -47,7 +48,7 @@ export class EquipoChildComponent implements OnInit {
     equipo.materiales.splice(equipo.materiales.indexOf(material), 1);
     this.actualizarTotal();
   }
-  constructor() { }
+  constructor(private http: HttpService) { }
   ngOnInit() {
     this.areaSeleccionada = this.area;
 
@@ -60,9 +61,14 @@ export class EquipoChildComponent implements OnInit {
   totalMateriales(equipo: Equipo) {
     let total = 0;
     equipo.materiales.forEach(material => {
-      total += material.material_precio * material.cantidad;
+      total += material.material_precio * material.material_cantidad;
     });
     return total;
+  }
+  actualizarTotalAsync(equipo) {
+    this.http.equipos_area_actualizar(equipo).subscribe(() => {
+      this.actualizarTotal();
+    });
   }
   // Se hace una actualización de totales($$$) a todas las áreas
   actualizarTotal() {
@@ -93,7 +99,7 @@ export class EquipoChildComponent implements OnInit {
     });
     this.notificar.emit(true); // notificar al padre para que actualice los totales
   }
-  moverEquipo(equipo: Equipo) {
+  moverEquipo(equipo: EquipoArea) {
     const r = confirm('está seguro que desea mover de área este equipo?');
     if (!r) {
       setTimeout(() => {

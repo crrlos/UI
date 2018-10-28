@@ -31,7 +31,7 @@
             <div class="cell">
               <div class="form-group">
                 <label>Porc</label>
-                <p-spinner (onChange)="actualizarTotal()" (keyup)="actualizarTotal()" size="30" [(ngModel)]="equipo.porcentaje_ganancia"
+                <p-spinner (onChange)="actualizarTotalAsync(equipo)" (keyup)="actualizarTotalAsync(equipo)" size="30" [(ngModel)]="equipo.porcentaje_ganancia"
                   [step]="0.25"></p-spinner>
               </div>
             </div>
