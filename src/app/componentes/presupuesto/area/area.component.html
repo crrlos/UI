@@ -39,38 +39,50 @@ total {{totalGeneral}}
       <app-equipo-child [area]="area" [areas]="areas" (notificar)="onNotificacion()"></app-equipo-child>
     </div>
   </div>
-  
+
 </div>
 
 <div class="dialog" data-role="dialog" id="equipos_dialog" data-width="1000">
   <div class="dialog-title">Equipos</div>
   <div class="dialog-content">
-    <div class="row">
-      <div class="cell">
-        <input type="text" placeholder="buscar">
-      </div>
-    </div>
-    <div class="row">
-      <div class="cell">
-        <table class="table compact striped row-hover">
-          <thead>
-            <th>codigo</th>
-            <th>nombre</th>
-            <th>precio</th>
-            <th>capacidad</th>
+      <p-table [globalFilterFields]="['tipo.nombre','nombre','codigo']" #tt [columns]="selectedColumns" [value]="equipos"
+      selectionMode="single" [(selection)]="equipoSeleccionado" (onRowSelect)="onRowSelect($event)" [paginator]="true"
+      [rows]="15" [rowsPerPageOptions]="[10,20,30]" [lazy]="true" (onLazyLoad)="loadLazy($event)" [totalRecords]="totalRecords">
+      <ng-template pTemplate="caption">
 
-          </thead>
-          <tbody>
-            <tr *ngFor="let equipo of equipos_lista" (click)="agregarEquipo(equipo)" class="pointer">
-              <td>{{equipo.codigo}}</td>
-              <td>{{equipo.nombre}}</td>
-              <td>{{equipo.precio | currency}}</td>
-              <td>{{equipo.capacidad}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+        <input type="text" pInputText size="50" placeholder="Filtrar" (input)="tt.filterGlobal($event.target.value, 'contains')"
+          style="width:auto">
+
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td *ngFor="let col of columns">
+            {{
+            col.header === 'marca' ? rowData[col.field].marca_nombre :
+            col.header === 'tipo' ? rowData[col.field].tipo_nombre :
+            col.header === 'estado' ? rowData[col.field] === 1 ? 'A' : 'I' :
+            rowData[col.field]
+            }}
+          </td>
+
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+          <div style="text-align:left">
+              <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" selectedItemsLabel="{0} columnas seleccionadas"
+                [style]="{minWidth: '200px'}" defaultLabel="Seleccionar columnas"></p-multiSelect>
+            </div>
+      </ng-template>
+    </p-table>
+
   </div>
   <div class="dialog-actions">
     <button class="button js-dialog-close">Cerrar</button>
