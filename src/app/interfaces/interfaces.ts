@@ -52,7 +52,7 @@ export interface Material {
   material_id?;
   material_codigo?;
   material_nombre?;
-  cantidad?;
+  material_cantidad?;
   material_precio?;
   porcentaje?;
   tipo?: TipoUnidad;

@@ -37,6 +37,7 @@ export class MaterialesComponent implements OnInit {
       { field: 'material_codigo', header: 'codigo' },
       { field: 'material_nombre', header: 'nombre' },
       { field: 'material_precio', header: 'precio' },
+      { field: 'material_cantidad', header: 'cantidad' },
       { field: 'marca', header: 'marca' },
       { field: 'tipo', header: 'tipo' },
       { field: 'unidad_medida', header: 'unidad' },
