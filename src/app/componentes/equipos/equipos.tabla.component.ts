@@ -1,27 +1,25 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Equipo } from '../../../../interfaces/interfaces';
-import { HttpService } from '../../../../servicios/http.service';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Equipo } from 'src/app/interfaces/interfaces';
+import { HttpService } from 'src/app/servicios/http.service';
+
 @Component({
   selector: 'app-equipos-tabla',
-  templateUrl: './equipos.tabla.html'
+  templateUrl: './equipos.tabla.component.html'
 })
 export class EquiposTablaComponent implements OnInit {
 
-  equipos: Equipo[];
+  constructor(private http: HttpService) { }
+
+  equipos: Equipo[] = [];
   equipo: Equipo;
   cols: any[];
   totalRecords;
   selectedColumns: any[];
 
+  @Input() puede_agregar: boolean;
   @Output() equipo_seleccionado = new EventEmitter<Equipo>();
+  @Output() agregar = new EventEmitter<boolean>();
 
-  constructor(private http: HttpService) { }
-  loadLazy(event) {
-    this.http.equipos(event).subscribe(data => {
-      this.equipos = data.equipos;
-      this.totalRecords = data.totalRecords;
-    });
-  }
   ngOnInit() {
     this.cols = [
       { field: 'equipo_codigo', header: 'codigo' },
@@ -30,7 +28,8 @@ export class EquiposTablaComponent implements OnInit {
       { field: 'capacidad', header: 'capacidad' },
       { field: 'marca', header: 'marca' },
       { field: 'tipo', header: 'tipo' },
-      { field: 'voltaje', header: 'V' }
+      { field: 'voltaje', header: 'V' },
+      { field: 'equipo_activo', header: 'estado' }
     ];
     this.selectedColumns = this.cols;
   }
@@ -38,5 +37,11 @@ export class EquiposTablaComponent implements OnInit {
     this.equipo = JSON.parse(JSON.stringify(event.data));
     this.equipo_seleccionado.emit(this.equipo);
   }
-}
+  loadLazy(event) {
+    this.http.equipos(event).subscribe(data => {
+      this.equipos = data.equipos;
+      this.totalRecords = data.totalRecords;
+    });
+  }
 
+}

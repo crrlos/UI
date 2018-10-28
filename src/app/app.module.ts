@@ -11,7 +11,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { RouterModule, Routes } from '@angular/router';
 import { EquiposComponent } from './componentes/equipos/equipos.component';
 import { MaterialesComponent } from './componentes/materiales/materiales.component';
-import { EquiposTablaComponent } from './componentes/presupuesto/area/equipos-tabla/equipos.tabla';
+import { EquiposTablaComponent } from './componentes/equipos/equipos.tabla.component';
 import { HttpClientModule } from '@angular/common/http';
 import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';

@@ -1,43 +1,9 @@
-<p-table [globalFilterFields]="['tipo.nombre','nombre','codigo']" #tt [columns]="selectedColumns" [value]="equipos"
-  selectionMode="single" [(selection)]="equipoSeleccionado" (onRowSelect)="onRowSelect($event)" [paginator]="true"
-  [rows]="15" [rowsPerPageOptions]="[10,20,30]" [lazy]="true" (onLazyLoad)="loadLazy($event)" [totalRecords]="totalRecords">
-  <ng-template pTemplate="caption">
-    <div style="text-align:left">
-      <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Agregar"></button>
-    </div>
-    <br>
-    <input type="text" pInputText size="50" placeholder="Filtrar" (input)="tt.filterGlobal($event.target.value, 'contains')"
-      style="width:auto">
 
-  </ng-template>
-  <ng-template pTemplate="header" let-columns>
-    <tr>
-      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-        {{col.header}}
-        <p-sortIcon [field]="col.field"></p-sortIcon>
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-rowData let-columns="columns">
-    <tr [pSelectableRow]="rowData">
-      <td *ngFor="let col of columns">
-        {{
-        col.header === 'marca' ? rowData[col.field].marca_nombre :
-        col.header === 'tipo' ? rowData[col.field].tipo_nombre :
-        col.header === 'estado' ? rowData[col.field] === 1 ? 'A' : 'I' :
-        rowData[col.field]
-        }}
-      </td>
-
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="summary">
-      <div style="text-align:left">
-          <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" selectedItemsLabel="{0} columnas seleccionadas"
-            [style]="{minWidth: '200px'}" defaultLabel="Seleccionar columnas"></p-multiSelect>
-        </div>
-  </ng-template>
-</p-table>
+<app-equipos-tabla
+#equipos_tabla (equipo_seleccionado)="onRowSelect($event)"
+(agregar)="showDialogToAdd()"
+[puede_agregar] = 'true'>
+</app-equipos-tabla>
 
 <p-dialog header="Equipo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
   <div class="ui-g ui-fluid" *ngIf="equipo">
