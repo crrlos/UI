@@ -13,7 +13,7 @@ export interface Area {
   insertar_equipo?: boolean; // permite saber en cual area se insertará el equipo
 }
 export interface EquipoArea {
-  id?;
+  equipo_area_id?;
   id_equipo?;
   id_area?;
   precio_equipo?;
@@ -25,7 +25,7 @@ export interface EquipoArea {
   insertar_material?: boolean;
 }
 export interface MaterialEquipoArea {
-  id?;
+  material_equipo_area_id?;
   id_material?;
   id_equipo_area?;
   cantidad?;
@@ -40,7 +40,6 @@ export interface Equipo {
   capacidad?;
   equipo_precio?;
   porcentaje?;
-  materiales?: Material[];
   total?;
   total_materiales_modificado?;
   tipo?: TipoUnidad;

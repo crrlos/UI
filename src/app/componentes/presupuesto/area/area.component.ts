@@ -64,14 +64,17 @@ export class AreaComponent implements OnInit {
         if (equipoArea.insertar_material) {
           const material_equipo: MaterialEquipoArea = {
             id_material: material.material_id,
-            id_equipo_area: equipoArea.id,
+            id_equipo_area: equipoArea.equipo_area_id,
             cantidad: 1,
             precio: material.material_precio,
             porcentaje_ganancia: 1,
             material: material
           };
-          equipoArea.materiales.push(material_equipo);
-          return;
+          this.http.material_equipo_area_agregar(material_equipo).subscribe((id) => {
+            material_equipo.material_equipo_area_id = JSON.parse(JSON.stringify(id)).id;
+            equipoArea.materiales.push(material_equipo);
+            return;
+          });
         }
       });
     });

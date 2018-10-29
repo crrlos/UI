@@ -84,16 +84,16 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let material of equipo.materiales">
-                    <td>{{material.material.codigo}}</td>
-                    <td>{{material.material.nombre}}</td>
-                    <td>{{material.precio}}</td>
+                    <td>{{material.material.material_codigo}}</td>
+                    <td>{{material.material.material_nombre}}</td>
+                    <td>{{material.material.material_precio}}</td>
                     <td>
-                      <p-spinner (onChange)="actualizarTotal()" (keyup)="actualizarTotal()" size="10" [(ngModel)]="material.porcentaje_ganancia"
+                      <p-spinner (onChange)="actualizarTotalAsyncMaterial(material)" (keyup)="actualizarTotalAsyncMaterial(material)" size="10" [(ngModel)]="material.porcentaje_ganancia"
                         [step]="0.25">
                       </p-spinner>
                     </td>
                     <td>
-                      <p-spinner (onChange)="actualizarTotal()" (keyup)="actualizarTotal()" size="10" [(ngModel)]="material.cantidad"
+                      <p-spinner (onChange)="actualizarTotalAsyncMaterial(material)" (keyup)="actualizarTotalAsyncMaterial(material)" size="10" [(ngModel)]="material.cantidad"
                         [step]="1" min="1"></p-spinner>
                     </td>
                     <td>{{material.precio * material.cantidad * material.porcentaje_ganancia | currency}}</td>

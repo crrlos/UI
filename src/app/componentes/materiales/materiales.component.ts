@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Equipo, TipoUnidad, Marca, Material, UnidadMedida } from 'src/app/interfaces/interfaces';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {TipoUnidad, Marca, Material, UnidadMedida } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
+
+interface MaterialesTabla {
+  materiales: Material[];
+}
 
 @Component({
   selector: 'app-materiales',
@@ -18,8 +22,9 @@ export class MaterialesComponent implements OnInit {
   nuevoMaterial = false;
   materialSeleccionado: Material;
   cols: any[];
-  totalRecords;
   selectedColumns: any[];
+
+  @ViewChild('materiales_tabla') materiales_tabla: MaterialesTabla;
 
   ngOnInit() {
     this.http.tipos().subscribe(tipos => {
@@ -48,6 +53,7 @@ export class MaterialesComponent implements OnInit {
   showDialogToAdd() {
     this.nuevoMaterial = true;
     this.displayDialog = true;
+    this.material = {};
   }
   onRowSelect(event) {
     this.nuevoMaterial = false;
@@ -55,22 +61,18 @@ export class MaterialesComponent implements OnInit {
     console.log(this.material);
     this.displayDialog = true;
   }
-  loadLazy(event) {
-    this.http.materiales(event).subscribe(data => {
-      this.materiales = data.materiales;
-      this.totalRecords = data.totalRecords;
-    });
-  }
   save() {
     const materiales = this.materiales;
     if (this.nuevoMaterial) {
-      this.http.equipos_agregar(this.material).subscribe((res) => {
+      this.http.materiales_agregar(this.material).subscribe((res) => {
         this.material.material_id = JSON.parse(JSON.stringify(res)).id;
-        materiales.push(this.material);
+        this.materiales_tabla.materiales.push(JSON.parse(JSON.stringify(this.material)));
       });
     } else {
       this.http.materiales_actualizar(this.material).subscribe(() =>
-        materiales[this.materiales.indexOf(this.materialSeleccionado)] = this.material);
+        this.materiales_tabla
+          .materiales[this.materiales_tabla.materiales
+          .findIndex(m => m.material_id === this.material.material_id)] = this.material);
     }
     this.materiales = materiales;
     this.displayDialog = false;
@@ -81,9 +83,6 @@ export class MaterialesComponent implements OnInit {
     this.materiales = this.materiales.filter((val, i) => i !== index);
     this.material = null;
     this.displayDialog = false;
-  }
-  endEdit(event) {
-    console.log(event);
   }
 
 }

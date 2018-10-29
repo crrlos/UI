@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Area, Equipo, Material, EquipoArea } from '../../../interfaces/interfaces';
+import {Area, Equipo, Material, EquipoArea, MaterialEquipoArea} from '../../../interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 declare var Metro;
 @Component({
@@ -44,9 +44,11 @@ export class EquipoChildComponent implements OnInit {
     }
     this.timeout_id = setTimeout(() => { this.actualizarTotal(); }, 1000);
   }
-  eliminarMaterial(equipo: Equipo, material: Material) {
-    equipo.materiales.splice(equipo.materiales.indexOf(material), 1);
-    this.actualizarTotal();
+  eliminarMaterial(equipo: EquipoArea, material: MaterialEquipoArea) {
+    this.http.material_equipo_area_eliminar(material).subscribe(() => {
+      equipo.materiales.splice(equipo.materiales.indexOf(material), 1);
+      this.actualizarTotal();
+    });
   }
   constructor(private http: HttpService) { }
   ngOnInit() {
@@ -55,18 +57,20 @@ export class EquipoChildComponent implements OnInit {
     this.actualizarTotal();
 
   }
-  obtener(equipo) {
-    this.equipoSeleccionado = equipo;
-  }
-  totalMateriales(equipo: Equipo) {
+  totalMateriales(equipo: EquipoArea) {
     let total = 0;
     equipo.materiales.forEach(material => {
-      total += material.material_precio * material.material_cantidad;
+      total += material.precio * material.cantidad;
     });
     return total;
   }
   actualizarTotalAsync(equipo) {
     this.http.equipos_area_actualizar(equipo).subscribe(() => {
+      this.actualizarTotal();
+    });
+  }
+  actualizarTotalAsyncMaterial(material) {
+    this.http.material_equipo_area_actualizar(material).subscribe(() => {
       this.actualizarTotal();
     });
   }

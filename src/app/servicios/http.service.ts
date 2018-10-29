@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Area, EquiposResponse, TipoUnidad, Marca, MaterialResponse, UnidadMedida } from '../interfaces/interfaces';
+import {Area, EquiposResponse, TipoUnidad, Marca, MaterialResponse, UnidadMedida, MaterialEquipoArea} from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -50,10 +50,22 @@ export class HttpService {
   materiales_actualizar(material) {
     return this.http.put(`${this.HOST}/materiales`, material);
   }
+  materiales_agregar(material) {
+    return this.http.post(`${this.HOST}/materiales`, material);
+  }
   equipos_area_agregar(equipo_area) {
     return this.http.post(`${this.HOST}/equipos_area`, equipo_area);
   }
   equipos_area_actualizar(equipo_area) {
     return this.http.put(`${this.HOST}/equipos_area`, equipo_area);
+  }
+  material_equipo_area_agregar(material: MaterialEquipoArea) {
+    return this.http.post(`${this.HOST}/materiales_equipo_area`, material);
+  }
+  material_equipo_area_actualizar(material: MaterialEquipoArea) {
+    return this.http.put(`${this.HOST}/materiales_equipo_area`, material);
+  }
+  material_equipo_area_eliminar(material: MaterialEquipoArea) {
+    return this.http.delete(`${this.HOST}/materiales_equipo_area`, {params: {id: material.material_equipo_area_id}});
   }
 }
