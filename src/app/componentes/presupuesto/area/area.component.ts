@@ -48,7 +48,8 @@ export class AreaComponent implements OnInit {
           equipo: equipo,
           total: 0
         };
-        this.http.equipos_area_agregar(equipo_area).subscribe(() => {
+        this.http.equipos_area_agregar(equipo_area).subscribe((id) => {
+          equipo_area.equipo_area_id = JSON.parse(JSON.stringify(id)).id;
           area.equipos.push(equipo_area);
           area.insertar_equipo = false;
           this.equipoChild.actualizarTotal();
