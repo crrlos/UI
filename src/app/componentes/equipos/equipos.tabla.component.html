@@ -1,6 +1,6 @@
 <p-table [globalFilterFields]="['tipo.nombre','nombre','codigo']" #tt [columns]="selectedColumns" [value]="equipos"
   selectionMode="single" [(selection)]="equipoSeleccionado" (onRowSelect)="onRowSelect($event)" [paginator]="true"
-  [rows]="15" [rowsPerPageOptions]="[10,20,30]" [lazy]="true" (onLazyLoad)="loadLazy($event)" [totalRecords]="totalRecords">
+  [rows]="7" [rowsPerPageOptions]="[10,20,30]" [lazy]="true" (onLazyLoad)="loadLazy($event)" [totalRecords]="totalRecords">
   <ng-template pTemplate="caption">
     <div style="text-align:left" *ngIf="puede_agregar">
       <button type="button" pButton icon="fa fa-plus" (click)="agregar.emit(true)" label="Agregar"></button>
