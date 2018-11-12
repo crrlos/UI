@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Area, EquiposResponse, TipoUnidad, Marca, MaterialResponse, UnidadMedida, MaterialEquipoArea} from '../interfaces/interfaces';
+import { Area, EquiposResponse, TipoUnidad, Marca, MaterialResponse, UnidadMedida,
+  MaterialEquipoArea, Gas, Tecnologia, Voltaje } from 'src/app/interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,16 @@ export class HttpService {
     return this.http.put(`${this.HOST}/materiales_equipo_area`, material);
   }
   material_equipo_area_eliminar(material: MaterialEquipoArea) {
-    return this.http.delete(`${this.HOST}/materiales_equipo_area`, {params: {id: material.material_equipo_area_id}});
+    return this.http.delete(`${this.HOST}/materiales_equipo_area`, { params: { id: material.material_equipo_area_id } });
   }
+  gases_get() {
+    return this.http.get<Gas[]>(`${this.HOST}/gases`);
+  }
+  tecnologias_get() {
+    return this.http.get<Tecnologia[]>(`${this.HOST}/tecnologias`);
+  }
+  voltajes() {
+    return this.http.get<Voltaje[]>(`${this.HOST}/voltajes`);
+  }
+
 }

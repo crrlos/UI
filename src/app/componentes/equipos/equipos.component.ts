@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Equipo, TipoUnidad, Marca } from 'src/app/interfaces/interfaces';
+import { Equipo, TipoUnidad, Marca, Tecnologia, Gas } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 
 @Component({
@@ -12,18 +12,15 @@ export class EquiposComponent implements OnInit {
   equipo: Equipo;
   tipos: TipoUnidad[] = [];
   marcas: Marca[] = [];
+  gases: Gas[];
+  tecnologias: Tecnologia[];
   displayDialog = false;
   nuevoEquipo = false;
   equipoSeleccionado: Equipo;
 
   @ViewChild('equipos_tabla') equipos_tabla: EquiposTabla;
 
-  voltajes = [
-    { name: '0', code: '0' },
-    { name: '120V', code: '120V' },
-    { name: '240V', code: '240V' },
-    { name: '480V', code: '480V' }
-  ];
+  voltajes;
 
   ngOnInit() {
     this.http.tipos().subscribe(tipos => {
@@ -34,10 +31,22 @@ export class EquiposComponent implements OnInit {
       this.marcas = marcas;
     }
     );
+    this.http.gases_get().subscribe(gases => {
+      this.gases = gases;
+    }
+    );
+    this.http.tecnologias_get().subscribe(tecnologias => {
+      this.tecnologias = tecnologias;
+    }
+    );
+    this.http.voltajes().subscribe(voltajes => {
+      this.voltajes = voltajes;
+    }
+    );
   }
   showDialogToAdd() {
     this.nuevoEquipo = true;
-    this.equipo = { equipo_activo: true, tipo: this.tipos[0], marca: this.marcas[0], voltaje: this.voltajes[0] };
+    this.equipo = { tipo: this.tipos[0], marca: this.marcas[0], voltaje: this.voltajes[0] };
     this.displayDialog = true;
   }
   onRowSelect(event) {
@@ -48,7 +57,11 @@ export class EquiposComponent implements OnInit {
     this.displayDialog = true;
   }
   save() {
-    this.equipo.voltaje = this.equipo.voltaje.name;
+    if (this.equipo.voltaje) {
+      this.equipo.voltaje = this.equipo.voltaje.name;
+    } else {
+      this.equipo.voltaje = '0';
+    }
     if (this.nuevoEquipo) {
       this.http.equipos_agregar(this.equipo).subscribe((res) => {
         this.equipo.equipo_id = JSON.parse(JSON.stringify(res)).id;

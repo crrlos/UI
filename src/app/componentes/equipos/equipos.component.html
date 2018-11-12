@@ -61,18 +61,32 @@
         <label for="year">Voltaje</label>
       </div>
       <div class="ui-g-8">
-        <p-dropdown appendTo="body" [options]="voltajes" [style]="{'width':'150px'}" [(ngModel)]="equipo.voltaje"
+        <p-dropdown appendTo="body" placeholder="Seleccione" [showClear]="true"
+        [options]="voltajes" [style]="{'width':'150px'}" [(ngModel)]="equipo.voltaje"
           optionLabel="name"></p-dropdown>
       </div>
     </div>
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="year">Tipo</label>
+        <label for="year">Gas</label>
       </div>
       <div class="ui-g-8">
-        <p-checkbox binary="true" label="Activo" [(ngModel)]="equipo.equipo_activo"></p-checkbox>
+        <p-dropdown appendTo="body" placeholder="Seleccione" [showClear]="true"
+         [options]="gases" [style]="{'width':'150px'}" [(ngModel)]="equipo.gas"
+          optionLabel="gas_nombre"></p-dropdown>
       </div>
     </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Tecnología</label>
+      </div>
+      <div class="ui-g-8">
+        <p-dropdown appendTo="body" placeholder="Seleccione" [showClear]="true"
+        [options]="tecnologias" [style]="{'width':'150px'}" [(ngModel)]="equipo.tecnologia"
+          optionLabel="tecnologia_nombre"></p-dropdown>
+      </div>
+    </div>
+
 
 
   </div>

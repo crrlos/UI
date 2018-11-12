@@ -29,7 +29,8 @@ export class EquiposTablaComponent implements OnInit {
       { field: 'marca', header: 'marca' },
       { field: 'tipo', header: 'tipo' },
       { field: 'voltaje', header: 'V' },
-      { field: 'equipo_activo', header: 'estado' }
+      { field: 'tecnologia', header: 'tecnología' },
+      { field: 'gas', header: 'gas' }
     ];
     this.selectedColumns = this.cols;
   }

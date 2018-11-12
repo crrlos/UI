@@ -24,7 +24,8 @@
         <div [ngSwitch]="col.header">
           <div *ngSwitchCase="'marca'">{{rowData[col.field].marca_nombre}}</div>
           <div *ngSwitchCase="'tipo'">{{rowData[col.field].tipo_nombre}}</div>
-          <div *ngSwitchCase="'estado'">{{rowData[col.field] === 1 ? 'A' : 'I'}}</div>
+          <div *ngSwitchCase="'gas'">{{rowData[col.field]?.gas_nombre}}</div>
+          <div *ngSwitchCase="'tecnología'">{{rowData[col.field]?.tecnologia_nombre}}</div>
           <div *ngSwitchDefault>{{rowData[col.field]}}</div>
         </div>
       </td>

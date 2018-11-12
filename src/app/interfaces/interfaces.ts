@@ -45,7 +45,8 @@ export interface Equipo {
   tipo?: TipoUnidad;
   marca?: Marca;
   voltaje?;
-  equipo_activo?: boolean;
+  tecnologia?: Tecnologia;
+  gas?: Gas;
 }
 export interface Material {
   material_id?;
@@ -59,6 +60,10 @@ export interface Material {
   unidad_medida?: UnidadMedida;
   material_activo?;
 }
+export interface Voltaje {
+  name;
+  code;
+}
 export interface TipoUnidad {
   id?;
   tipo_nombre?;
@@ -67,6 +72,14 @@ export interface TipoUnidad {
 export interface Marca {
   id?;
   marca_nombre?;
+}
+export interface Gas {
+  gas_id;
+  gas_nombre;
+}
+export interface Tecnologia {
+  tecnologia_id;
+  tecnologia_nombre;
 }
 export interface UnidadMedida {
   id?;
