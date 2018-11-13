@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {Area, Equipo, Material, EquipoArea, MaterialEquipoArea} from '../../../interfaces/interfaces';
+import { Area, Equipo, Material, EquipoArea, MaterialEquipoArea } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 declare var Metro;
 @Component({
@@ -42,7 +42,7 @@ export class EquipoChildComponent implements OnInit {
       clearTimeout(this.timeout_id);
       this.timeout_id = null;
     }
-    this.timeout_id = setTimeout(() => { this.actualizarTotal(); }, 1000);
+    this.timeout_id = setTimeout(() => { this.actualizarTotal(true); }, 1000);
   }
   eliminarMaterial(equipo: EquipoArea, material: MaterialEquipoArea) {
     this.http.material_equipo_area_eliminar(material).subscribe(() => {
@@ -75,7 +75,7 @@ export class EquipoChildComponent implements OnInit {
     });
   }
   // Se hace una actualización de totales($$$) a todas las áreas
-  actualizarTotal() {
+  actualizarTotal(conservar_total_ajustado?: boolean) {
     let total_general = 0;
 
     this.areas.forEach(area => {
@@ -90,7 +90,10 @@ export class EquipoChildComponent implements OnInit {
         // evita que se sobreescriba el valor ingresado manualmente
         if (equipo_area.precio_materiales_equipo < total_materiales_equipo) {
           equipo_area.precio_materiales_equipo = total_materiales_equipo;
+        } else if (equipo_area.precio_materiales_equipo > total_materiales_equipo && !conservar_total_ajustado) {
+          equipo_area.precio_materiales_equipo = total_materiales_equipo;
         }
+
 
         if (total_materiales_equipo === 0) {
           equipo_area.precio_materiales_equipo = 0;
