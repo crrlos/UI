@@ -26,6 +26,9 @@
           <div *ngSwitchDefault>{{rowData[col.field]}}</div>
         </div>
       </td>
+      <td>
+        <button pButton icon="fa-search" (click)="selectedCotizacion(rowData)"></button>
+    </td>
 
     </tr>
   </ng-template>

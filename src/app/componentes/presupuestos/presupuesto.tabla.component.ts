@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Equipo, Cotizacion } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-presupuesto-tabla',
@@ -8,7 +9,7 @@ import { HttpService } from 'src/app/servicios/http.service';
 })
 export class PresupuestoTablaComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private router: Router) { }
 
   cotizaciones: Cotizacion[] = [];
   cotizacion: Cotizacion;
@@ -27,9 +28,11 @@ export class PresupuestoTablaComponent implements OnInit {
     ];
     this.selectedColumns = this.cols;
   }
+  selectedCotizacion(data) {
+    console.log('un evento');
+  }
   onRowSelect(event) {
-    this.cotizacion = JSON.parse(JSON.stringify(event.data));
-    this.cotizacion_seleccionada.emit(this.cotizacion);
+    this.router.navigate(['presupuesto', event.data.cotizacion_id]);
   }
   loadLazy(event) {
     this.http.cotizaciones(event).subscribe(data => {

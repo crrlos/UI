@@ -13,8 +13,8 @@ export class HttpService {
   HOST = 'http://localhost:8000';
 
   constructor(private http: HttpClient) { }
-  areas() {
-    return this.http.get<Area[]>(`${this.HOST}/areas`);
+  areas(id) {
+    return this.http.get<Area[]>(`${this.HOST}/areas?id=${id}`);
   }
   areas_agregar(area) {
     return this.http.post(`${this.HOST}/areas`, area);

@@ -28,7 +28,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 const appRoutes: Routes = [
   { path: 'materiales', component: MaterialesComponent },
   { path: 'equipos', component: EquiposComponent },
-  { path: 'presupuestos', component: PresupuestoComponent }
+  { path: 'presupuestos', component: PresupuestoComponent },
+  { path: 'presupuesto/:id', component: AreaComponent }
 ];
 
 @NgModule({

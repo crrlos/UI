@@ -3,6 +3,7 @@ import { Area, Equipo, EquipoArea, Material, MaterialEquipoArea } from '../../..
 import { isNumber } from 'util';
 import { HttpService } from '../../../servicios/http.service';
 import { EquipoChildComponent } from '../equipo-child/equipo-child.component';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html'
@@ -16,9 +17,10 @@ export class AreaComponent implements OnInit {
   equipos_lista: Equipo[];
   materiales_lista: Material[];
   area: Area = {};
+  id_cotizacion;
 
   agregarArea() {
-    this.http.areas_agregar(this.area).subscribe((id) => {
+    this.http.areas_agregar({ area: this.area.nombre, cotizacion: this.id_cotizacion }).subscribe((id) => {
       this.areas.push({
         area_id: JSON.parse(JSON.stringify(id)).id,
         nombre: this.area.nombre,
@@ -28,7 +30,8 @@ export class AreaComponent implements OnInit {
 
   }
   actualizarArea(area) {
-    this.http.areas_actualizar(area).subscribe();
+    const data = {nombre : area.nombre, area_id: area.area_id , cotizacion: this.id_cotizacion};
+    this.http.areas_actualizar(data).subscribe();
   }
   eliminarArea(area: Area) {
     this.http.areas_eliminar(area).subscribe(() => {
@@ -81,11 +84,13 @@ export class AreaComponent implements OnInit {
     });
     this.equipoChild.actualizarTotal();
   }
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private route: ActivatedRoute) { }
   ngOnInit() {
-
-    this.http.areas().subscribe(success => {
-      this.areas = success;
+    this.route.params.subscribe(params => {
+      this.id_cotizacion = params['id'];
+      this.http.areas(this.id_cotizacion).subscribe(success => {
+        this.areas = success;
+      });
     });
   }
   onNotificacion() {
