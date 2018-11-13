@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   Area, EquiposResponse, TipoUnidad, Marca, MaterialResponse, UnidadMedida,
-  MaterialEquipoArea, Gas, Tecnologia, Voltaje, Cliente
+  MaterialEquipoArea, Gas, Tecnologia, Voltaje, Cliente, CotizacionResponse
 } from 'src/app/interfaces/interfaces';
 
 @Injectable({
@@ -85,6 +85,11 @@ export class HttpService {
   }
   cotizacion_agregar(data) {
     return this.http.post(`${this.HOST}/cotizaciones`, data);
+  }
+  cotizaciones(event?) {
+    return this.http.get<CotizacionResponse>(`${this.HOST}/cotizaciones`, {
+      params: event
+    });
   }
 
 }

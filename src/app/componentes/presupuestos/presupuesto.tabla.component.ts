@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Equipo } from 'src/app/interfaces/interfaces';
+import { Equipo, Cotizacion } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 
 @Component({
@@ -10,31 +10,30 @@ export class PresupuestoTablaComponent implements OnInit {
 
   constructor(private http: HttpService) { }
 
-  equipos: Equipo[] = [];
-  equipo: Equipo;
+  cotizaciones: Cotizacion[] = [];
+  cotizacion: Cotizacion;
   cols: any[];
   totalRecords;
   selectedColumns: any[];
 
   @Input() puede_agregar: boolean;
-  @Output() equipo_seleccionado = new EventEmitter<Equipo>();
+  @Output() cotizacion_seleccionada = new EventEmitter<Cotizacion>();
   @Output() agregar = new EventEmitter<boolean>();
 
   ngOnInit() {
     this.cols = [
-      { field: 'equipo_codigo', header: 'Cliente' },
-      { field: 'equipo_nombre', header: 'Fecha' },
-      { field: 'equipo_precio', header: 'Estado' }
+      { field: 'cliente', header: 'Cliente' },
+      { field: 'descripcion', header: 'Descripción' }
     ];
     this.selectedColumns = this.cols;
   }
   onRowSelect(event) {
-    this.equipo = JSON.parse(JSON.stringify(event.data));
-    this.equipo_seleccionado.emit(this.equipo);
+    this.cotizacion = JSON.parse(JSON.stringify(event.data));
+    this.cotizacion_seleccionada.emit(this.cotizacion);
   }
   loadLazy(event) {
-    this.http.equipos(event).subscribe(data => {
-      this.equipos = data.equipos;
+    this.http.cotizaciones(event).subscribe(data => {
+      this.cotizaciones = data.cotizaciones;
       this.totalRecords = data.totalRecords;
     });
   }

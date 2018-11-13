@@ -90,6 +90,10 @@ export interface EquiposResponse {
   equipos: Equipo[];
   totalRecords;
 }
+export interface CotizacionResponse {
+  cotizaciones: Cotizacion[];
+  totalRecords;
+}
 
 export interface MaterialResponse {
   materiales: Material[];
