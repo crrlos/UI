@@ -95,3 +95,13 @@ export interface MaterialResponse {
   materiales: Material[];
   totalRecords;
 }
+export interface Cliente {
+  cliente_id?;
+  nombre?;
+}
+export interface Cotizacion {
+  cotizacion_id?;
+  descripcion?;
+  cliente?: Cliente;
+  fecha?;
+}

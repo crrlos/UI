@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Area, EquiposResponse, TipoUnidad, Marca, MaterialResponse, UnidadMedida,
-  MaterialEquipoArea, Gas, Tecnologia, Voltaje } from 'src/app/interfaces/interfaces';
+import {
+  Area, EquiposResponse, TipoUnidad, Marca, MaterialResponse, UnidadMedida,
+  MaterialEquipoArea, Gas, Tecnologia, Voltaje, Cliente
+} from 'src/app/interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +79,12 @@ export class HttpService {
   }
   voltajes() {
     return this.http.get<Voltaje[]>(`${this.HOST}/voltajes`);
+  }
+  clientes(filtro) {
+    return this.http.get<Cliente[]>(`${this.HOST}/clientes?filtro=${filtro}`);
+  }
+  cotizacion_agregar(data) {
+    return this.http.post(`${this.HOST}/cotizaciones`, data);
   }
 
 }

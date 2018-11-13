@@ -1,0 +1,45 @@
+
+<app-presupuesto-tabla
+
+(agregar)="showDialogToAdd()"
+[puede_agregar] = 'true'>
+</app-presupuesto-tabla>
+
+<p-dialog header="Cotización" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="600">
+  <div class="ui-g ui-fluid" >
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="vin">Cliente</label>
+      </div>
+      <div class="ui-g-8">
+        <p-autoComplete [(ngModel)]="cotizacion.cliente" [forceSelection]="true"
+        [suggestions]="results" field="nombre" (completeMethod)="search($event)"></p-autoComplete>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Descripción</label>
+      </div>
+      <div class="ui-g-8">
+        <textarea pInputTextarea [rows]="5" [cols]="30" [(ngModel)]="cotizacion.descripcion" pInputTextarea autoResize="autoResize"></textarea>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Estado</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="year"  />
+      </div>
+    </div>
+
+
+
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+      <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+    </div>
+  </p-footer>
+</p-dialog>

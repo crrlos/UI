@@ -12,6 +12,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { EquiposComponent } from './componentes/equipos/equipos.component';
 import { MaterialesComponent } from './componentes/materiales/materiales.component';
 import { EquiposTablaComponent } from './componentes/equipos/equipos.tabla.component';
+import { PresupuestoTablaComponent } from './componentes/presupuestos/presupuesto.tabla.component';
+import { PresupuestoComponent } from './componentes/presupuestos/presupuesto.component';
 import {MaterialesTablaComponent} from './componentes/materiales/materiales.tabla.component';
 import { HttpClientModule } from '@angular/common/http';
 import {TableModule} from 'primeng/table';
@@ -21,10 +23,12 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown';
 import {CheckboxModule} from 'primeng/checkbox';
 import {MultiSelectModule} from 'primeng/multiselect';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 const appRoutes: Routes = [
   { path: 'materiales', component: MaterialesComponent },
   { path: 'equipos', component: EquiposComponent },
-  { path: 'presupueto', component: AreaComponent }
+  { path: 'presupuestos', component: PresupuestoComponent }
 ];
 
 @NgModule({
@@ -35,9 +39,13 @@ const appRoutes: Routes = [
     MaterialesComponent,
     EquiposComponent,
     EquiposTablaComponent,
-    MaterialesTablaComponent
+    MaterialesTablaComponent,
+    PresupuestoTablaComponent,
+    PresupuestoComponent
   ],
   imports: [
+    InputTextareaModule,
+    AutoCompleteModule,
     AngularFontAwesomeModule,
     MultiSelectModule,
     CheckboxModule,
