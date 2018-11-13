@@ -40,7 +40,7 @@ export class PresupuestoComponent implements OnInit {
     if (this.nuevaCotizacion) {
       this.http.cotizacion_agregar(this.cotizacion).subscribe((res) => {
         this.cotizacion.cotizacion_id = JSON.parse(JSON.stringify(res)).id;
-        // this.cotizaciones_tabla.equipos.push(this.cotizacion);
+        this.cotizaciones_tabla.cotizaciones.push(this.cotizacion);
         this.cotizacion = {};
       });
     } else {
