@@ -25,11 +25,19 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {AccordionModule} from 'primeng/accordion';
+import {FileUploadModule} from 'primeng/fileupload';
+import { HeaderComponent } from './shared/header/header.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
+import { ContenidoComponent } from './paginas/contenido/contenido.component';
+
 const appRoutes: Routes = [
   { path: 'materiales', component: MaterialesComponent },
   { path: 'equipos', component: EquiposComponent },
   { path: 'presupuestos', component: PresupuestoComponent },
-  { path: 'presupuesto/:id', component: AreaComponent }
+  { path: 'presupuesto/:id', component: AreaComponent },
+  { path: 'pagina', component: EquiposComponent }
 ];
 
 @NgModule({
@@ -42,9 +50,15 @@ const appRoutes: Routes = [
     EquiposTablaComponent,
     MaterialesTablaComponent,
     PresupuestoTablaComponent,
-    PresupuestoComponent
+    PresupuestoComponent,
+    HeaderComponent,
+    SidebarComponent,
+    BreadcrumbsComponent,
+    ContenidoComponent
   ],
   imports: [
+    FileUploadModule,
+    AccordionModule,
     InputTextareaModule,
     AutoCompleteModule,
     AngularFontAwesomeModule,

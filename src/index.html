@@ -1,46 +1,34 @@
 <!doctype html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
   <meta charset="utf-8">
   <title>IrwinUi</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro.min.css">
-  <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-colors.min.css">
-  <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-rtl.min.css">
-  <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-icons.min.css">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="assets/dist/css/style.min.css"/>
+
 
 </head>
 <body>
-    <ul class="h-menu">
-        <li><a href="#">Home</a></li>
-        <li><a href="/equipos">Equipos</a></li>
-        <li><a href="/materiales">Materiales</a></li>
-        <li><a href="/presupuestos">Presupuestos</a></li>
-    </ul>
-
   <app-root></app-root>
-  <script>
-    function mostrar(){
-      var x = document.getElementById("ocultar");
-      var y = document.getElementById("toggle");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-        y.classList.remove("mif-plus");
-        y.classList.add("mif-minus");
-    } else {
-        x.style.display = "none";
-        y.classList.remove("mif-minus");
-        y.classList.add("mif-plus");
-    }
-    }
-  </script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+
+<!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="assets/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="assets/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="assets/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="assets/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="assets/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="assets/dist/js/custom.min.js"></script>
 </body>
 </html>
