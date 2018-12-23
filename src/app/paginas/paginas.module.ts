@@ -39,7 +39,6 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   exports: [
-    PrimengModule,
     RouterModule
   ]
 })
