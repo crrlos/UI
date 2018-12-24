@@ -12,6 +12,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {AccordionModule} from 'primeng/accordion';
 import {FileUploadModule} from 'primeng/fileupload';
 import { SpinnerModule } from 'primeng/spinner';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 @NgModule({
   exports: [
@@ -27,7 +28,8 @@ import { SpinnerModule } from 'primeng/spinner';
     ButtonModule,
     InputTextModule,
     DropdownModule,
-    SpinnerModule
+    SpinnerModule,
+    ScrollPanelModule
   ]
 })
 export class PrimengModule { }
