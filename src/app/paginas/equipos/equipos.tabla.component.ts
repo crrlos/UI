@@ -37,6 +37,7 @@ export class EquiposTablaComponent implements OnInit {
   onRowSelect(event) {
     this.equipo = JSON.parse(JSON.stringify(event.data));
     this.equipo_seleccionado.emit(this.equipo);
+    console.log('seleccionado');
   }
   loadLazy(event) {
     this.http.equipos(event).subscribe(data => {

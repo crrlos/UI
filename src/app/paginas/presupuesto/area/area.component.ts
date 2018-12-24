@@ -18,6 +18,7 @@ export class AreaComponent implements OnInit {
   materiales_lista: Material[];
   area: Area = {};
   id_cotizacion;
+  display;
 
   agregarArea() {
     this.http.areas_agregar({ area: this.area.nombre, cotizacion: this.id_cotizacion }).subscribe((id) => {
@@ -30,7 +31,7 @@ export class AreaComponent implements OnInit {
 
   }
   actualizarArea(area) {
-    const data = {nombre : area.nombre, area_id: area.area_id , cotizacion: this.id_cotizacion};
+    const data = { nombre: area.nombre, area_id: area.area_id, cotizacion: this.id_cotizacion };
     this.http.areas_actualizar(data).subscribe();
   }
   eliminarArea(area: Area) {
@@ -99,6 +100,10 @@ export class AreaComponent implements OnInit {
       this.totalGeneral += isNumber(area.total) ? area.total : 0;
     });
   }
+  showDialog() {
+    this.display = true;
+  }
+
 
 
 }

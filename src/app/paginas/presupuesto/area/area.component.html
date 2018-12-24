@@ -8,9 +8,29 @@ total {{totalGeneral}}
     </form>
   </div>
 </div>
+
+<p-accordion [multiple]="true">
+    <p-accordionTab  *ngFor="let area of areas">
+      <p-header>
+          {{area.nombre}} {{area.total | currency}}
+
+      </p-header>
+        <div class="row">
+          <div class="col">
+              <div class="form-group">
+                  <label>Nombre</label>
+                  <input type="text" (keyup)="actualizarArea(area)" [(ngModel)]="area.nombre">
+                </div>
+          </div>
+        </div>
+        <app-equipo-child [area]="area" [areas]="areas" (notificar)="onNotificacion()"></app-equipo-child>
+    </p-accordionTab>
+</p-accordion>
+
+
 <div class="mt-10"></div>
 <div data-role="accordion" data-one-frame="false"  data-show-active="false" data-active-heading-class="bg-cyan fg-white">
-  <div class="frame" *ngFor="let area of areas">
+  <div class="frame">
     <div class="heading">
       <div class="row">
         <div class="cell">
