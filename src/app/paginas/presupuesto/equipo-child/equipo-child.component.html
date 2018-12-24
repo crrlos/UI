@@ -11,7 +11,7 @@
               <div class="col">
                 <div class="form-group">
                   <label>Área</label>
-                  <select [(ngModel)]="areaSeleccionada" (change)="moverEquipo(equipo)">
+                  <select class="form-control" [(ngModel)]="areaSeleccionada" (change)="moverEquipo(equipo)">
                     <option *ngFor="let area of  areas" [ngValue]="area">
                       {{area.nombre}}
                     </option>
@@ -22,26 +22,26 @@
               <div class="col">
                 <div class="form-group">
                   <label>Precio</label>
-                  <input disabled type="text" value="{{equipo.precio_equipo | currency}}">
+                  <input  class="form-control" disabled type="text" value="{{equipo.precio_equipo | currency}}">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
-                  <label>Porc</label>
-                  <p-spinner (onChange)="actualizarTotalAsync(equipo)" (keyup)="actualizarTotalAsync(equipo)" size="30" [(ngModel)]="equipo.porcentaje_ganancia"
+                  <label>Porc</label><br>
+                  <p-spinner (onChange)="actualizarTotalAsync(equipo)" (keyup)="actualizarTotalAsync(equipo)" size="15" [(ngModel)]="equipo.porcentaje_ganancia"
                     [step]="0.25"></p-spinner>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label>Precio final</label>
-                  <input disabled type="text" value="{{equipo.precio_equipo * equipo.porcentaje_ganancia | currency}}">
+                  <input   class="form-control" disabled type="text" value="{{equipo.precio_equipo * equipo.porcentaje_ganancia | currency}}">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label>Total equipo + materiales</label>
-                  <input disabled type="text" value="{{equipo.total | currency}}">
+                  <input  class="form-control" disabled type="text" value="{{equipo.total | currency}}">
                 </div>
               </div>
             </div>
@@ -54,13 +54,13 @@
             <div class="col">
               <div class="form-group">
                 <label>Total materiales</label>
-                <input type="text" disabled value="{{ totalMateriales(equipo) | currency}}">
+                <input  class="form-control" type="text" disabled value="{{ totalMateriales(equipo) | currency}}">
               </div>
             </div>
             <div class="col">
               <div class="form-group">
                 <label>Total Personalizado</label>
-                <input type="text" id="total_personalizado" (keyup)="actualizar_total_personalizado()" name="total_personalizado"
+                <input  class="form-control" type="text" id="total_personalizado" (keyup)="actualizar_total_personalizado()" name="total_personalizado"
                   [(ngModel)]="equipo.precio_materiales_equipo">
               </div>
             </div>
