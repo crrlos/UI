@@ -13,7 +13,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { SharedModule } from '../shared/shared.module';
-import { AreaAccordionComponent } from './presupuesto/area/area-accordion.component';
 
 const appRoutes: Routes = [
   { path: 'materiales', component: MaterialesComponent },
@@ -31,8 +30,7 @@ const appRoutes: Routes = [
     EquiposTablaComponent,
     MaterialesTablaComponent,
     PresupuestoTablaComponent,
-    PresupuestoComponent,
-    AreaAccordionComponent
+    PresupuestoComponent
   ],
   imports: [
     AngularFontAwesomeModule,

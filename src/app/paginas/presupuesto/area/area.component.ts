@@ -18,7 +18,9 @@ export class AreaComponent implements OnInit {
   materiales_lista: Material[];
   area: Area = {};
   id_cotizacion;
-  display;
+
+  mostrar_dialogo_equipos;
+  mostrar_dialogo_materiales;
 
   agregarArea() {
     this.http.areas_agregar({ area: this.area.nombre, cotizacion: this.id_cotizacion }).subscribe((id) => {
@@ -100,10 +102,6 @@ export class AreaComponent implements OnInit {
       this.totalGeneral += isNumber(area.total) ? area.total : 0;
     });
   }
-  showDialog() {
-    this.display = true;
-  }
-
 
 
 }

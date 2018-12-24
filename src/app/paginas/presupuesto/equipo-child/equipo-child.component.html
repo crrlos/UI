@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col">
-    <button class="btn btn-primary m-2" (click)="f('#equipos_dialog')">Agregar Equipo</button>
+    <button class="btn btn-primary m-2" (click)="f(true)">Agregar Equipo</button>
   </div>
 </div>
 <div class="row">
@@ -48,7 +48,7 @@
             <hr>
           <div class="row">
             <div class="col">
-              <button class="btn btn-primary m-2" (click)="f('#materiales_dialog',equipo)">Agregar Material</button>
+              <button class="btn btn-primary m-2" (click)="f(false,equipo)">Agregar Material</button>
 
             </div>
             <div class="col">

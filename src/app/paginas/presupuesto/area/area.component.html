@@ -23,69 +23,21 @@ total {{totalGeneral}}
                 </div>
           </div>
         </div>
-        <app-equipo-child [area]="area" [areas]="areas" (notificar)="onNotificacion()"></app-equipo-child>
+        <app-equipo-child [area]="area" (mostrar_dialogo_equipos)="mostrar_dialogo_equipos = $event"
+        (mostrar_dialogo_materiales)="mostrar_dialogo_materiales = $event"
+        [areas]="areas" (notificar)="onNotificacion()">
+
+        </app-equipo-child>
     </p-accordionTab>
 </p-accordion>
 
+<!--equipos-->
+<p-dialog header="Equipos" [(visible)]="mostrar_dialogo_equipos">
+  <app-equipos-tabla (equipo_seleccionado)="agregarEquipo($event)"></app-equipos-tabla>
+</p-dialog>
 
-<div class="mt-10"></div>
-<div data-role="accordion" data-one-frame="false"  data-show-active="false" data-active-heading-class="bg-cyan fg-white">
-  <div class="frame">
-    <div class="heading">
-      <div class="row">
-        <div class="cell">
-          {{area.nombre}}
-        </div>
-        <div class="cell text-right">
-          {{area.total | currency}}
-        </div>
-      </div>
-    </div>
-    <div class="content" style="display:none">
-      <div class="row border bd-cyan">
-        <div class="cell-4 p-5">
-          <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" (keyup)="actualizarArea(area)" [(ngModel)]="area.nombre">
-          </div>
-        </div>
-        <div class="cell-4 p-5">
-          <div class="form-group">
-            <label>Total por área</label>
-            <input disabled type="text" value="{{area.total | currency}}">
-          </div>
-        </div>
-        <div class="cell text-right mr-3 fg-red pointer">
-          <fa name="trash" size='2x' (click)="eliminarArea(area)"></fa>
-        </div>
-      </div>
-      <app-equipo-child [area]="area" [areas]="areas" (notificar)="onNotificacion()"></app-equipo-child>
-    </div>
-  </div>
+<!--materiales-->
+<p-dialog header="Materiales" [(visible)]="mostrar_dialogo_materiales">
+  <app-materiales-tabla (material_seleccionado)="agregarMaterial($event.data)"></app-materiales-tabla>
+</p-dialog>
 
-</div>
-
-<div class="dialog" data-role="dialog" id="equipos_dialog" data-width="1000">
-  <div class="dialog-title">Equipos</div>
-  <div class="dialog-content">
-
-    <app-equipos-tabla (equipo_seleccionado)="agregarEquipo($event)"></app-equipos-tabla>
-
-  </div>
-  <div class="dialog-actions">
-    <button class="button js-dialog-close">Cerrar</button>
-
-  </div>
-</div>
-
-<div class="dialog" data-role="dialog" id="materiales_dialog" data-width="1000">
-  <div class="dialog-title">Materiales</div>
-  <div class="dialog-content">
-
-    <app-materiales-tabla (material_seleccionado)="agregarMaterial($event.data)"></app-materiales-tabla>
-  </div>
-  <div class="dialog-actions">
-    <button class="button js-dialog-close">Cerrar</button>
-
-  </div>
-</div>

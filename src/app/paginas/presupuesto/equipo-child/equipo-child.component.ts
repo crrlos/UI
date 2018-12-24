@@ -11,6 +11,8 @@ export class EquipoChildComponent implements OnInit {
   @Input() areas: Area[];
   @Input() area: Area;
   @Output() notificar = new EventEmitter<boolean>();
+  @Output() mostrar_dialogo_equipos = new EventEmitter<boolean>();
+  @Output() mostrar_dialogo_materiales = new EventEmitter<boolean>();
 
   areaSeleccionada: Area;
 
@@ -24,7 +26,7 @@ export class EquipoChildComponent implements OnInit {
 
   editaEquipo = false;
 
-  f(eq, equipo?: EquipoArea) {
+  f(materiales: boolean, equipo?: EquipoArea) {
     this.areas.forEach(area => {
       area.insertar_equipo = false;
       area.equipos.forEach(e => e.insertar_material = false);
@@ -35,7 +37,12 @@ export class EquipoChildComponent implements OnInit {
     if (equipo) {
       equipo.insertar_material = true;
     }
-    Metro.dialog.open(eq);
+
+    if (materiales) {
+      this.mostrar_dialogo_equipos.emit(true);
+    } else {
+      this.mostrar_dialogo_materiales.emit(true);
+    }
   }
   actualizar_total_personalizado() {
     if (this.timeout_id) {
