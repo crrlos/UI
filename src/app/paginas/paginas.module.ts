@@ -13,9 +13,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { SharedModule } from '../shared/shared.module';
+import { ClientesComponent } from './clientes/clientes.component';
+import { ClientesTablaComponent } from './clientes/clientes.tabla.component';
 
 const appRoutes: Routes = [
   { path: 'materiales', component: MaterialesComponent },
+  { path: 'clientes', component: ClientesComponent },
   { path: 'equipos', component: EquiposComponent },
   { path: 'presupuestos', component: PresupuestoComponent },
   { path: 'presupuesto/:id', component: AreaComponent }
@@ -30,7 +33,9 @@ const appRoutes: Routes = [
     EquiposTablaComponent,
     MaterialesTablaComponent,
     PresupuestoTablaComponent,
-    PresupuestoComponent
+    PresupuestoComponent,
+    ClientesComponent,
+    ClientesTablaComponent
   ],
   imports: [
     AngularFontAwesomeModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Area, Equipo, Material, EquipoArea, MaterialEquipoArea } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
-declare var Metro;
+
 @Component({
   selector: 'app-equipo-child',
   templateUrl: './equipo-child.component.html'

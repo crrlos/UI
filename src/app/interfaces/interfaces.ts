@@ -90,6 +90,10 @@ export interface EquiposResponse {
   equipos: Equipo[];
   totalRecords;
 }
+export interface ClienteResponse {
+  clientes: Cliente[];
+  totalRecords;
+}
 export interface CotizacionResponse {
   cotizaciones: Cotizacion[];
   totalRecords;
