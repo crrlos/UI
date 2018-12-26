@@ -7,16 +7,16 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false" ><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Mantenimientos </span></a>
+                        <li class="sidebar-item" routerLinkActive="selected"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Mantenimientos </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a [routerLink]="['equipos']" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu">Equipos </span></a></li>
                                 <li class="sidebar-item"><a routerLink="materiales" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Materiales </span></a></li>
                                 <li class="sidebar-item"><a routerLink="clientes" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Clientes </span></a></li>
                             </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" routerLink="presupuestos" aria-expanded="false"><i class="mdi mdi-newspaper"></i><span class="hide-menu">Cotizaciones</span></a></li>
+                        <li class="sidebar-item" routerLinkActive="selected"> <a class="sidebar-link waves-effect waves-dark sidebar-link"  routerLink="presupuestos" aria-expanded="false"><i class="mdi mdi-newspaper"></i><span class="hide-menu">Cotizaciones</span></a></li>
 
 
                     </ul>

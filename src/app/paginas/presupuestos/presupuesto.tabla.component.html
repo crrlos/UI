@@ -29,7 +29,7 @@
         <div [ngSwitch]="col.header">
           <div *ngSwitchCase="'Cliente'">{{rowData[col.field].nombre}}</div>
           <div *ngSwitchCase="'Editar'">
-            <button pButton icon="fa fa-pencil" (click)="selectedCotizacion(rowData)"></button>
+            <button pButton icon="mdi mdi-lead-pencil" (click)="selectedCotizacion(rowData)"></button>
           </div>
           <div *ngSwitchDefault>{{rowData[col.field]}}</div>
         </div>
