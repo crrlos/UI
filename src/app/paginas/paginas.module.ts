@@ -17,11 +17,11 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { ClientesTablaComponent } from './clientes/clientes.tabla.component';
 
 const appRoutes: Routes = [
-  { path: 'materiales', component: MaterialesComponent },
-  { path: 'clientes', component: ClientesComponent },
-  { path: 'equipos', component: EquiposComponent },
-  { path: 'presupuestos', component: PresupuestoComponent },
-  { path: 'presupuesto/:id', component: AreaComponent }
+  { path: 'materiales', component: MaterialesComponent, data: { titulo: 'Materiales' } },
+  { path: 'clientes', component: ClientesComponent, data: { titulo: 'Clientes' } },
+  { path: 'equipos', component: EquiposComponent, data: { titulo: 'Equipos' } },
+  { path: 'presupuestos', component: PresupuestoComponent, data: { titulo: 'Presupuestos' } },
+  { path: 'presupuesto/:id', component: AreaComponent, data: { titulo: 'Presupuesto' } }
 ];
 
 @NgModule({
