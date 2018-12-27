@@ -88,6 +88,12 @@ export class HttpService {
       params: event
     });
   }
+  clientes_guardar(cliente) {
+    return this.http.post(`${this.HOST}/clientes`, cliente);
+  }
+  clientes_actualizar(cliente) {
+    return this.http.put(`${this.HOST}/clientes`, cliente);
+  }
   cotizacion_agregar(data) {
     return this.http.post(`${this.HOST}/cotizaciones`, data);
   }

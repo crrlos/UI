@@ -34,12 +34,12 @@ export class ClientesComponent implements OnInit {
   save() {
 
     if (this.nuevoCliente) {
-      this.http.equipos_agregar(this.cliente).subscribe((res) => {
+      this.http.clientes_guardar(this.cliente).subscribe((res) => {
         this.cliente.cliente_id = JSON.parse(JSON.stringify(res)).id;
         this.clientes_tabla.clientes.push(this.cliente);
       });
     } else {
-      this.http.equipos_actualizar(this.cliente).subscribe(() => {
+      this.http.clientes_actualizar(this.cliente).subscribe(() => {
         const i = this.clientes_tabla.clientes.findIndex(et => et.cliente_id === this.cliente.cliente_id);
         this.clientes_tabla.clientes[i] = this.cliente;
       });

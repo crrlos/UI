@@ -106,6 +106,8 @@ export interface MaterialResponse {
 export interface Cliente {
   cliente_id?;
   nombre?;
+  direccion?;
+  telefono?;
 }
 export interface Cotizacion {
   cotizacion_id?;
