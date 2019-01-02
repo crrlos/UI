@@ -1,27 +1,29 @@
-total {{totalGeneral}}
+<h4>Total General<span class="badge badge-secondary">{{totalGeneral | currency}}</span></h4>
 <div class="mt-5"></div>
 <div class="row">
-  <div class="cell">
-    <form class="inline-form">
-      <input type="text" name="area" [(ngModel)] ="area.nombre">
-      <button class="button" (click)="agregarArea()">Agregar Área</button>
+  <div class="col-7">
+    <form class="form-inline">
+      <input class="form-control mr-2" type="text" name="area" [(ngModel)] ="area.nombre">
+      <button class="btn btn-primary" (click)="agregarArea()">Agregar Área</button>
     </form>
   </div>
 </div>
-
+<br>
+<br>
 
 <p-scrollPanel [style]="{width: '100%', height: '500px'}">
   <p-accordion [multiple]="true">
     <p-accordionTab  *ngFor="let area of areas">
       <p-header>
-          {{area.nombre}} {{area.total | currency}}
+          <div style="display:inline-block" >{{area.nombre}}</div>
+          <div style="float:right">{{area.total | currency}}</div>
 
       </p-header>
         <div class="row">
-          <div class="col">
+          <div class="col-6">
               <div class="form-group">
                   <label>Nombre</label>
-                  <input type="text" (keyup)="actualizarArea(area)" [(ngModel)]="area.nombre">
+                  <input class="form-control" type="text" (keyup)="actualizarArea(area)" [(ngModel)]="area.nombre">
                 </div>
           </div>
         </div>
