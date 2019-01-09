@@ -9,20 +9,13 @@ import { MaterialesTablaComponent } from './materiales/materiales.tabla.componen
 import { PresupuestoTablaComponent } from './presupuestos/presupuesto.tabla.component';
 import { PresupuestoComponent } from './presupuestos/presupuesto.component';
 import { PrimengModule } from './primeng.module';
-import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { SharedModule } from '../shared/shared.module';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ClientesTablaComponent } from './clientes/clientes.tabla.component';
-
-const appRoutes: Routes = [
-  { path: 'materiales', component: MaterialesComponent, data: { titulo: 'Materiales' } },
-  { path: 'clientes', component: ClientesComponent, data: { titulo: 'Clientes' } },
-  { path: 'equipos', component: EquiposComponent, data: { titulo: 'Equipos' } },
-  { path: 'presupuestos', component: PresupuestoComponent, data: { titulo: 'Presupuestos' } },
-  { path: 'presupuesto/:id', component: AreaComponent, data: { titulo: 'Presupuesto' } }
-];
+import { RouterModule } from '@angular/router';
+import { WrapperComponent } from './wrapper/wrapper.component';
 
 @NgModule({
   declarations: [
@@ -35,19 +28,19 @@ const appRoutes: Routes = [
     PresupuestoTablaComponent,
     PresupuestoComponent,
     ClientesComponent,
-    ClientesTablaComponent
+    ClientesTablaComponent,
+    WrapperComponent
   ],
   imports: [
+    SharedModule,
     AngularFontAwesomeModule,
     FormsModule,
     CommonModule,
     PrimengModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule
   ],
   exports: [
-    RouterModule,
-    SharedModule,
-    CommonModule
+    SharedModule
   ]
 })
 export class PaginasModule { }

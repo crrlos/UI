@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { RouterModule, Router } from '@angular/router';
-
+import { LoginComponent } from './login/login.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [
     CommonModule,
@@ -13,13 +13,13 @@ import { RouterModule, Router } from '@angular/router';
   declarations: [
     HeaderComponent,
     SidebarComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    LoginComponent
   ],
   exports: [
     HeaderComponent,
     SidebarComponent,
-    BreadcrumbsComponent,
-    RouterModule
+    BreadcrumbsComponent
   ]
 })
 export class SharedModule { }
