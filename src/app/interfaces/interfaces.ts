@@ -74,8 +74,8 @@ export interface Marca {
   marca_nombre?;
 }
 export interface Gas {
-  gas_id;
-  gas_nombre;
+  gas_id?;
+  gas_nombre?;
 }
 export interface Tecnologia {
   tecnologia_id?;
@@ -104,6 +104,10 @@ export interface TipoResponse {
 }
 export interface TecnologiaResponse {
   tecnologias: Tecnologia[];
+  totalRecords;
+}
+export interface GasResponse {
+  gases: Gas[];
   totalRecords;
 }
 export interface CotizacionResponse {

@@ -30,8 +30,8 @@ export class EquiposComponent implements OnInit {
       this.marcas = marcas.marcas;
     }
     );
-    this.http.gases_get().subscribe(gases => {
-      this.gases = gases;
+    this.http.gases_filtro().subscribe(gases => {
+      this.gases = gases.gases;
     }
     );
     this.http.tecnologias_filtro().subscribe(tecnologias => {

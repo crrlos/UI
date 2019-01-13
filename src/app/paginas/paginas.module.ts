@@ -23,6 +23,7 @@ import { TiposTablaComponent } from './tipos/tipos.tabla.component';
 import { TecnologiaComponent } from './tecnologia/tecnologia.component';
 import { GasComponent } from './gas/gas.component';
 import { TecnologiaTablaComponent } from './tecnologia/tecnologia.tabla.component';
+import { GasTablaComponent } from './gas/gas.tabla.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TecnologiaTablaComponent } from './tecnologia/tecnologia.tabla.componen
     TiposTablaComponent,
     TecnologiaComponent,
     TecnologiaTablaComponent,
-    GasComponent
+    GasComponent,
+    GasTablaComponent
   ],
   imports: [
     SharedModule,

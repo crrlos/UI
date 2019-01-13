@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {
   Area, EquiposResponse, TipoUnidad, Marca, MaterialResponse, UnidadMedida,
   MaterialEquipoArea, Gas, Tecnologia, Voltaje, Cliente, CotizacionResponse,
-  ClienteResponse, MarcaResponse, TipoResponse, TecnologiaResponse
+  ClienteResponse, MarcaResponse, TipoResponse, TecnologiaResponse, GasResponse
 } from 'src/app/interfaces/interfaces';
 
 @Injectable({
@@ -136,6 +136,18 @@ export class HttpService {
   }
   tecnologias_filtro(event?) {
     return this.http.get<TecnologiaResponse>(`${this.HOST}/tecnologias`, {
+      params: event
+    });
+  }
+
+  gases_guardar(gases) {
+    return this.http.post(`${this.HOST}/gases`, gases);
+  }
+  gases_actualizar(gases) {
+    return this.http.put(`${this.HOST}/gases`, gases);
+  }
+  gases_filtro(event?) {
+    return this.http.get<GasResponse>(`${this.HOST}/gases`, {
       params: event
     });
   }

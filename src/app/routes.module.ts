@@ -11,6 +11,7 @@ import { WrapperComponent } from './paginas/wrapper/wrapper.component';
 import { MarcasComponent } from './paginas/marcas/marcas.component';
 import { TiposComponent } from './paginas/tipos/tipos.component';
 import { TecnologiaComponent } from './paginas/tecnologia/tecnologia.component';
+import { GasComponent } from './paginas/gas/gas.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     { path: 'marcas', component: MarcasComponent, data: { titulo: 'Marcas' } },
     { path: 'tipos', component: TiposComponent, data: { titulo: 'Tipos' } },
     { path: 'tecnologias', component: TecnologiaComponent, data: { titulo: 'Tipos' } },
+    { path: 'gases', component: GasComponent, data: { titulo: 'Gases' } },
     { path: 'equipos', component: EquiposComponent, data: { titulo: 'Equipos' } },
     { path: 'presupuestos', component: PresupuestoComponent, data: { titulo: 'Presupuestos' } },
     { path: 'presupuesto/:id', component: AreaComponent, data: { titulo: 'Presupuesto' } }
