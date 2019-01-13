@@ -31,8 +31,8 @@ export class MaterialesComponent implements OnInit {
       this.tipos = tipos;
     }
     );
-    this.http.marcas().subscribe(marcas => {
-      this.marcas = marcas;
+    this.http.marcas_filtro().subscribe( marcas => {
+      this.marcas = marcas.marcas;
     });
     this.http.unidades_medida().subscribe(unidad_medida => {
         this.unidades = unidad_medida;

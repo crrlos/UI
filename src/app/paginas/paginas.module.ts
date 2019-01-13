@@ -16,6 +16,8 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { ClientesTablaComponent } from './clientes/clientes.tabla.component';
 import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './wrapper/wrapper.component';
+import { MarcasComponent } from './marcas/marcas.component';
+import { MarcasTablaComponent } from './marcas/marcas.tabla.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { WrapperComponent } from './wrapper/wrapper.component';
     PresupuestoComponent,
     ClientesComponent,
     ClientesTablaComponent,
-    WrapperComponent
+    WrapperComponent,
+    MarcasComponent,
+    MarcasTablaComponent
   ],
   imports: [
     SharedModule,

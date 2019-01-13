@@ -70,7 +70,7 @@ export interface TipoUnidad {
 }
 
 export interface Marca {
-  id?;
+  marca_id?;
   marca_nombre?;
 }
 export interface Gas {
@@ -92,6 +92,10 @@ export interface EquiposResponse {
 }
 export interface ClienteResponse {
   clientes: Cliente[];
+  totalRecords;
+}
+export interface MarcaResponse {
+  marcas: Marca[];
   totalRecords;
 }
 export interface CotizacionResponse {

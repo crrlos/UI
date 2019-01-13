@@ -4,6 +4,7 @@ import { isNumber } from 'util';
 import { HttpService } from '../../../servicios/http.service';
 import { EquipoChildComponent } from '../equipo-child/equipo-child.component';
 import { ActivatedRoute } from '@angular/router';
+declare var $;
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html'
@@ -29,8 +30,16 @@ export class AreaComponent implements OnInit {
         nombre: this.area.nombre,
         equipos: []
       });
+      this.reubicarContenidos();
     });
 
+  }
+  reubicarContenidos(){
+    setTimeout(() => {
+      this.areas.forEach(a => {
+        $(`#Toggle-${a.area_id}`).insertAfter(`#ac${a.area_id}`);
+      });
+    });
   }
   actualizarArea(area) {
     const data = { nombre: area.nombre, area_id: area.area_id, cotizacion: this.id_cotizacion };
@@ -93,6 +102,7 @@ export class AreaComponent implements OnInit {
       this.id_cotizacion = params['id'];
       this.http.areas(this.id_cotizacion).subscribe(success => {
         this.areas = success;
+        this.reubicarContenidos();
       });
     });
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Equipo, TipoUnidad, Marca, Tecnologia, Gas } from 'src/app/interfaces/interfaces';
+import { Equipo, TipoUnidad, Marca, Tecnologia, Gas, MarcaResponse } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 
 @Component({
@@ -27,8 +27,8 @@ export class EquiposComponent implements OnInit {
       this.tipos = tipos;
     }
     );
-    this.http.marcas().subscribe(marcas => {
-      this.marcas = marcas;
+    this.http.marcas_filtro().subscribe( marcas => {
+      this.marcas = marcas.marcas;
     }
     );
     this.http.gases_get().subscribe(gases => {
