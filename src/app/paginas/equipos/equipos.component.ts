@@ -34,8 +34,8 @@ export class EquiposComponent implements OnInit {
       this.gases = gases;
     }
     );
-    this.http.tecnologias_get().subscribe(tecnologias => {
-      this.tecnologias = tecnologias;
+    this.http.tecnologias_filtro().subscribe(tecnologias => {
+      this.tecnologias = tecnologias.tecnologias;
     }
     );
     this.http.voltajes().subscribe(voltajes => {

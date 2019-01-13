@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   Area, EquiposResponse, TipoUnidad, Marca, MaterialResponse, UnidadMedida,
-  MaterialEquipoArea, Gas, Tecnologia, Voltaje, Cliente, CotizacionResponse, ClienteResponse, MarcaResponse
+  MaterialEquipoArea, Gas, Tecnologia, Voltaje, Cliente, CotizacionResponse,
+  ClienteResponse, MarcaResponse, TipoResponse, TecnologiaResponse
 } from 'src/app/interfaces/interfaces';
 
 @Injectable({
@@ -123,6 +124,18 @@ export class HttpService {
   }
   tipos_filtro(event?) {
     return this.http.get<TipoResponse>(`${this.HOST}/tipos`, {
+      params: event
+    });
+  }
+
+  tecnologias_guardar(tecnologia) {
+    return this.http.post(`${this.HOST}/tecnologias`, tecnologia);
+  }
+  tecnologias_actualizar(tecnologia) {
+    return this.http.put(`${this.HOST}/tecnologias`, tecnologia);
+  }
+  tecnologias_filtro(event?) {
+    return this.http.get<TecnologiaResponse>(`${this.HOST}/tecnologias`, {
       params: event
     });
   }

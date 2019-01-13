@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { TipoResponse as Tipo } from 'src/app/interfaces/interfaces';
+import { TipoUnidad as Tipo } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 
 @Component({

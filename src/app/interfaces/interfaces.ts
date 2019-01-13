@@ -78,8 +78,8 @@ export interface Gas {
   gas_nombre;
 }
 export interface Tecnologia {
-  tecnologia_id;
-  tecnologia_nombre;
+  tecnologia_id?;
+  tecnologia_nombre?;
 }
 export interface UnidadMedida {
   id?;
@@ -99,7 +99,11 @@ export interface MarcaResponse {
   totalRecords;
 }
 export interface TipoResponse {
-  tipos: TipoResponse[];
+  tipos: TipoUnidad[];
+  totalRecords;
+}
+export interface TecnologiaResponse {
+  tecnologias: Tecnologia[];
   totalRecords;
 }
 export interface CotizacionResponse {

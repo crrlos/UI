@@ -20,6 +20,9 @@ import { MarcasComponent } from './marcas/marcas.component';
 import { MarcasTablaComponent } from './marcas/marcas.tabla.component';
 import { TiposComponent } from './tipos/tipos.component';
 import { TiposTablaComponent } from './tipos/tipos.tabla.component';
+import { TecnologiaComponent } from './tecnologia/tecnologia.component';
+import { GasComponent } from './gas/gas.component';
+import { TecnologiaTablaComponent } from './tecnologia/tecnologia.tabla.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { TiposTablaComponent } from './tipos/tipos.tabla.component';
     MarcasComponent,
     MarcasTablaComponent,
     TiposComponent,
-    TiposTablaComponent
+    TiposTablaComponent,
+    TecnologiaComponent,
+    TecnologiaTablaComponent,
+    GasComponent
   ],
   imports: [
     SharedModule,
