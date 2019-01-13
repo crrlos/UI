@@ -115,4 +115,16 @@ export class HttpService {
     });
   }
 
+  tipos_guardar(tipo) {
+    return this.http.post(`${this.HOST}/tipos`, tipo);
+  }
+  tipos_actualizar(tipo) {
+    return this.http.put(`${this.HOST}/tipos`, tipo);
+  }
+  tipos_filtro(event?) {
+    return this.http.get<TipoResponse>(`${this.HOST}/tipos`, {
+      params: event
+    });
+  }
+
 }

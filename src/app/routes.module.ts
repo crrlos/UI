@@ -9,6 +9,7 @@ import { PresupuestoComponent } from './paginas/presupuestos/presupuesto.compone
 import { AreaComponent } from './paginas/presupuesto/area/area.component';
 import { WrapperComponent } from './paginas/wrapper/wrapper.component';
 import { MarcasComponent } from './paginas/marcas/marcas.component';
+import { TiposComponent } from './paginas/tipos/tipos.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'materiales', component: MaterialesComponent, data: { titulo: 'Materiales' } },
     { path: 'clientes', component: ClientesComponent, data: { titulo: 'Clientes' } },
     { path: 'marcas', component: MarcasComponent, data: { titulo: 'Marcas' } },
+    { path: 'tipos', component: TiposComponent, data: { titulo: 'Tipos' } },
     { path: 'equipos', component: EquiposComponent, data: { titulo: 'Equipos' } },
     { path: 'presupuestos', component: PresupuestoComponent, data: { titulo: 'Presupuestos' } },
     { path: 'presupuesto/:id', component: AreaComponent, data: { titulo: 'Presupuesto' } }

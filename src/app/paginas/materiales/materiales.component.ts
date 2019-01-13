@@ -27,10 +27,9 @@ export class MaterialesComponent implements OnInit {
   @ViewChild('materiales_tabla') materiales_tabla: MaterialesTabla;
 
   ngOnInit() {
-    this.http.tipos().subscribe(tipos => {
-      this.tipos = tipos;
-    }
-    );
+    this.http.tipos_filtro(event).subscribe(data => {
+      this.tipos = data.tipos;
+    });
     this.http.marcas_filtro().subscribe( marcas => {
       this.marcas = marcas.marcas;
     });

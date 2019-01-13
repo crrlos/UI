@@ -18,6 +18,8 @@ import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { MarcasComponent } from './marcas/marcas.component';
 import { MarcasTablaComponent } from './marcas/marcas.tabla.component';
+import { TiposComponent } from './tipos/tipos.component';
+import { TiposTablaComponent } from './tipos/tipos.tabla.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { MarcasTablaComponent } from './marcas/marcas.tabla.component';
     ClientesTablaComponent,
     WrapperComponent,
     MarcasComponent,
-    MarcasTablaComponent
+    MarcasTablaComponent,
+    TiposComponent,
+    TiposTablaComponent
   ],
   imports: [
     SharedModule,

@@ -65,7 +65,7 @@ export interface Voltaje {
   code;
 }
 export interface TipoUnidad {
-  id?;
+  tipo_id?;
   tipo_nombre?;
 }
 
@@ -96,6 +96,10 @@ export interface ClienteResponse {
 }
 export interface MarcaResponse {
   marcas: Marca[];
+  totalRecords;
+}
+export interface TipoResponse {
+  tipos: TipoResponse[];
   totalRecords;
 }
 export interface CotizacionResponse {
