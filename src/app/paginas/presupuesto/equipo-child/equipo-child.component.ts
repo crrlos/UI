@@ -67,7 +67,7 @@ export class EquipoChildComponent implements OnInit {
   totalMateriales(equipo: EquipoArea) {
     let total = 0;
     equipo.materiales.forEach(material => {
-      total += material.precio * material.cantidad;
+      total += material.precio * material.cantidad * material.porcentaje_ganancia;
     });
     return total;
   }
