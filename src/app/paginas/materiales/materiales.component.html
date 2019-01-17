@@ -36,7 +36,7 @@
         <label for="year">Marca</label>
       </div>
       <div class="ui-g-8">
-        <p-dropdown appendTo="body" [options]="marcas" [style]="{'width':'150px'}" [(ngModel)]="material.marca"
+        <p-dropdown appendTo="body" placeholder="Seleccione" [options]="marcas" [style]="{'width':'150px'}" [(ngModel)]="material.marca"
           optionLabel="marca_nombre"></p-dropdown>
       </div>
     </div>
@@ -45,7 +45,7 @@
         <label for="year">Tipo</label>
       </div>
       <div class="ui-g-8">
-        <p-dropdown appendTo="body" [options]="tipos" [style]="{'width':'150px'}" [(ngModel)]="material.tipo" optionLabel="tipo_nombre"></p-dropdown>
+        <p-dropdown appendTo="body" placeholder="Seleccione" [options]="tipos" [style]="{'width':'150px'}" [(ngModel)]="material.tipo" optionLabel="tipo_nombre"></p-dropdown>
       </div>
     </div>
 <div class="ui-g-12">
@@ -53,7 +53,7 @@
         <label for="year">Unidad</label>
       </div>
       <div class="ui-g-8">
-        <p-dropdown appendTo="body" [options]="unidades" [style]="{'width':'150px'}" [(ngModel)]="material.unidad_medida" optionLabel="unidad_nombre"></p-dropdown>
+        <p-dropdown appendTo="body" placeholder="Seleccione" [options]="unidades" [style]="{'width':'150px'}" [(ngModel)]="material.unidad_medida" optionLabel="unidad_nombre"></p-dropdown>
       </div>
     </div>
 
