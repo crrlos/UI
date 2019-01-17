@@ -6,7 +6,7 @@
 <div class="row">
   <div class="col-10 offset-1">
     <p-accordion>
-      <p-accordionTab [header]="equipo.equipo.equipo_nombre" *ngFor="let equipo of area.equipos">
+      <p-accordionTab [header]="equipo.equipo.equipo_nombre + equipo.equipo.capacidad" *ngFor="let equipo of area.equipos">
           <div class="row">
               <div class="col">
                 <div class="form-group">

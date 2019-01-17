@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {TipoUnidad, Marca, Material, UnidadMedida } from 'src/app/interfaces/interfaces';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { TipoUnidad, Marca, Material, UnidadMedida } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 
 interface MaterialesTabla {
@@ -13,14 +13,17 @@ interface MaterialesTabla {
 export class MaterialesComponent implements OnInit {
 
   constructor(private http: HttpService) { }
-  materiales: Material[] = [];
+
   material: Material;
+  materialSeleccionado: Material;
+
   tipos: TipoUnidad[] = [];
   marcas: Marca[] = [];
   unidades: UnidadMedida[] = [];
+
   displayDialog = false;
   nuevoMaterial = false;
-  materialSeleccionado: Material;
+
   cols: any[];
   selectedColumns: any[];
 
@@ -30,12 +33,12 @@ export class MaterialesComponent implements OnInit {
     this.http.tipos_filtro(event).subscribe(data => {
       this.tipos = data.tipos;
     });
-    this.http.marcas_filtro().subscribe( marcas => {
+    this.http.marcas_filtro().subscribe(marcas => {
       this.marcas = marcas.marcas;
     });
     this.http.unidades_medida().subscribe(unidad_medida => {
-        this.unidades = unidad_medida;
-      }
+      this.unidades = unidad_medida;
+    }
     );
     this.cols = [
       { field: 'material_codigo', header: 'codigo' },
@@ -56,32 +59,29 @@ export class MaterialesComponent implements OnInit {
   }
   onRowSelect(event) {
     this.nuevoMaterial = false;
+    // crea un nuevo objeto Material para no modificar el original
     this.material = JSON.parse(JSON.stringify(event.data));
-    console.log(this.material);
     this.displayDialog = true;
   }
   save() {
-    const materiales = this.materiales;
+
     if (this.nuevoMaterial) {
-      this.http.materiales_agregar(this.material).subscribe((res) => {
-        this.material.material_id = JSON.parse(JSON.stringify(res)).id;
-        this.materiales_tabla.materiales.push(JSON.parse(JSON.stringify(this.material)));
+      this.http.materiales_agregar(this.material).subscribe((res: any) => {
+        this.material.material_id = res.id;
+        // this.materiales_tabla.materiales.push(JSON.parse(JSON.stringify(this.material)));
+        this.materiales_tabla.materiales.push(this.material);
       });
     } else {
       this.http.materiales_actualizar(this.material).subscribe(() =>
         this.materiales_tabla
           .materiales[this.materiales_tabla.materiales
-          .findIndex(m => m.material_id === this.material.material_id)] = this.material);
+            .findIndex(m => m.material_id === this.material.material_id)] = this.material);
     }
-    this.materiales = materiales;
+
     this.displayDialog = false;
   }
 
   delete() {
-    const index = this.materiales.indexOf(this.materialSeleccionado);
-    this.materiales = this.materiales.filter((val, i) => i !== index);
-    this.material = null;
-    this.displayDialog = false;
   }
 
 }
