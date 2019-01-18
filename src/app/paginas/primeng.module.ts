@@ -15,6 +15,8 @@ import { SpinnerModule } from 'primeng/spinner';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   exports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { ConfirmationService } from 'primeng/api';
     DropdownModule,
     SpinnerModule,
     ScrollPanelModule,
-    ConfirmDialogModule
-  ], providers: [ConfirmationService]
+    ConfirmDialogModule,
+    ToastModule
+  ], providers: [ConfirmationService, MessageService]
 })
 export class PrimengModule { }

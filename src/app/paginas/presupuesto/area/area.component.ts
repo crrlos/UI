@@ -4,6 +4,7 @@ import { isNumber } from 'util';
 import { HttpService } from '../../../servicios/http.service';
 import { EquipoChildComponent } from '../equipo-child/equipo-child.component';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
 declare var $;
 @Component({
   selector: 'app-area',
@@ -34,7 +35,7 @@ export class AreaComponent implements OnInit {
     });
 
   }
-  reubicarContenidos(){
+  reubicarContenidos() {
     setTimeout(() => {
       this.areas.forEach(a => {
         $(`#Toggle-${a.area_id}`).insertAfter(`#ac${a.area_id}`);
@@ -72,7 +73,7 @@ export class AreaComponent implements OnInit {
         });
       }
     });
-
+    this.messageService.add({ severity: 'success', summary: 'Equipo agregado', detail: 'El equipo se agregó correctamente' });
   }
   agregarMaterial(material: Material) {
     this.areas.forEach(area => {
@@ -96,7 +97,8 @@ export class AreaComponent implements OnInit {
     });
     this.equipoChild.actualizarTotal();
   }
-  constructor(private http: HttpService, private route: ActivatedRoute) { }
+  constructor(private http: HttpService, private route: ActivatedRoute,
+    private messageService: MessageService) { }
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id_cotizacion = params['id'];
