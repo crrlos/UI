@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Area, Equipo, Material, EquipoArea, MaterialEquipoArea } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-equipo-child',
@@ -23,22 +23,26 @@ export class EquipoChildComponent implements OnInit {
   equipos_filtro: Equipo[] = [];
   cambioUbicacion: Area = {};
 
-  timeout_id;
+  timeout_id: any;
 
   editaEquipo = false;
 
   f(materiales: boolean, equipo?: EquipoArea) {
+    // se reestablecen las banderas de insertar equipo/material
     this.areas.forEach(area => {
       area.insertar_equipo = false;
       area.equipos.forEach(e => e.insertar_material = false);
     });
-
+    // se habilita la bandera que indica que se debe agregar un equipo en esta área
     this.area.insertar_equipo = true;
 
+    // si se pasa un EquipoArea como segundo parámetro entonces se le coloca la bandera que indica
+    // el equipo espera que se agregue un material
     if (equipo) {
       equipo.insertar_material = true;
     }
 
+    // se muestra el diálogo según si se va a agregar un equipo o un material
     if (materiales) {
       this.mostrar_dialogo_equipos.emit(true);
     } else {
@@ -115,27 +119,28 @@ export class EquipoChildComponent implements OnInit {
     this.notificar.emit(true); // notificar al padre para que actualice los totales
   }
   moverEquipo(equipo: EquipoArea) {
-    const r = confirm('está seguro que desea mover de área este equipo?');
-    if (!r) {
-      setTimeout(() => {
-        this.areaSeleccionada = this.area;
-      });
-      return;
-    }
+    this.confirmationService.confirm({
+      message: 'Desea mover este equipo?',
+      accept: () => {
+        setTimeout(() => {
+          this.areaSeleccionada = this.area;
+        });
+      }
+    });
     this.area.equipos.splice(this.area.equipos.indexOf(equipo));
     this.areaSeleccionada.equipos.push(equipo);
     this.areaSeleccionada = this.area;
     this.actualizarTotal();
   }
-  duplicarEquipo(equipo) {
+  duplicarEquipo(equipo: EquipoArea) {
     this.http.equipo_duplicar(equipo).subscribe((done: EquipoArea) => {
       this.area.equipos.push(done);
       this.actualizarTotal();
     });
   }
-  confirm(equipo) {
+  confirm(equipo: EquipoArea) {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to perform this action?',
+      message: 'Desea duplicar este equipo?',
       accept: () => {
         this.duplicarEquipo(equipo);
       }

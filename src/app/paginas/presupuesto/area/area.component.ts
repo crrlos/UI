@@ -5,7 +5,7 @@ import { HttpService } from '../../../servicios/http.service';
 import { EquipoChildComponent } from '../equipo-child/equipo-child.component';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-declare var $;
+
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html'
@@ -19,30 +19,21 @@ export class AreaComponent implements OnInit {
   equipos_lista: Equipo[];
   materiales_lista: Material[];
   area: Area = {};
-  id_cotizacion;
+  id_cotizacion: number;
 
-  mostrar_dialogo_equipos;
-  mostrar_dialogo_materiales;
+  mostrar_dialogo_equipos: boolean;
+  mostrar_dialogo_materiales: boolean;
 
   agregarArea() {
-    this.http.areas_agregar({ area: this.area.nombre, cotizacion: this.id_cotizacion }).subscribe((id) => {
+    this.http.areas_agregar({ area: this.area.nombre, cotizacion: this.id_cotizacion }).subscribe((id: any) => {
       this.areas.push({
-        area_id: JSON.parse(JSON.stringify(id)).id,
+        area_id: id.id,
         nombre: this.area.nombre,
         equipos: []
       });
-      this.reubicarContenidos();
-    });
-
-  }
-  reubicarContenidos() {
-    setTimeout(() => {
-      this.areas.forEach(a => {
-        $(`#Toggle-${a.area_id}`).insertAfter(`#ac${a.area_id}`);
-      });
     });
   }
-  actualizarArea(area) {
+  actualizarArea(area: Area) {
     const data = { nombre: area.nombre, area_id: area.area_id, cotizacion: this.id_cotizacion };
     this.http.areas_actualizar(data).subscribe();
   }
@@ -64,16 +55,15 @@ export class AreaComponent implements OnInit {
           equipo: equipo,
           total: 0
         };
-        this.http.equipos_area_agregar(equipo_area).subscribe((id) => {
-          equipo_area.equipo_area_id = JSON.parse(JSON.stringify(id)).id;
+        this.http.equipos_area_agregar(equipo_area).subscribe((id: any) => {
+          equipo_area.equipo_area_id = id.id;
           area.equipos.push(equipo_area);
           area.insertar_equipo = false;
           this.equipoChild.actualizarTotal();
-          return;
+          this.messageService.add({ severity: 'success', summary: 'Equipo agregado', detail: 'El equipo se agregó correctamente' });
         });
       }
     });
-    this.messageService.add({ severity: 'success', summary: 'Equipo agregado', detail: 'El equipo se agregó correctamente' });
   }
   agregarMaterial(material: Material) {
     this.areas.forEach(area => {
@@ -87,15 +77,15 @@ export class AreaComponent implements OnInit {
             porcentaje_ganancia: 1,
             material: material
           };
-          this.http.material_equipo_area_agregar(material_equipo).subscribe((id) => {
-            material_equipo.material_equipo_area_id = JSON.parse(JSON.stringify(id)).id;
+          this.http.material_equipo_area_agregar(material_equipo).subscribe((id: any) => {
+            material_equipo.material_equipo_area_id = id.id;
             equipoArea.materiales.push(material_equipo);
-            return;
+            this.equipoChild.actualizarTotal();
+            this.messageService.add({ severity: 'success', summary: 'Material agregado', detail: 'El material se agregó correctamente' });
           });
         }
       });
     });
-    this.equipoChild.actualizarTotal();
   }
   constructor(private http: HttpService, private route: ActivatedRoute,
     private messageService: MessageService) { }
@@ -104,7 +94,6 @@ export class AreaComponent implements OnInit {
       this.id_cotizacion = params['id'];
       this.http.areas(this.id_cotizacion).subscribe(success => {
         this.areas = success;
-        this.reubicarContenidos();
       });
     });
   }
