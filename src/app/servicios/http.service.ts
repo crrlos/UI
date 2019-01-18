@@ -152,4 +152,8 @@ export class HttpService {
     });
   }
 
+  equipo_duplicar(equipo) {
+    return this.http.post(`${this.HOST}/equipos/duplicar`, equipo);
+  }
+
 }

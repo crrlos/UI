@@ -6,7 +6,18 @@
 <div class="row">
   <div class="col-10 offset-1">
     <p-accordion>
-      <p-accordionTab [header]="equipo.equipo.equipo_nombre + equipo.equipo.capacidad" *ngFor="let equipo of area.equipos">
+      <p-accordionTab  *ngFor="let equipo of area.equipos">
+          <p-header>
+              {{equipo.equipo.equipo_nombre + equipo.equipo.capacidad}}
+          </p-header>
+          <div class="row">
+            <div class="col">
+                  <span style="float: left;" class="pointer"><i class="mdi mdi-arrange-bring-forward"
+                    data-toggle="tooltip" data-placement="top" data-original-title="duplicar"
+                    (click)="duplicarEquipo(equipo)"></i></span>
+            </div>
+          </div>
+          <hr/>
           <div class="row">
               <div class="col">
                 <div class="form-group">
