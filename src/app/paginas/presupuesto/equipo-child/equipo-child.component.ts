@@ -129,6 +129,7 @@ export class EquipoChildComponent implements OnInit {
   duplicarEquipo(equipo) {
     this.http.equipo_duplicar(equipo).subscribe((done: EquipoArea) => {
       this.area.equipos.push(done);
+      this.actualizarTotal();
     });
   }
 }
