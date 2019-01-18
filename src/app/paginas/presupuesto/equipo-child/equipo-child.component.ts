@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Area, Equipo, Material, EquipoArea, MaterialEquipoArea } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-equipo-child',
@@ -57,7 +58,7 @@ export class EquipoChildComponent implements OnInit {
       this.actualizarTotal();
     });
   }
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private confirmationService: ConfirmationService) { }
   ngOnInit() {
     this.areaSeleccionada = this.area;
 
@@ -130,6 +131,14 @@ export class EquipoChildComponent implements OnInit {
     this.http.equipo_duplicar(equipo).subscribe((done: EquipoArea) => {
       this.area.equipos.push(done);
       this.actualizarTotal();
+    });
+  }
+  confirm(equipo) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to perform this action?',
+      accept: () => {
+        this.duplicarEquipo(equipo);
+      }
     });
   }
 }
