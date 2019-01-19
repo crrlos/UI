@@ -34,7 +34,7 @@
               </div>
             </div>
             <!-- aquí se muestran los equipos por área -->
-            <app-equipo-child [area]="area" [areas]="areas" (notificar)="onNotificacion()"
+            <app-equipo-child [area]="area" [areas]="areas" (total_general)="totalGeneral = $event"
               (mostrar_dialogo_equipos)="mostrarDialogoEquipo($event)"
               (mostrar_dialogo_materiales)="mostrarDialogoMaterial($event)">
             </app-equipo-child>

@@ -100,12 +100,6 @@ export class AreaComponent implements OnInit {
       });
     });
   }
-  onNotificacion() {
-    this.totalGeneral = 0;
-    this.areas.forEach(area => {
-      this.totalGeneral += isNumber(area.total) ? area.total : 0;
-    });
-  }
 
 
 }

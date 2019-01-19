@@ -11,7 +11,7 @@ export class EquipoChildComponent implements OnInit {
 
   @Input() areas: Area[];
   @Input() area: Area;
-  @Output() notificar = new EventEmitter<boolean>();
+  @Output() total_general = new EventEmitter<number>();
   @Output() mostrar_dialogo_equipos = new EventEmitter<any>();
   @Output() mostrar_dialogo_materiales = new EventEmitter<any>();
 
@@ -28,20 +28,6 @@ export class EquipoChildComponent implements OnInit {
   editaEquipo = false;
 
   f(materiales: boolean, equipo?: EquipoArea) {
-    // se reestablecen las banderas de insertar equipo/material
-    /* this.areas.forEach(area => {
-      area.insertar_equipo = false;
-      area.equipos.forEach(e => e.insertar_material = false);
-    }); */
-    // se habilita la bandera que indica que se debe agregar un equipo en esta área
-    // this.area.insertar_equipo = true;
-
-    // si se pasa un EquipoArea como segundo parámetro entonces se le coloca la bandera que indica
-    // el equipo espera que se agregue un material
-    /* if (equipo) {
-      equipo.insertar_material = true;
-    } */
-
     // se muestra el diálogo según si se va a agregar un equipo o un material
     if (materiales) {
       this.mostrar_dialogo_equipos.emit({ area: this.area });
@@ -76,12 +62,12 @@ export class EquipoChildComponent implements OnInit {
     });
     return total;
   }
-  actualizarTotalAsync(equipo) {
+  actualizarPorcentajeGanancia(equipo: EquipoArea) {
     this.http.equipos_area_actualizar(equipo).subscribe(() => {
       this.actualizarTotal();
     });
   }
-  actualizarTotalAsyncMaterial(material) {
+  actualizarTotalAsyncMaterial(material: MaterialEquipoArea) {
     this.http.material_equipo_area_actualizar(material).subscribe(() => {
       this.actualizarTotal();
     });
@@ -91,8 +77,7 @@ export class EquipoChildComponent implements OnInit {
     let total_general = 0;
 
     this.areas.forEach(area => {
-      total_general = 0;
-
+      area.total = 0;
       area.equipos.forEach(equipo_area => {
         let total_materiales_equipo = 0;
 
@@ -112,11 +97,11 @@ export class EquipoChildComponent implements OnInit {
         }
         equipo_area.total = Number.parseFloat(equipo_area.precio_materiales_equipo)
           + equipo_area.precio_equipo * equipo_area.porcentaje_ganancia;
-        total_general += equipo_area.total; // valor del equipo
+        area.total += equipo_area.total; // valor del equipo
+        total_general += area.total;
       });
-      area.total = total_general;
     });
-    this.notificar.emit(true); // notificar al padre para que actualice los totales
+    this.total_general.emit(total_general); // notificar al padre el nuevo total
   }
   moverEquipo(equipo: EquipoArea) {
     this.confirmationService.confirm({

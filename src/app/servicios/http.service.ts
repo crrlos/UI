@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {
   Area, EquiposResponse, TipoUnidad, Marca, MaterialResponse, UnidadMedida,
   MaterialEquipoArea, Gas, Tecnologia, Voltaje, Cliente, CotizacionResponse,
-  ClienteResponse, MarcaResponse, TipoResponse, TecnologiaResponse, GasResponse
+  ClienteResponse, MarcaResponse, TipoResponse, TecnologiaResponse, GasResponse, EquipoArea
 } from 'src/app/interfaces/interfaces';
 
 @Injectable({
@@ -60,7 +60,9 @@ export class HttpService {
   equipos_area_agregar(equipo_area) {
     return this.http.post(`${this.HOST}/equipos_area`, equipo_area);
   }
-  equipos_area_actualizar(equipo_area) {
+  equipos_area_actualizar(equipo_area: EquipoArea) {
+    equipo_area = JSON.parse(JSON.stringify(equipo_area));
+    equipo_area.materiales = [];
     return this.http.put(`${this.HOST}/equipos_area`, equipo_area);
   }
   material_equipo_area_agregar(material: MaterialEquipoArea) {

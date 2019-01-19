@@ -38,8 +38,8 @@
               </div>
               <div class="col">
                 <div class="form-group">
-                  <label>Porc</label><br>
-                  <p-spinner (onChange)="actualizarTotalAsync(equipo)" (keyup)="actualizarTotalAsync(equipo)" size="15" [(ngModel)]="equipo.porcentaje_ganancia"
+                  <label>Porc. Ganancia</label><br>
+                  <p-spinner (onChange)="actualizarPorcentajeGanancia(equipo)" (keyup)="actualizarPorcentajeGanancia(equipo)" size="15" [(ngModel)]="equipo.porcentaje_ganancia"
                     [step]="0.25"></p-spinner>
                 </div>
               </div>
