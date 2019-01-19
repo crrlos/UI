@@ -12,8 +12,8 @@ export class EquipoChildComponent implements OnInit {
   @Input() areas: Area[];
   @Input() area: Area;
   @Output() notificar = new EventEmitter<boolean>();
-  @Output() mostrar_dialogo_equipos = new EventEmitter<boolean>();
-  @Output() mostrar_dialogo_materiales = new EventEmitter<boolean>();
+  @Output() mostrar_dialogo_equipos = new EventEmitter<any>();
+  @Output() mostrar_dialogo_materiales = new EventEmitter<any>();
 
   areaSeleccionada: Area;
 
@@ -29,24 +29,24 @@ export class EquipoChildComponent implements OnInit {
 
   f(materiales: boolean, equipo?: EquipoArea) {
     // se reestablecen las banderas de insertar equipo/material
-    this.areas.forEach(area => {
+    /* this.areas.forEach(area => {
       area.insertar_equipo = false;
       area.equipos.forEach(e => e.insertar_material = false);
-    });
+    }); */
     // se habilita la bandera que indica que se debe agregar un equipo en esta área
-    this.area.insertar_equipo = true;
+    // this.area.insertar_equipo = true;
 
     // si se pasa un EquipoArea como segundo parámetro entonces se le coloca la bandera que indica
     // el equipo espera que se agregue un material
-    if (equipo) {
+    /* if (equipo) {
       equipo.insertar_material = true;
-    }
+    } */
 
     // se muestra el diálogo según si se va a agregar un equipo o un material
     if (materiales) {
-      this.mostrar_dialogo_equipos.emit(true);
+      this.mostrar_dialogo_equipos.emit({ area: this.area });
     } else {
-      this.mostrar_dialogo_materiales.emit(true);
+      this.mostrar_dialogo_materiales.emit({ equipo: equipo });
     }
   }
   actualizar_total_personalizado() {

@@ -5,8 +5,8 @@
 <div class="row">
   <div class="col-7">
     <form class="form-inline">
-      <input class="form-control mr-2" type="text" name="area" [(ngModel)]="area.nombre">
-      <button class="btn btn-primary" (click)="agregarArea()">Agregar Área</button>
+      <input class="form-control mr-2" type="text" #area name="area">
+      <button class="btn btn-primary" (click)="agregarArea(area.value)">Agregar Área</button>
     </form>
   </div>
 </div>
@@ -35,8 +35,8 @@
             </div>
             <!-- aquí se muestran los equipos por área -->
             <app-equipo-child [area]="area" [areas]="areas" (notificar)="onNotificacion()"
-              (mostrar_dialogo_equipos)="mostrar_dialogo_equipos = $event"
-              (mostrar_dialogo_materiales)="mostrar_dialogo_materiales = $event">
+              (mostrar_dialogo_equipos)="mostrarDialogoEquipo($event)"
+              (mostrar_dialogo_materiales)="mostrarDialogoMateriales($event)">
             </app-equipo-child>
 
           </div>

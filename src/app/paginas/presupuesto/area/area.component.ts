@@ -18,17 +18,29 @@ export class AreaComponent implements OnInit {
   totalGeneral = 0;
   equipos_lista: Equipo[];
   materiales_lista: Material[];
-  area: Area = {};
   id_cotizacion: number;
 
   mostrar_dialogo_equipos: boolean;
   mostrar_dialogo_materiales: boolean;
 
-  agregarArea() {
-    this.http.areas_agregar({ area: this.area.nombre, cotizacion: this.id_cotizacion }).subscribe((id: any) => {
+  // almacenan los valores emitidos por equipo-child
+  area: Area;
+  equipoArea: EquipoArea;
+
+  mostrarDialogoEquipo(event: any) {
+    this.mostrar_dialogo_equipos = true;
+    this.area = event.area;
+  }
+  mostrarDialogoMaterial(event: any) {
+    this.mostrar_dialogo_materiales = true;
+    this.equipoArea = event.equipo;
+  }
+
+  agregarArea(area: string) {
+    this.http.areas_agregar({ area: area, cotizacion: this.id_cotizacion }).subscribe((id: any) => {
       this.areas.push({
         area_id: id.id,
-        nombre: this.area.nombre,
+        nombre: area,
         equipos: []
       });
     });
@@ -43,48 +55,39 @@ export class AreaComponent implements OnInit {
     });
   }
   agregarEquipo(equipo: Equipo) {
-    this.areas.forEach(area => {
-      if (area.insertar_equipo) {
-        const equipo_area: EquipoArea = {
-          id_equipo: equipo.equipo_id,
-          id_area: area.area_id,
-          precio_equipo: equipo.equipo_precio,
-          porcentaje_ganancia: 1,
-          precio_materiales_equipo: 0,
-          materiales: [],
-          equipo: equipo,
-          total: 0
-        };
-        this.http.equipos_area_agregar(equipo_area).subscribe((id: any) => {
-          equipo_area.equipo_area_id = id.id;
-          area.equipos.push(equipo_area);
-          area.insertar_equipo = false;
-          this.equipoChild.actualizarTotal();
-          this.messageService.add({ severity: 'success', summary: 'Equipo agregado', detail: 'El equipo se agregó correctamente' });
-        });
-      }
+
+    const equipo_area: EquipoArea = {
+      id_equipo: equipo.equipo_id,
+      id_area: this.area.area_id,
+      precio_equipo: equipo.equipo_precio,
+      porcentaje_ganancia: 1,
+      precio_materiales_equipo: 0,
+      materiales: [],
+      equipo: equipo,
+      total: 0
+    };
+    this.http.equipos_area_agregar(equipo_area).subscribe((id: any) => {
+      equipo_area.equipo_area_id = id.id;
+      this.area.equipos.push(equipo_area);
+      this.equipoChild.actualizarTotal();
+      this.messageService.add({ severity: 'success', summary: 'Equipo agregado', detail: 'El equipo se agregó correctamente' });
     });
+
   }
   agregarMaterial(material: Material) {
-    this.areas.forEach(area => {
-      area.equipos.forEach(equipoArea => {
-        if (equipoArea.insertar_material) {
-          const material_equipo: MaterialEquipoArea = {
-            id_material: material.material_id,
-            id_equipo_area: equipoArea.equipo_area_id,
-            cantidad: 1,
-            precio: material.material_precio,
-            porcentaje_ganancia: 1,
-            material: material
-          };
-          this.http.material_equipo_area_agregar(material_equipo).subscribe((id: any) => {
-            material_equipo.material_equipo_area_id = id.id;
-            equipoArea.materiales.push(material_equipo);
-            this.equipoChild.actualizarTotal();
-            this.messageService.add({ severity: 'success', summary: 'Material agregado', detail: 'El material se agregó correctamente' });
-          });
-        }
-      });
+    const material_equipo: MaterialEquipoArea = {
+      id_material: material.material_id,
+      id_equipo_area: this.equipoArea.equipo_area_id,
+      cantidad: 1,
+      precio: material.material_precio,
+      porcentaje_ganancia: 1,
+      material: material
+    };
+    this.http.material_equipo_area_agregar(material_equipo).subscribe((id: any) => {
+      material_equipo.material_equipo_area_id = id.id;
+      this.equipoArea.materiales.push(material_equipo);
+      this.equipoChild.actualizarTotal();
+      this.messageService.add({ severity: 'success', summary: 'Material agregado', detail: 'El material se agregó correctamente' });
     });
   }
   constructor(private http: HttpService, private route: ActivatedRoute,
