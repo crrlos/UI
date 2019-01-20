@@ -70,7 +70,7 @@ export class AreaComponent implements OnInit {
     this.http.equipos_area_agregar(equipo_area).subscribe((id: any) => {
       equipo_area.equipo_area_id = id.id;
       this.area.equipos.push(equipo_area);
-      this.equipoChild.actualizarTotal();
+      this.equipoChild.actualizarTotal(null);
       this.messageService.add({ severity: 'success', summary: 'Equipo agregado', detail: 'El equipo se agregó correctamente' });
     });
 
@@ -87,7 +87,7 @@ export class AreaComponent implements OnInit {
     this.http.material_equipo_area_agregar(material_equipo).subscribe((id: any) => {
       material_equipo.material_equipo_area_id = id.id;
       this.equipoArea.materiales.push(material_equipo);
-      this.equipoChild.actualizarTotal();
+      this.equipoChild.actualizarTotal(null);
       this.equipoChild.actualizarTotalPersonalizado(this.equipoArea);
       this.messageService.add({ severity: 'success', summary: 'Material agregado', detail: 'El material se agregó correctamente' });
     });

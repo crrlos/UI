@@ -42,7 +42,7 @@ export class EquipoChildComponent implements OnInit {
     }
     this.timeout_id = setTimeout(() => {
       this.http.equipos_area_actualizar(equipo).subscribe(() => {
-        this.actualizarTotal(true);
+        this.actualizarTotal(equipo, true);
       });
 
     }, 1000);
@@ -50,14 +50,14 @@ export class EquipoChildComponent implements OnInit {
   eliminarMaterial(equipo: EquipoArea, material: MaterialEquipoArea) {
     this.http.material_equipo_area_eliminar(material).subscribe(() => {
       equipo.materiales.splice(equipo.materiales.indexOf(material), 1);
-      this.actualizarTotal();
+      this.actualizarTotal(null);
     });
   }
   constructor(private http: HttpService, private confirmationService: ConfirmationService) { }
   ngOnInit() {
     this.areaSeleccionada = this.area;
 
-    this.actualizarTotal(true);
+    this.actualizarTotal(null, true);
 
   }
   totalMateriales(equipo: EquipoArea) {
@@ -69,18 +69,18 @@ export class EquipoChildComponent implements OnInit {
   }
   actualizarPorcentajeGanancia(equipo: EquipoArea) {
     this.http.equipos_area_actualizar(equipo).subscribe(() => {
-      this.actualizarTotal(true);
+      this.actualizarTotal(equipo, true);
       this.actualizarTotalPersonalizado(equipo);
     });
   }
   actualizarTotalAsyncMaterial(material: MaterialEquipoArea, equipoArea: EquipoArea) {
     this.http.material_equipo_area_actualizar(material).subscribe(() => {
-      this.actualizarTotal();
+      this.actualizarTotal(equipoArea);
       this.actualizarTotalPersonalizado(equipoArea);
     });
   }
   // Se hace una actualización de totales($$$) a todas las áreas
-  actualizarTotal(conservar_total_ajustado?: boolean) {
+  actualizarTotal(equipoArea: EquipoArea, conservar_total_ajustado?: boolean) {
     let total_general = 0;
 
     this.areas.forEach(area => {
@@ -96,7 +96,8 @@ export class EquipoChildComponent implements OnInit {
           equipo_area.precio_materiales_equipo = total_materiales_equipo;
         }
         // evita que se sobreescriba el valor ingresado manualmente
-        if (equipo_area.precio_materiales_equipo > total_materiales_equipo && !conservar_total_ajustado) {
+        if (equipo_area.precio_materiales_equipo > total_materiales_equipo && !conservar_total_ajustado
+          && equipoArea === equipo_area) {
           equipo_area.precio_materiales_equipo = total_materiales_equipo;
         }
 
@@ -106,8 +107,19 @@ export class EquipoChildComponent implements OnInit {
 
         equipo_area.total = (equipo_area.precio_materiales_equipo * 1)
           + equipo_area.precio_equipo * equipo_area.porcentaje_ganancia;
-        equipo_area.precio_total_personalizado = equipo_area.total;
-        area.total += equipo_area.total; // valor del equipo
+        // Reestablece el valor de equipo personalizado si el valor ingresado es menor que el total
+        if (equipo_area.precio_total_personalizado < equipo_area.total) {
+          equipo_area.precio_total_personalizado = equipo_area.total;
+        }
+        // evita que se sobreescriba el valor ingresado manualmente
+        if (equipo_area.precio_total_personalizado > equipo_area.total && !conservar_total_ajustado
+          && equipoArea === equipo_area) {
+          equipo_area.precio_total_personalizado = equipo_area.total;
+        }
+        if (equipo_area.total === 0) {
+          equipo_area.precio_total_personalizado = 0;
+        }
+        area.total += equipo_area.precio_total_personalizado * 1; // valor del equipo
       });
       total_general += area.total;
     });
@@ -125,12 +137,12 @@ export class EquipoChildComponent implements OnInit {
     this.area.equipos.splice(this.area.equipos.indexOf(equipo));
     this.areaSeleccionada.equipos.push(equipo);
     this.areaSeleccionada = this.area;
-    this.actualizarTotal();
+    this.actualizarTotal(null, true);
   }
   duplicarEquipo(equipo: EquipoArea) {
     this.http.equipo_duplicar(equipo).subscribe((done: EquipoArea) => {
       this.area.equipos.push(done);
-      this.actualizarTotal();
+      this.actualizarTotal(null, true);
     });
   }
   confirm(equipo: EquipoArea) {

@@ -18,7 +18,8 @@
           <div class="col-4">
             <div class="form-inline">
               <label style="margin-right: 2px">Total personalizado:</label>
-              <input type="text" class="form-control" [(ngModel)]="equipo.precio_total_personalizado">
+              <input type="text" class="form-control" [(ngModel)]="equipo.precio_total_personalizado"
+              (keyup)="actualizar_total_personalizado(equipo)">
             </div>
           </div>
         </div>
