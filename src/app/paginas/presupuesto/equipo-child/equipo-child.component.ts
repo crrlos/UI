@@ -35,12 +35,17 @@ export class EquipoChildComponent implements OnInit {
       this.mostrar_dialogo_materiales.emit({ equipo: equipo });
     }
   }
-  actualizar_total_personalizado() {
+  actualizar_total_personalizado(equipo: EquipoArea) {
     if (this.timeout_id) {
       clearTimeout(this.timeout_id);
       this.timeout_id = null;
     }
-    this.timeout_id = setTimeout(() => { this.actualizarTotal(true); }, 1000);
+    this.timeout_id = setTimeout(() => {
+      this.http.equipos_area_actualizar(equipo).subscribe(() => {
+        this.actualizarTotal(true);
+      });
+
+    }, 1000);
   }
   eliminarMaterial(equipo: EquipoArea, material: MaterialEquipoArea) {
     this.http.material_equipo_area_eliminar(material).subscribe(() => {
@@ -52,7 +57,7 @@ export class EquipoChildComponent implements OnInit {
   ngOnInit() {
     this.areaSeleccionada = this.area;
 
-    this.actualizarTotal();
+    this.actualizarTotal(true);
 
   }
   totalMateriales(equipo: EquipoArea) {
@@ -64,7 +69,7 @@ export class EquipoChildComponent implements OnInit {
   }
   actualizarPorcentajeGanancia(equipo: EquipoArea) {
     this.http.equipos_area_actualizar(equipo).subscribe(() => {
-      this.actualizarTotal();
+      this.actualizarTotal(true);
     });
   }
   actualizarTotalAsyncMaterial(material: MaterialEquipoArea) {
@@ -95,7 +100,7 @@ export class EquipoChildComponent implements OnInit {
         if (total_materiales_equipo === 0) {
           equipo_area.precio_materiales_equipo = 0;
         }
-        equipo_area.total = Number.parseFloat(equipo_area.precio_materiales_equipo)
+        equipo_area.total = equipo_area.precio_materiales_equipo
           + equipo_area.precio_equipo * equipo_area.porcentaje_ganancia;
         area.total += equipo_area.total; // valor del equipo
         total_general += area.total;

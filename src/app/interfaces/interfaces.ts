@@ -13,16 +13,16 @@ export interface Area {
   insertar_equipo?: boolean; // permite saber en cual area se insertará el equipo
 }
 export interface EquipoArea {
-  equipo_area_id?;
-  id_equipo?;
-  id_area?;
-  precio_equipo?;
-  porcentaje_ganancia?;
-  precio_materiales_equipo?;
+  equipo_area_id?: number;
+  id_equipo?: number;
+  id_area?: number;
+  precio_equipo?: number;
+  porcentaje_ganancia?: number;
+  precio_materiales_equipo?: number;
   materiales?: MaterialEquipoArea[];
   equipo?: Equipo;
-  total?;
-  insertar_material?: boolean;
+  total?: number;
+  precio_total_personalizado?: number;
 }
 export interface MaterialEquipoArea {
   material_equipo_area_id?;

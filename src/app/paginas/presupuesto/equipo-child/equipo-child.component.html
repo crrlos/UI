@@ -6,129 +6,133 @@
 <div class="row">
   <div class="col-10 offset-1">
     <p-accordion>
-      <p-accordionTab  *ngFor="let equipo of area.equipos">
-          <p-header>
-              {{equipo.equipo.equipo_nombre + equipo.equipo.capacidad}}
-          </p-header>
-          <div class="row">
-            <div class="col">
-                  <span style="float: left;" class="pointer"><i class="mdi mdi-arrange-bring-forward"
-                    data-toggle="tooltip" data-placement="top" data-original-title="duplicar"
-                    (click)="confirm(equipo)"></i></span>
+      <p-accordionTab *ngFor="let equipo of area.equipos">
+        <p-header>
+          {{equipo.equipo.equipo_nombre + equipo.equipo.capacidad}}
+        </p-header>
+        <div class="row">
+          <div class="col-8">
+            <span style="float: left;" class="pointer"><i class="mdi mdi-arrange-bring-forward" data-toggle="tooltip"
+                data-placement="top" data-original-title="duplicar" (click)="confirm(equipo)"></i></span>
+          </div>
+          <div class="col-4">
+            <div class="form-inline">
+              <label style="margin-right: 2px">Total personalizado:</label>
+              <input type="text" class="form-control" [(ngModel)]="equipo.precio_total_personalizado">
             </div>
           </div>
-          <hr/>
-          <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label>Área</label>
-                  <select class="form-control" [(ngModel)]="areaSeleccionada" (change)="moverEquipo(equipo)">
-                    <option *ngFor="let area of  areas" [ngValue]="area">
-                      {{area.nombre}}
-                    </option>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Área</label>
+              <select class="form-control" [(ngModel)]="areaSeleccionada" (change)="moverEquipo(equipo)">
+                <option *ngFor="let area of  areas" [ngValue]="area">
+                  {{area.nombre}}
+                </option>
 
-                  </select>
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <label>Precio</label>
-                  <input  class="form-control" disabled type="text" value="{{equipo.precio_equipo | currency}}">
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <label>Porc. Ganancia</label><br>
-                  <p-spinner (onChange)="actualizarPorcentajeGanancia(equipo)" (keyup)="actualizarPorcentajeGanancia(equipo)" size="15" [(ngModel)]="equipo.porcentaje_ganancia"
-                    [step]="0.25"></p-spinner>
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <label>Precio final</label>
-                  <input   class="form-control" disabled type="text" value="{{equipo.precio_equipo * equipo.porcentaje_ganancia | currency}}">
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <label>Total equipo + materiales</label>
-                  <input  class="form-control" disabled type="text" value="{{equipo.total | currency}}">
-                </div>
-              </div>
-            </div>
-            <hr>
-          <div class="row">
-            <div class="col">
-              <button class="btn btn-primary m-2" (click)="f(false,equipo)">Agregar Material</button>
-
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label>Total materiales</label>
-                <input  class="form-control" type="text" disabled value="{{ totalMateriales(equipo) | currency}}">
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label>Total Personalizado</label>
-                <input  class="form-control" type="text" id="total_personalizado" (keyup)="actualizar_total_personalizado()" name="total_personalizado"
-                  [(ngModel)]="equipo.precio_materiales_equipo">
-              </div>
+              </select>
             </div>
           </div>
-
-          <div class="row">
-              <div class="col">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>código</th>
-                      <th>nombre</th>
-                      <th>precio</th>
-                      <th>Porc</th>
-                      <th>cantidad</th>
-                      <th>total</th>
-                      <th>Eliminar</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let material of equipo.materiales">
-                      <td>{{material.material.material_codigo}}</td>
-                      <td>{{material.material.material_nombre}}</td>
-                      <td>{{material.material.material_precio}}</td>
-                      <td>
-                        <p-spinner (onChange)="actualizarTotalAsyncMaterial(material)" (keyup)="actualizarTotalAsyncMaterial(material)" size="10" [(ngModel)]="material.porcentaje_ganancia"
-                          [step]="0.25">
-                        </p-spinner>
-                      </td>
-                      <td>
-                        <p-spinner (onChange)="actualizarTotalAsyncMaterial(material)" (keyup)="actualizarTotalAsyncMaterial(material)" size="10" [(ngModel)]="material.cantidad"
-                          [step]="1" min="1"></p-spinner>
-                      </td>
-                      <td>{{material.precio * material.cantidad * material.porcentaje_ganancia | currency}}</td>
-                      <td><span class="mif-bin mif-lg fg-red pointer" (click)="eliminarMaterial(equipo,material)"></span>
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td>
-                        Total
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>{{ totalMateriales(equipo) | currency}}</td>
-                      <td></td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Precio</label>
+              <input class="form-control" disabled type="text" value="{{equipo.precio_equipo | currency}}">
             </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Porc. Ganancia</label><br>
+              <p-spinner (onChange)="actualizarPorcentajeGanancia(equipo)" (keyup)="actualizarPorcentajeGanancia(equipo)"
+                size="15" [(ngModel)]="equipo.porcentaje_ganancia" [step]="0.25"></p-spinner>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Precio final</label>
+              <input class="form-control" disabled type="text" value="{{equipo.precio_equipo * equipo.porcentaje_ganancia | currency}}">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Total equipo + materiales</label>
+              <input class="form-control" disabled type="text" value="{{equipo.total | currency}}">
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-primary m-2" (click)="f(false,equipo)">Agregar Material</button>
+
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Total materiales</label>
+              <input class="form-control" type="text" disabled value="{{ totalMateriales(equipo) | currency}}">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Total Personalizado</label>
+              <input class="form-control" type="text" id="total_personalizado" (keyup)="actualizar_total_personalizado(equipo)"
+                name="total_personalizado" [(ngModel)]="equipo.precio_materiales_equipo">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>código</th>
+                  <th>nombre</th>
+                  <th>precio</th>
+                  <th>Porc</th>
+                  <th>cantidad</th>
+                  <th>total</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let material of equipo.materiales">
+                  <td>{{material.material.material_codigo}}</td>
+                  <td>{{material.material.material_nombre}}</td>
+                  <td>{{material.material.material_precio}}</td>
+                  <td>
+                    <p-spinner (onChange)="actualizarTotalAsyncMaterial(material)" (keyup)="actualizarTotalAsyncMaterial(material)"
+                      size="10" [(ngModel)]="material.porcentaje_ganancia" [step]="0.25">
+                    </p-spinner>
+                  </td>
+                  <td>
+                    <p-spinner (onChange)="actualizarTotalAsyncMaterial(material)" (keyup)="actualizarTotalAsyncMaterial(material)"
+                      size="10" [(ngModel)]="material.cantidad" [step]="1" min="1"></p-spinner>
+                  </td>
+                  <td>{{material.precio * material.cantidad * material.porcentaje_ganancia | currency}}</td>
+                  <td><span class="mif-bin mif-lg fg-red pointer" (click)="eliminarMaterial(equipo,material)"></span>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>
+                    Total
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>{{ totalMateriales(equipo) | currency}}</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
       </p-accordionTab>
     </p-accordion>
 
   </div>
 </div>
-
