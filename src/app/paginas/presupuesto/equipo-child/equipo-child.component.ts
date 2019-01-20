@@ -89,18 +89,20 @@ export class EquipoChildComponent implements OnInit {
         equipo_area.materiales.forEach(material => {
           total_materiales_equipo += material.cantidad * material.precio * material.porcentaje_ganancia;
         });
-        // evita que se sobreescriba el valor ingresado manualmente
+        // Reestablece el valor de materiales personalizado si el valor ingresado es menor que el total
         if (equipo_area.precio_materiales_equipo < total_materiales_equipo) {
           equipo_area.precio_materiales_equipo = total_materiales_equipo;
-        } else if (equipo_area.precio_materiales_equipo > total_materiales_equipo && !conservar_total_ajustado) {
+        }
+        // evita que se sobreescriba el valor ingresado manualmente
+        if (equipo_area.precio_materiales_equipo > total_materiales_equipo && !conservar_total_ajustado) {
           equipo_area.precio_materiales_equipo = total_materiales_equipo;
         }
-
 
         if (total_materiales_equipo === 0) {
           equipo_area.precio_materiales_equipo = 0;
         }
-        equipo_area.total = equipo_area.precio_materiales_equipo
+
+        equipo_area.total = (equipo_area.precio_materiales_equipo * 1)
           + equipo_area.precio_equipo * equipo_area.porcentaje_ganancia;
         area.total += equipo_area.total; // valor del equipo
         total_general += area.total;
