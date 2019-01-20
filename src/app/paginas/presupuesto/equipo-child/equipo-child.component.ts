@@ -69,7 +69,7 @@ export class EquipoChildComponent implements OnInit {
   }
   actualizarPorcentajeGanancia(equipo: EquipoArea) {
     this.http.equipos_area_actualizar(equipo).subscribe(() => {
-      this.actualizarTotal(equipo, true);
+      this.actualizarTotal(equipo);
       this.actualizarTotalPersonalizado(equipo);
     });
   }
