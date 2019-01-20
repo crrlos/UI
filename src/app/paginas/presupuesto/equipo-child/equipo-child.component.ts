@@ -108,8 +108,8 @@ export class EquipoChildComponent implements OnInit {
           + equipo_area.precio_equipo * equipo_area.porcentaje_ganancia;
         equipo_area.precio_total_personalizado = equipo_area.total;
         area.total += equipo_area.total; // valor del equipo
-        total_general += area.total;
       });
+      total_general += area.total;
     });
     this.total_general.emit(total_general); // notificar al padre el nuevo total
   }
