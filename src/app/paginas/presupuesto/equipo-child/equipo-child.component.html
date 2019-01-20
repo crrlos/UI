@@ -102,12 +102,12 @@
                   <td>{{material.material.material_nombre}}</td>
                   <td>{{material.material.material_precio}}</td>
                   <td>
-                    <p-spinner (onChange)="actualizarTotalAsyncMaterial(material)" (keyup)="actualizarTotalAsyncMaterial(material)"
+                    <p-spinner (onChange)="actualizarTotalAsyncMaterial(material,equipo)" (keyup)="actualizarTotalAsyncMaterial(material,equipo)"
                       size="10" [(ngModel)]="material.porcentaje_ganancia" [step]="0.25">
                     </p-spinner>
                   </td>
                   <td>
-                    <p-spinner (onChange)="actualizarTotalAsyncMaterial(material)" (keyup)="actualizarTotalAsyncMaterial(material)"
+                    <p-spinner (onChange)="actualizarTotalAsyncMaterial(material,equipo)" (keyup)="actualizarTotalAsyncMaterial(material,equipo)"
                       size="10" [(ngModel)]="material.cantidad" [step]="1" min="1"></p-spinner>
                   </td>
                   <td>{{material.precio * material.cantidad * material.porcentaje_ganancia | currency}}</td>

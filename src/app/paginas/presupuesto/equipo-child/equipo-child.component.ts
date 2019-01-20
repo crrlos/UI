@@ -70,11 +70,13 @@ export class EquipoChildComponent implements OnInit {
   actualizarPorcentajeGanancia(equipo: EquipoArea) {
     this.http.equipos_area_actualizar(equipo).subscribe(() => {
       this.actualizarTotal(true);
+      this.actualizarTotalPersonalizado(equipo);
     });
   }
-  actualizarTotalAsyncMaterial(material: MaterialEquipoArea) {
+  actualizarTotalAsyncMaterial(material: MaterialEquipoArea, equipoArea: EquipoArea) {
     this.http.material_equipo_area_actualizar(material).subscribe(() => {
       this.actualizarTotal();
+      this.actualizarTotalPersonalizado(equipoArea);
     });
   }
   // Se hace una actualización de totales($$$) a todas las áreas
@@ -104,6 +106,7 @@ export class EquipoChildComponent implements OnInit {
 
         equipo_area.total = (equipo_area.precio_materiales_equipo * 1)
           + equipo_area.precio_equipo * equipo_area.porcentaje_ganancia;
+        equipo_area.precio_total_personalizado = equipo_area.total;
         area.total += equipo_area.total; // valor del equipo
         total_general += area.total;
       });
@@ -137,5 +140,8 @@ export class EquipoChildComponent implements OnInit {
         this.duplicarEquipo(equipo);
       }
     });
+  }
+  actualizarTotalPersonalizado(equipoArea: EquipoArea) {
+    this.http.equipos_area_actualizar(equipoArea).subscribe();
   }
 }

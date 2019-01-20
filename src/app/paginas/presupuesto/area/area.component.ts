@@ -62,6 +62,7 @@ export class AreaComponent implements OnInit {
       precio_equipo: equipo.equipo_precio,
       porcentaje_ganancia: 1,
       precio_materiales_equipo: 0,
+      precio_total_personalizado: equipo.equipo_precio,
       materiales: [],
       equipo: equipo,
       total: 0
@@ -87,6 +88,7 @@ export class AreaComponent implements OnInit {
       material_equipo.material_equipo_area_id = id.id;
       this.equipoArea.materiales.push(material_equipo);
       this.equipoChild.actualizarTotal();
+      this.equipoChild.actualizarTotalPersonalizado(this.equipoArea);
       this.messageService.add({ severity: 'success', summary: 'Material agregado', detail: 'El material se agregó correctamente' });
     });
   }
