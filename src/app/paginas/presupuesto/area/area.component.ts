@@ -65,12 +65,12 @@ export class AreaComponent implements OnInit {
       precio_total_personalizado: equipo.equipo_precio,
       materiales: [],
       equipo: equipo,
-      total: 0
+      total: equipo.equipo_precio
     };
     this.http.equipos_area_agregar(equipo_area).subscribe((id: any) => {
       equipo_area.equipo_area_id = id.id;
       this.area.equipos.push(equipo_area);
-      this.equipoChild.actualizarTotal(null);
+      this.equipoChild.actualizarTotal();
       this.messageService.add({ severity: 'success', summary: 'Equipo agregado', detail: 'El equipo se agregó correctamente' });
     });
 
@@ -87,7 +87,8 @@ export class AreaComponent implements OnInit {
     this.http.material_equipo_area_agregar(material_equipo).subscribe((id: any) => {
       material_equipo.material_equipo_area_id = id.id;
       this.equipoArea.materiales.push(material_equipo);
-      this.equipoChild.actualizarTotal(null);
+      this.equipoChild.actualizarTotalesEquipo(this.equipoArea, false);
+      this.equipoChild.actualizarTotal();
       this.equipoChild.actualizarTotalPersonalizado(this.equipoArea);
       this.messageService.add({ severity: 'success', summary: 'Material agregado', detail: 'El material se agregó correctamente' });
     });
@@ -99,6 +100,16 @@ export class AreaComponent implements OnInit {
       this.id_cotizacion = params['id'];
       this.http.areas(this.id_cotizacion).subscribe(success => {
         this.areas = success;
+        this.recalcularTotalesEquipos(this.areas);
+      });
+    });
+  }
+  recalcularTotalesEquipos(areas: Area[]) {
+    setTimeout(() => {
+      this.areas.forEach(area => {
+        area.equipos.forEach(equipo => {
+          this.equipoChild.actualizarTotalesEquipo(equipo, true);
+        });
       });
     });
   }

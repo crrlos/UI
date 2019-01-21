@@ -42,7 +42,8 @@ export class EquipoChildComponent implements OnInit {
     }
     this.timeout_id = setTimeout(() => {
       this.http.equipos_area_actualizar(equipo).subscribe(() => {
-        this.actualizarTotal(equipo, true);
+        this.actualizarTotalesEquipo(equipo, true);
+        this.actualizarTotal();
       });
 
     }, 1000);
@@ -50,14 +51,14 @@ export class EquipoChildComponent implements OnInit {
   eliminarMaterial(equipo: EquipoArea, material: MaterialEquipoArea) {
     this.http.material_equipo_area_eliminar(material).subscribe(() => {
       equipo.materiales.splice(equipo.materiales.indexOf(material), 1);
-      this.actualizarTotal(null);
+      this.actualizarTotal();
     });
   }
   constructor(private http: HttpService, private confirmationService: ConfirmationService) { }
   ngOnInit() {
     this.areaSeleccionada = this.area;
 
-    this.actualizarTotal(null, true);
+    this.actualizarTotal();
 
   }
   totalMateriales(equipo: EquipoArea) {
@@ -69,57 +70,47 @@ export class EquipoChildComponent implements OnInit {
   }
   actualizarPorcentajeGanancia(equipo: EquipoArea) {
     this.http.equipos_area_actualizar(equipo).subscribe(() => {
-      this.actualizarTotal(equipo);
+      this.actualizarTotalesEquipo(equipo, false);
+      this.actualizarTotal();
       this.actualizarTotalPersonalizado(equipo);
     });
   }
   actualizarTotalAsyncMaterial(material: MaterialEquipoArea, equipoArea: EquipoArea) {
     this.http.material_equipo_area_actualizar(material).subscribe(() => {
-      this.actualizarTotal(equipoArea);
+      this.actualizarTotalesEquipo(equipoArea, false);
+      this.actualizarTotal();
       this.actualizarTotalPersonalizado(equipoArea);
     });
   }
+  actualizarTotalesEquipo(equipoArea: EquipoArea, conservar_total: boolean) {
+    let total_materiales = 0;
+    equipoArea.materiales.forEach(material => {
+      total_materiales += material.precio * material.cantidad * material.porcentaje_ganancia * 1;
+    });
+    if (equipoArea.precio_materiales_equipo < total_materiales) {
+      equipoArea.precio_materiales_equipo = total_materiales;
+    }
+    if (equipoArea.precio_materiales_equipo > total_materiales && !conservar_total) {
+      equipoArea.precio_materiales_equipo = total_materiales;
+    }
+    equipoArea.total = equipoArea.precio_equipo * equipoArea.porcentaje_ganancia
+      + equipoArea.precio_materiales_equipo * 1;
+
+    if (equipoArea.precio_total_personalizado < equipoArea.total) {
+      equipoArea.precio_total_personalizado = equipoArea.total;
+    }
+    if (equipoArea.precio_total_personalizado > equipoArea.total && !conservar_total) {
+      equipoArea.precio_total_personalizado = equipoArea.total;
+    }
+  }
   // Se hace una actualización de totales($$$) a todas las áreas
-  actualizarTotal(equipoArea: EquipoArea, conservar_total_ajustado?: boolean) {
+  actualizarTotal() {
     let total_general = 0;
 
     this.areas.forEach(area => {
       area.total = 0;
       area.equipos.forEach(equipo_area => {
-        let total_materiales_equipo = 0;
-
-        equipo_area.materiales.forEach(material => {
-          total_materiales_equipo += material.cantidad * material.precio * material.porcentaje_ganancia;
-        });
-        // Reestablece el valor de materiales personalizado si el valor ingresado es menor que el total
-        if (equipo_area.precio_materiales_equipo < total_materiales_equipo) {
-          equipo_area.precio_materiales_equipo = total_materiales_equipo;
-        }
-        // evita que se sobreescriba el valor ingresado manualmente
-        if (equipo_area.precio_materiales_equipo > total_materiales_equipo && !conservar_total_ajustado
-          && equipoArea === equipo_area) {
-          equipo_area.precio_materiales_equipo = total_materiales_equipo;
-        }
-
-        if (total_materiales_equipo === 0) {
-          equipo_area.precio_materiales_equipo = 0;
-        }
-
-        equipo_area.total = (equipo_area.precio_materiales_equipo * 1)
-          + equipo_area.precio_equipo * equipo_area.porcentaje_ganancia;
-        // Reestablece el valor de equipo personalizado si el valor ingresado es menor que el total
-        if (equipo_area.precio_total_personalizado < equipo_area.total) {
-          equipo_area.precio_total_personalizado = equipo_area.total;
-        }
-        // evita que se sobreescriba el valor ingresado manualmente
-        if (equipo_area.precio_total_personalizado > equipo_area.total && !conservar_total_ajustado
-          && equipoArea === equipo_area) {
-          equipo_area.precio_total_personalizado = equipo_area.total;
-        }
-        if (equipo_area.total === 0) {
-          equipo_area.precio_total_personalizado = 0;
-        }
-        area.total += equipo_area.precio_total_personalizado * 1; // valor del equipo
+        area.total += equipo_area.precio_total_personalizado * 1;
       });
       total_general += area.total;
     });
@@ -137,12 +128,12 @@ export class EquipoChildComponent implements OnInit {
     this.area.equipos.splice(this.area.equipos.indexOf(equipo));
     this.areaSeleccionada.equipos.push(equipo);
     this.areaSeleccionada = this.area;
-    this.actualizarTotal(null, true);
+    this.actualizarTotal();
   }
   duplicarEquipo(equipo: EquipoArea) {
     this.http.equipo_duplicar(equipo).subscribe((done: EquipoArea) => {
       this.area.equipos.push(done);
-      this.actualizarTotal(null, true);
+      this.actualizarTotal();
     });
   }
   confirm(equipo: EquipoArea) {
