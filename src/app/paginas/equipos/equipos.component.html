@@ -36,8 +36,12 @@
         <label for="year">Capacidad</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="equipo.capacidad" />
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [(ngModel)]="equipo.capacidad" pKeyFilter="pint">
+          <span class="ui-inputgroup-addon">BTU </span>
       </div>
+      </div>
+
     </div>
     <div class="ui-g-12">
       <div class="ui-g-4">

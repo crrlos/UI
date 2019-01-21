@@ -17,6 +17,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import {KeyFilterModule} from 'primeng/keyfilter';
 @NgModule({
   exports: [
     CommonModule,
@@ -34,7 +35,8 @@ import { ToastModule } from 'primeng/toast';
     SpinnerModule,
     ScrollPanelModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    KeyFilterModule
   ], providers: [ConfirmationService, MessageService]
 })
 export class PrimengModule { }
