@@ -23,6 +23,7 @@ export interface EquipoArea {
   equipo?: Equipo;
   total?: number;
   precio_total_personalizado?: number;
+  costo_btu?: number;
 }
 export interface MaterialEquipoArea {
   material_equipo_area_id?;

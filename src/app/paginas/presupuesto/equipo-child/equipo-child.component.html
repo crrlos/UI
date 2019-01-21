@@ -11,9 +11,16 @@
           {{equipo.equipo.equipo_nombre + equipo.equipo.capacidad}}
         </p-header>
         <div class="row">
-          <div class="col-8">
+          <div class="col-4">
             <span style="float: left;" class="pointer"><i class="mdi mdi-arrange-bring-forward" data-toggle="tooltip"
                 data-placement="top" data-original-title="duplicar" (click)="confirm(equipo)"></i></span>
+          </div>
+          <div class="col-4">
+            <div class="form-inline">
+              <label style="margin-right: 2px">Costo TON:</label>
+              <input type="text" disabled class="form-control" value="{{equipo.costo_btu | currency}}"
+              (keyup)="actualizar_total_personalizado(equipo)">
+            </div>
           </div>
           <div class="col-4">
             <div class="form-inline">

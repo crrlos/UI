@@ -99,6 +99,7 @@ export class EquipoChildComponent implements OnInit {
     if (equipoArea.precio_total_personalizado > equipoArea.total && !conservar_total) {
       equipoArea.precio_total_personalizado = equipoArea.total;
     }
+    equipoArea.costo_btu =  equipoArea.total / (equipoArea.equipo.capacidad / 12000); // 12,000 BTU = 1 T
   }
   // Se hace una actualización de totales($$$) a todas las áreas
   actualizarTotal() {
