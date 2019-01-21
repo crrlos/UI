@@ -8,7 +8,24 @@
     <p-accordion>
       <p-accordionTab *ngFor="let equipo of area.equipos">
         <p-header>
-          {{equipo.equipo.equipo_nombre + equipo.equipo.capacidad}}
+          <!-- {{equipo.equipo.equipo_nombre}} ||
+          {{equipo.equipo.capacidad + 'BTU'}} ||
+          {{equipo.precio_total_personalizado}} ||{{equipo.costo_btu}} -->
+          <div class="row" style="width:90%;display: inline-block">
+            <div class="col-3 text-right" style="display: inline-block">
+              {{equipo.equipo.equipo_nombre}}
+            </div>
+            <div class="col-3 text-right" style="display: inline-block">
+              {{equipo.equipo.capacidad}} BTU
+            </div>
+            <div class="col-3 text-right" style="display: inline-block">
+              {{equipo.precio_total_personalizado | currency}}
+            </div>
+            <div class="col-3 text-right" style="display: inline-block">
+              {{equipo.costo_btu | currency }}
+            </div>
+
+          </div>
         </p-header>
         <div class="row">
           <div class="col-4">
@@ -18,15 +35,13 @@
           <div class="col-4">
             <div class="form-inline">
               <label style="margin-right: 2px">Costo TON:</label>
-              <input type="text" disabled class="form-control" value="{{equipo.costo_btu | currency}}"
-              (keyup)="actualizar_total_personalizado(equipo)">
+              <input type="text" disabled class="form-control" value="{{equipo.costo_btu | currency}}" (keyup)="actualizar_total_personalizado(equipo)">
             </div>
           </div>
           <div class="col-4">
             <div class="form-inline">
               <label style="margin-right: 2px">Total personalizado:</label>
-              <input type="text" class="form-control" [(ngModel)]="equipo.precio_total_personalizado"
-              (keyup)="actualizar_total_personalizado(equipo)">
+              <input type="text" class="form-control" [(ngModel)]="equipo.precio_total_personalizado" (keyup)="actualizar_total_personalizado(equipo)">
             </div>
           </div>
         </div>
