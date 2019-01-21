@@ -100,20 +100,18 @@ export class AreaComponent implements OnInit {
       this.id_cotizacion = params['id'];
       this.http.areas(this.id_cotizacion).subscribe(success => {
         this.areas = success;
-        this.recalcularTotalesEquipos(this.areas);
+        this.inicializarTotales();
       });
     });
   }
-  recalcularTotalesEquipos(areas: Area[]) {
+  inicializarTotales() {
     setTimeout(() => {
       this.areas.forEach(area => {
         area.equipos.forEach(equipo => {
           this.equipoChild.actualizarTotalesEquipo(equipo, true);
         });
       });
+      this.equipoChild.actualizarTotal();
     });
   }
-
-
 }
-

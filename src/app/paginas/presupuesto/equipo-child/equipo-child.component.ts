@@ -17,7 +17,6 @@ export class EquipoChildComponent implements OnInit {
 
   areaSeleccionada: Area;
 
-
   materiales_lista: Material[];
   equipoSeleccionado: Equipo = {};
   equipos_filtro: Equipo[] = [];
@@ -25,7 +24,10 @@ export class EquipoChildComponent implements OnInit {
 
   timeout_id: any;
 
-  editaEquipo = false;
+  constructor(private http: HttpService, private confirmationService: ConfirmationService) { }
+  ngOnInit() {
+    this.areaSeleccionada = this.area;
+  }
 
   f(materiales: boolean, equipo?: EquipoArea) {
     // se muestra el diálogo según si se va a agregar un equipo o un material
@@ -54,13 +56,7 @@ export class EquipoChildComponent implements OnInit {
       this.actualizarTotal();
     });
   }
-  constructor(private http: HttpService, private confirmationService: ConfirmationService) { }
-  ngOnInit() {
-    this.areaSeleccionada = this.area;
 
-    this.actualizarTotal();
-
-  }
   totalMateriales(equipo: EquipoArea) {
     let total = 0;
     equipo.materiales.forEach(material => {
@@ -68,12 +64,13 @@ export class EquipoChildComponent implements OnInit {
     });
     return total;
   }
+
   actualizarPorcentajeGanancia(equipo: EquipoArea) {
-    this.http.equipos_area_actualizar(equipo).subscribe(() => {
-      this.actualizarTotalesEquipo(equipo, false);
-      this.actualizarTotal();
-      this.actualizarTotalPersonalizado(equipo);
-    });
+
+    this.actualizarTotalesEquipo(equipo, false);
+    this.actualizarTotal();
+    this.actualizarTotalPersonalizado(equipo);
+
   }
   actualizarTotalAsyncMaterial(material: MaterialEquipoArea, equipoArea: EquipoArea) {
     this.http.material_equipo_area_actualizar(material).subscribe(() => {
