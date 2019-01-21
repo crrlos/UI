@@ -87,7 +87,7 @@ export class AreaComponent implements OnInit {
     this.http.material_equipo_area_agregar(material_equipo).subscribe((id: any) => {
       material_equipo.material_equipo_area_id = id.id;
       this.equipoArea.materiales.push(material_equipo);
-      this.equipoChild.actualizarTotalesEquipo(this.equipoArea, false);
+      this.equipoChild.actualizarTotalesEquipo(this.equipoArea, false, false);
       this.equipoChild.actualizarTotal();
       this.equipoChild.actualizarTotalPersonalizado(this.equipoArea);
       this.messageService.add({ severity: 'success', summary: 'Material agregado', detail: 'El material se agregó correctamente' });
@@ -108,7 +108,7 @@ export class AreaComponent implements OnInit {
     setTimeout(() => {
       this.areas.forEach(area => {
         area.equipos.forEach(equipo => {
-          this.equipoChild.actualizarTotalesEquipo(equipo, true);
+          this.equipoChild.actualizarTotalesEquipo(equipo, true, true);
         });
       });
       this.equipoChild.actualizarTotal();

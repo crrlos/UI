@@ -44,7 +44,7 @@ export class EquipoChildComponent implements OnInit {
     }
     this.timeout_id = setTimeout(() => {
       this.http.equipos_area_actualizar(equipo).subscribe(() => {
-        this.actualizarTotalesEquipo(equipo, true);
+        this.actualizarTotalesEquipo(equipo, true, true);
         this.actualizarTotal();
       });
 
@@ -67,19 +67,20 @@ export class EquipoChildComponent implements OnInit {
 
   actualizarPorcentajeGanancia(equipo: EquipoArea) {
 
-    this.actualizarTotalesEquipo(equipo, false);
+    this.actualizarTotalesEquipo(equipo, false, true);
     this.actualizarTotal();
     this.actualizarTotalPersonalizado(equipo);
 
   }
   actualizarTotalAsyncMaterial(material: MaterialEquipoArea, equipoArea: EquipoArea) {
     this.http.material_equipo_area_actualizar(material).subscribe(() => {
-      this.actualizarTotalesEquipo(equipoArea, false);
+      this.actualizarTotalesEquipo(equipoArea, true, false);
       this.actualizarTotal();
       this.actualizarTotalPersonalizado(equipoArea);
     });
   }
-  actualizarTotalesEquipo(equipoArea: EquipoArea, conservar_total: boolean) {
+  actualizarTotalesEquipo(equipoArea: EquipoArea, conservar_total_equipo: boolean,
+    conservar_total_material: boolean) {
     let total_materiales = 0;
     equipoArea.materiales.forEach(material => {
       total_materiales += material.precio * material.cantidad * material.porcentaje_ganancia * 1;
@@ -87,7 +88,7 @@ export class EquipoChildComponent implements OnInit {
     if (equipoArea.precio_materiales_equipo < total_materiales || total_materiales === 0) {
       equipoArea.precio_materiales_equipo = total_materiales;
     }
-    if (equipoArea.precio_materiales_equipo > total_materiales && !conservar_total) {
+    if (equipoArea.precio_materiales_equipo > total_materiales && !conservar_total_material) {
       equipoArea.precio_materiales_equipo = total_materiales;
     }
     equipoArea.total = equipoArea.precio_equipo * equipoArea.porcentaje_ganancia
@@ -96,10 +97,10 @@ export class EquipoChildComponent implements OnInit {
     if (equipoArea.precio_total_personalizado < equipoArea.total) {
       equipoArea.precio_total_personalizado = equipoArea.total;
     }
-    if (equipoArea.precio_total_personalizado > equipoArea.total && !conservar_total) {
+    if (equipoArea.precio_total_personalizado > equipoArea.total && !conservar_total_equipo) {
       equipoArea.precio_total_personalizado = equipoArea.total;
     }
-    equipoArea.costo_btu =  equipoArea.total / (equipoArea.equipo.capacidad / 12000); // 12,000 BTU = 1 T
+    equipoArea.costo_btu = equipoArea.total / (equipoArea.equipo.capacidad / 12000); // 12,000 BTU = 1 T
   }
   // Se hace una actualización de totales($$$) a todas las áreas
   actualizarTotal() {
