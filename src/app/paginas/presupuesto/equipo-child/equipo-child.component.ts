@@ -84,7 +84,7 @@ export class EquipoChildComponent implements OnInit {
     equipoArea.materiales.forEach(material => {
       total_materiales += material.precio * material.cantidad * material.porcentaje_ganancia * 1;
     });
-    if (equipoArea.precio_materiales_equipo < total_materiales) {
+    if (equipoArea.precio_materiales_equipo < total_materiales || total_materiales === 0) {
       equipoArea.precio_materiales_equipo = total_materiales;
     }
     if (equipoArea.precio_materiales_equipo > total_materiales && !conservar_total) {
