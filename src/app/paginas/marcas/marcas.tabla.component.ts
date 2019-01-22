@@ -25,18 +25,16 @@ export class MarcasTablaComponent implements OnInit {
       { field: 'marca_nombre', header: 'marca' }
     ];
     this.selectedColumns = this.cols;
-  }
-  onRowSelect(event) {
-    this.marca = JSON.parse(JSON.stringify(event.data));
-    this.marca_seleccionada.emit(this.marca);
-    console.log('seleccionado');
-  }
-  loadLazy(event) {
     this.http.marcas_filtro(event).subscribe(data => {
       this.marcas = data.marcas;
       this.totalRecords = data.totalRecords;
       console.log(this.marcas);
     });
+  }
+  onRowSelect(event) {
+    this.marca = JSON.parse(JSON.stringify(event.data));
+    this.marca_seleccionada.emit(this.marca);
+    console.log('seleccionado');
   }
 
 }
