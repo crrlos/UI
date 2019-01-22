@@ -25,17 +25,15 @@ export class GasTablaComponent implements OnInit {
       { field: 'gas_nombre', header: 'gas' }
     ];
     this.selectedColumns = this.cols;
+    this.http.gases_filtro(event).subscribe(data => {
+      this.gases = data.gases;
+      this.totalRecords = data.totalRecords;
+    });
   }
   onRowSelect(event) {
     this.gas = JSON.parse(JSON.stringify(event.data));
     this.gas_seleccionado.emit(this.gas);
     console.log('seleccionado');
-  }
-  loadLazy(event) {
-    this.http.gases_filtro(event).subscribe(data => {
-      this.gases = data.gases;
-      this.totalRecords = data.totalRecords;
-    });
   }
 
 }

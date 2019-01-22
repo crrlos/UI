@@ -25,18 +25,16 @@ export class TecnologiaTablaComponent implements OnInit {
       { field: 'tecnologia_nombre', header: 'tecnologia' }
     ];
     this.selectedColumns = this.cols;
-  }
-  onRowSelect(event) {
-    this.tecnologia = JSON.parse(JSON.stringify(event.data));
-    this.tecnologia_seleccionado.emit(this.tecnologia);
-    console.log('seleccionado');
-  }
-  loadLazy(event) {
     this.http.tecnologias_filtro(event).subscribe(data => {
       this.tecnologias = data.tecnologias;
       this.totalRecords = data.totalRecords;
       console.log(this.tecnologias);
     });
+  }
+  onRowSelect(event) {
+    this.tecnologia = JSON.parse(JSON.stringify(event.data));
+    this.tecnologia_seleccionado.emit(this.tecnologia);
+    console.log('seleccionado');
   }
 
 }

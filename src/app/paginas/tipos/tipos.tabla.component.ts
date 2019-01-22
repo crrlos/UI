@@ -25,18 +25,16 @@ export class TiposTablaComponent implements OnInit {
       { field: 'tipo_nombre', header: 'tipo' }
     ];
     this.selectedColumns = this.cols;
-  }
-  onRowSelect(event) {
-    this.tipo = JSON.parse(JSON.stringify(event.data));
-    this.tipo_seleccionado.emit(this.tipo);
-    console.log('seleccionado');
-  }
-  loadLazy(event) {
     this.http.tipos_filtro(event).subscribe(data => {
       this.tipos = data.tipos;
       this.totalRecords = data.totalRecords;
       console.log(this.tipos);
     });
+  }
+  onRowSelect(event) {
+    this.tipo = JSON.parse(JSON.stringify(event.data));
+    this.tipo_seleccionado.emit(this.tipo);
+    console.log('seleccionado');
   }
 
 }
