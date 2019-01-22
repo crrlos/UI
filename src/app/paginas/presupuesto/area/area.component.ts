@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Area, Equipo, EquipoArea, Material, MaterialEquipoArea } from '../../../interfaces/interfaces';
-import { isNumber } from 'util';
 import { HttpService } from '../../../servicios/http.service';
 import { EquipoChildComponent } from '../equipo-child/equipo-child.component';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+declare var customjs;
 
 @Component({
   selector: 'app-area',
@@ -101,6 +101,7 @@ export class AreaComponent implements OnInit {
       this.http.areas(this.id_cotizacion).subscribe(success => {
         this.areas = success;
         this.inicializarTotales();
+        customjs();
       });
     });
   }
