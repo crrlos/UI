@@ -12,7 +12,7 @@ import {
 export class HttpService {
 
   HOST = 'http://crrlos7-001-site1.dtempurl.com/api';
-  // HOST = 'http://localhost:8000';
+   // HOST = 'http://localhost:8000';
 
 
   constructor(private http: HttpClient) { }
@@ -20,9 +20,13 @@ export class HttpService {
     return this.http.get<Area[]>(`${this.HOST}/areas?id=${id}`);
   }
   areas_agregar(area) {
+    area.nombre = area.area;
+    area.id_cotizacion = area.cotizacion;
+
     return this.http.post(`${this.HOST}/areas`, area);
   }
   areas_actualizar(area) {
+    area.id_cotizacion = area.cotizacion;
     return this.http.put(`${this.HOST}/areas`, area);
   }
   areas_eliminar(area: Area) {
