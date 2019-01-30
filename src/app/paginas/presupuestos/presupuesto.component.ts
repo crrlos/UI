@@ -21,8 +21,8 @@ export class PresupuestoComponent implements OnInit {
 
   ngOnInit() {}
   search(event) {
-    this.http.clientes(event.query).subscribe(clientes => {
-      this.results = clientes;
+    this.http.clientes(event.query).subscribe((clientes: any) => {
+      this.results = clientes.clientes;
     });
   }
   showDialogToAdd() {

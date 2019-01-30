@@ -35,11 +35,19 @@ export class PresupuestoTablaComponent implements OnInit {
   onRowSelect(event) {
     this.router.navigate(['presupuesto', event.data.cotizacion_id]);
   }
-  loadLazy(event) {
+  loadLazy(event: Lazy) {
+    console.log(event);
+
     this.http.cotizaciones(event).subscribe(data => {
       this.cotizaciones = data.cotizaciones;
       this.totalRecords = data.totalRecords;
     });
   }
 
+}
+interface Lazy {
+  first?;
+  rows?;
+  softField?;
+  globalFilter?;
 }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {
   Area, EquiposResponse, TipoUnidad, Marca, MaterialResponse, UnidadMedida,
   MaterialEquipoArea, Gas, Tecnologia, Voltaje, Cliente, CotizacionResponse,
-  ClienteResponse, MarcaResponse, TipoResponse, TecnologiaResponse, GasResponse, EquipoArea
+  ClienteResponse, MarcaResponse, TipoResponse, TecnologiaResponse, GasResponse, EquipoArea, Equipo
 } from 'src/app/interfaces/interfaces';
 
 @Injectable({
@@ -11,7 +11,9 @@ import {
 })
 export class HttpService {
 
-  HOST = 'http://localhost:8000';
+  HOST = 'http://crrlos7-001-site1.dtempurl.com/api';
+  // HOST = 'http://localhost:8000';
+
 
   constructor(private http: HttpClient) { }
   areas(id) {
@@ -32,9 +34,18 @@ export class HttpService {
     });
   }
   equipos_actualizar(equipo) {
+    equipo.id_marca = equipo.marca.marca_id;
+    equipo.id_tipo = equipo.tipo.tipo_id;
+    equipo.id_tecnologia = equipo.tecnologia.tecnologia_id;
+    equipo.id_gas = equipo.gas.gas_id;
     return this.http.put(`${this.HOST}/equipos`, equipo);
   }
-  equipos_agregar(equipo) {
+  equipos_agregar(equipo: any) {
+    equipo.id_marca = equipo.marca.marca_id;
+    equipo.id_tipo = equipo.tipo.tipo_id;
+    equipo.id_tecnologia = equipo.tecnologia.tecnologia_id;
+    equipo.id_gas = equipo.gas.gas_id;
+
     return this.http.post(`${this.HOST}/equipos`, equipo);
   }
   tipos() {
@@ -97,10 +108,10 @@ export class HttpService {
   clientes_actualizar(cliente) {
     return this.http.put(`${this.HOST}/clientes`, cliente);
   }
-  cotizacion_agregar(data) {
-    return this.http.post(`${this.HOST}/cotizaciones`, data);
+  cotizacion_agregar(data: any) {
+    return this.http.post(`${this.HOST}/cotizaciones`, { id_cliente: data.cliente.cliente_id, descripcion: data.descripcion });
   }
-  cotizaciones(event?) {
+  cotizaciones(event?: any) {
     return this.http.get<CotizacionResponse>(`${this.HOST}/cotizaciones`, {
       params: event
     });
