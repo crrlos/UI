@@ -80,21 +80,22 @@ export class HttpService {
     return this.http.post(`${this.HOST}/materiales`, material);
   }
   equipos_area_agregar(equipo_area) {
-    return this.http.post(`${this.HOST}/equipos_area`, equipo_area);
+    return this.http.post(`${this.HOST}/equiposarea`, equipo_area);
   }
   equipos_area_actualizar(equipo_area: EquipoArea) {
     equipo_area = JSON.parse(JSON.stringify(equipo_area));
     equipo_area.materiales = [];
-    return this.http.put(`${this.HOST}/equipos_area`, equipo_area);
+    return this.http.put(`${this.HOST}/equiposarea`, equipo_area);
   }
-  material_equipo_area_agregar(material: MaterialEquipoArea) {
-    return this.http.post(`${this.HOST}/materiales_equipo_area`, material);
+  material_equipo_area_agregar(material: any) {
+    material.id_material = material.material.material_id;
+    return this.http.post(`${this.HOST}/materialesequipoarea`, material);
   }
   material_equipo_area_actualizar(material: MaterialEquipoArea) {
-    return this.http.put(`${this.HOST}/materiales_equipo_area`, material);
+    return this.http.put(`${this.HOST}/materialesequipoarea`, material);
   }
   material_equipo_area_eliminar(material: MaterialEquipoArea) {
-    return this.http.delete(`${this.HOST}/materiales_equipo_area`, { params: { id: material.material_equipo_area_id } });
+    return this.http.delete(`${this.HOST}/materialesequipoarea`, { params: { id: material.material_equipo_area_id } });
   }
   gases_get() {
     return this.http.get<Gas[]>(`${this.HOST}/gases`);
@@ -177,7 +178,7 @@ export class HttpService {
   }
 
   equipo_duplicar(equipo) {
-    return this.http.post(`${this.HOST}/equipos/duplicar`, equipo);
+    return this.http.get(`${this.HOST}/equiposarea/${equipo.equipo_area_id}`);
   }
 
 }
