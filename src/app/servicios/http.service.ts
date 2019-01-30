@@ -55,7 +55,7 @@ export class HttpService {
     return this.http.get<Marca[]>(`${this.HOST}/marcas`);
   }
   unidades_medida() {
-    return this.http.get<UnidadMedida[]>(`${this.HOST}/unidadmedida`);
+    return this.http.get<UnidadMedida[]>(`${this.HOST}/unidadesmedida`);
   }
   materiales(event?) {
     return this.http.get<MaterialResponse>(`${this.HOST}/materiales`, {
@@ -63,9 +63,16 @@ export class HttpService {
     });
   }
   materiales_actualizar(material) {
+    material.id_marca = material.marca.marca_id;
+    material.id_tipo = material.tipo.tipo_id;
+    material.id_unidad_medida = material.unidad_medida.unidad_medida_id;
+
     return this.http.put(`${this.HOST}/materiales`, material);
   }
   materiales_agregar(material) {
+    material.id_marca = material.marca.marca_id;
+    material.id_tipo = material.tipo.tipo_id;
+    material.id_unidad_medida = material.unidad_medida.unidad_medida_id;
     return this.http.post(`${this.HOST}/materiales`, material);
   }
   equipos_area_agregar(equipo_area) {
