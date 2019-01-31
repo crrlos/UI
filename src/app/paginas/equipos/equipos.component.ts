@@ -19,6 +19,8 @@ export class EquiposComponent implements OnInit {
   nuevoEquipo = false;
   equipoSeleccionado: Equipo;
 
+  errores: boolean;
+
   @ViewChild('equipos_tabla') equipos_tabla: EquiposTabla;
 
   voltajes;
@@ -56,12 +58,12 @@ export class EquiposComponent implements OnInit {
     this.equipo.voltaje = this.voltajes.find(v => v.code === this.equipo.voltaje);
     this.displayDialog = true;
   }
-  save() {
-    if (this.equipo.voltaje) {
-      this.equipo.voltaje = this.equipo.voltaje.name;
-    } else {
-      this.equipo.voltaje = '0';
+  save(f: FormGroup) {
+    if (f.invalid) {
+      this.errores = true;
+      return;
     }
+
     if (this.nuevoEquipo) {
       this.http.equipos_agregar(this.equipo).subscribe((res) => {
         this.equipo.equipo_id = JSON.parse(JSON.stringify(res)).id;

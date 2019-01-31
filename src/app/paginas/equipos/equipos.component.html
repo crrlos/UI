@@ -5,8 +5,10 @@
 [puede_agregar] = 'true'>
 </app-equipos-tabla>
 
-<p-dialog header="Equipo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+<form #f="ngForm">
+  <p-dialog header="Equipo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
     <div class="ui-g ui-fluid" *ngIf="equipo">
+      <div class="text-danger text-center" *ngIf="errores">Hay campos incompletos</div>
       <div class="ui-g-12">
         <div class="ui-g-4">
           <label for="vin">Codigo</label>
@@ -68,7 +70,7 @@
           <label for="year">Voltaje</label>
         </div>
         <div class="ui-g-8">
-          <p-dropdown appendTo="body" name="voltaje" placeholder="Seleccione" [showClear]="true"
+          <p-dropdown appendTo="body"  required name="voltaje" placeholder="Seleccione" [showClear]="true"
           [options]="voltajes" [style]="{'width':'150px'}" [(ngModel)]="equipo.voltaje"
             optionLabel="name"></p-dropdown>
         </div>
@@ -78,7 +80,7 @@
           <label for="year">Gas</label>
         </div>
         <div class="ui-g-8">
-          <p-dropdown appendTo="body" name="gas" placeholder="Seleccione" [showClear]="true"
+          <p-dropdown appendTo="body" required name="gas" placeholder="Seleccione" [showClear]="true"
            [options]="gases" [style]="{'width':'150px'}" [(ngModel)]="equipo.gas"
             optionLabel="gas_nombre"></p-dropdown>
         </div>
@@ -88,20 +90,18 @@
           <label for="year">Tecnología</label>
         </div>
         <div class="ui-g-8">
-          <p-dropdown appendTo="body" name="tecnologia" placeholder="Seleccione" [showClear]="true"
+          <p-dropdown appendTo="body" required name="tecnologia" placeholder="Seleccione" [showClear]="true"
           [options]="tecnologias" [style]="{'width':'150px'}" [(ngModel)]="equipo.tecnologia"
             optionLabel="tecnologia_nombre"></p-dropdown>
         </div>
       </div>
-
-
-
     </div>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
         <button type="button" pButton icon="fa fa-close" (click)="cancelar()" label="Cancelar"></button>
-        <button type="button" pButton icon="fa fa-check" (click)="save()" label="Guardar"></button>
+        <button type="button" pButton icon="fa fa-check" (click)="save(f)" label="Guardar"></button>
       </div>
     </p-footer>
 
 </p-dialog>
+</form>
