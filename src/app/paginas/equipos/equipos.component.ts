@@ -48,6 +48,7 @@ export class EquiposComponent implements OnInit {
   }
   showDialogToAdd() {
     this.nuevoEquipo = true;
+    this.errores = false;
     this.equipo = {};
     this.displayDialog = true;
   }

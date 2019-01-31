@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TipoUnidad, Marca, Material, UnidadMedida } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 interface MaterialesTabla {
   materiales: Material[];
@@ -23,6 +24,8 @@ export class MaterialesComponent implements OnInit {
 
   displayDialog = false;
   nuevoMaterial = false;
+
+  errores: boolean;
 
   cols: any[];
   selectedColumns: any[];
@@ -54,6 +57,7 @@ export class MaterialesComponent implements OnInit {
   }
   showDialogToAdd() {
     this.nuevoMaterial = true;
+    this.errores = false;
     this.displayDialog = true;
     this.material = {};
   }
@@ -63,7 +67,10 @@ export class MaterialesComponent implements OnInit {
     this.material = JSON.parse(JSON.stringify(event.data));
     this.displayDialog = true;
   }
-  save() {
+  save(f: FormGroup) {
+    if (f.invalid) {
+        this.errores =  true;
+    }
 
     if (this.nuevoMaterial) {
       this.http.materiales_agregar(this.material).subscribe((res: any) => {
