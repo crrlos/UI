@@ -22,10 +22,10 @@ export class EquiposTablaComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'equipo_codigo', header: 'codigo' },
+      { field: 'equipo_codigo', header: 'código' },
       { field: 'equipo_nombre', header: 'nombre' },
       { field: 'equipo_precio', header: 'precio' },
-      { field: 'capacidad', header: 'capacidad' },
+      { field: 'capacidad', header: 'capacidad (BTU)' },
       { field: 'marca', header: 'marca' },
       { field: 'tipo', header: 'tipo' },
       { field: 'voltaje', header: 'V' },

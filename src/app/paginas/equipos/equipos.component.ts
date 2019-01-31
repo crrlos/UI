@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Equipo, TipoUnidad, Marca, Tecnologia, Gas } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-equipos',
@@ -26,7 +27,7 @@ export class EquiposComponent implements OnInit {
     this.http.tipos_filtro(event).subscribe(data => {
       this.tipos = data.tipos;
     });
-    this.http.marcas_filtro().subscribe( marcas => {
+    this.http.marcas_filtro().subscribe(marcas => {
       this.marcas = marcas.marcas;
     }
     );
@@ -45,7 +46,7 @@ export class EquiposComponent implements OnInit {
   }
   showDialogToAdd() {
     this.nuevoEquipo = true;
-    this.equipo = { tipo: this.tipos[0], marca: this.marcas[0], voltaje: this.voltajes[0] };
+    this.equipo = {};
     this.displayDialog = true;
   }
   onRowSelect(event) {
@@ -75,11 +76,8 @@ export class EquiposComponent implements OnInit {
     this.displayDialog = false;
   }
 
-  delete() {
-    /* const index = this.equipos.indexOf(this.equipoSeleccionado);
-    this.equipos = this.equipos.filter((val, i) => i !== index);
-    this.equipo = null;
-    this.displayDialog = false; */
+  cancelar() {
+    this.displayDialog = false;
   }
 
 }
