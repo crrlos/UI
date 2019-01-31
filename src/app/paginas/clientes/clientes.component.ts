@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Equipo, TipoUnidad, Marca, Tecnologia, Gas, Cliente } from 'src/app/interfaces/interfaces';
+import { Cliente } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-clientes',
@@ -15,9 +16,6 @@ export class ClientesComponent implements OnInit {
   clienteSeleccionado: Cliente;
 
   @ViewChild('clientes_tabla') clientes_tabla: ClientesTabla;
-
-  voltajes;
-
   ngOnInit() {
   }
   showDialogToAdd() {
@@ -31,7 +29,10 @@ export class ClientesComponent implements OnInit {
     console.log(this.cliente);
     this.displayDialog = true;
   }
-  save() {
+  save(f: NgForm) {
+    if (f.invalid) {
+      return;
+    }
 
     if (this.nuevoCliente) {
       this.http.clientes_guardar(this.cliente).subscribe((res) => {
@@ -48,10 +49,7 @@ export class ClientesComponent implements OnInit {
   }
 
   delete() {
-    /* const index = this.equipos.indexOf(this.equipoSeleccionado);
-    this.equipos = this.equipos.filter((val, i) => i !== index);
-    this.equipo = null;
-    this.displayDialog = false; */
+    this.displayDialog = false;
   }
 
 }

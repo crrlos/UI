@@ -70,6 +70,7 @@ export class MaterialesComponent implements OnInit {
   save(f: FormGroup) {
     if (f.invalid) {
         this.errores =  true;
+        return;
     }
 
     if (this.nuevoMaterial) {
@@ -89,6 +90,7 @@ export class MaterialesComponent implements OnInit {
   }
 
   delete() {
+    this.displayDialog = false;
   }
 
 }
