@@ -136,12 +136,25 @@ export class EquipoChildComponent implements OnInit {
       this.actualizarTotal();
     });
   }
-  confirm(equipo: EquipoArea) {
+  confirmDuplicar(equipo: EquipoArea) {
     this.confirmationService.confirm({
       message: 'Desea duplicar este equipo?',
       accept: () => {
         this.duplicarEquipo(equipo);
       }
+    });
+  }
+  confirmEliminar(equipo: EquipoArea) {
+    this.confirmationService.confirm({
+      message: 'Desea eliminar este equipo?',
+      accept: () => {
+        this.eliminarEquipo(equipo);
+      }
+    });
+  }
+  eliminarEquipo(equipo: EquipoArea) {
+    this.http.equipos_area_eliminar(equipo).subscribe(() => {
+      this.area.equipos.splice(this.area.equipos.indexOf(equipo));
     });
   }
   actualizarTotalPersonalizado(equipoArea: EquipoArea) {

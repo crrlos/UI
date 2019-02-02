@@ -12,7 +12,7 @@ import {
 export class HttpService {
 
   HOST = 'http://crrlos7-001-site1.dtempurl.com/api';
-   // HOST = 'http://localhost:8000';
+  // HOST = 'http://localhost:8000';
 
 
   constructor(private http: HttpClient) { }
@@ -87,6 +87,10 @@ export class HttpService {
     equipo_area.materiales = [];
     return this.http.put(`${this.HOST}/equiposarea`, equipo_area);
   }
+  equipos_area_eliminar(equipo_area: EquipoArea) {
+    return this.http.delete(`${this.HOST}/equiposarea/${equipo_area.equipo_area_id}`);
+  }
+
   material_equipo_area_agregar(material: any) {
     material.id_material = material.material.material_id;
     return this.http.post(`${this.HOST}/materialesequipoarea`, material);
