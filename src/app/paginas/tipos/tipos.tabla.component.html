@@ -7,8 +7,8 @@
       <button type="button" pButton icon="fa fa-plus" (click)="agregar.emit(true)" label="Agregar"></button>
     </div>
     <br>
-    <input type="text" pInputText size="50" placeholder="Filtrar" (input)="tt.filterGlobal($event.target.value, 'contains')"
-      style="width:auto">
+    <input type="text" pInputText class="form-control" placeholder="Filtrar" (input)="tt.filterGlobal($event.target.value, 'contains')"
+    class="form-control">
 
   </ng-template>
   <ng-template pTemplate="header" let-columns>

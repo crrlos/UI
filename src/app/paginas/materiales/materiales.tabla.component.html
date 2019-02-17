@@ -1,13 +1,14 @@
 <p-table [globalFilterFields]="['tipo.nombre','nombre','codigo']" #tt [columns]="selectedColumns" [value]="materiales"
   selectionMode="single" (onRowSelect)="onRowSelect($event)" [paginator]="true"
-  [rows]="7" [rowsPerPageOptions]="[10,20,30]" [lazy]="true" (onLazyLoad)="loadLazy($event)" [totalRecords]="totalRecords">
+  [rows]="7" [rowsPerPageOptions]="[10,20,30]" [lazy]="true" (onLazyLoad)="loadLazy($event)"
+  [responsive]="true" [totalRecords]="totalRecords">
   <ng-template pTemplate="caption">
     <div style="text-align:left">
       <button type="button" pButton icon="fa fa-plus" (click)="agregar_material.emit(true)" label="Agregar"></button>
     </div>
     <br>
-    <input type="text" pInputText size="50" placeholder="Filtrar" (input)="tt.filterGlobal($event.target.value, 'contains')"
-      style="width:auto">
+    <input type="text" pInputText  placeholder="Filtrar" (input)="tt.filterGlobal($event.target.value, 'contains')"
+      class="form-control">
 
   </ng-template>
   <ng-template pTemplate="header" let-columns>
