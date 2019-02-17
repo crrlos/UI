@@ -70,6 +70,7 @@ export class AreaComponent implements OnInit {
     this.http.equipos_area_agregar(equipo_area).subscribe((id: any) => {
       equipo_area.equipo_area_id = id.id;
       this.area.equipos.push(equipo_area);
+      this.equipoChild.actualizarTotalesEquipo(equipo_area, false, false);
       this.equipoChild.actualizarTotal();
       this.messageService.add({ severity: 'success', summary: 'Equipo agregado', detail: 'El equipo se agregó correctamente' });
     });

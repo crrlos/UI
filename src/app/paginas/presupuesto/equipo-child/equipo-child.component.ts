@@ -29,9 +29,9 @@ export class EquipoChildComponent implements OnInit {
     this.areaSeleccionada = this.area;
   }
 
-  f(materiales: boolean, equipo?: EquipoArea) {
+  f(agregar_equipo: boolean, equipo?: EquipoArea) {
     // se muestra el diálogo según si se va a agregar un equipo o un material
-    if (materiales) {
+    if (agregar_equipo) {
       this.mostrar_dialogo_equipos.emit({ area: this.area });
     } else {
       this.mostrar_dialogo_materiales.emit({ equipo: equipo });
