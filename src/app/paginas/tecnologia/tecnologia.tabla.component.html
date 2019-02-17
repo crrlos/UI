@@ -17,12 +17,17 @@
         {{col.header}}
 
       </th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowData>
     <tr [pSelectableRow]="rowData">
       <td>{{rowData.tecnologia_nombre}}</td>
+      <td style="text-align: center">
+        <span style=" font-size: 20px" class="pointer text-danger text-center"><i class="mdi mdi-delete" data-toggle="tooltip"
+          data-placement="top" data-original-title="eliminar"></i></span>
 
+      </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary">
