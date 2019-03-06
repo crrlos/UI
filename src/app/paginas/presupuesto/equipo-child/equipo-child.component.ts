@@ -154,7 +154,7 @@ export class EquipoChildComponent implements OnInit {
   }
   eliminarEquipo(equipo: EquipoArea) {
     this.http.equipos_area_eliminar(equipo).subscribe(() => {
-      this.area.equipos.splice(this.area.equipos.indexOf(equipo));
+      this.area.equipos.splice(this.area.equipos.indexOf(equipo), 1);
     });
   }
   actualizarTotalPersonalizado(equipoArea: EquipoArea) {
