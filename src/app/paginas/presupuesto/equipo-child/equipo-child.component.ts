@@ -109,7 +109,7 @@ export class EquipoChildComponent implements OnInit {
     this.areas.forEach(area => {
       area.total = 0;
       area.equipos.forEach(equipo_area => {
-        area.total += equipo_area.precio_total_personalizado * 1;
+        area.total += equipo_area.precio_total_personalizado * 1; // *1 convierte a number
       });
       total_general += area.total;
     });
@@ -155,6 +155,8 @@ export class EquipoChildComponent implements OnInit {
   eliminarEquipo(equipo: EquipoArea) {
     this.http.equipos_area_eliminar(equipo).subscribe(() => {
       this.area.equipos.splice(this.area.equipos.indexOf(equipo), 1);
+      // this.actualizarTotalesEquipo(equipo, true, true);
+      this.actualizarTotal();
     });
   }
   actualizarTotalPersonalizado(equipoArea: EquipoArea) {
