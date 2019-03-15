@@ -79,6 +79,9 @@ export class EquipoChildComponent implements OnInit {
       this.actualizarTotalPersonalizado(equipoArea);
     });
   }
+  // Esta función actualiza el total de un equipo de un equipo (  precio equipo + materiales)
+  // tomando en cuenta los totales personalizados para no sobreescribirlos cuando se agrega o elimina
+  // un material
   actualizarTotalesEquipo(equipoArea: EquipoArea, conservar_total_equipo: boolean,
     conservar_total_material: boolean) {
     let total_materiales = 0;
@@ -102,7 +105,7 @@ export class EquipoChildComponent implements OnInit {
     }
     equipoArea.costo_btu = equipoArea.total / (equipoArea.equipo.capacidad / 12000); // 12,000 BTU = 1 T
   }
-  // Se hace una actualización de totales($$$) a todas las áreas
+  // Esta función suma solo los totales personalizados de cada equipo por área para obtener el total general
   actualizarTotal() {
     let total_general = 0;
 
