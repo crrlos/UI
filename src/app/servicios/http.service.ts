@@ -166,6 +166,9 @@ export class HttpService {
   tecnologias_actualizar(tecnologia) {
     return this.http.put(`${this.HOST}/tecnologias`, tecnologia);
   }
+  tecnologias_eliminar(id: number) {
+    return this.http.delete(`${this.HOST}/tecnologias/${id}`);
+  }
   tecnologias_filtro(event?) {
     return this.http.get<TecnologiaResponse>(`${this.HOST}/tecnologias`, {
       params: event

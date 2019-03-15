@@ -52,7 +52,7 @@ export class TiposComponent implements OnInit {
     this.http.tipos_eliminar(id).subscribe(() => {
       this.tipos_tabla.tipos.splice(this.tipos_tabla.tipos.indexOf(this.tipoSeleccionado), 1);
       swal('Correcto!', 'Registro eliminado!', 'success');
-    }, error => {
+    }, () => {
       swal ( 'Oops' ,  'Este registro no se pudo eliminar' ,  'error' );
 
     });

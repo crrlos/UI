@@ -34,21 +34,27 @@ export class TecnologiaComponent implements OnInit {
       this.http.tecnologias_guardar(this.tecnologia).subscribe((res) => {
         this.tecnologia.tecnologia_id = JSON.parse(JSON.stringify(res)).id;
         this.tecnologias_tabla.tecnologias.push(this.tecnologia);
+        swal('Correcto!', 'Registro agregado!', 'success');
       });
     } else {
       this.http.tecnologias_actualizar(this.tecnologia).subscribe(() => {
         const i = this.tecnologias_tabla.tecnologias.findIndex(et => et.tecnologia_id === this.tecnologia.tecnologia_id);
         this.tecnologias_tabla.tecnologias[i] = this.tecnologia;
+        swal('Correcto!', 'Registro actualizado!', 'success');
       });
     }
     this.displayDialog = false;
   }
 
-  delete() {
-    /* const index = this.equipos.indexOf(this.equipoSeleccionado);
-    this.equipos = this.equipos.filter((val, i) => i !== index);
-    this.equipo = null;
-    this.displayDialog = false; */
+  delete(id: number) {
+    this.http.tecnologias_eliminar(id).subscribe(() => {
+      this.tecnologias_tabla.tecnologias.splice(this.tecnologias_tabla.tecnologias.indexOf(this.tecnologiaSeleccionado), 1);
+      swal('Correcto!', 'Registro eliminado!', 'success');
+    }, () => {
+      swal ( 'Oops' ,  'Este registro no se pudo eliminar' ,  'error' );
+
+    });
+    this.displayDialog = false;
   }
 
 }
