@@ -23,9 +23,10 @@ export class PresupuestoTablaComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'cliente', header: 'Cliente', width: '45%' },
-      { field: 'descripcion', header: 'Descripción', width: '45%' },
-      { field: 'editar', header: 'Editar', width: '10%' }
+      { field: 'cotizacion_id', header: 'Id', width: '5%' },
+      { field: 'cliente', header: 'Cliente', width: '40%' },
+      { field: 'descripcion', header: 'Descripción', width: '40%' },
+      { field: 'opciones', header: 'Opciones', width: '15%' }
     ];
     this.selectedColumns = this.cols;
   }

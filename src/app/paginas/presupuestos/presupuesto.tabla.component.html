@@ -28,9 +28,11 @@
       <td *ngFor="let col of columns">
         <div [ngSwitch]="col.header">
           <div *ngSwitchCase="'Cliente'">{{rowData[col.field].nombre}}</div>
-          <div *ngSwitchCase="'Editar'">
+          <div *ngSwitchCase="'Opciones'">
             <button pButton icon="mdi mdi-lead-pencil" (click)="selectedCotizacion(rowData)"></button>
+            <button pButton icon="mdi mdi-download" class="ml-3" (click)="selectedCotizacion(rowData)"></button>
           </div>
+
           <div *ngSwitchDefault>{{rowData[col.field]}}</div>
         </div>
       </td>
