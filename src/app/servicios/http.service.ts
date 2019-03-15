@@ -55,6 +55,9 @@ export class HttpService {
   tipos() {
     return this.http.get<TipoUnidad[]>(`${this.HOST}/tipos`);
   }
+  tipos_eliminar(id: number) {
+    return this.http.delete(`${this.HOST}/tipos/${id}`);
+  }
   marcas() {
     return this.http.get<Marca[]>(`${this.HOST}/marcas`);
   }
