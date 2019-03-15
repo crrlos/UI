@@ -35,21 +35,27 @@ export class MarcasComponent implements OnInit {
       this.http.marcas_guardar(this.marca).subscribe((res) => {
         this.marca.marca_id = JSON.parse(JSON.stringify(res)).id;
         this.marcas_tabla.marcas.push(this.marca);
+        swal('Correcto!', 'Registro agregado!', 'success');
       });
     } else {
       this.http.marcas_actualizar(this.marca).subscribe(() => {
         const i = this.marcas_tabla.marcas.findIndex(et => et.marca_id === this.marca.marca_id);
         this.marcas_tabla.marcas[i] = this.marca;
+        swal('Correcto!', 'Registro actualizado!', 'success');
       });
     }
     this.displayDialog = false;
   }
 
-  delete() {
-    /* const index = this.equipos.indexOf(this.equipoSeleccionado);
-    this.equipos = this.equipos.filter((val, i) => i !== index);
-    this.equipo = null;
-    this.displayDialog = false; */
+  delete(id: number) {
+    this.http.marcas_eliminar(id).subscribe(() => {
+      this.marcas_tabla.marcas.splice(this.marcas_tabla.marcas.indexOf(this.marcaSeleccionada), 1);
+      swal('Correcto!', 'Registro eliminado!', 'success');
+    }, () => {
+      swal ( 'Oops' ,  'Este registro no se pudo eliminar' ,  'error' );
+
+    });
+    this.displayDialog = false;
   }
 
 }

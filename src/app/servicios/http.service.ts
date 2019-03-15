@@ -61,6 +61,9 @@ export class HttpService {
   marcas() {
     return this.http.get<Marca[]>(`${this.HOST}/marcas`);
   }
+  marcas_eliminar(id: number) {
+    return this.http.delete(`${this.HOST}/marcas/${id}`);
+  }
   unidades_medida() {
     return this.http.get<UnidadMedida[]>(`${this.HOST}/unidadesmedida`);
   }
