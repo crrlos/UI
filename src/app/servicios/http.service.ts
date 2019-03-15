@@ -11,7 +11,7 @@ import {
 })
 export class HttpService {
 
-  HOST = 'http://crrlos7-001-site1.dtempurl.com/api';
+  HOST = 'http://crrlos8-001-site1.htempurl.com/api';
   // HOST = 'http://localhost:8000';
 
 
