@@ -34,21 +34,27 @@ export class GasComponent implements OnInit {
       this.http.gases_guardar(this.gas).subscribe((res) => {
         this.gas.gas_id = JSON.parse(JSON.stringify(res)).id;
         this.gas_tabla.gases.push(this.gas);
+        swal('Correcto!', 'Registro agregado!', 'success');
       });
     } else {
       this.http.gases_actualizar(this.gas).subscribe(() => {
         const i = this.gas_tabla.gases.findIndex(et => et.gas_id === this.gas.gas_id);
         this.gas_tabla.gases[i] = this.gas;
+        swal('Correcto!', 'Registro actualizado!', 'success');
       });
     }
     this.displayDialog = false;
   }
 
-  delete() {
-    /* const index = this.equipos.indexOf(this.equipoSeleccionado);
-    this.equipos = this.equipos.filter((val, i) => i !== index);
-    this.equipo = null;
-    this.displayDialog = false; */
+  delete(id: number) {
+    this.http.gases_eliminar(id).subscribe(() => {
+      this.gas_tabla.gases.splice(this.gas_tabla.gases.indexOf(this.gasSeleccionado), 1);
+      swal('Correcto!', 'Registro eliminado!', 'success');
+    }, () => {
+      swal ( 'Oops' ,  'Este registro no se pudo eliminar' ,  'error' );
+
+    });
+    this.displayDialog = false;
   }
 
 }

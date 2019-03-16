@@ -58,6 +58,7 @@ export class HttpService {
   tipos_eliminar(id: number) {
     return this.http.delete(`${this.HOST}/tipos/${id}`);
   }
+
   marcas() {
     return this.http.get<Marca[]>(`${this.HOST}/marcas`);
   }
@@ -109,6 +110,9 @@ export class HttpService {
   }
   gases_get() {
     return this.http.get<Gas[]>(`${this.HOST}/gases`);
+  }
+  gases_eliminar(id: number) {
+    return this.http.delete(`${this.HOST}/gases/${id}`);
   }
   tecnologias_get() {
     return this.http.get<Tecnologia[]>(`${this.HOST}/tecnologias`);
