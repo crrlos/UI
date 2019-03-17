@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Equipo, Cotizacion } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 import { Router } from '@angular/router';
+import { EditableColumn } from 'primeng/table';
 
 @Component({
   selector: 'app-presupuesto-tabla',
@@ -20,6 +21,8 @@ export class PresupuestoTablaComponent implements OnInit {
   @Input() puede_agregar: boolean;
   @Output() cotizacion_seleccionada = new EventEmitter<Cotizacion>();
   @Output() agregar = new EventEmitter<boolean>();
+  @Output() editar = new EventEmitter<Cotizacion>();
+
 
   ngOnInit() {
     this.cols = [
@@ -31,7 +34,7 @@ export class PresupuestoTablaComponent implements OnInit {
     this.selectedColumns = this.cols;
   }
   selectedCotizacion(data) {
-    console.log('un evento');
+    this.editar.emit(data);
   }
   onRowSelect(event) {
     this.router.navigate(['presupuesto', event.data.cotizacion_id]);

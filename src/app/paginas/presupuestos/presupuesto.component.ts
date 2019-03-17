@@ -22,7 +22,7 @@ export class PresupuestoComponent implements OnInit {
 
   voltajes;
 
-  ngOnInit() {}
+  ngOnInit() { }
   search(event) {
     this.clienteHttp.clientes(event.query).subscribe((clientes: any) => {
       this.results = clientes.clientes;
@@ -31,6 +31,12 @@ export class PresupuestoComponent implements OnInit {
   showDialogToAdd() {
     this.nuevaCotizacion = true;
     this.displayDialog = true;
+  }
+  showDialogToEdit(cotizacion: Cotizacion) {
+    this.nuevaCotizacion = false;
+    this.displayDialog = true;
+    this.cotizacion = cotizacion;
+
   }
   onRowSelect(event) {
     this.nuevaCotizacion = false;
@@ -41,15 +47,15 @@ export class PresupuestoComponent implements OnInit {
   save() {
 
     if (this.nuevaCotizacion) {
-      this.http.cotizacion_agregar(this.cotizacion).subscribe((res) => {
-        this.cotizacion.cotizacion_id = JSON.parse(JSON.stringify(res)).id;
+      this.http.cotizacion_agregar(this.cotizacion).subscribe((res: any) => {
+        this.cotizacion.cotizacion_id = res.id;
         this.cotizaciones_tabla.cotizaciones.push(this.cotizacion);
         this.cotizacion = {};
       });
     } else {
       this.equipoHttp.actualizar(this.cotizacion).subscribe(() => {
         // const i = this.equipos_tabla.equipos.findIndex(et => et.equipo_id === this.cotizacion.equipo_id);
-         // this.equipos_tabla.equipos[i] = this.cotizacion;
+        // this.equipos_tabla.equipos[i] = this.cotizacion;
       });
     }
     this.displayDialog = false;

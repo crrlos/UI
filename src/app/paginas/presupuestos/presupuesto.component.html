@@ -2,6 +2,7 @@
 <app-presupuesto-tabla
 #cotizaciones_tabla
 (agregar)="showDialogToAdd()"
+(editar)="showDialogToEdit($event)"
 [puede_agregar] = 'true'>
 </app-presupuesto-tabla>
 
@@ -21,7 +22,7 @@
         <label for="year">Descripción</label>
       </div>
       <div class="ui-g-8">
-        <textarea pInputTextarea [rows]="5" [cols]="30" [(ngModel)]="cotizacion.descripcion" pInputTextarea autoResize="autoResize"></textarea>
+        <textarea pInputTextarea [rows]="5" [cols]="30" [(ngModel)]="cotizacion.descripcion" pInputTextarea ></textarea>
       </div>
     </div>
   </div>

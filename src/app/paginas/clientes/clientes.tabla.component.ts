@@ -31,7 +31,6 @@ export class ClientesTablaComponent implements OnInit {
   onRowSelect(event) {
     this.cliente = JSON.parse(JSON.stringify(event.data));
     this.cliente_seleccionado.emit(this.cliente);
-    console.log('seleccionado');
   }
   loadLazy(event) {
     this.http.filtrar(event).subscribe(data => {
