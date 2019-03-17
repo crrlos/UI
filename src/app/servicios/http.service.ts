@@ -22,6 +22,11 @@ export class HttpService {
   cotizacion_agregar(data: any) {
     return this.http.post(`${HOST}/cotizaciones`, { id_cliente: data.cliente.cliente_id, descripcion: data.descripcion });
   }
+  cotizacion_actualizar(data: any) {
+    return this.http.put(`${HOST}/cotizaciones/${data.cotizacion_id}`, {
+      cotizacion_id: data.cotizacion_id, id_cliente: data.cliente.cliente_id, descripcion: data.descripcion
+    });
+  }
   cotizaciones(event?: any) {
     return this.http.get<CotizacionResponse>(`${HOST}/cotizaciones`, {
       params: event

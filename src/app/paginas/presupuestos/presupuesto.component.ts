@@ -53,7 +53,7 @@ export class PresupuestoComponent implements OnInit {
         this.cotizacion = {};
       });
     } else {
-      this.equipoHttp.actualizar(this.cotizacion).subscribe(() => {
+      this.http.cotizacion_actualizar(this.cotizacion).subscribe(() => {
         // const i = this.equipos_tabla.equipos.findIndex(et => et.equipo_id === this.cotizacion.equipo_id);
         // this.equipos_tabla.equipos[i] = this.cotizacion;
       });
