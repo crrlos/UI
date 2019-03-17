@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Cliente, Cotizacion } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
+import { EquipoHttpService } from 'src/app/servicios/http/equipo.service';
+import { ClienteHttpService } from 'src/app/servicios/http/cliente.service';
 
 @Component({
   selector: 'app-presupuesto',
@@ -8,7 +10,8 @@ import { HttpService } from 'src/app/servicios/http.service';
 })
 export class PresupuestoComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private equipoHttp: EquipoHttpService,
+    private clienteHttp: ClienteHttpService) { }
   cotizacion: Cotizacion = {};
   displayDialog = false;
   nuevaCotizacion = false;
@@ -21,7 +24,7 @@ export class PresupuestoComponent implements OnInit {
 
   ngOnInit() {}
   search(event) {
-    this.http.clientes(event.query).subscribe((clientes: any) => {
+    this.clienteHttp.clientes(event.query).subscribe((clientes: any) => {
       this.results = clientes.clientes;
     });
   }
@@ -44,7 +47,7 @@ export class PresupuestoComponent implements OnInit {
         this.cotizacion = {};
       });
     } else {
-      this.http.equipos_actualizar(this.cotizacion).subscribe(() => {
+      this.equipoHttp.actualizar(this.cotizacion).subscribe(() => {
         // const i = this.equipos_tabla.equipos.findIndex(et => et.equipo_id === this.cotizacion.equipo_id);
          // this.equipos_tabla.equipos[i] = this.cotizacion;
       });

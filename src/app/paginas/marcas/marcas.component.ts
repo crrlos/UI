@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Marca } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
+import { MarcaHttpService } from 'src/app/servicios/http/marcas.service';
 
 @Component({
   selector: 'app-marcas',
@@ -8,7 +9,7 @@ import { HttpService } from 'src/app/servicios/http.service';
 })
 export class MarcasComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: MarcaHttpService) { }
   marca: Marca;
   displayDialog = false;
   nuevomarca = false;
@@ -32,13 +33,13 @@ export class MarcasComponent implements OnInit {
   save() {
 
     if (this.nuevomarca) {
-      this.http.marcas_guardar(this.marca).subscribe((res) => {
+      this.http.guardar(this.marca).subscribe((res) => {
         this.marca.marca_id = JSON.parse(JSON.stringify(res)).id;
         this.marcas_tabla.marcas.push(this.marca);
         swal('Correcto!', 'Registro agregado!', 'success');
       });
     } else {
-      this.http.marcas_actualizar(this.marca).subscribe(() => {
+      this.http.actualizar(this.marca).subscribe(() => {
         const i = this.marcas_tabla.marcas.findIndex(et => et.marca_id === this.marca.marca_id);
         this.marcas_tabla.marcas[i] = this.marca;
         swal('Correcto!', 'Registro actualizado!', 'success');
@@ -48,7 +49,7 @@ export class MarcasComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.http.marcas_eliminar(id).subscribe(() => {
+    this.http.eliminar(id).subscribe(() => {
       this.marcas_tabla.marcas.splice(this.marcas_tabla.marcas.indexOf(this.marcaSeleccionada), 1);
       swal('Correcto!', 'Registro eliminado!', 'success');
     }, () => {

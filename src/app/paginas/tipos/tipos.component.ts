@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TipoUnidad as Tipo } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 import swal from 'sweetalert';
+import { TiposHttpService } from 'src/app/servicios/http/tipos.service';
 
 @Component({
   selector: 'app-tipos',
@@ -9,7 +10,7 @@ import swal from 'sweetalert';
 })
 export class TiposComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: TiposHttpService) { }
   tipo: Tipo;
   displayDialog = false;
   nuevotipo = false;
@@ -33,13 +34,13 @@ export class TiposComponent implements OnInit {
   save() {
 
     if (this.nuevotipo) {
-      this.http.tipos_guardar(this.tipo).subscribe((res) => {
+      this.http.guardar(this.tipo).subscribe((res) => {
         this.tipo.tipo_id = JSON.parse(JSON.stringify(res)).id;
         this.tipos_tabla.tipos.push(this.tipo);
         swal('Correcto!', 'Registro agregado!', 'success');
       });
     } else {
-      this.http.tipos_actualizar(this.tipo).subscribe(() => {
+      this.http.actualizar(this.tipo).subscribe(() => {
         const i = this.tipos_tabla.tipos.findIndex(et => et.tipo_id === this.tipo.tipo_id);
         this.tipos_tabla.tipos[i] = this.tipo;
         swal('Correcto!', 'Registro actualizado!', 'success');
@@ -49,11 +50,11 @@ export class TiposComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.http.tipos_eliminar(id).subscribe(() => {
+    this.http.eliminar(id).subscribe(() => {
       this.tipos_tabla.tipos.splice(this.tipos_tabla.tipos.indexOf(this.tipoSeleccionado), 1);
       swal('Correcto!', 'Registro eliminado!', 'success');
     }, () => {
-      swal ( 'Oops' ,  'Este registro no se pudo eliminar' ,  'error' );
+      swal('Oops', 'Este registro no se pudo eliminar', 'error');
 
     });
     this.displayDialog = false;

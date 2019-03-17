@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TipoUnidad as Tipo } from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
+import { TiposHttpService } from 'src/app/servicios/http/tipos.service';
 
 @Component({
   selector: 'app-tipos-tabla',
@@ -8,7 +8,7 @@ import { HttpService } from 'src/app/servicios/http.service';
 })
 export class TiposTablaComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: TiposHttpService) { }
 
   tipos: Tipo[] = [];
   tipo: Tipo;
@@ -25,7 +25,7 @@ export class TiposTablaComponent implements OnInit {
       { field: 'tipo_nombre', header: 'tipo' }
     ];
     this.selectedColumns = this.cols;
-    this.http.tipos_filtro(event).subscribe(data => {
+    this.http.filtrar(event).subscribe(data => {
       this.tipos = data.tipos;
       this.totalRecords = data.totalRecords;
       console.log(this.tipos);

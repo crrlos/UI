@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Gas} from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
+import { GasHttpService } from 'src/app/servicios/http/gases.service';
 
 @Component({
   selector: 'app-gases',
@@ -8,7 +8,7 @@ import { HttpService } from 'src/app/servicios/http.service';
 })
 export class GasComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: GasHttpService) { }
   gas: Gas;
   displayDialog = false;
   nuevogas = false;
@@ -31,13 +31,13 @@ export class GasComponent implements OnInit {
   save() {
 
     if (this.nuevogas) {
-      this.http.gases_guardar(this.gas).subscribe((res) => {
+      this.http.guardar(this.gas).subscribe((res) => {
         this.gas.gas_id = JSON.parse(JSON.stringify(res)).id;
         this.gas_tabla.gases.push(this.gas);
         swal('Correcto!', 'Registro agregado!', 'success');
       });
     } else {
-      this.http.gases_actualizar(this.gas).subscribe(() => {
+      this.http.actualizar(this.gas).subscribe(() => {
         const i = this.gas_tabla.gases.findIndex(et => et.gas_id === this.gas.gas_id);
         this.gas_tabla.gases[i] = this.gas;
         swal('Correcto!', 'Registro actualizado!', 'success');
@@ -47,7 +47,7 @@ export class GasComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.http.gases_eliminar(id).subscribe(() => {
+    this.http.eliminar(id).subscribe(() => {
       this.gas_tabla.gases.splice(this.gas_tabla.gases.indexOf(this.gasSeleccionado), 1);
       swal('Correcto!', 'Registro eliminado!', 'success');
     }, () => {

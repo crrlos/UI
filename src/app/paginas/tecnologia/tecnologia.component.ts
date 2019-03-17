@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Tecnologia} from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
+import { TecnologiaHttpService } from 'src/app/servicios/http/tecnologias.service';
 
 @Component({
   selector: 'app-tecnologias',
@@ -8,7 +8,7 @@ import { HttpService } from 'src/app/servicios/http.service';
 })
 export class TecnologiaComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: TecnologiaHttpService) { }
   tecnologia: Tecnologia;
   displayDialog = false;
   nuevotecnologia = false;
@@ -31,13 +31,13 @@ export class TecnologiaComponent implements OnInit {
   save() {
 
     if (this.nuevotecnologia) {
-      this.http.tecnologias_guardar(this.tecnologia).subscribe((res) => {
+      this.http.guardar(this.tecnologia).subscribe((res) => {
         this.tecnologia.tecnologia_id = JSON.parse(JSON.stringify(res)).id;
         this.tecnologias_tabla.tecnologias.push(this.tecnologia);
         swal('Correcto!', 'Registro agregado!', 'success');
       });
     } else {
-      this.http.tecnologias_actualizar(this.tecnologia).subscribe(() => {
+      this.http.actualizar(this.tecnologia).subscribe(() => {
         const i = this.tecnologias_tabla.tecnologias.findIndex(et => et.tecnologia_id === this.tecnologia.tecnologia_id);
         this.tecnologias_tabla.tecnologias[i] = this.tecnologia;
         swal('Correcto!', 'Registro actualizado!', 'success');
@@ -47,7 +47,7 @@ export class TecnologiaComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.http.tecnologias_eliminar(id).subscribe(() => {
+    this.http.eliminar(id).subscribe(() => {
       this.tecnologias_tabla.tecnologias.splice(this.tecnologias_tabla.tecnologias.indexOf(this.tecnologiaSeleccionado), 1);
       swal('Correcto!', 'Registro eliminado!', 'success');
     }, () => {

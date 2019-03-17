@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Equipo } from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
+import { EquipoHttpService } from 'src/app/servicios/http/equipo.service';
 
 @Component({
   selector: 'app-equipos-tabla',
@@ -8,7 +8,7 @@ import { HttpService } from 'src/app/servicios/http.service';
 })
 export class EquiposTablaComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: EquipoHttpService) { }
 
   equipos: Equipo[] = [];
   equipo: Equipo;

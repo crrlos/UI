@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Marca } from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
+import { MarcaHttpService } from 'src/app/servicios/http/marcas.service';
 
 @Component({
   selector: 'app-marcas-tabla',
@@ -8,7 +8,7 @@ import { HttpService } from 'src/app/servicios/http.service';
 })
 export class MarcasTablaComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: MarcaHttpService) { }
 
   marcas: Marca[] = [];
   marca: Marca;
@@ -25,7 +25,7 @@ export class MarcasTablaComponent implements OnInit {
       { field: 'marca_nombre', header: 'marca' }
     ];
     this.selectedColumns = this.cols;
-    this.http.marcas_filtro(event).subscribe(data => {
+    this.http.filtrar(event).subscribe(data => {
       this.marcas = data.marcas;
       this.totalRecords = data.totalRecords;
       console.log(this.marcas);

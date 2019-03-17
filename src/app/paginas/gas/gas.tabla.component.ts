@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Gas } from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
+import { GasHttpService } from 'src/app/servicios/http/gases.service';
 
 @Component({
   selector: 'app-gas-tabla',
@@ -8,7 +8,7 @@ import { HttpService } from 'src/app/servicios/http.service';
 })
 export class GasTablaComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: GasHttpService) { }
 
   gases: Gas[] = [];
   gas: Gas;
@@ -25,7 +25,7 @@ export class GasTablaComponent implements OnInit {
       { field: 'gas_nombre', header: 'gas' }
     ];
     this.selectedColumns = this.cols;
-    this.http.gases_filtro(event).subscribe(data => {
+    this.http.filtrar(event).subscribe(data => {
       this.gases = data.gases;
       this.totalRecords = data.totalRecords;
     });

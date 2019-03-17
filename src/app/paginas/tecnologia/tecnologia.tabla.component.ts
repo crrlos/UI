@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Tecnologia } from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
+import { TecnologiaHttpService } from 'src/app/servicios/http/tecnologias.service';
 
 @Component({
   selector: 'app-tecnologias-tabla',
@@ -8,7 +8,7 @@ import { HttpService } from 'src/app/servicios/http.service';
 })
 export class TecnologiaTablaComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: TecnologiaHttpService) { }
 
   tecnologias: Tecnologia[] = [];
   tecnologia: Tecnologia;
@@ -25,7 +25,7 @@ export class TecnologiaTablaComponent implements OnInit {
       { field: 'tecnologia_nombre', header: 'tecnologia' }
     ];
     this.selectedColumns = this.cols;
-    this.http.tecnologias_filtro(event).subscribe(data => {
+    this.http.filtrar(event).subscribe(data => {
       this.tecnologias = data.tecnologias;
       this.totalRecords = data.totalRecords;
       console.log(this.tecnologias);

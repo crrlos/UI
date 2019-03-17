@@ -24,6 +24,7 @@ import { TecnologiaComponent } from './tecnologia/tecnologia.component';
 import { GasComponent } from './gas/gas.component';
 import { TecnologiaTablaComponent } from './tecnologia/tecnologia.tabla.component';
 import { GasTablaComponent } from './gas/gas.tabla.component';
+import { ServiciosModule } from '../servicios/servicios.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { GasTablaComponent } from './gas/gas.tabla.component';
     FormsModule,
     CommonModule,
     PrimengModule,
-    RouterModule
+    RouterModule,
+    ServiciosModule
   ],
   exports: [
     SharedModule

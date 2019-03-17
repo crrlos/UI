@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Cliente } from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
 import { NgForm } from '@angular/forms';
+import { ClienteHttpService } from 'src/app/servicios/http/cliente.service';
 
 @Component({
   selector: 'app-clientes',
@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class ClientesComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: ClienteHttpService) { }
   cliente: Cliente;
   displayDialog = false;
   nuevoCliente = false;
@@ -35,12 +35,12 @@ export class ClientesComponent implements OnInit {
     }
 
     if (this.nuevoCliente) {
-      this.http.clientes_guardar(this.cliente).subscribe((res) => {
+      this.http.guardar(this.cliente).subscribe((res) => {
         this.cliente.cliente_id = JSON.parse(JSON.stringify(res)).id;
         this.clientes_tabla.clientes.push(this.cliente);
       });
     } else {
-      this.http.clientes_actualizar(this.cliente).subscribe(() => {
+      this.http.actualizar(this.cliente).subscribe(() => {
         const i = this.clientes_tabla.clientes.findIndex(et => et.cliente_id === this.cliente.cliente_id);
         this.clientes_tabla.clientes[i] = this.cliente;
       });

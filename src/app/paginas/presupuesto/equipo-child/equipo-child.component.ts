@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Area, Equipo, Material, EquipoArea, MaterialEquipoArea } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 import { ConfirmationService } from 'primeng/api';
+import { EquipoAreaHttpService } from 'src/app/servicios/http/equipo-area.service';
+import { MaterialEquipoAreaHttpService } from 'src/app/servicios/http/material-equipo-area.service';
 
 @Component({
   selector: 'app-equipo-child',
@@ -24,7 +26,9 @@ export class EquipoChildComponent implements OnInit {
 
   timeout_id: any;
 
-  constructor(private http: HttpService, private confirmationService: ConfirmationService) { }
+  constructor(private http: HttpService, private confirmationService: ConfirmationService,
+    private equipoAreaHttp: EquipoAreaHttpService,
+    private materialEquipoAreaHttp: MaterialEquipoAreaHttpService) { }
   ngOnInit() {
     this.areaSeleccionada = this.area;
   }
@@ -43,7 +47,7 @@ export class EquipoChildComponent implements OnInit {
       this.timeout_id = null;
     }
     this.timeout_id = setTimeout(() => {
-      this.http.equipos_area_actualizar(equipo).subscribe(() => {
+      this.equipoAreaHttp.actualizar(equipo).subscribe(() => {
         this.actualizarTotalesEquipo(equipo, true, true);
         this.actualizarTotal();
       });
@@ -51,7 +55,7 @@ export class EquipoChildComponent implements OnInit {
     }, 1000);
   }
   eliminarMaterial(equipo: EquipoArea, material: MaterialEquipoArea) {
-    this.http.material_equipo_area_eliminar(material).subscribe(() => {
+    this.materialEquipoAreaHttp.eliminar(material).subscribe(() => {
       equipo.materiales.splice(equipo.materiales.indexOf(material), 1);
       this.actualizarTotal();
     });
@@ -73,7 +77,7 @@ export class EquipoChildComponent implements OnInit {
 
   }
   actualizarTotalAsyncMaterial(material: MaterialEquipoArea, equipoArea: EquipoArea) {
-    this.http.material_equipo_area_actualizar(material).subscribe(() => {
+    this.materialEquipoAreaHttp.actualizar(material).subscribe(() => {
       this.actualizarTotalesEquipo(equipoArea, true, false);
       this.actualizarTotal();
       this.actualizarTotalPersonalizado(equipoArea);
@@ -133,7 +137,7 @@ export class EquipoChildComponent implements OnInit {
     this.actualizarTotal();
   }
   duplicarEquipo(equipo: EquipoArea) {
-    this.http.equipo_duplicar(equipo).subscribe((done: EquipoArea) => {
+    this.equipoAreaHttp.duplicar(equipo).subscribe((done: EquipoArea) => {
       this.area.equipos.push(done);
       this.actualizarTotalesEquipo(done, true, true);
       this.actualizarTotal();
@@ -156,13 +160,13 @@ export class EquipoChildComponent implements OnInit {
     });
   }
   eliminarEquipo(equipo: EquipoArea) {
-    this.http.equipos_area_eliminar(equipo).subscribe(() => {
+    this.equipoAreaHttp.eliminar(equipo).subscribe(() => {
       this.area.equipos.splice(this.area.equipos.indexOf(equipo), 1);
       // this.actualizarTotalesEquipo(equipo, true, true);
       this.actualizarTotal();
     });
   }
   actualizarTotalPersonalizado(equipoArea: EquipoArea) {
-    this.http.equipos_area_actualizar(equipoArea).subscribe();
+    this.equipoAreaHttp.actualizar(equipoArea).subscribe();
   }
 }

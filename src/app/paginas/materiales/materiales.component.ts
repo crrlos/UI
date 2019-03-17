@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TipoUnidad, Marca, Material, UnidadMedida } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { TiposHttpService } from 'src/app/servicios/http/tipos.service';
+import { MarcaHttpService } from 'src/app/servicios/http/marcas.service';
+import { MaterialHttpService } from 'src/app/servicios/http/material.service';
 
 interface MaterialesTabla {
   materiales: Material[];
@@ -13,7 +16,10 @@ interface MaterialesTabla {
 })
 export class MaterialesComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService,
+    private tipoHttp: TiposHttpService,
+    private marcaHttp: MarcaHttpService,
+    private materialHttp: MaterialHttpService) { }
 
   material: Material;
   materialSeleccionado: Material;
@@ -33,10 +39,10 @@ export class MaterialesComponent implements OnInit {
   @ViewChild('materiales_tabla') materiales_tabla: MaterialesTabla;
 
   ngOnInit() {
-    this.http.tipos_filtro(event).subscribe(data => {
+    this.tipoHttp.filtrar(event).subscribe(data => {
       this.tipos = data.tipos;
     });
-    this.http.marcas_filtro().subscribe(marcas => {
+    this.marcaHttp.filtrar().subscribe(marcas => {
       this.marcas = marcas.marcas;
     });
     this.http.unidades_medida().subscribe(unidad_medida => {
@@ -69,18 +75,18 @@ export class MaterialesComponent implements OnInit {
   }
   save(f: FormGroup) {
     if (f.invalid) {
-        this.errores =  true;
-        return;
+      this.errores = true;
+      return;
     }
 
     if (this.nuevoMaterial) {
-      this.http.materiales_agregar(this.material).subscribe((res: any) => {
+      this.materialHttp.agregar(this.material).subscribe((res: any) => {
         this.material.material_id = res.id;
         // this.materiales_tabla.materiales.push(JSON.parse(JSON.stringify(this.material)));
         this.materiales_tabla.materiales.push(this.material);
       });
     } else {
-      this.http.materiales_actualizar(this.material).subscribe(() =>
+      this.materialHttp.actualizar(this.material).subscribe(() =>
         this.materiales_tabla
           .materiales[this.materiales_tabla.materiales
             .findIndex(m => m.material_id === this.material.material_id)] = this.material);

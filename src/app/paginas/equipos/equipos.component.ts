@@ -2,6 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Equipo, TipoUnidad, Marca, Tecnologia, Gas } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 import { FormGroup } from '@angular/forms';
+import { TiposHttpService } from 'src/app/servicios/http/tipos.service';
+import { MarcaHttpService } from 'src/app/servicios/http/marcas.service';
+import { GasHttpService } from 'src/app/servicios/http/gases.service';
+import { TecnologiaHttpService } from 'src/app/servicios/http/tecnologias.service';
+import { EquipoHttpService } from 'src/app/servicios/http/equipo.service';
 
 @Component({
   selector: 'app-equipos',
@@ -9,7 +14,11 @@ import { FormGroup } from '@angular/forms';
 })
 export class EquiposComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private tipoHttp: TiposHttpService,
+    private marcaHttp: MarcaHttpService,
+    private gasHttp: GasHttpService,
+    private tecnologiaHttp: TecnologiaHttpService,
+    private equipoHttp: EquipoHttpService) { }
   equipo: Equipo;
   tipos: TipoUnidad[] = [];
   marcas: Marca[] = [];
@@ -26,18 +35,18 @@ export class EquiposComponent implements OnInit {
   voltajes;
 
   ngOnInit() {
-    this.http.tipos_filtro(event).subscribe(data => {
+    this.tipoHttp.filtrar(event).subscribe(data => {
       this.tipos = data.tipos;
     });
-    this.http.marcas_filtro().subscribe(marcas => {
+    this.marcaHttp.filtrar().subscribe(marcas => {
       this.marcas = marcas.marcas;
     }
     );
-    this.http.gases_filtro().subscribe(gases => {
+    this.gasHttp.filtrar().subscribe(gases => {
       this.gases = gases.gases;
     }
     );
-    this.http.tecnologias_filtro().subscribe(tecnologias => {
+    this.tecnologiaHttp.filtrar().subscribe(tecnologias => {
       this.tecnologias = tecnologias.tecnologias;
     }
     );
@@ -66,12 +75,12 @@ export class EquiposComponent implements OnInit {
     }
 
     if (this.nuevoEquipo) {
-      this.http.equipos_agregar(this.equipo).subscribe((res) => {
+      this.equipoHttp.agregar(this.equipo).subscribe((res) => {
         this.equipo.equipo_id = JSON.parse(JSON.stringify(res)).id;
         this.equipos_tabla.equipos.push(this.equipo);
       });
     } else {
-      this.http.equipos_actualizar(this.equipo).subscribe(() => {
+      this.equipoHttp.actualizar(this.equipo).subscribe(() => {
         const i = this.equipos_tabla.equipos.findIndex(et => et.equipo_id === this.equipo.equipo_id);
         this.equipos_tabla.equipos[i] = this.equipo;
       });

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Material } from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
+import { MaterialHttpService } from 'src/app/servicios/http/material.service';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { HttpService } from 'src/app/servicios/http.service';
 })
 export class MaterialesTablaComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: MaterialHttpService) { }
   materiales: Material[] = [];
   material: Material;
   cols: any[];
