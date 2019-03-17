@@ -29,6 +29,7 @@ export class PresupuestoComponent implements OnInit {
     });
   }
   showDialogToAdd() {
+    this.cotizacion = {};
     this.nuevaCotizacion = true;
     this.displayDialog = true;
   }
