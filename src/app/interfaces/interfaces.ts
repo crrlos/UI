@@ -132,3 +132,8 @@ export interface Cotizacion {
   cliente?: Cliente;
   fecha?;
 }
+
+export interface UnidadResponse {
+  unidades: UnidadMedida[];
+  totalRecords;
+}

@@ -12,6 +12,7 @@ import { MarcasComponent } from './paginas/marcas/marcas.component';
 import { TiposComponent } from './paginas/tipos/tipos.component';
 import { TecnologiaComponent } from './paginas/tecnologia/tecnologia.component';
 import { GasComponent } from './paginas/gas/gas.component';
+import { UnidadComponent } from './paginas/unidades/unidades.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'materiales', component: MaterialesComponent, data: { titulo: 'Materiales' } },
     { path: 'clientes', component: ClientesComponent, data: { titulo: 'Clientes' } },
     { path: 'marcas', component: MarcasComponent, data: { titulo: 'Marcas' } },
+    { path: 'unidades', component: UnidadComponent, data: { titulo: 'Unidades' } },
     { path: 'tipos', component: TiposComponent, data: { titulo: 'Tipos' } },
     { path: 'tecnologias', component: TecnologiaComponent, data: { titulo: 'Tipos' } },
     { path: 'gases', component: GasComponent, data: { titulo: 'Gases' } },

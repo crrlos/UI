@@ -1,0 +1,26 @@
+
+<app-unidades-tabla
+#unidades_tabla (unidad_seleccionada)="onRowSelect($event)"
+(agregar)="showDialogToAdd()"
+[puede_agregar] = 'true'>
+</app-unidades-tabla>
+
+<p-dialog header="Unidad" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+  <div class="ui-g ui-fluid" *ngIf="unidad">
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Unidad</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="year" [(ngModel)]="unidad.nombre" />
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa fa-close" (click)="delete(unidad.id)" label="Eliminar"></button>
+      <button type="button" pButton icon="fa fa-check" (click)="save()" label="Guardar"></button>
+    </div>
+  </p-footer>
+</p-dialog>
