@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { TiposHttpService } from 'src/app/servicios/http/tipos.service';
 import { MarcaHttpService } from 'src/app/servicios/http/marcas.service';
 import { MaterialHttpService } from 'src/app/servicios/http/material.service';
+import { UnidadHttpService } from 'src/app/servicios/http/unidad.service';
 
 interface MaterialesTabla {
   materiales: Material[];
@@ -19,7 +20,8 @@ export class MaterialesComponent implements OnInit {
   constructor(private http: HttpService,
     private tipoHttp: TiposHttpService,
     private marcaHttp: MarcaHttpService,
-    private materialHttp: MaterialHttpService) { }
+    private materialHttp: MaterialHttpService,
+    private unidadesHttp: UnidadHttpService) { }
 
   material: Material;
   materialSeleccionado: Material;
@@ -45,8 +47,8 @@ export class MaterialesComponent implements OnInit {
     this.marcaHttp.filtrar().subscribe(marcas => {
       this.marcas = marcas.marcas;
     });
-    this.http.unidades_medida().subscribe(unidad_medida => {
-      this.unidades = unidad_medida;
+    this.unidadesHttp.filtrar().subscribe(unidad_medida => {
+      this.unidades = unidad_medida.unidades;
     }
     );
     this.cols = [
