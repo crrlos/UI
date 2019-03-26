@@ -83,9 +83,9 @@ export interface Tecnologia {
   tecnologia_nombre?;
 }
 export interface UnidadMedida {
-  id?;
-  nombre?;
-  abreviatura?;
+  unidad_medida_id?: number;
+  unidad_nombre?: string;
+  unidad_abreviatura?: string;
 }
 export interface EquiposResponse {
   equipos: Equipo[];

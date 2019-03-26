@@ -22,7 +22,8 @@ export class UnidadesTablaComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'marca_nombre', header: 'marca' }
+      { field: 'unidad_nombre', header: 'unidad' },
+      { field: 'unidad_abreviatura', header: 'abreviatura' }
     ];
     this.selectedColumns = this.cols;
     this.http.filtrar(event).subscribe(data => {
@@ -34,7 +35,7 @@ export class UnidadesTablaComponent implements OnInit {
   onRowSelect(event) {
     this.unidad = JSON.parse(JSON.stringify(event.data));
     this.unidad_seleccionada.emit(this.unidad);
-    console.log('seleccionado');
+    console.log(event);
   }
 
 }

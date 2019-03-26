@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UnidadMedida } from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
-import { MarcaHttpService } from 'src/app/servicios/http/marcas.service';
+import { UnidadHttpService } from 'src/app/servicios/http/unidad.service';
 
 @Component({
   selector: 'app-unidades',
@@ -9,7 +8,7 @@ import { MarcaHttpService } from 'src/app/servicios/http/marcas.service';
 })
 export class UnidadComponent implements OnInit {
 
-  constructor(private http: MarcaHttpService) { }
+  constructor(private http: UnidadHttpService) { }
   unidad: UnidadMedida;
   displayDialog = false;
   nuevaUnidad = false;
@@ -33,13 +32,13 @@ export class UnidadComponent implements OnInit {
 
     if (this.nuevaUnidad) {
       this.http.guardar(this.unidad).subscribe((res: any) => {
-        this.unidad.id = res.id;
+        this.unidad.unidad_medida_id = res.id;
         this.unidades_tabla.unidades.push(this.unidad);
         swal('Correcto!', 'Registro agregado!', 'success');
       });
     } else {
       this.http.actualizar(this.unidad).subscribe(() => {
-        const i = this.unidades_tabla.unidades.findIndex(et => et.id === this.unidad.id);
+        const i = this.unidades_tabla.unidades.findIndex(et => et.unidad_medida_id === this.unidad.unidad_medida_id);
         this.unidades_tabla.unidades[i] = this.unidad;
         swal('Correcto!', 'Registro actualizado!', 'success');
       });

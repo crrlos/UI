@@ -21,9 +21,10 @@
   </ng-template>
   <ng-template pTemplate="body" let-rowData>
     <tr [pSelectableRow]="rowData">
-      <td>{{rowData.marca_nombre}}</td>
-
+      <td>{{rowData?.unidad_nombre}}</td>
+      <td>{{rowData?.unidad_abreviatura}}</td>
     </tr>
+
   </ng-template>
   <ng-template pTemplate="summary">
       <div style="text-align:left">
