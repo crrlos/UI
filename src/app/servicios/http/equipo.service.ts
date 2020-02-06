@@ -26,6 +26,7 @@ export class EquipoHttpService {
     equipo.id_tipo = equipo.tipo.tipo_id;
     equipo.id_tecnologia = equipo.tecnologia.tecnologia_id;
     equipo.id_gas = equipo.gas.gas_id;
+    equipo.voltaje = equipo.voltaje.name;
 
     return this.http.post(`${HOST}/equipos`, equipo);
   }

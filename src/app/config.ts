@@ -1,1 +1,1 @@
- export const HOST: String = 'http://crrlos8-001-site1.htempurl.com/api';
+ export const HOST: String = 'http://ablublu-001-site1.itempurl.com/api';
