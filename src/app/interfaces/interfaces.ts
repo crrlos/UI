@@ -66,8 +66,8 @@ export interface Voltaje {
   code;
 }
 export interface TipoUnidad {
-  tipo_id?;
-  tipo_nombre?;
+  id? :number;
+  nombre? :string;
 }
 
 export interface Marca {
@@ -75,12 +75,12 @@ export interface Marca {
   marca_nombre?;
 }
 export interface Gas {
-  gas_id?;
-  gas_nombre?;
+  id?:number;
+  nombre?: string;
 }
 export interface Tecnologia {
-  tecnologia_id?;
-  tecnologia_nombre?;
+  id?:number;
+  nombre?:string;
 }
 export interface UnidadMedida {
   id?: number;

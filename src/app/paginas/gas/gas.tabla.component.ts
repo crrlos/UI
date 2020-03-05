@@ -22,7 +22,7 @@ export class GasTablaComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'gas_nombre', header: 'gas' }
+      { field: 'nombre', header: 'Gas' }
     ];
     this.selectedColumns = this.cols;
     this.http.filtrar(event).subscribe(data => {
@@ -33,7 +33,6 @@ export class GasTablaComponent implements OnInit {
   onRowSelect(event) {
     this.gas = JSON.parse(JSON.stringify(event.data));
     this.gas_seleccionado.emit(this.gas);
-    console.log('seleccionado');
   }
 
 }

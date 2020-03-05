@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TipoUnidad as Tipo } from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
 import swal from 'sweetalert';
 import { TiposHttpService } from 'src/app/servicios/http/tipos.service';
-
 @Component({
   selector: 'app-tipos',
   templateUrl: './tipos.component.html'
@@ -35,13 +33,13 @@ export class TiposComponent implements OnInit {
 
     if (this.nuevotipo) {
       this.http.guardar(this.tipo).subscribe((res) => {
-        this.tipo.tipo_id = JSON.parse(JSON.stringify(res)).id;
+        this.tipo.id = JSON.parse(JSON.stringify(res)).id;
         this.tipos_tabla.tipos.push(this.tipo);
         swal('Correcto!', 'Registro agregado!', 'success');
       });
     } else {
       this.http.actualizar(this.tipo).subscribe(() => {
-        const i = this.tipos_tabla.tipos.findIndex(et => et.tipo_id === this.tipo.tipo_id);
+        const i = this.tipos_tabla.tipos.findIndex(et => et.id === this.tipo.id);
         this.tipos_tabla.tipos[i] = this.tipo;
         swal('Correcto!', 'Registro actualizado!', 'success');
       });

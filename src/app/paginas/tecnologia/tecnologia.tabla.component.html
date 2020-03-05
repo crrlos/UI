@@ -1,5 +1,5 @@
 
-<p-table [globalFilterFields]="['tecnologia_nombre']" #tt [columns]="selectedColumns" [value]="tecnologias"
+<p-table [globalFilterFields]="['nombre']" #tt [columns]="selectedColumns" [value]="tecnologias"
   selectionMode="single"  (onRowSelect)="onRowSelect($event)" [paginator]="true"
   [rows]="7" [rowsPerPageOptions]="[10,20,30]"  [totalRecords]="totalRecords">
   <ng-template pTemplate="caption">
@@ -22,7 +22,7 @@
   </ng-template>
   <ng-template pTemplate="body" let-rowData>
     <tr [pSelectableRow]="rowData">
-      <td>{{rowData.tecnologia_nombre}}</td>
+      <td>{{rowData.nombre}}</td>
 
     </tr>
   </ng-template>

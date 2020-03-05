@@ -22,19 +22,17 @@ export class TiposTablaComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'tipo_nombre', header: 'tipo' }
+      { field: 'nombre', header: 'Tipo' }
     ];
     this.selectedColumns = this.cols;
     this.http.filtrar(event).subscribe(data => {
       this.tipos = data.tipos;
       this.totalRecords = data.totalRecords;
-      console.log(this.tipos);
     });
   }
   onRowSelect(event) {
     this.tipo = JSON.parse(JSON.stringify(event.data));
     this.tipo_seleccionado.emit(this.tipo);
-    console.log('seleccionado');
   }
 
 }

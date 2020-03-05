@@ -13,13 +13,13 @@
         <label for="year">Gas</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="gas.gas_nombre" />
+        <input pInputText id="year" [(ngModel)]="gas.nombre" />
       </div>
     </div>
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa fa-close" (click)="delete(gas.gas_id)" label="Eliminar"></button>
+      <button type="button" pButton icon="fa fa-close" (click)="delete(gas.id)" label="Eliminar"></button>
       <button type="button" pButton icon="fa fa-check" (click)="save()" label="Guardar"></button>
     </div>
   </p-footer>

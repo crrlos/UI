@@ -22,13 +22,12 @@ export class TecnologiaTablaComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'tecnologia_nombre', header: 'tecnologia' }
+      { field: 'nombre', header: 'Tecnologia' }
     ];
     this.selectedColumns = this.cols;
     this.http.filtrar(event).subscribe(data => {
       this.tecnologias = data.tecnologias;
       this.totalRecords = data.totalRecords;
-      console.log(this.tecnologias);
     });
   }
   onRowSelect(event) {

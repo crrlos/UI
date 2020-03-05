@@ -13,13 +13,13 @@
         <label for="year">Tipo</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="tipo.tipo_nombre" />
+        <input pInputText id="year" [(ngModel)]="tipo.nombre" />
       </div>
     </div>
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa fa-close" (click)="delete(tipo.tipo_id)" label="Eliminar"></button>
+      <button type="button" pButton icon="fa fa-close" (click)="delete(tipo.id)" label="Eliminar"></button>
       <button type="button" pButton icon="fa fa-check" (click)="save()" label="Guardar"></button>
     </div>
   </p-footer>
