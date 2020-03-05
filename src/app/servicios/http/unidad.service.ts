@@ -13,7 +13,7 @@ export class UnidadHttpService {
     return this.http.post(`${HOST}/unidadesmedida`, unidad);
   }
   actualizar(unidad: UnidadMedida) {
-    return this.http.put(`${HOST}/unidadesmedida/${unidad.unidad_medida_id}`, unidad);
+    return this.http.put(`${HOST}/unidadesmedida/${unidad.id}`, unidad);
   }
   eliminar(id: number) {
     return this.http.delete(`${HOST}/unidadesmedida/${id}`);

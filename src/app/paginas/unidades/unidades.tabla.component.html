@@ -1,4 +1,4 @@
-<p-table [globalFilterFields]="['unidad_nombre']" #tt [columns]="selectedColumns" [value]="unidades"
+<p-table [globalFilterFields]="['nombre']" #tt [columns]="selectedColumns" [value]="unidades"
   selectionMode="single"  (onRowSelect)="onRowSelect($event)" [paginator]="true"
   [rows]="7" [rowsPerPageOptions]="[10,20,30]" [totalRecords]="totalRecords">
   <ng-template pTemplate="caption">
@@ -21,8 +21,8 @@
   </ng-template>
   <ng-template pTemplate="body" let-rowData>
     <tr [pSelectableRow]="rowData">
-      <td>{{rowData?.unidad_nombre}}</td>
-      <td>{{rowData?.unidad_abreviatura}}</td>
+      <td>{{rowData?.nombre}}</td>
+      <td>{{rowData?.abreviatura}}</td>
     </tr>
 
   </ng-template>

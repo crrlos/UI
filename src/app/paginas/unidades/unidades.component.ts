@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UnidadMedida } from 'src/app/interfaces/interfaces';
 import { UnidadHttpService } from 'src/app/servicios/http/unidad.service';
-
+declare var swal;
 @Component({
   selector: 'app-unidades',
   templateUrl: './unidades.component.html'
@@ -32,13 +32,13 @@ export class UnidadComponent implements OnInit {
 
     if (this.nuevaUnidad) {
       this.http.guardar(this.unidad).subscribe((res: any) => {
-        this.unidad.unidad_medida_id = res.id;
+        this.unidad.id = res.id;
         this.unidades_tabla.unidades.push(this.unidad);
         swal('Correcto!', 'Registro agregado!', 'success');
       });
     } else {
       this.http.actualizar(this.unidad).subscribe(() => {
-        const i = this.unidades_tabla.unidades.findIndex(et => et.unidad_medida_id === this.unidad.unidad_medida_id);
+        const i = this.unidades_tabla.unidades.findIndex(et => et.id === this.unidad.id);
         this.unidades_tabla.unidades[i] = this.unidad;
         swal('Correcto!', 'Registro actualizado!', 'success');
       });

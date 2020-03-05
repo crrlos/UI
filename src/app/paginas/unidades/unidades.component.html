@@ -13,7 +13,7 @@
         <label for="year">Unidad</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="unidad.unidad_nombre" />
+        <input pInputText id="year" [(ngModel)]="unidad.nombre" />
       </div>
     </div>
     <div class="ui-g-12">
@@ -21,13 +21,13 @@
         <label for="year">Abreviatura</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="unidad.unidad_abreviatura" />
+        <input pInputText id="year" [(ngModel)]="unidad.abreviatura" />
       </div>
     </div>
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa fa-close" (click)="delete(unidad.unidad_medida_id)" label="Eliminar"></button>
+      <button type="button" pButton icon="fa fa-close" (click)="delete(unidad.id)" label="Eliminar"></button>
       <button type="button" pButton icon="fa fa-check" (click)="save()" label="Guardar"></button>
     </div>
   </p-footer>

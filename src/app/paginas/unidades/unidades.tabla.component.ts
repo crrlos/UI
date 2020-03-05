@@ -22,14 +22,13 @@ export class UnidadesTablaComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'unidad_nombre', header: 'unidad' },
-      { field: 'unidad_abreviatura', header: 'abreviatura' }
+      { field: 'nombre', header: 'Unidad' },
+      { field: 'abreviatura', header: 'Abreviatura' }
     ];
     this.selectedColumns = this.cols;
     this.http.filtrar(event).subscribe(data => {
       this.unidades = data.unidades;
       this.totalRecords = data.totalRecords;
-      console.log(this.unidades);
     });
   }
   onRowSelect(event) {
