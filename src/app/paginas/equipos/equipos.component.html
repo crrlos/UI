@@ -14,7 +14,7 @@
           <label for="vin">Codigo</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText required name="codigo" [(ngModel)]="equipo.equipo_codigo" />
+          <input pInputText required name="codigo" [(ngModel)]="equipo.codigo" />
         </div>
       </div>
       <div class="ui-g-12">
@@ -22,7 +22,7 @@
           <label for="year">Nombre</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText required name="nombre" [(ngModel)]="equipo.equipo_nombre" />
+          <input pInputText required name="nombre" [(ngModel)]="equipo.nombre" />
         </div>
       </div>
       <div class="ui-g-12">
@@ -30,7 +30,7 @@
           <label for="year">Precio</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText name="precio" [(ngModel)]="equipo.equipo_precio" pKeyFilter="num"/>
+          <input pInputText name="precio" [(ngModel)]="equipo.precio" pKeyFilter="num"/>
         </div>
       </div>
       <div class="ui-g-12">
@@ -52,7 +52,7 @@
         <div class="ui-g-8">
           <p-dropdown appendTo="body" name="marca" [required]="true" [options]="marcas" [style]="{'width':'150px'}" [(ngModel)]="equipo.marca"
           [showClear]="true" placeholder="Seleccione"
-            optionLabel="marca_nombre"></p-dropdown>
+            optionLabel="nombre"></p-dropdown>
         </div>
       </div>
       <div class="ui-g-12">
@@ -62,7 +62,7 @@
         <div class="ui-g-8">
           <p-dropdown appendTo="body" required  name ="tipo" [options]="tipos" [style]="{'width':'150px'}" [(ngModel)]="equipo.tipo"
           [showClear]="true" placeholder="Seleccione"
-          optionLabel="tipo_nombre"></p-dropdown>
+          optionLabel="nombre"></p-dropdown>
         </div>
       </div>
       <div class="ui-g-12">
@@ -82,7 +82,7 @@
         <div class="ui-g-8">
           <p-dropdown appendTo="body" required name="gas" placeholder="Seleccione" [showClear]="true"
            [options]="gases" [style]="{'width':'150px'}" [(ngModel)]="equipo.gas"
-            optionLabel="gas_nombre"></p-dropdown>
+            optionLabel="nombre"></p-dropdown>
         </div>
       </div>
       <div class="ui-g-12">
@@ -92,7 +92,7 @@
         <div class="ui-g-8">
           <p-dropdown appendTo="body" required name="tecnologia" placeholder="Seleccione" [showClear]="true"
           [options]="tecnologias" [style]="{'width':'150px'}" [(ngModel)]="equipo.tecnologia"
-            optionLabel="tecnologia_nombre"></p-dropdown>
+            optionLabel="nombre"></p-dropdown>
         </div>
       </div>
     </div>

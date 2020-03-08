@@ -35,17 +35,17 @@ export interface MaterialEquipoArea {
   material?: Material;
 }
 export interface Equipo {
-  equipo_id?;
-  equipo_codigo?;
-  equipo_nombre?;
-  capacidad?;
-  equipo_precio?;
-  porcentaje?;
-  total?;
-  total_materiales_modificado?;
+  id?: number;
+  codigo? :string;
+  nombre?:string;
+  capacidad?:any;
+  precio? :number ;
+  porcentaje? :number;
+  total? :number;
+  totalMaterialesModificado? : number;
   tipo?: TipoUnidad;
   marca?: Marca;
-  voltaje?;
+  voltaje? : string;
   tecnologia?: Tecnologia;
   gas?: Gas;
 }

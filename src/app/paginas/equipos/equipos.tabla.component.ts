@@ -22,15 +22,15 @@ export class EquiposTablaComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'equipo_codigo', header: 'código' },
-      { field: 'equipo_nombre', header: 'nombre' },
-      { field: 'equipo_precio', header: 'precio' },
-      { field: 'capacidad', header: 'capacidad (BTU)' },
-      { field: 'marca', header: 'marca' },
-      { field: 'tipo', header: 'tipo' },
-      { field: 'voltaje', header: 'V' },
-      { field: 'tecnologia', header: 'tecnología' },
-      { field: 'gas', header: 'gas' }
+      { field: 'codigo', header: 'Código' },
+      { field: 'nombre', header: 'Nombre' },
+      { field: 'precio', header: 'Precio' },
+      { field: 'capacidad', header: 'Capacidad (BTU)' },
+      { field: 'marca', header: 'Marca' },
+      { field: 'tipo', header: 'Tipo' },
+      { field: 'voltaje', header: 'Voltaje' },
+      { field: 'tecnologia', header: 'Tecnología' },
+      { field: 'gas', header: 'Gas' }
     ];
     this.selectedColumns = this.cols;
   }

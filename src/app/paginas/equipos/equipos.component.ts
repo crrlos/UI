@@ -76,12 +76,12 @@ export class EquiposComponent implements OnInit {
 
     if (this.nuevoEquipo) {
       this.equipoHttp.agregar(this.equipo).subscribe((res) => {
-        this.equipo.equipo_id = JSON.parse(JSON.stringify(res)).id;
+        this.equipo.id = JSON.parse(JSON.stringify(res)).id;
         this.equipos_tabla.equipos.push(this.equipo);
       });
     } else {
       this.equipoHttp.actualizar(this.equipo).subscribe(() => {
-        const i = this.equipos_tabla.equipos.findIndex(et => et.equipo_id === this.equipo.equipo_id);
+        const i = this.equipos_tabla.equipos.findIndex(et => et.id === this.equipo.id);
         this.equipos_tabla.equipos[i] = this.equipo;
       });
     }

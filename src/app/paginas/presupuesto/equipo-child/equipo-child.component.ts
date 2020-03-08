@@ -107,7 +107,7 @@ export class EquipoChildComponent implements OnInit {
     if (equipoArea.precio_total_personalizado > equipoArea.total && !conservar_total_equipo) {
       equipoArea.precio_total_personalizado = equipoArea.total;
     }
-    equipoArea.costo_btu = equipoArea.total / (equipoArea.equipo.capacidad / 12000); // 12,000 BTU = 1 T
+    equipoArea.costo_btu = equipoArea.total / ((equipoArea.equipo.capacidad) / 12000); // 12,000 BTU = 1 T
   }
   // Esta función suma solo los totales personalizados de cada equipo por área para obtener el total general
   actualizarTotal() {

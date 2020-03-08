@@ -65,15 +65,15 @@ export class AreaComponent implements OnInit {
   agregarEquipo(equipo: Equipo) {
 
     const equipo_area: EquipoArea = {
-      id_equipo: equipo.equipo_id,
+      id_equipo: equipo.id,
       id_area: this.area.area_id,
-      precio_equipo: equipo.equipo_precio,
+      precio_equipo: equipo.precio,
       porcentaje_ganancia: 1,
       precio_materiales_equipo: 0,
-      precio_total_personalizado: equipo.equipo_precio,
+      precio_total_personalizado: equipo.precio,
       materiales: [],
       equipo: equipo,
-      total: equipo.equipo_precio
+      total: equipo.precio
     };
     this.equipoAreaHttp.agregar(equipo_area).subscribe((id: any) => {
       equipo_area.equipo_area_id = id.id;

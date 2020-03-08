@@ -22,10 +22,10 @@ export class EquipoHttpService {
     return this.http.put(`${HOST}/equipos`, equipo);
   }
   agregar(equipo: any) {
-    equipo.id_marca = equipo.marca.marca_id;
-    equipo.id_tipo = equipo.tipo.tipo_id;
-    equipo.id_tecnologia = equipo.tecnologia.tecnologia_id;
-    equipo.id_gas = equipo.gas.gas_id;
+    equipo.marcaId = equipo.marca.id;
+    equipo.tipoId = equipo.tipo.id;
+    equipo.tecnologiaId = equipo.tecnologia.id;
+    equipo.gasId = equipo.gas.id;
     equipo.voltaje = equipo.voltaje.name;
 
     return this.http.post(`${HOST}/equipos`, equipo);
