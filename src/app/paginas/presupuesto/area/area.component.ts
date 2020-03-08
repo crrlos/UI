@@ -86,10 +86,10 @@ export class AreaComponent implements OnInit {
   }
   agregarMaterial(material: Material) {
     const material_equipo: MaterialEquipoArea = {
-      id_material: material.material_id,
+      id_material: material.id,
       id_equipo_area: this.equipoArea.equipo_area_id,
       cantidad: 1,
-      precio: material.material_precio,
+      precio: material.precio,
       porcentaje_ganancia: 1,
       material: material
     };

@@ -52,14 +52,14 @@ export class MaterialesComponent implements OnInit {
     }
     );
     this.cols = [
-      { field: 'material_codigo', header: 'codigo' },
-      { field: 'material_nombre', header: 'nombre' },
-      { field: 'material_precio', header: 'precio' },
-      { field: 'material_cantidad', header: 'cantidad' },
-      { field: 'marca', header: 'marca' },
-      { field: 'tipo', header: 'tipo' },
-      { field: 'unidad_medida', header: 'unidad' },
-      { field: 'material_activo', header: 'estado' }
+      { field: 'codigo', header: 'Código' },
+      { field: 'nombre', header: 'Nombre' },
+      { field: 'precio', header: 'Precio' },
+      { field: 'cantidad', header: 'Cantidad' },
+      { field: 'marca', header: 'Marca' },
+      { field: 'tipo', header: 'Tipo' },
+      { field: 'medida', header: 'Unidad' },
+      { field: 'activo', header: 'Estado' }
     ];
     this.selectedColumns = this.cols;
   }
@@ -83,7 +83,7 @@ export class MaterialesComponent implements OnInit {
 
     if (this.nuevoMaterial) {
       this.materialHttp.agregar(this.material).subscribe((res: any) => {
-        this.material.material_id = res.id;
+        this.material.id = res.id;
         // this.materiales_tabla.materiales.push(JSON.parse(JSON.stringify(this.material)));
         this.materiales_tabla.materiales.push(this.material);
       });
@@ -91,7 +91,7 @@ export class MaterialesComponent implements OnInit {
       this.materialHttp.actualizar(this.material).subscribe(() =>
         this.materiales_tabla
           .materiales[this.materiales_tabla.materiales
-            .findIndex(m => m.material_id === this.material.material_id)] = this.material);
+            .findIndex(m => m.id === this.material.id)] = this.material);
     }
 
     this.displayDialog = false;

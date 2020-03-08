@@ -13,13 +13,13 @@
         <label for="year">Marca</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="marca.marca_nombre" />
+        <input pInputText id="year" [(ngModel)]="marca.nombre" />
       </div>
     </div>
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa fa-close" (click)="delete(marca.marca_id)" label="Eliminar"></button>
+      <button type="button" pButton icon="fa fa-close" (click)="delete(marca.id)" class="ui-button-danger" label="Eliminar"></button>
       <button type="button" pButton icon="fa fa-check" (click)="save()" label="Guardar"></button>
     </div>
   </p-footer>

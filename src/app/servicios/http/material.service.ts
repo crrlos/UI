@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { MaterialResponse } from 'src/app/interfaces/interfaces';
+import { MaterialResponse, Material } from 'src/app/interfaces/interfaces';
 import { HOST } from 'src/app/config';
 import { Injectable } from '@angular/core';
 
@@ -14,17 +14,17 @@ export class MaterialHttpService {
       params: event
     });
   }
-  actualizar(material) {
-    material.id_marca = material.marca.marca_id;
-    material.id_tipo = material.tipo.tipo_id;
-    material.id_unidad_medida = material.unidad_medida.unidad_medida_id;
+  actualizar(material : Material) {
+    material.marcaId = material.marca.id;
+    material.tipoId = material.tipo.id;
+    material.unidadMedidaId = material.unidadMedida.id;
 
     return this.http.put(`${HOST}/materiales`, material);
   }
-  agregar(material) {
-    material.id_marca = material.marca.marca_id;
-    material.id_tipo = material.tipo.tipo_id;
-    material.id_unidad_medida = material.unidad_medida.unidad_medida_id;
+  agregar(material: Material) {
+    material.marcaId = material.marca.id;
+    material.tipoId = material.tipo.id;
+    material.unidadMedidaId = material.unidadMedida.id;
     return this.http.post(`${HOST}/materiales`, material);
   }
 }

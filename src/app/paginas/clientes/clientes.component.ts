@@ -26,7 +26,6 @@ export class ClientesComponent implements OnInit {
   onRowSelect(event) {
     this.nuevoCliente = false;
     this.cliente = JSON.parse(JSON.stringify(event));
-    console.log(this.cliente);
     this.displayDialog = true;
   }
   save(f: NgForm) {
@@ -36,12 +35,12 @@ export class ClientesComponent implements OnInit {
 
     if (this.nuevoCliente) {
       this.http.guardar(this.cliente).subscribe((res) => {
-        this.cliente.cliente_id = JSON.parse(JSON.stringify(res)).id;
+        this.cliente.id = JSON.parse(JSON.stringify(res)).id;
         this.clientes_tabla.clientes.push(this.cliente);
       });
     } else {
       this.http.actualizar(this.cliente).subscribe(() => {
-        const i = this.clientes_tabla.clientes.findIndex(et => et.cliente_id === this.cliente.cliente_id);
+        const i = this.clientes_tabla.clientes.findIndex(et => et.id === this.cliente.id);
         this.clientes_tabla.clientes[i] = this.cliente;
       });
     }

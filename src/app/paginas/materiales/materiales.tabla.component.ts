@@ -22,12 +22,12 @@ export class MaterialesTablaComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'material_codigo', header: 'codigo' },
-      { field: 'material_nombre', header: 'nombre' },
-      { field: 'material_precio', header: 'precio' },
-      { field: 'marca', header: 'marca' },
-      { field: 'tipo', header: 'tipo' },
-      { field: 'unidad_medida', header: 'unidad' }
+      { field: 'codigo', header: 'Código' },
+      { field: 'nombre', header: 'Nombre' },
+      { field: 'precio', header: 'Precio' },
+      { field: 'marca', header: 'Marca' },
+      { field: 'tipo', header: 'Tipo' },
+      { field: 'unidadMedida', header: 'Unidad de medida' }
     ];
     this.selectedColumns = this.cols;
   }
@@ -38,6 +38,7 @@ export class MaterialesTablaComponent implements OnInit {
   loadLazy(event) {
     this.http.materiales(event).subscribe(data => {
       this.materiales = data.materiales;
+      console.log(this.materiales);
       this.totalRecords = data.totalRecords;
     });
   }

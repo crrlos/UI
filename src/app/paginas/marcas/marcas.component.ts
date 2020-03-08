@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Marca } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 import { MarcaHttpService } from 'src/app/servicios/http/marcas.service';
-
+declare var swal;
 @Component({
   selector: 'app-marcas',
   templateUrl: './marcas.component.html'
@@ -27,20 +27,19 @@ export class MarcasComponent implements OnInit {
   onRowSelect(event) {
     this.nuevomarca = false;
     this.marca = JSON.parse(JSON.stringify(event));
-    console.log(this.marca);
     this.displayDialog = true;
   }
   save() {
 
     if (this.nuevomarca) {
       this.http.guardar(this.marca).subscribe((res) => {
-        this.marca.marca_id = JSON.parse(JSON.stringify(res)).id;
+        this.marca.id = JSON.parse(JSON.stringify(res)).id;
         this.marcas_tabla.marcas.push(this.marca);
         swal('Correcto!', 'Registro agregado!', 'success');
       });
     } else {
       this.http.actualizar(this.marca).subscribe(() => {
-        const i = this.marcas_tabla.marcas.findIndex(et => et.marca_id === this.marca.marca_id);
+        const i = this.marcas_tabla.marcas.findIndex(et => et.id === this.marca.id);
         this.marcas_tabla.marcas[i] = this.marca;
         swal('Correcto!', 'Registro actualizado!', 'success');
       });

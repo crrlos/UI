@@ -14,7 +14,7 @@
               <label for="vin">Codigo</label>
             </div>
             <div class="ui-g-8">
-              <input pInputText required name="codigo" [(ngModel)]="material.material_codigo" />
+              <input pInputText required name="codigo" [(ngModel)]="material.codigo" />
             </div>
           </div>
           <div class="ui-g-12">
@@ -22,7 +22,7 @@
               <label for="year">Nombre</label>
             </div>
             <div class="ui-g-8">
-              <input pInputText required name="nombre" [(ngModel)]="material.material_nombre" />
+              <input pInputText required name="nombre" [(ngModel)]="material.nombre" />
             </div>
           </div>
           <div class="ui-g-12">
@@ -30,7 +30,7 @@
               <label for="year">Precio</label>
             </div>
             <div class="ui-g-8">
-              <input pInputText required name="precio" [(ngModel)]="material.material_precio" pKeyFilter="num"/>
+              <input pInputText required name="precio" [(ngModel)]="material.precio" pKeyFilter="num"/>
             </div>
           </div>
           <div class="ui-g-12">
@@ -39,7 +39,7 @@
             </div>
             <div class="ui-g-8">
               <p-dropdown appendTo="body" required name="marca"placeholder="Seleccione" [options]="marcas" [style]="{'width':'150px'}" [(ngModel)]="material.marca"
-                optionLabel="marca_nombre"></p-dropdown>
+                optionLabel="nombre"></p-dropdown>
             </div>
           </div>
           <div class="ui-g-12">
@@ -47,7 +47,7 @@
               <label for="year">Tipo</label>
             </div>
             <div class="ui-g-8">
-              <p-dropdown appendTo="body" required name="tipo" placeholder="Seleccione" [options]="tipos" [style]="{'width':'150px'}" [(ngModel)]="material.tipo" optionLabel="tipo_nombre"></p-dropdown>
+              <p-dropdown appendTo="body" required name="tipo" placeholder="Seleccione" [options]="tipos" [style]="{'width':'150px'}" [(ngModel)]="material.tipo" optionLabel="nombre"></p-dropdown>
             </div>
           </div>
       <div class="ui-g-12">
@@ -55,7 +55,7 @@
               <label for="year">Unidad</label>
             </div>
             <div class="ui-g-8">
-              <p-dropdown appendTo="body" required name="unidad" placeholder="Seleccione" [options]="unidades" [style]="{'width':'150px'}" [(ngModel)]="material.unidad_medida" optionLabel="unidad_nombre"></p-dropdown>
+              <p-dropdown appendTo="body" required name="unidad" placeholder="Seleccione" [options]="unidades" [style]="{'width':'150px'}" [(ngModel)]="material.unidadMedida" optionLabel="nombre"></p-dropdown>
             </div>
           </div>
 
@@ -63,7 +63,7 @@
         </div>
         <p-footer>
           <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Cancelar"></button>
+            <button type="button" pButton icon="fa fa-close" (click)="delete()"class="ui-button-danger" label="Eliminar"></button>
             <button type="button" pButton icon="fa fa-check" (click)="save(f)" label="Guardar"></button>
           </div>
         </p-footer>

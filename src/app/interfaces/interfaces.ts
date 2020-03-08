@@ -50,15 +50,18 @@ export interface Equipo {
   gas?: Gas;
 }
 export interface Material {
-  material_id?;
-  material_codigo?;
-  material_nombre?;
-  material_cantidad?;
-  material_precio?;
-  porcentaje?;
+  id?:number;
+  codigo?:string;
+  nombre?:string;
+  cantidad?:number;
+  precio?:number;
+  porcentaje?:number;
   tipo?: TipoUnidad;
+  tipoId?:number;
+  marcaId?:number;
   marca?: Marca;
-  unidad_medida?: UnidadMedida;
+  unidadMedidaId?:number;
+  unidadMedida?: UnidadMedida;
   material_activo?;
 }
 export interface Voltaje {
@@ -71,8 +74,8 @@ export interface TipoUnidad {
 }
 
 export interface Marca {
-  marca_id?;
-  marca_nombre?;
+  id?:number;
+  nombre?:string;
 }
 export interface Gas {
   id?:number;
@@ -121,10 +124,10 @@ export interface MaterialResponse {
   totalRecords;
 }
 export interface Cliente {
-  cliente_id?;
-  nombre?;
-  direccion?;
-  telefono?;
+  id?:number;
+  nombre?:string;
+  direccion?:string;
+  telefono?:string;
 }
 export interface Cotizacion {
   cotizacion_id?;

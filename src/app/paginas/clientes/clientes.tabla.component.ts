@@ -22,9 +22,9 @@ export class ClientesTablaComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'nombre', header: 'nombre' },
-      { field: 'direccion', header: 'direccion' },
-      { field: 'telefono', header: 'telefono' }
+      { field: 'nombre', header: 'Nombre' },
+      { field: 'direccion', header: 'Dirección' },
+      { field: 'telefono', header: 'Teléfono' }
     ];
     this.selectedColumns = this.cols;
   }

@@ -1,4 +1,4 @@
-<p-table [globalFilterFields]="['marca_nombre']" #tt [columns]="selectedColumns" [value]="marcas"
+<p-table [globalFilterFields]="['nombre']" #tt [columns]="selectedColumns" [value]="marcas"
   selectionMode="single"  (onRowSelect)="onRowSelect($event)" [paginator]="true"
   [rows]="7" [rowsPerPageOptions]="[10,20,30]" [totalRecords]="totalRecords">
   <ng-template pTemplate="caption">
@@ -21,7 +21,7 @@
   </ng-template>
   <ng-template pTemplate="body" let-rowData>
     <tr [pSelectableRow]="rowData">
-      <td>{{rowData.marca_nombre}}</td>
+      <td>{{rowData.nombre}}</td>
 
     </tr>
   </ng-template>
