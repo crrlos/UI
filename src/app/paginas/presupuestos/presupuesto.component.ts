@@ -10,6 +10,8 @@ import { ClienteHttpService } from 'src/app/servicios/http/cliente.service';
 })
 export class PresupuestoComponent implements OnInit {
 
+
+
   constructor(private http: HttpService, private equipoHttp: EquipoHttpService,
     private clienteHttp: ClienteHttpService) { }
   cotizacion: Cotizacion = {};
@@ -49,7 +51,7 @@ export class PresupuestoComponent implements OnInit {
 
     if (this.nuevaCotizacion) {
       this.http.cotizacion_agregar(this.cotizacion).subscribe((res: any) => {
-        this.cotizacion.cotizacion_id = res.id;
+        this.cotizacion.id = res.id;
         this.cotizaciones_tabla.cotizaciones.push(this.cotizacion);
         this.cotizacion = {};
       });

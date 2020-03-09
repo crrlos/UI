@@ -3,13 +3,14 @@ import { Equipo, Cotizacion } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 import { Router } from '@angular/router';
 import { EditableColumn } from 'primeng/table';
+import {HOST} from 'src/app/config';
 
 @Component({
   selector: 'app-presupuesto-tabla',
   templateUrl: './presupuesto.tabla.component.html'
 })
 export class PresupuestoTablaComponent implements OnInit {
-
+  variable = "hola";
   constructor(private http: HttpService, private router: Router) { }
 
   cotizaciones: Cotizacion[] = [];
@@ -26,7 +27,7 @@ export class PresupuestoTablaComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'cotizacion_id', header: 'Id', width: '5%' },
+      { field: 'id', header: 'Id', width: '5%' },
       { field: 'cliente', header: 'Cliente', width: '40%' },
       { field: 'descripcion', header: 'Descripción', width: '40%' },
       { field: 'opciones', header: 'Opciones', width: '15%' }
@@ -37,7 +38,7 @@ export class PresupuestoTablaComponent implements OnInit {
     this.editar.emit(data);
   }
   onRowSelect(event) {
-    this.router.navigate(['presupuesto', event.data.cotizacion_id]);
+    this.router.navigate(['presupuesto', event.data.id]);
   }
   loadLazy(event: Lazy) {
     console.log(event);

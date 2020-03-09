@@ -14,7 +14,7 @@ export class AreaHttpService {
   }
   agregar(area) {
     area.nombre = area.area;
-    area.id_cotizacion = area.cotizacion;
+    area.cotizacionId = area.cotizacion;
 
     return this.http.post(`${HOST}/areas`, area);
   }
@@ -23,6 +23,6 @@ export class AreaHttpService {
     return this.http.put(`${HOST}/areas`, area);
   }
   eliminar(area: Area) {
-    return this.http.delete(`${HOST}/areas`, { params: { area_id: area.area_id } });
+    return this.http.delete(`${HOST}/areas`, { params: { area_id: area.id.toString() } });
   }
 }

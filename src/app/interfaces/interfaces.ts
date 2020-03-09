@@ -5,33 +5,33 @@ export interface Ubicacion {
   total?;
 }
 export interface Area {
-  area_id?;
-  nombre?;
-  id_cotizacion?;
-  total?;
+  id?:number;
+  nombre?:string;
+  cotizacionId?:number;
+  total?:number;
   equipos?: EquipoArea[];
   insertar_equipo?: boolean; // permite saber en cual area se insertará el equipo
 }
 export interface EquipoArea {
-  equipo_area_id?: number;
-  id_equipo?: number;
-  id_area?: number;
-  precio_equipo?: number;
-  porcentaje_ganancia?: number;
-  precio_materiales_equipo?: number;
+  id?: number;
+  equipoId?: number;
+  areaId?: number;
+  precioEquipo?: number;
+  porcentajeGanancia?: number;
+  precioMaterialesEquipo?: number;
   materiales?: MaterialEquipoArea[];
   equipo?: Equipo;
   total?: number;
-  precio_total_personalizado?: number;
-  costo_btu?: number;
+  precioTotalPersonalizado?: number;
+  costoBTU?: number;
 }
 export interface MaterialEquipoArea {
-  material_equipo_area_id?;
-  id_material?;
-  id_equipo_area?;
-  cantidad?;
-  precio?;
-  porcentaje_ganancia?;
+  id?:number;
+  materialId?:number;
+  equipoAreaId?:number;
+  cantidad?:number;
+  precio?:number;
+  porcentajeGanancia?:number;
   material?: Material;
 }
 export interface Equipo {
@@ -130,10 +130,10 @@ export interface Cliente {
   telefono?:string;
 }
 export interface Cotizacion {
-  cotizacion_id?;
-  descripcion?;
+  id?:number;
+  descripcion?:number;
   cliente?: Cliente;
-  fecha?;
+  fecha?:string;
 }
 
 export interface UnidadResponse {

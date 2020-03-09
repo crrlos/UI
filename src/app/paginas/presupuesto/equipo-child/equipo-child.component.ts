@@ -64,7 +64,7 @@ export class EquipoChildComponent implements OnInit {
   totalMateriales(equipo: EquipoArea) {
     let total = 0;
     equipo.materiales.forEach(material => {
-      total += material.precio * material.cantidad * material.porcentaje_ganancia;
+      total += material.precio * material.cantidad * material.porcentajeGanancia;
     });
     return total;
   }
@@ -90,24 +90,24 @@ export class EquipoChildComponent implements OnInit {
     conservar_total_material: boolean) {
     let total_materiales = 0;
     equipoArea.materiales.forEach(material => {
-      total_materiales += material.precio * material.cantidad * material.porcentaje_ganancia * 1;
+      total_materiales += material.precio * material.cantidad * material.porcentajeGanancia * 1;
     });
-    if (equipoArea.precio_materiales_equipo < total_materiales || total_materiales === 0) {
-      equipoArea.precio_materiales_equipo = total_materiales;
+    if (equipoArea.precioMaterialesEquipo < total_materiales || total_materiales === 0) {
+      equipoArea.precioMaterialesEquipo = total_materiales;
     }
-    if (equipoArea.precio_materiales_equipo > total_materiales && !conservar_total_material) {
-      equipoArea.precio_materiales_equipo = total_materiales;
+    if (equipoArea.precioMaterialesEquipo > total_materiales && !conservar_total_material) {
+      equipoArea.precioMaterialesEquipo = total_materiales;
     }
-    equipoArea.total = equipoArea.precio_equipo * equipoArea.porcentaje_ganancia
-      + equipoArea.precio_materiales_equipo * 1;
+    equipoArea.total = equipoArea.precioEquipo * equipoArea.porcentajeGanancia
+      + equipoArea.precioMaterialesEquipo * 1;
 
-    if (equipoArea.precio_total_personalizado < equipoArea.total) {
-      equipoArea.precio_total_personalizado = equipoArea.total;
+    if (equipoArea.precioTotalPersonalizado < equipoArea.total) {
+      equipoArea.precioTotalPersonalizado = equipoArea.total;
     }
-    if (equipoArea.precio_total_personalizado > equipoArea.total && !conservar_total_equipo) {
-      equipoArea.precio_total_personalizado = equipoArea.total;
+    if (equipoArea.precioTotalPersonalizado > equipoArea.total && !conservar_total_equipo) {
+      equipoArea.precioTotalPersonalizado = equipoArea.total;
     }
-    equipoArea.costo_btu = equipoArea.total / ((equipoArea.equipo.capacidad) / 12000); // 12,000 BTU = 1 T
+    equipoArea.costoBTU = equipoArea.total / ((equipoArea.equipo.capacidad) / 12000); // 12,000 BTU = 1 T
   }
   // Esta función suma solo los totales personalizados de cada equipo por área para obtener el total general
   actualizarTotal() {
@@ -116,7 +116,7 @@ export class EquipoChildComponent implements OnInit {
     this.areas.forEach(area => {
       area.total = 0;
       area.equipos.forEach(equipo_area => {
-        area.total += equipo_area.precio_total_personalizado * 1; // *1 convierte a number
+        area.total += equipo_area.precioTotalPersonalizado * 1; // *1 convierte a number
       });
       total_general += area.total;
     });

@@ -47,14 +47,14 @@ export class AreaComponent implements OnInit {
   agregarArea(area: string) {
     this.areaHttp.agregar({ area: area, cotizacion: this.id_cotizacion }).subscribe((id: any) => {
       this.areas.push({
-        area_id: id.id,
+        id: id.id,
         nombre: area,
         equipos: []
       });
     });
   }
   actualizarArea(area: Area) {
-    const data = { nombre: area.nombre, area_id: area.area_id, cotizacion: this.id_cotizacion };
+    const data = { nombre: area.nombre, area_id: area.id, cotizacion: this.id_cotizacion };
     this.areaHttp.actualizar(data).subscribe();
   }
   eliminarArea(area: Area) {
@@ -65,18 +65,18 @@ export class AreaComponent implements OnInit {
   agregarEquipo(equipo: Equipo) {
 
     const equipo_area: EquipoArea = {
-      id_equipo: equipo.id,
-      id_area: this.area.area_id,
-      precio_equipo: equipo.precio,
-      porcentaje_ganancia: 1,
-      precio_materiales_equipo: 0,
-      precio_total_personalizado: equipo.precio,
+      equipoId: equipo.id,
+      areaId: this.area.id,
+      precioEquipo: equipo.precio,
+      porcentajeGanancia: 1,
+      precioMaterialesEquipo: 0,
+      precioTotalPersonalizado: equipo.precio,
       materiales: [],
       equipo: equipo,
       total: equipo.precio
     };
     this.equipoAreaHttp.agregar(equipo_area).subscribe((id: any) => {
-      equipo_area.equipo_area_id = id.id;
+      equipo_area.id = id.id;
       this.area.equipos.push(equipo_area);
       this.equipoChild.actualizarTotalesEquipo(equipo_area, false, false);
       this.equipoChild.actualizarTotal();
@@ -86,15 +86,15 @@ export class AreaComponent implements OnInit {
   }
   agregarMaterial(material: Material) {
     const material_equipo: MaterialEquipoArea = {
-      id_material: material.id,
-      id_equipo_area: this.equipoArea.equipo_area_id,
+      id: material.id,
+      equipoAreaId: this.equipoArea.id,
       cantidad: 1,
       precio: material.precio,
-      porcentaje_ganancia: 1,
+      porcentajeGanancia: 1,
       material: material
     };
     this.materialEquipoAreaHttp.agregar(material_equipo).subscribe((id: any) => {
-      material_equipo.material_equipo_area_id = id.id;
+      material_equipo.id = id.id;
       this.equipoArea.materiales.push(material_equipo);
       this.equipoChild.actualizarTotalesEquipo(this.equipoArea, false, false);
       this.equipoChild.actualizarTotal();
@@ -108,6 +108,7 @@ export class AreaComponent implements OnInit {
       this.id_cotizacion = params['id'];
       this.areaHttp.areas(this.id_cotizacion).subscribe(success => {
         this.areas = success;
+        console.log(this.areas);
         this.inicializarTotales();
         customjs();
       });

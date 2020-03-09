@@ -10,13 +10,14 @@ export class MaterialEquipoAreaHttpService {
 
   constructor(private http: HttpClient) { }
   agregar(material: any) {
-    material.id_material = material.material.material_id;
+    material.materialId = material.material.id;
+    console.log(material);
     return this.http.post(`${HOST}/materialesequipoarea`, material);
   }
   actualizar(material: MaterialEquipoArea) {
     return this.http.put(`${HOST}/materialesequipoarea`, material);
   }
   eliminar(material: MaterialEquipoArea) {
-    return this.http.delete(`${HOST}/materialesequipoarea`, { params: { id: material.material_equipo_area_id } });
+    return this.http.delete(`${HOST}/materialesequipoarea`, { params: { id: material.id.toString() } });
   }
 }

@@ -18,7 +18,7 @@ export class EquipoAreaHttpService {
     return this.http.put(`${HOST}/equiposarea`, equipo_area);
   }
   eliminar(equipo_area: EquipoArea) {
-    return this.http.delete(`${HOST}/equiposarea/${equipo_area.equipo_area_id}`);
+    return this.http.delete(`${HOST}/equiposarea/${equipo_area.id}`);
   }
   duplicar(equipo) {
     return this.http.get(`${HOST}/equiposarea/${equipo.equipo_area_id}`);

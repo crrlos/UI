@@ -20,7 +20,7 @@ export class HttpService {
     return this.http.get<Voltaje[]>(`${HOST}/voltajes`);
   }
   cotizacion_agregar(data: any) {
-    return this.http.post(`${HOST}/cotizaciones`, { id_cliente: data.cliente.cliente_id, descripcion: data.descripcion });
+    return this.http.post(`${HOST}/cotizaciones`, { clienteId: data.cliente.id, descripcion: data.descripcion });
   }
   cotizacion_actualizar(data: any) {
     return this.http.put(`${HOST}/cotizaciones/${data.cotizacion_id}`, {

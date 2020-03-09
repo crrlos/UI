@@ -13,16 +13,16 @@
           {{equipo.precio_total_personalizado}} ||{{equipo.costo_btu}} -->
           <div class="row" style="width:90%;display: inline-block">
             <div class="col-md-3 text-right" style="display: inline-block">
-              {{equipo.equipo.equipo_nombre}}
+              {{equipo.equipo.nombre}}
             </div>
             <div class="col-md-3 text-right" style="display: inline-block">
               {{equipo.equipo.capacidad}} BTU
             </div>
             <div class="col-md-3 text-right" style="display: inline-block">
-              <strong>P </strong>{{equipo.precio_total_personalizado | currency}}
+              <strong>P </strong>{{equipo.precioTotalPersonalizado | currency}}
             </div>
             <div class="col-md-3 text-right" style="display: inline-block">
-              <strong>CT </strong>{{equipo.costo_btu | currency }}
+              <strong>CT </strong>{{equipo.costoBTU | currency }}
             </div>
 
           </div>
@@ -38,13 +38,13 @@
           <div class="col-4">
             <div class="form-inline">
               <label style="margin-right: 2px">Costo TON:</label>
-              <input type="text" disabled class="form-control" value="{{equipo.costo_btu | currency}}" (keyup)="actualizar_total_personalizado(equipo)">
+              <input type="text" disabled class="form-control" value="{{equipo.costoBTU | currency}}" (keyup)="actualizar_total_personalizado(equipo)">
             </div>
           </div>
           <div class="col-4">
             <div class="form-inline">
               <label style="margin-right: 2px">Total personalizado:</label>
-              <input type="text" class="form-control" [(ngModel)]="equipo.precio_total_personalizado" (keyup)="actualizar_total_personalizado(equipo)">
+              <input type="text" class="form-control" [(ngModel)]="equipo.precioTotalPersonalizado" (keyup)="actualizar_total_personalizado(equipo)">
             </div>
           </div>
         </div>
@@ -64,20 +64,20 @@
           <div class="col">
             <div class="form-group">
               <label>Precio</label>
-              <input class="form-control" disabled type="text" value="{{equipo.precio_equipo | currency}}">
+              <input class="form-control" disabled type="text" value="{{equipo.precioEquipo | currency}}">
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Porc. Ganancia</label><br>
               <p-spinner (onChange)="actualizarPorcentajeGanancia(equipo)" (keyup)="actualizarPorcentajeGanancia(equipo)"
-                size="15" [(ngModel)]="equipo.porcentaje_ganancia" [step]="0.25"></p-spinner>
+                size="15" [(ngModel)]="equipo.porcentajeGanancia" [step]="0.25"></p-spinner>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Precio final</label>
-              <input class="form-control" disabled type="text" value="{{equipo.precio_equipo * equipo.porcentaje_ganancia | currency}}">
+              <input class="form-control" disabled type="text" value="{{equipo.precioEquipo * equipo.porcentajeGanancia | currency}}">
             </div>
           </div>
           <div class="col">
@@ -124,19 +124,19 @@
               </thead>
               <tbody>
                 <tr *ngFor="let material of equipo.materiales">
-                  <td>{{material.material.material_codigo}}</td>
-                  <td>{{material.material.material_nombre}}</td>
-                  <td>{{material.material.material_precio}}</td>
+                  <td>{{material.material.codigo}}</td>
+                  <td>{{material.material.nombre}}</td>
+                  <td>{{material.material.precio}}</td>
                   <td>
                     <p-spinner (onChange)="actualizarTotalAsyncMaterial(material,equipo)" (keyup)="actualizarTotalAsyncMaterial(material,equipo)"
-                      size="10" [(ngModel)]="material.porcentaje_ganancia" [step]="0.25">
+                      size="10" [(ngModel)]="material.porcentajeGanancia" [step]="0.25">
                     </p-spinner>
                   </td>
                   <td>
                     <p-spinner (onChange)="actualizarTotalAsyncMaterial(material,equipo)" (keyup)="actualizarTotalAsyncMaterial(material,equipo)"
                       size="10" [(ngModel)]="material.cantidad" [step]="1" min="1"></p-spinner>
                   </td>
-                  <td>{{material.precio * material.cantidad * material.porcentaje_ganancia | currency}}</td>
+                  <td>{{material.precio * material.cantidad * material.porcentajeGanancia | currency}}</td>
                   <td><span class="mif-bin mif-lg fg-red pointer" (click)="eliminarMaterial(equipo,material)"></span>
                   </td>
                 </tr>
