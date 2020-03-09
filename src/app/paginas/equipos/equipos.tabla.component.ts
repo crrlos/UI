@@ -13,7 +13,7 @@ export class EquiposTablaComponent implements OnInit {
   equipos: Equipo[] = [];
   equipo: Equipo;
   cols: any[];
-  totalRecords;
+  totalRecords:number;
   selectedColumns: any[];
 
   @Input() puede_agregar: boolean;
