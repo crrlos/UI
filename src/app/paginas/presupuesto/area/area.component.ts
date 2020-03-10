@@ -17,6 +17,8 @@ export class AreaComponent implements OnInit {
   @ViewChild(EquipoChildComponent)
   private equipoChild: EquipoChildComponent;
 
+  mostrarDialogo: boolean = false;
+  nombreArea:string;
   areas: Area[] = [];
   totalGeneral = 0;
   equipos_lista: Equipo[];
@@ -34,7 +36,11 @@ export class AreaComponent implements OnInit {
     private messageService: MessageService,
     private equipoAreaHttp: EquipoAreaHttpService,
     private materialEquipoAreaHttp: MaterialEquipoAreaHttpService) { }
+  mostrarDialogoArea(){
+      this.mostrarDialogo = true;
+      this.nombreArea = "";
 
+  }
   mostrarDialogoEquipo(event: any) {
     this.mostrar_dialogo_equipos = true;
     this.area = event.area;
@@ -44,11 +50,12 @@ export class AreaComponent implements OnInit {
     this.equipoArea = event.equipo;
   }
 
-  agregarArea(area: string) {
-    this.areaHttp.agregar({ area: area, cotizacion: this.id_cotizacion }).subscribe((id: any) => {
+  agregarArea() {
+    this.mostrarDialogo = false;
+    this.areaHttp.agregar({ area: this.nombreArea, cotizacion: this.id_cotizacion }).subscribe((id: any) => {
       this.areas.push({
         id: id.id,
-        nombre: area,
+        nombre: this.nombreArea,
         equipos: []
       });
     });

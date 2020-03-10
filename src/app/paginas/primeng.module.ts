@@ -18,6 +18,8 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import {KeyFilterModule} from 'primeng/keyfilter';
+import {FieldsetModule} from 'primeng/fieldset';
+import {TabViewModule, TabView, TabViewNav} from 'primeng/tabview';
 @NgModule({
   exports: [
     CommonModule,
@@ -36,7 +38,9 @@ import {KeyFilterModule} from 'primeng/keyfilter';
     ScrollPanelModule,
     ConfirmDialogModule,
     ToastModule,
-    KeyFilterModule
+    KeyFilterModule,
+    FieldsetModule,
+    TabViewModule
   ], providers: [ConfirmationService, MessageService]
 })
 export class PrimengModule { }

@@ -2,57 +2,76 @@
 <p-toast></p-toast>
 <h4>Total General<span class="badge badge-secondary">{{totalGeneral | currency}}</span></h4>
 <div class="mt-5"></div>
-<div class="row">
-  <div class="col-7">
-    <form class="form-inline">
-      <input class="form-control mr-2" type="text" #area name="area">
-      <button class="btn btn-primary" (click)="agregarArea(area.value)">Agregar Área</button>
-    </form>
-  </div>
-</div>
-<br>
-<br>
 
-<p-scrollPanel [style]="{width: '100%', height: '500px'}">
-  <div id="accordian-4">
-    <div class="card m-t-30">
-      <ng-template ngFor let-area [ngForOf]="areas" let-i="index">
-        <a class="card-header link" data-toggle="collapse" data-parent="#accordian-4" href="#c_{{area.id}}"
-          aria-expanded="true">
-          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          <span>{{area.nombre}}</span>
-        </a>
-        <div id="c_{{area.id}}" class="collapse  multi-collapse">
-          <div class="card-body widget-content">
-
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group">
-                  <label>Nombre</label>
-                  <input class="form-control" type="text" (keyup)="actualizarArea(area)" [(ngModel)]="area.nombre">
+<p-tabView>
+  <p-tabPanel header="Áreas">
+    <div class="row">
+      <button class="btn btn-primary ml-2" (click)="mostrarDialogoArea()">Agregar área</button>
+    </div>
+    <br>
+    <p-dialog header="Registrar área" [visible]="mostrarDialogo" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+      <div class="ui-g ui-fluid">
+  
+        <input type="text" [(ngModel)]="nombreArea" placeholder="Nombre área" pInputText/>
+       
+      </div>
+      <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+          <button type="button" pButton icon="fa fa-close" (click)="mostrarDialogo = false"  label="Cancelar"></button>
+          <button type="button" pButton icon="fa fa-check" (click)="agregarArea()" label="Guardar"></button>
+        </div>
+      </p-footer>
+    </p-dialog>
+    
+    <p-scrollPanel [style]="{width: '100%', height: '500px'}">
+      <div id="accordian-4">
+        <div class="card m-t-30">
+          <ng-template ngFor let-area [ngForOf]="areas" let-i="index">
+            <a class="card-header link" data-toggle="collapse" data-parent="#accordian-4" href="#c_{{area.id}}"
+              aria-expanded="true">
+              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              <span>{{area.nombre}}</span>
+            </a>
+            <div id="c_{{area.id}}" class="collapse  multi-collapse">
+              <div class="card-body widget-content">
+    
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label>Nombre</label>
+                      <input class="form-control" type="text" (keyup)="actualizarArea(area)" [(ngModel)]="area.nombre">
+                    </div>
+                  </div>
                 </div>
+                <!-- aquí se muestran los equipos por área -->
+                <app-equipo-child [area]="area" [areas]="areas" (total_general)="totalGeneral = $event"
+                  (mostrar_dialogo_equipos)="mostrarDialogoEquipo($event)"
+                  (mostrar_dialogo_materiales)="mostrarDialogoMaterial($event)">
+                </app-equipo-child>
+    
               </div>
             </div>
-            <!-- aquí se muestran los equipos por área -->
-            <app-equipo-child [area]="area" [areas]="areas" (total_general)="totalGeneral = $event"
-              (mostrar_dialogo_equipos)="mostrarDialogoEquipo($event)"
-              (mostrar_dialogo_materiales)="mostrarDialogoMaterial($event)">
-            </app-equipo-child>
-
-          </div>
+          </ng-template>
+    
         </div>
-      </ng-template>
+      </div>
+    </p-scrollPanel>
+  </p-tabPanel>
+  <p-tabPanel header="Mano de obra">
+      Content 2
+  </p-tabPanel>
+ 
+</p-tabView>
 
-    </div>
-  </div>
-</p-scrollPanel>
+  
+  
+  <!--equipos-->
+  <p-dialog header="Equipos" [(visible)]="mostrar_dialogo_equipos">
+    <app-equipos-tabla (equipo_seleccionado)="agregarEquipo($event)"></app-equipos-tabla>
+  </p-dialog>
+  
+  <!--materiales-->
+  <p-dialog header="Materiales" [(visible)]="mostrar_dialogo_materiales">
+    <app-materiales-tabla (material_seleccionado)="agregarMaterial($event.data)"></app-materiales-tabla>
+  </p-dialog>
 
-<!--equipos-->
-<p-dialog header="Equipos" [(visible)]="mostrar_dialogo_equipos">
-  <app-equipos-tabla (equipo_seleccionado)="agregarEquipo($event)"></app-equipos-tabla>
-</p-dialog>
-
-<!--materiales-->
-<p-dialog header="Materiales" [(visible)]="mostrar_dialogo_materiales">
-  <app-materiales-tabla (material_seleccionado)="agregarMaterial($event.data)"></app-materiales-tabla>
-</p-dialog>
