@@ -17,12 +17,12 @@
   <div id="accordian-4">
     <div class="card m-t-30">
       <ng-template ngFor let-area [ngForOf]="areas" let-i="index">
-        <a class="card-header link" data-toggle="collapse" data-parent="#accordian-4" href="#c_{{area.area_id}}"
+        <a class="card-header link" data-toggle="collapse" data-parent="#accordian-4" href="#c_{{area.id}}"
           aria-expanded="true">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
           <span>{{area.nombre}}</span>
         </a>
-        <div id="c_{{area.area_id}}" class="collapse  multi-collapse">
+        <div id="c_{{area.id}}" class="collapse  multi-collapse">
           <div class="card-body widget-content">
 
             <div class="row">
