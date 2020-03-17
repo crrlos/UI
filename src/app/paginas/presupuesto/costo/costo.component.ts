@@ -31,12 +31,11 @@ export class CostoComponent implements OnInit {
           costo.total = costo.cantidad * costo.costo;
           return;
         }
-
-      
-      this.costoSeleccionado.cantidad = this.cantidad;
-      this.costoSeleccionado.total = this.cantidad * this.costoSeleccionado.costo;
-      this.costoSeleccionado.costoId = r;
-      this.costos.push(this.costoSeleccionado);
+      let clone = JSON.parse( JSON.stringify(this.costoSeleccionado));
+      clone.total = this.cantidad * this.costoSeleccionado.costo;
+      clone.cantidad = this.cantidad;
+      clone.id = r;
+      this.costos.push(clone);
     });
     
   }
