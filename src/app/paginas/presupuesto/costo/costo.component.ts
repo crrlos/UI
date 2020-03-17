@@ -35,6 +35,7 @@ export class CostoComponent implements OnInit {
       
       this.costoSeleccionado.cantidad = this.cantidad;
       this.costoSeleccionado.total = this.cantidad * this.costoSeleccionado.costo;
+      this.costoSeleccionado.costoId = r;
       this.costos.push(this.costoSeleccionado);
     });
     
@@ -50,7 +51,7 @@ export class CostoComponent implements OnInit {
   eliminar(id){
     this.http.eliminar(id).subscribe(r =>{
 
-      this.costos.splice(this.costos.findIndex(c => c.id == id));
+      this.costos.splice(this.costos.findIndex(c => c.id == id),1);
 
     });
   }

@@ -28,7 +28,7 @@ export interface EquipoArea {
 export interface MaterialEquipoArea {
   id?:number;
   materialId?:number;
-  equipoAreaId?:number;
+  equiposAreaId?:number;
   cantidad?:number;
   precio?:number;
   porcentajeGanancia?:number;

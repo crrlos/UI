@@ -113,13 +113,13 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>código</th>
-                  <th>nombre</th>
-                  <th>precio</th>
-                  <th>Porc</th>
-                  <th>cantidad</th>
-                  <th>total</th>
-                  <th>Eliminar</th>
+                  <th>Código</th>
+                  <th>Nombre</th>
+                  <th>Precio</th>
+                  <th>Porc. Ganancia</th>
+                  <th>Cantidad</th>
+                  <th>Total</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -137,7 +137,9 @@
                       size="10" [(ngModel)]="material.cantidad" [step]="1" min="1"></p-spinner>
                   </td>
                   <td>{{material.precio * material.cantidad * material.porcentajeGanancia | currency}}</td>
-                  <td><span class="mif-bin mif-lg fg-red pointer" (click)="eliminarMaterial(equipo,material)"></span>
+                 <td>
+                  <span style="float: left; margin-left: 3px; font-size: 20px" class="pointer text-danger"><i class="mdi mdi-delete" data-toggle="tooltip"
+                    data-placement="top" data-original-title="eliminar" (click)="confirmEliminar(equipo)"></i></span>
                   </td>
                 </tr>
               </tbody>
