@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MaterialResponse, Material } from 'src/app/interfaces/interfaces';
 import { HOST } from 'src/app/config';
 import { Injectable } from '@angular/core';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,13 @@ import { Injectable } from '@angular/core';
 export class MaterialHttpService {
 
   constructor(private http: HttpClient) { }
-  materiales(event?) {
+  materiales(event?: any) {
     return this.http.get<MaterialResponse>(`${HOST}/materiales`, {
-      params: event
+      params: event,
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+
     });
   }
   actualizar(material : Material) {
@@ -22,9 +27,16 @@ export class MaterialHttpService {
     return this.http.put(`${HOST}/materiales`, material);
   }
   agregar(material: Material) {
-    material.marcaId = material.marca.id;
-    material.tipoId = material.tipo.id;
-    material.unidadMedidaId = material.unidadMedida.id;
-    return this.http.post(`${HOST}/materiales`, material);
+    
+    let m2: any = {};
+
+    m2.marcaId = material.marca.id;
+    m2.tipoId = material.tipo.id;
+    m2.unidadMedidaId = material.unidadMedida.id;
+    m2.codigo = material.codigo;
+    m2.nombre = material.nombre;
+    m2.precio = material.precio * 1;
+
+    return this.http.post(`${HOST}/materiales`, m2);
   }
 }

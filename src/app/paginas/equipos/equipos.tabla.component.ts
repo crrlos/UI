@@ -34,12 +34,12 @@ export class EquiposTablaComponent implements OnInit {
     ];
     this.selectedColumns = this.cols;
   }
-  onRowSelect(event) {
+  onRowSelect(event: { data: any; }) {
     this.equipo = JSON.parse(JSON.stringify(event.data));
     this.equipo_seleccionado.emit(this.equipo);
     console.log('seleccionado');
   }
-  loadLazy(event) {
+  loadLazy(event: any) {
     this.http.equipos(event).subscribe(data => {
       this.equipos = data.equipos;
       this.totalRecords = data.totalRecords;

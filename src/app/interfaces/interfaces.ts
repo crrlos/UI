@@ -45,7 +45,7 @@ export interface Equipo {
   totalMaterialesModificado? : number;
   tipo?: TipoUnidad;
   marca?: Marca;
-  voltaje? : string;
+  voltaje? : String;
   tecnologia?: Tecnologia;
   gas?: Gas;
 }

@@ -1,1 +1,1 @@
- export const HOST: String = 'http://ablublu-001-site1.itempurl.com/api';
+ export const HOST: String = 'https://localhost:5001';

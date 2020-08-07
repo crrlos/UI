@@ -27,12 +27,12 @@ export class EquiposComponent implements OnInit {
   displayDialog = false;
   nuevoEquipo = false;
   equipoSeleccionado: Equipo;
+  voltajes: any[];
 
   errores: boolean;
 
   @ViewChild('equipos_tabla') equipos_tabla: EquiposTabla;
 
-  voltajes;
 
   ngOnInit() {
     this.tipoHttp.filtrar(event).subscribe(data => {
@@ -61,7 +61,7 @@ export class EquiposComponent implements OnInit {
     this.equipo = {};
     this.displayDialog = true;
   }
-  onRowSelect(event) {
+  onRowSelect(event: any) {
     this.nuevoEquipo = false;
     this.equipo = JSON.parse(JSON.stringify(event));
     console.log(this.equipo);
@@ -77,10 +77,12 @@ export class EquiposComponent implements OnInit {
     if (this.nuevoEquipo) {
       this.equipoHttp.agregar(this.equipo).subscribe((res) => {
         this.equipo.id = JSON.parse(JSON.stringify(res)).id;
+        this.equipo.voltaje = this.equipo.voltaje['name'];
         this.equipos_tabla.equipos.push(this.equipo);
       });
     } else {
       this.equipoHttp.actualizar(this.equipo).subscribe(() => {
+        this.equipo.voltaje = this.equipo.voltaje['name'];
         const i = this.equipos_tabla.equipos.findIndex(et => et.id === this.equipo.id);
         this.equipos_tabla.equipos[i] = this.equipo;
       });

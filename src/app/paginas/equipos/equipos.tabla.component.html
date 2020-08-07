@@ -28,6 +28,7 @@
           <div *ngSwitchCase="'tipo'">{{rowData[col.field].nombre}}</div>
           <div *ngSwitchCase="'gas'">{{rowData[col.field]?.nombre}}</div>
           <div *ngSwitchCase="'tecnologia'">{{rowData[col.field]?.nombre}}</div>
+         
           <div *ngSwitchDefault>{{rowData[col.field]}}</div>
         </div>
       </td>
