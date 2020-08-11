@@ -31,7 +31,7 @@ export class EquiposComponent implements OnInit {
 
   errores: boolean;
 
-  @ViewChild('equipos_tabla') equipos_tabla: EquiposTabla;
+  @ViewChild('equipos_tabla', { static: true }) equipos_tabla: EquiposTabla;
 
 
   ngOnInit() {

@@ -20,7 +20,7 @@ export class PresupuestoComponent implements OnInit {
   cotizacionSeleccionada: Cotizacion;
   results: Cliente[];
 
-  @ViewChild('cotizaciones_tabla') cotizaciones_tabla: CotizacionTabla;
+  @ViewChild('cotizaciones_tabla', { static: true }) cotizaciones_tabla: CotizacionTabla;
 
   voltajes;
 

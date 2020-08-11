@@ -14,7 +14,7 @@ export class TiposComponent implements OnInit {
   nuevotipo = false;
   tipoSeleccionado: Tipo;
 
-  @ViewChild('tipos_tabla') tipos_tabla: TiposTabla;
+  @ViewChild('tipos_tabla', { static: true }) tipos_tabla: TiposTabla;
 
   ngOnInit() {
   }

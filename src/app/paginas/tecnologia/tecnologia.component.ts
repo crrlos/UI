@@ -14,7 +14,7 @@ export class TecnologiaComponent implements OnInit {
   nuevotecnologia = false;
   tecnologiaSeleccionado: Tecnologia;
 
-  @ViewChild('tecnologias_tabla') tecnologias_tabla: TecnologiasTabla;
+  @ViewChild('tecnologias_tabla', { static: true }) tecnologias_tabla: TecnologiasTabla;
 
   ngOnInit() {
   }

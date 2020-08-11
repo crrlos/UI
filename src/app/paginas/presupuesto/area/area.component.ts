@@ -14,7 +14,7 @@ declare var customjs;
   templateUrl: './area.component.html'
 })
 export class AreaComponent implements OnInit {
-  @ViewChild(EquipoChildComponent)
+  @ViewChild(EquipoChildComponent, { static: false })
   private equipoChild: EquipoChildComponent;
 
   mostrarDialogo: boolean = false;

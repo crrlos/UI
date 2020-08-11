@@ -14,7 +14,7 @@ export class GasComponent implements OnInit {
   nuevogas = false;
   gasSeleccionado: Gas;
 
-  @ViewChild('gas_tabla') gas_tabla: GasTabla;
+  @ViewChild('gas_tabla', { static: true }) gas_tabla: GasTabla;
 
   ngOnInit() {
   }

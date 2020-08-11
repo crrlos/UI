@@ -15,7 +15,7 @@ export class ClientesComponent implements OnInit {
   nuevoCliente = false;
   clienteSeleccionado: Cliente;
 
-  @ViewChild('clientes_tabla') clientes_tabla: ClientesTabla;
+  @ViewChild('clientes_tabla', { static: true }) clientes_tabla: ClientesTabla;
   ngOnInit() {
   }
   showDialogToAdd() {

@@ -38,7 +38,7 @@ export class MaterialesComponent implements OnInit {
   cols: any[];
   selectedColumns: any[];
 
-  @ViewChild('materiales_tabla') materiales_tabla: MaterialesTabla;
+  @ViewChild('materiales_tabla', { static: true }) materiales_tabla: MaterialesTabla;
 
   ngOnInit() {
     this.tipoHttp.filtrar(event).subscribe(data => {

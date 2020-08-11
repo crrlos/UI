@@ -14,7 +14,7 @@ export class UnidadComponent implements OnInit {
   nuevaUnidad = false;
   unidadSeleccionada: UnidadMedida;
 
-  @ViewChild('unidades_tabla') unidades_tabla: UnidadesTabla;
+  @ViewChild('unidades_tabla', { static: true }) unidades_tabla: UnidadesTabla;
 
   ngOnInit() {
   }

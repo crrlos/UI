@@ -15,7 +15,7 @@ export class MarcasComponent implements OnInit {
   nuevomarca = false;
   marcaSeleccionada: Marca;
 
-  @ViewChild('marcas_tabla') marcas_tabla: MarcasTabla;
+  @ViewChild('marcas_tabla', { static: true }) marcas_tabla: MarcasTabla;
 
   ngOnInit() {
   }
