@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { PaginasModule } from './paginas/paginas.module';
 import { RoutesModule } from './routes.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RoutesModule } from './routes.module';
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
-    RoutesModule
+    RoutesModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

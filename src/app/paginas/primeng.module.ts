@@ -19,7 +19,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {FieldsetModule} from 'primeng/fieldset';
-import {TabViewModule, TabView, TabViewNav} from 'primeng/tabview';
+import {TabViewModule} from 'primeng/tabview';
 @NgModule({
   exports: [
     CommonModule,

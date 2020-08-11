@@ -6,7 +6,7 @@
 </app-materiales-tabla>
 
 <form #f="ngForm">
-    <p-dialog header="Material" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+    <p-dialog header="Material" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'300px'}">
         <div class="ui-g ui-fluid" *ngIf="material">
             <div class="text-danger text-center" *ngIf="errores">Hay campos incompletos</div>
           <div class="ui-g-12">

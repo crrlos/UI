@@ -6,7 +6,7 @@
 </app-clientes-tabla>
 
 <form #f="ngForm">
-    <p-dialog header="Cliente" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+    <p-dialog header="Cliente" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'300px'}">
         <div class="ui-g ui-fluid" *ngIf="cliente">
 
           <div class="ui-g-12">

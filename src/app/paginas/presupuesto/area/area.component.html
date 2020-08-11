@@ -9,7 +9,7 @@
       <button class="btn btn-primary ml-2" (click)="mostrarDialogoArea()">Agregar área</button>
     </div>
     <br>
-    <p-dialog header="Registrar área" [visible]="mostrarDialogo" [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+    <p-dialog header="Registrar área" [visible]="mostrarDialogo" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'300px'}">
       <div class="ui-g ui-fluid">
   
         <input type="text" [(ngModel)]="nombreArea" placeholder="Nombre área" pInputText/>

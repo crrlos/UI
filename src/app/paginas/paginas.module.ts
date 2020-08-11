@@ -10,7 +10,7 @@ import { PresupuestoTablaComponent } from './presupuestos/presupuesto.tabla.comp
 import { PresupuestoComponent } from './presupuestos/presupuesto.component';
 import { PrimengModule } from './primeng.module';
 import { FormsModule } from '@angular/forms';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from '../shared/shared.module';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ClientesTablaComponent } from './clientes/clientes.tabla.component';
@@ -56,7 +56,7 @@ import { CostoComponent } from './presupuesto/costo/costo.component';
   ],
   imports: [
     SharedModule,
-    AngularFontAwesomeModule,
+    FontAwesomeModule,
     FormsModule,
     CommonModule,
     PrimengModule,
