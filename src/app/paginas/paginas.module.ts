@@ -17,7 +17,6 @@ import { ClientesTablaComponent } from './clientes/clientes.tabla.component';
 import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { MarcasComponent } from './marcas/marcas.component';
-import { MarcasTablaComponent } from './marcas/marcas.tabla.component';
 import { TiposComponent } from './tipos/tipos.component';
 import { TiposTablaComponent } from './tipos/tipos.tabla.component';
 import { TecnologiaComponent } from './tecnologia/tecnologia.component';
@@ -28,6 +27,7 @@ import { ServiciosModule } from '../servicios/servicios.module';
 import { UnidadComponent } from './unidades/unidades.component';
 import { UnidadesTablaComponent } from './unidades/unidades.tabla.component';
 import { CostoComponent } from './presupuesto/costo/costo.component';
+import { TablaComponent } from '../tabla/tabla.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,6 @@ import { CostoComponent } from './presupuesto/costo/costo.component';
     ClientesTablaComponent,
     WrapperComponent,
     MarcasComponent,
-    MarcasTablaComponent,
     TiposComponent,
     TiposTablaComponent,
     TecnologiaComponent,
@@ -52,7 +51,8 @@ import { CostoComponent } from './presupuesto/costo/costo.component';
     GasTablaComponent,
     UnidadComponent,
     UnidadesTablaComponent,
-    CostoComponent
+    CostoComponent,
+    TablaComponent
   ],
   imports: [
     SharedModule,

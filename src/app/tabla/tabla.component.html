@@ -1,0 +1,74 @@
+<p-table
+  #tt
+  [columns]="configuration.columns"
+  [globalFilterFields]="configuration.globalFilterFields"
+  [paginator]="true"
+  [rows]="7"
+  [rowsPerPageOptions]="[10, 20, 30]"
+  [totalRecords]="configuration.data.length"
+  [value]="configuration.data"
+  selectionMode="single"
+  styleClass="p-datatable-striped"
+>
+  <ng-template pTemplate="caption">
+    <div style="text-align: left;">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-plus"
+        (click)="add.emit(true)"
+        label="Agregar"
+      ></button>
+    </div>
+    <br />
+    <input
+      type="text"
+      pInputText
+      placeholder="Filtrar"
+      (input)="tt.filterGlobal($event.target.value, 'contains')"
+      class="form-control"
+    />
+  </ng-template>
+
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{ col.header }}
+      </th>
+      <th>Opciones</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData>
+    <tr>
+      <td>{{ rowData.nombre }}</td>
+      <td>
+        <button
+          class="p-button-rounded p-button-success p-ripple p-button p-component p-button-icon-only"
+          type="button"
+          style="margin-right: 5px;"
+          pTooltip="Editar"
+          tooltipPosition="top"
+          (click)="edit.emit(rowData)"
+        >
+          <span class="p-button-icon pi pi-pencil"></span
+          ><span class="p-button-label"></span>
+        </button>
+
+        <button
+          class="p-button-rounded p-button-danger p-ripple p-button p-component p-button-icon-only"
+          type="button"
+          pTooltip="Eliminar"
+          tooltipPosition="top"
+          (click)="delete.emit(rowData)"
+        >
+          <span class="p-button-icon pi pi-trash"></span
+          ><span class="p-button-label"></span>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+
+  
+
+</p-table>

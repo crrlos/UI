@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {MarcaResponse } from 'src/app/interfaces/interfaces';
+import {MarcaResponse, Marca } from 'src/app/interfaces/interfaces';
 import { HOST } from 'src/app/config';
 import { Injectable } from '@angular/core';
 
@@ -9,10 +9,11 @@ import { Injectable } from '@angular/core';
 export class MarcaHttpService {
 
   constructor(private http: HttpClient) { }
-  guardar(tecnologia) {
+
+  guardar(tecnologia: Marca) {
     return this.http.post(`${HOST}/marcas`, tecnologia);
   }
-  actualizar(tecnologia) {
+  actualizar(tecnologia: Marca) {
     return this.http.put(`${HOST}/marcas`, tecnologia);
   }
   eliminar(id: number) {

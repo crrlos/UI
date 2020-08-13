@@ -20,6 +20,7 @@ import { ToastModule } from 'primeng/toast';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {FieldsetModule} from 'primeng/fieldset';
 import {TabViewModule} from 'primeng/tabview';
+import {TooltipModule} from 'primeng/tooltip';
 @NgModule({
   exports: [
     CommonModule,
@@ -40,7 +41,8 @@ import {TabViewModule} from 'primeng/tabview';
     ToastModule,
     KeyFilterModule,
     FieldsetModule,
-    TabViewModule
+    TabViewModule,
+    TooltipModule
   ], providers: [ConfirmationService, MessageService]
 })
 export class PrimengModule { }
