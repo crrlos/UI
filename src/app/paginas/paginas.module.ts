@@ -20,7 +20,6 @@ import { MarcasComponent } from './marcas/marcas.component';
 import { TiposComponent } from './tipos/tipos.component';
 import { TecnologiaComponent } from './tecnologia/tecnologia.component';
 import { GasComponent } from './gas/gas.component';
-import { TecnologiaTablaComponent } from './tecnologia/tecnologia.tabla.component';
 import { ServiciosModule } from '../servicios/servicios.module';
 import { UnidadComponent } from './unidades/unidades.component';
 import { UnidadesTablaComponent } from './unidades/unidades.tabla.component';
@@ -43,7 +42,6 @@ import { TablaComponent } from '../tabla/tabla.component';
     MarcasComponent,
     TiposComponent,
     TecnologiaComponent,
-    TecnologiaTablaComponent,
     GasComponent,
     UnidadComponent,
     UnidadesTablaComponent,
