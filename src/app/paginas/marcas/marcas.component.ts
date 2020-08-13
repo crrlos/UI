@@ -31,7 +31,7 @@ export class MarcasComponent implements OnInit {
 
   tableConfiguration = {
     globalFilterFields: ["nombre"],
-    columns: [{ field: "marca_nombre", header: "Marca" }],
+    columns: [{ field: "nombre", header: "Marca" }],
     http: this.http,
     route: "marcas",
     data: this.data,
