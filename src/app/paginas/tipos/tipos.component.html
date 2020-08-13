@@ -1,26 +1,31 @@
+<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"
+acceptLabel="Sí" rejectLabel="No" defaultFocus="reject"
+acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
 
-<app-tipos-tabla
-#tipos_tabla (tipo_seleccionado)="onRowSelect($event)"
-(agregar)="showDialogToAdd()"
-[puede_agregar] = 'true'>
-</app-tipos-tabla>
-
-<p-dialog header="Tipo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'300px'}">
+<p-dialog header="Agregar tipo" [(visible)]="displayDialog" showEffect="fade" [modal]="true" [style]="{'width':'300px'}">
   <div class="ui-g ui-fluid" *ngIf="tipo">
 
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="year">Tipo</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="tipo.nombre" />
-      </div>
+    <div class="form-group">
+      Nombre de tipo<br/>
+    <input pInputText style="width: 100%;" [ngClass]="{'p-invalid' : invalid}" [(ngModel)] ="tipo.nombre"/>
+    <small *ngIf="invalid" class="p-invalid">Campo requerido</small>
     </div>
+
   </div>
+
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa fa-close" (click)="delete(tipo.id)" class="ui-button-danger" label="Eliminar"></button>
-      <button type="button" pButton icon="fa fa-check" (click)="save()" label="Guardar"></button>
+      <button type="button" pButton   (click)="displayDialog = false" class="p-button-outlined" label="Cancelar"></button>
+      <button type="button" pButton  (click)="save()" label="Guardar"></button>
     </div>
   </p-footer>
 </p-dialog>
+
+<app-tabla
+  [configuration]="tableConfiguration"
+  (add) = "showDialogToAdd()"
+  (edit) = "showDialogToEdit($event)"
+  (delete) = "showDialogToDelete($event)"
+>
+
+</app-tabla>

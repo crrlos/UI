@@ -18,7 +18,6 @@ import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { MarcasComponent } from './marcas/marcas.component';
 import { TiposComponent } from './tipos/tipos.component';
-import { TiposTablaComponent } from './tipos/tipos.tabla.component';
 import { TecnologiaComponent } from './tecnologia/tecnologia.component';
 import { GasComponent } from './gas/gas.component';
 import { TecnologiaTablaComponent } from './tecnologia/tecnologia.tabla.component';
@@ -44,7 +43,6 @@ import { TablaComponent } from '../tabla/tabla.component';
     WrapperComponent,
     MarcasComponent,
     TiposComponent,
-    TiposTablaComponent,
     TecnologiaComponent,
     TecnologiaTablaComponent,
     GasComponent,
