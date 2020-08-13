@@ -21,7 +21,6 @@ import { TiposComponent } from './tipos/tipos.component';
 import { TecnologiaComponent } from './tecnologia/tecnologia.component';
 import { GasComponent } from './gas/gas.component';
 import { TecnologiaTablaComponent } from './tecnologia/tecnologia.tabla.component';
-import { GasTablaComponent } from './gas/gas.tabla.component';
 import { ServiciosModule } from '../servicios/servicios.module';
 import { UnidadComponent } from './unidades/unidades.component';
 import { UnidadesTablaComponent } from './unidades/unidades.tabla.component';
@@ -46,7 +45,6 @@ import { TablaComponent } from '../tabla/tabla.component';
     TecnologiaComponent,
     TecnologiaTablaComponent,
     GasComponent,
-    GasTablaComponent,
     UnidadComponent,
     UnidadesTablaComponent,
     CostoComponent,
