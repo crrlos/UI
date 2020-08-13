@@ -1,64 +1,106 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UnidadMedida } from 'src/app/interfaces/interfaces';
 import { UnidadHttpService } from 'src/app/servicios/http/unidad.service';
-declare var swal;
+import { ConfirmationService } from 'primeng/api';
+declare var swal : any;
 @Component({
   selector: 'app-unidades',
   templateUrl: './unidades.component.html'
 })
 export class UnidadComponent implements OnInit {
 
-  constructor(private http: UnidadHttpService) { }
-  unidad: UnidadMedida;
+  
+  constructor(
+    private http: UnidadHttpService,
+    private confirmationService: ConfirmationService
+  ) {}
+
+  invalid = false;
+  unidadMedida: UnidadMedida;
   displayDialog = false;
-  nuevaUnidad = false;
-  unidadSeleccionada: UnidadMedida;
+  nuevaUnidadMedida = false;
+  marcaSeleccionada: UnidadMedida;
 
-  @ViewChild('unidades_tabla', { static: true }) unidades_tabla: UnidadesTabla;
+  data: UnidadMedida[] = [];
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.http.filtrar().subscribe((data) => {
+      data.unidades.forEach((m) => {
+        this.data.push(m);
+      });
+    });
   }
+
+  tableConfiguration = {
+    globalFilterFields: ["nombre"],
+    columns: [
+      { field: "nombre", header: "Unidad" },
+      { field: "abreviatura", header: "Abreviatura" },
+    ],
+    http: this.http,
+    data: this.data,
+  };
+
+
   showDialogToAdd() {
-    this.nuevaUnidad = true;
-    this.unidad = {};
-    this.displayDialog = true;
+    this.resetState({}, true);
   }
-  onRowSelect(event) {
-    this.nuevaUnidad = false;
-    this.unidad = JSON.parse(JSON.stringify(event));
-    this.displayDialog = true;
-  }
-  save() {
 
-    if (this.nuevaUnidad) {
-      this.http.guardar(this.unidad).subscribe((res: any) => {
-        this.unidad.id = res.id;
-        this.unidades_tabla.unidades.push(this.unidad);
-        swal('Correcto!', 'Registro agregado!', 'success');
+  showDialogToEdit(unidadMedida: UnidadMedida) {
+    this.resetState(unidadMedida, false);
+  }
+
+  showDialogToDelete(unidadMedida: UnidadMedida) {
+    this.confirmationService.confirm({
+      message: "Está seguro que desea eliminar este registro?",
+      accept: () => {
+        this.delete(unidadMedida);
+      },
+    });
+  }
+
+  resetState(unidadMedida: UnidadMedida, esNuevaMarca: boolean) {
+    this.invalid = false;
+    this.nuevaUnidadMedida = esNuevaMarca;
+    this.unidadMedida = unidadMedida;
+    this.displayDialog = true;
+  }
+
+  
+ 
+  save() {
+    
+    if (this.unidadMedida.nombre == null || this.unidadMedida.nombre.length == 0) {
+      this.invalid = true;
+      return;
+    }
+
+    if (this.nuevaUnidadMedida) {
+      this.http.guardar(this.unidadMedida).subscribe((res) => {
+        this.unidadMedida.id = JSON.parse(JSON.stringify(res)).id;
+        this.data.push(this.unidadMedida);
+        swal("Correcto!", "Registro agregado!", "success");
       });
     } else {
-      this.http.actualizar(this.unidad).subscribe(() => {
-        const i = this.unidades_tabla.unidades.findIndex(et => et.id === this.unidad.id);
-        this.unidades_tabla.unidades[i] = this.unidad;
-        swal('Correcto!', 'Registro actualizado!', 'success');
+      this.http.actualizar(this.unidadMedida).subscribe(() => {
+        const i = this.data.findIndex((et) => et.id === this.unidadMedida.id);
+        this.data[i] = this.unidadMedida;
+        swal("Correcto!", "Registro actualizado!", "success");
       });
     }
     this.displayDialog = false;
   }
 
-  delete(id: number) {
-    this.http.eliminar(id).subscribe(() => {
-      this.unidades_tabla.unidades.splice(this.unidades_tabla.unidades.indexOf(this.unidadSeleccionada), 1);
-      swal('Correcto!', 'Registro eliminado!', 'success');
-    }, () => {
-      swal ( 'Oops' ,  'Este registro no se pudo eliminar' ,  'error' );
-
-    });
+  delete(unidadMedida: UnidadMedida) {
+    this.http.eliminar(unidadMedida.id).subscribe(
+      () => {
+        this.data.splice(this.data.indexOf(unidadMedida), 1);
+        swal("Correcto!", "Registro eliminado!", "success");
+      },
+      () => {
+        swal("Oops", "Este registro no se pudo eliminar", "error");
+      }
+    );
     this.displayDialog = false;
   }
-
 }
-export interface UnidadesTabla {
-  unidades: UnidadMedida[];
-}
-

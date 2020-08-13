@@ -9,11 +9,11 @@ import { Injectable } from '@angular/core';
 export class UnidadHttpService {
 
   constructor(private http: HttpClient) { }
-  guardar(unidad) {
+  guardar(unidad: UnidadMedida) {
     return this.http.post(`${HOST}/unidadesmedida`, unidad);
   }
   actualizar(unidad: UnidadMedida) {
-    return this.http.put(`${HOST}/unidadesmedida/${unidad.id}`, unidad);
+    return this.http.put(`${HOST}/unidadesmedida`, unidad);
   }
   eliminar(id: number) {
     return this.http.delete(`${HOST}/unidadesmedida/${id}`);

@@ -41,7 +41,10 @@
 
   <ng-template pTemplate="body" let-rowData>
     <tr>
-      <td>{{ rowData.nombre }}</td>
+
+      <td *ngFor="let col of configuration.columns">{{rowData[col.field]}}</td>
+      
+
       <td>
         <button
           class="p-button-rounded p-button-success p-ripple p-button p-component p-button-icon-only"

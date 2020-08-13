@@ -1,34 +1,37 @@
+<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"
+acceptLabel="Sí" rejectLabel="No" defaultFocus="reject"
+acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
 
-<app-unidades-tabla
-#unidades_tabla (unidad_seleccionada)="onRowSelect($event)"
-(agregar)="showDialogToAdd()"
-[puede_agregar] = 'true'>
-</app-unidades-tabla>
+<p-dialog header="Agregar unidad de medida" [(visible)]="displayDialog" showEffect="fade" [modal]="true" [style]="{'width':'300px'}">
+  <div class="ui-g ui-fluid" *ngIf="unidadMedida">
 
-<p-dialog header="Unidad" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'300px'}">
-  <div class="ui-g ui-fluid" *ngIf="unidad">
-
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="year">Unidad</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="unidad.nombre" />
-      </div>
+    <div class="form-group">
+      Nombre de unidad<br/>
+    <input pInputText style="width: 100%;" [ngClass]="{'p-invalid' : invalid}" [(ngModel)] ="unidadMedida.nombre"/>
+    <small *ngIf="invalid" class="p-invalid">Campo requerido</small>
     </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="year">Abreviatura</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="unidad.abreviatura" />
-      </div>
+
+    <div class="form-group">
+      Abreviatura<br/>
+    <input pInputText style="width: 100%;" [ngClass]="{'p-invalid' : invalidAbreviatura}" [(ngModel)] ="unidadMedida.abreviatura"/>
+    <small *ngIf="invalid" class="p-invalid">Campo requerido</small>
     </div>
+
   </div>
+
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa fa-close" (click)="delete(unidad.id)" class="ui-button-danger" label="Eliminar"></button>
-      <button type="button" pButton icon="fa fa-check" (click)="save()" label="Guardar"></button>
+      <button type="button" pButton   (click)="displayDialog = false" class="p-button-outlined" label="Cancelar"></button>
+      <button type="button" pButton  (click)="save()" label="Guardar"></button>
     </div>
   </p-footer>
 </p-dialog>
+
+<app-tabla
+  [configuration]="tableConfiguration"
+  (add) = "showDialogToAdd()"
+  (edit) = "showDialogToEdit($event)"
+  (delete) = "showDialogToDelete($event)"
+>
+
+</app-tabla>
