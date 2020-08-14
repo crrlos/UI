@@ -12,7 +12,7 @@ pipelines:
           - node
         script: # Modify the commands below to build your repository.
           - npm install
-          - echo "import swal  from \"./core\";\nexport default swal;\nexport as namespace swal;" >
+          - echo "import swal  from \"./core\";export default swal;export as namespace swal;" >
                   /opt/atlassian/pipelines/agent/build/node_modules/sweetalert/typings/sweetalert.d.ts
           - npm run build
           - pipe: atlassian/ftp-deploy:0.3.3
