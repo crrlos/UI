@@ -14,3 +14,11 @@ pipelines:
           - npm install -g @angular/cli
           - npm install
           - ng build --prod --baseHref=UI
+          - pipe: atlassian/ftp-deploy:0.3.3
+                      variables:
+                                  USER: 'carlos'
+                                  PASSWORD: 'Rl2214_.s'
+                                  SERVER: 'ftp.site4now.net'
+                                  REMOTE_PATH: '/UI'
+                                  LOCAL_PATH: './dist'
+                                  DELETE_FLAG: 'true'
