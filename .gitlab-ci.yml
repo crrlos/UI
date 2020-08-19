@@ -1,0 +1,19 @@
+# This file is a template, and might need editing before it works on your project.
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/node/tags/
+image: node:latest
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+cache:
+  paths:
+    - node_modules/
+
+build:
+  script:
+    - apt-get update -qy
+    - apt-get install -y lftp
+    - npm install
+    - echo "import swal  from \"./core\";export default swal;export as namespace swal;" > /builds/rlobos.carlos/IrwinUI/node_modules/sweetalert/typings/sweetalert.d.ts
+    - npm run build
+    - lftp -e "open ftp.site4now.net; user $USER $PASSWORD;set ssl:verify-certificate no;mirror --reverse --verbose --parallel=10  ./dist/irwin-ui /ui;bye"
