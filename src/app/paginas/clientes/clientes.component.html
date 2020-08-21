@@ -1,9 +1,6 @@
-
-<app-clientes-tabla
-#clientes_tabla (cliente_seleccionado)="onRowSelect($event)"
-(agregar)="showDialogToAdd()"
-[puede_agregar] = 'true'>
-</app-clientes-tabla>
+<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"
+acceptLabel="Sí" rejectLabel="No" defaultFocus="reject"
+acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
 
 <form #f="ngForm">
     <p-dialog header="Cliente" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'300px'}">
@@ -36,9 +33,21 @@
         </div>
         <p-footer>
           <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="button" pButton icon="fa fa-close" (click)="delete()" class="ui-button-danger" label="Cancelar"></button>
-            <button type="button" pButton icon="fa fa-check" (click)="save(f)" label="Guardar"></button>
+            <button type="button" pButton icon="fa fa-close" (click)="displayDialog=false" class="p-button-outlined" label="Cancelar"></button>
+            <button type="button" pButton icon="fa fa-check" (click)="save()" label="Guardar"></button>
           </div>
         </p-footer>
       </p-dialog>
 </form>
+
+
+<app-tabla
+  [configuration]="tableConfiguration"
+  (add) = "showDialogToAdd()"
+  (edit) = "showDialogToEdit($event)"
+  (delete) = "showDialogToDelete($event)"
+>
+
+</app-tabla>
+
+

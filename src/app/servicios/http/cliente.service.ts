@@ -17,10 +17,13 @@ export class ClienteHttpService {
       params: event
     });
   }
-  guardar(cliente) {
+  guardar(cliente: Cliente) {
     return this.http.post(`${HOST}/clientes`, cliente);
   }
-  actualizar(cliente) {
+  actualizar(cliente: Cliente) {
     return this.http.put(`${HOST}/clientes`, cliente);
+  }
+  eliminar(cliente :Cliente){
+    return this.http.delete(`${HOST}/clientes/${cliente.id}`)
   }
 }

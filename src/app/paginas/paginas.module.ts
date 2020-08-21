@@ -13,7 +13,6 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from '../shared/shared.module';
 import { ClientesComponent } from './clientes/clientes.component';
-import { ClientesTablaComponent } from './clientes/clientes.tabla.component';
 import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { MarcasComponent } from './marcas/marcas.component';
@@ -36,7 +35,6 @@ import { TablaComponent } from '../tabla/tabla.component';
     PresupuestoTablaComponent,
     PresupuestoComponent,
     ClientesComponent,
-    ClientesTablaComponent,
     WrapperComponent,
     MarcasComponent,
     TiposComponent,
