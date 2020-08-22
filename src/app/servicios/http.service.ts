@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
-  UnidadMedida, Voltaje, CotizacionResponse
+  UnidadMedida, Voltaje, CotizacionResponse, VoltajeResponse
 } from 'src/app/interfaces/interfaces';
 import { HOST } from '../config';
 
@@ -17,7 +17,7 @@ export class HttpService {
     return this.http.get<UnidadMedida[]>(`${HOST}/unidadesmedida`);
   }
   voltajes() {
-    return this.http.get<Voltaje[]>(`${HOST}/voltajes`);
+    return this.http.get<VoltajeResponse>(`${HOST}/voltajes`);
   }
   cotizacion_agregar(data: any) {
     return this.http.post(`${HOST}/cotizaciones`, { clienteId: data.cliente.id, descripcion: data.descripcion });

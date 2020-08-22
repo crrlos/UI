@@ -23,6 +23,7 @@ import { ServiciosModule } from '../servicios/servicios.module';
 import { UnidadComponent } from './unidades/unidades.component';
 import { CostoComponent } from './presupuesto/costo/costo.component';
 import { TablaComponent } from '../tabla/tabla.component';
+import { VoltajesComponent } from './voltajes/voltajes.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TablaComponent } from '../tabla/tabla.component';
     GasComponent,
     UnidadComponent,
     CostoComponent,
-    TablaComponent
+    TablaComponent,
+    VoltajesComponent
   ],
   imports: [
     SharedModule,

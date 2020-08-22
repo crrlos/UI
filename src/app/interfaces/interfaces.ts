@@ -45,7 +45,7 @@ export interface Equipo {
   totalMaterialesModificado? : number;
   tipo?: TipoUnidad;
   marca?: Marca;
-  voltaje? : String;
+  voltaje? : Voltaje;
   tecnologia?: Tecnologia;
   gas?: Gas;
 }
@@ -65,8 +65,8 @@ export interface Material {
   material_activo?;
 }
 export interface Voltaje {
-  name;
-  code;
+  id? : number;
+  nombre?: String;
 }
 export interface TipoUnidad {
   id? :number;
@@ -113,6 +113,10 @@ export interface TecnologiaResponse {
 export interface GasResponse {
   gases: Gas[];
   totalRecords;
+}
+export interface VoltajeResponse {
+  voltajes: Voltaje[];
+  totalRecords :number;
 }
 export interface CotizacionResponse {
   cotizaciones: Cotizacion[];

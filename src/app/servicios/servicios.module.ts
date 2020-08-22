@@ -7,6 +7,7 @@ import { AreaHttpService } from './http/areas.service';
 import { EquipoHttpService } from './http/equipo.service';
 import { MaterialHttpService } from './http/material.service';
 import { UnidadHttpService } from './http/unidad.service';
+import { VoltajesHttpService } from './http/voltajes.service';
 
 @NgModule({
   providers: [
@@ -17,7 +18,8 @@ import { UnidadHttpService } from './http/unidad.service';
     AreaHttpService,
     EquipoHttpService,
     MaterialHttpService,
-    UnidadHttpService
+    UnidadHttpService,
+    VoltajesHttpService
   ]
 })
 export class ServiciosModule { }

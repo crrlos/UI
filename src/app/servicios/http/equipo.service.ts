@@ -12,6 +12,10 @@ export class EquipoHttpService {
   
   }
 
+  eliminar(id:number){
+    return this.http.delete(`${HOST}/equipos/${id}`);
+  }
+
   equipos(event?: any) {
     return this.http.get<EquiposResponse>(`${HOST}/equipos`, {
       params: event,
@@ -27,7 +31,7 @@ export class EquipoHttpService {
     equipo.tipoId = equipo.tipo.id;
     equipo.tecnologiaId = equipo.tecnologia.id;
     equipo.gasId = equipo.gas.id;
-    equipo.voltaje = equipo.voltaje.name;
+    equipo.voltajeId = equipo.voltaje.id;
 
     return this.http.put(`${HOST}/equipos`, equipo);
   }
@@ -44,6 +48,7 @@ export class EquipoHttpService {
     m2.marcaId = equipo.marca.id;
     m2.gasId = equipo.gas.id;
     m2.tecnologiaId = equipo.tecnologia.id;
+    m2.voltajeId = equipo.voltaje.id;
 
     return this.http.post(`${HOST}/equipos`, m2);
   }

@@ -1,9 +1,7 @@
+<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"
+acceptLabel="Sí" rejectLabel="No" defaultFocus="reject"
+acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
 
-<app-equipos-tabla
-#equipos_tabla (equipo_seleccionado)="onRowSelect($event)"
-(agregar)="showDialogToAdd()"
-[puede_agregar] = 'true'>
-</app-equipos-tabla>
 
 <form #f="ngForm">
   <p-dialog header="Agregar equipo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'600px'}">
@@ -60,7 +58,7 @@
       <label>Voltaje</label>
       <p-dropdown appendTo="body"  required name="voltaje" placeholder="Seleccione" [showClear]="true"
           [options]="voltajes" [style]="{'width':'100%'}" [(ngModel)]="equipo.voltaje"
-            optionLabel="name"></p-dropdown>
+            optionLabel="nombre"></p-dropdown>
   </div>
   <div class="p-field p-col">
       <label>Gas</label>
@@ -89,3 +87,13 @@
 
 </p-dialog>
 </form>
+
+
+<app-tabla
+  [configuration]="tableConfiguration"
+  (add) = "showDialogToAdd()"
+  (edit) = "showDialogToEdit($event)"
+  (delete) = "showDialogToDelete($event)"
+>
+
+</app-tabla>

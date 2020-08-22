@@ -1,0 +1,31 @@
+<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"
+acceptLabel="Sí" rejectLabel="No" defaultFocus="reject"
+acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
+
+<p-dialog header="Agregar voltaje" [(visible)]="displayDialog" showEffect="fade" [modal]="true" [style]="{'width':'300px'}">
+  <div class="ui-g ui-fluid" *ngIf="voltaje">
+
+    <div class="form-group">
+      Voltaje<br/>
+    <input pInputText pKeyFilter="int" style="width: 100%;" [ngClass]="{'p-invalid' : invalid}" [(ngModel)] ="voltaje.nombre"/>
+    <small *ngIf="invalid" class="p-invalid">Campo requerido</small>
+    </div>
+
+  </div>
+
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton   (click)="displayDialog = false" class="p-button-outlined" label="Cancelar"></button>
+      <button type="button" pButton  (click)="save()" label="Guardar"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<app-tabla
+  [configuration]="tableConfiguration"
+  (add) = "showDialogToAdd()"
+  (edit) = "showDialogToEdit($event)"
+  (delete) = "showDialogToDelete($event)"
+>
+
+</app-tabla>
