@@ -1,35 +1,38 @@
+<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"
+acceptLabel="Sí" rejectLabel="No" defaultFocus="reject"
+acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
 
-<app-presupuesto-tabla
-#cotizaciones_tabla
-(agregar)="showDialogToAdd()"
-(editar)="showDialogToEdit($event)"
-[puede_agregar] = 'true'>
-</app-presupuesto-tabla>
 
-<p-dialog header="Cotización" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'600px'}">
-  <div class="ui-g ui-fluid" >
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="vin">Cliente</label>
-      </div>
-      <div class="ui-g-8">
+<p-dialog header="Crear nueva cotización" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'600px'}">
+  
+  <div class="p-fluid p-grid">
+    <div class="p-field p-col">
+        <label>Cliente</label>
         <p-autoComplete [(ngModel)]="cotizacion.cliente" [forceSelection]="true"
         [suggestions]="results" field="nombre" (completeMethod)="search($event)"></p-autoComplete>
-      </div>
     </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="year">Descripción</label>
-      </div>
-      <div class="ui-g-8">
-        <textarea pInputTextarea [rows]="5" [cols]="30" [(ngModel)]="cotizacion.descripcion" pInputTextarea ></textarea>
-      </div>
-    </div>
+</div>
+
+<div class="p-fluid p-grid">
+  <div class="p-field p-col">
+      <label>Descripción</label>
+      <textarea pInputTextarea [rows]="5" [cols]="30" [(ngModel)]="cotizacion.descripcion" pInputTextarea ></textarea>
   </div>
+</div>
+
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa fa-close" (click)="delete()" class="ui-button-danger" label="Delete"></button>
-      <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+      <button type="button" pButton icon="fa fa-close" (click)="displayDialog = false" class="p-button-outlined" label="Cancelar"></button>
+      <button type="button" pButton icon="fa fa-check" (click)="save()" label="Guardar"></button>
     </div>
   </p-footer>
 </p-dialog>
+
+<app-tabla
+  [configuration]="tableConfiguration"
+  (add) = "showDialogToAdd()"
+  (edit) = "showDialogToEdit($event)"
+  (delete) = "showDialogToDelete($event)"
+>
+
+</app-tabla>

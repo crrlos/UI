@@ -8,6 +8,7 @@ import { EquipoHttpService } from './http/equipo.service';
 import { MaterialHttpService } from './http/material.service';
 import { UnidadHttpService } from './http/unidad.service';
 import { VoltajesHttpService } from './http/voltajes.service';
+import { CotizacionesHttpService } from './http/cotizaciones.service';
 
 @NgModule({
   providers: [
@@ -19,7 +20,8 @@ import { VoltajesHttpService } from './http/voltajes.service';
     EquipoHttpService,
     MaterialHttpService,
     UnidadHttpService,
-    VoltajesHttpService
+    VoltajesHttpService,
+    CotizacionesHttpService
   ]
 })
 export class ServiciosModule { }

@@ -6,7 +6,6 @@ import { MaterialesComponent } from './materiales/materiales.component';
 import { EquiposComponent } from './equipos/equipos.component';
 import { EquiposTablaComponent } from './equipos/equipos.tabla.component';
 import { MaterialesTablaComponent } from './materiales/materiales.tabla.component';
-import { PresupuestoTablaComponent } from './presupuestos/presupuesto.tabla.component';
 import { PresupuestoComponent } from './presupuestos/presupuesto.component';
 import { PrimengModule } from './primeng.module';
 import { FormsModule } from '@angular/forms';
@@ -33,7 +32,6 @@ import { VoltajesComponent } from './voltajes/voltajes.component';
     EquiposComponent,
     EquiposTablaComponent,
     MaterialesTablaComponent,
-    PresupuestoTablaComponent,
     PresupuestoComponent,
     ClientesComponent,
     WrapperComponent,
