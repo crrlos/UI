@@ -39,4 +39,8 @@ export class MaterialHttpService {
 
     return this.http.post(`${HOST}/materiales`, m2);
   }
+
+  eliminar(id:number){
+    return this.http.delete(`${HOST}/materiales/${id}`);
+  }
 }

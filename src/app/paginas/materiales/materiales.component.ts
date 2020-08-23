@@ -6,6 +6,10 @@ import { TiposHttpService } from 'src/app/servicios/http/tipos.service';
 import { MarcaHttpService } from 'src/app/servicios/http/marcas.service';
 import { MaterialHttpService } from 'src/app/servicios/http/material.service';
 import { UnidadHttpService } from 'src/app/servicios/http/unidad.service';
+import { ConfirmationService } from 'primeng/api';
+
+
+declare var swal : any;
 
 interface MaterialesTabla {
   materiales: Material[];
@@ -21,9 +25,12 @@ export class MaterialesComponent implements OnInit {
     private tipoHttp: TiposHttpService,
     private marcaHttp: MarcaHttpService,
     private materialHttp: MaterialHttpService,
-    private unidadesHttp: UnidadHttpService) { }
+    private unidadesHttp: UnidadHttpService,
+    private materialesHttp: MaterialHttpService,
+    private confirmationService: ConfirmationService) { }
 
   material: Material;
+  materiales:Material[] = [];
   materialSeleccionado: Material;
 
   tipos: TipoUnidad[] = [];
@@ -35,10 +42,24 @@ export class MaterialesComponent implements OnInit {
 
   errores: boolean;
 
-  cols: any[];
-  selectedColumns: any[];
+  invalid:boolean;
 
-  @ViewChild('materiales_tabla', { static: true }) materiales_tabla: MaterialesTabla;
+  data:any[] = [];
+
+  tableConfiguration = {
+    globalFilterFields: ["nombre"],
+    columns: [
+      { field: "codigo", header: "Código" },
+      { field: "nombre", header: "Nombre" },
+      { field: "precio", header: "Precio" },
+      { field: "marca", header: "Marca" },
+      { field: "tipo", header: "Tipo" },
+      { field: "unidadMedida", header: "Unidad de Medida" },
+    ],
+    http: this.http,
+    data: this.data,
+  };
+
 
   ngOnInit() {
     this.tipoHttp.filtrar(event).subscribe(data => {
@@ -51,30 +72,53 @@ export class MaterialesComponent implements OnInit {
       this.unidades = unidad_medida.unidades;
     }
     );
-    this.cols = [
-      { field: 'codigo', header: 'Código' },
-      { field: 'nombre', header: 'Nombre' },
-      { field: 'precio', header: 'Precio' },
-      { field: 'cantidad', header: 'Cantidad' },
-      { field: 'marca', header: 'Marca' },
-      { field: 'tipo', header: 'Tipo' },
-      { field: 'medida', header: 'Unidad' },
-      { field: 'activo', header: 'Estado' }
-    ];
-    this.selectedColumns = this.cols;
+
+    this.materialHttp.materiales(event).subscribe(data => {
+      data.materiales.forEach(m => {
+        this.materiales.push(m);
+        this.data.push(this.formatMaterial(m));
+      });
+    });
+    
   }
+
+  formatMaterial(material: Material){
+    return {
+      id: material.id,
+      codigo : material.codigo,
+      nombre : material.nombre,
+      precio : material.precio,
+      marca  : material.marca.nombre,
+      tipo   : material.tipo.nombre,
+      unidadMedida : material.unidadMedida.nombre
+    };
+  }
+ 
   showDialogToAdd() {
-    this.nuevoMaterial = true;
-    this.errores = false;
-    this.displayDialog = true;
-    this.material = {};
+    this.resetState({}, true);
   }
-  onRowSelect(event) {
-    this.nuevoMaterial = false;
-    // crea un nuevo objeto Material para no modificar el original
-    this.material = JSON.parse(JSON.stringify(event.data));
+
+  showDialogToEdit(material: Material) {
+    material = this.materiales.find( m => m.id == material.id);
+    this.resetState(material, false);
+  }
+
+  showDialogToDelete(material: Material) {
+    this.confirmationService.confirm({
+      message: "Está seguro que desea eliminar este registro?",
+      accept: () => {
+        this.delete(material);
+      },
+    });
+  }
+
+  resetState(material: Material, esNuevoMaterial: boolean) {
+    this.invalid = false;
+    this.nuevoMaterial = esNuevoMaterial;
+    this.material = material;
     this.displayDialog = true;
   }
+
   save(f: FormGroup) {
     if (f.invalid) {
       this.errores = true;
@@ -84,21 +128,29 @@ export class MaterialesComponent implements OnInit {
     if (this.nuevoMaterial) {
       this.materialHttp.agregar(this.material).subscribe((res: any) => {
         this.material.id = res.id;
-        // this.materiales_tabla.materiales.push(JSON.parse(JSON.stringify(this.material)));
-        this.materiales_tabla.materiales.push(this.material);
+        this.data.push(this.formatMaterial(this.material));
+        swal("Correcto!", "Registro agregado!", "success");
       });
     } else {
       this.materialHttp.actualizar(this.material).subscribe(() =>
-        this.materiales_tabla
-          .materiales[this.materiales_tabla.materiales
-            .findIndex(m => m.id === this.material.id)] = this.material);
+        this.data
+          [this.data
+            .findIndex(m => m.id === this.material.id)] = this.formatMaterial(this.material));
+            swal("Correcto!", "Registro actualizado!", "success");
     }
 
     this.displayDialog = false;
   }
 
-  delete() {
-    this.displayDialog = false;
+  delete(material : Material) {
+    this.materialHttp.eliminar(material.id).subscribe(
+      () => {
+      this.data.splice(this.data.indexOf(material), 1);
+      swal("Correcto!", "Registro eliminado!", "success");
+    },
+    () => {
+      swal("Oops", "Este registro no se pudo eliminar", "error");
+    });
   }
 
 }
