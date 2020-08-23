@@ -37,7 +37,6 @@ export class EquiposComponent implements OnInit {
   nuevoEquipo = false;
   equipoSeleccionado: Equipo;
 
-  errores: boolean;
 
   invalid:boolean;
   equipos : Equipo [];
@@ -107,7 +106,7 @@ export class EquiposComponent implements OnInit {
 
   save(f: FormGroup) {
     if (f.invalid) {
-      this.errores = true;
+      this.invalid = true;
       return;
     }
 
@@ -172,8 +171,5 @@ export class EquiposComponent implements OnInit {
     this.displayDialog = false;
   }
 
-}
-export interface EquiposTabla {
-  equipos: Equipo[];
 }
 

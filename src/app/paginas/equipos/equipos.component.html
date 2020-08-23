@@ -6,7 +6,7 @@ acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
 <form #f="ngForm">
   <p-dialog header="Agregar equipo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'600px'}">
     <div *ngIf="equipo">
-      <div class="text-danger text-center" *ngIf="errores">Hay campos incompletos</div>
+      <div class="text-danger text-center" *ngIf="invalid">Hay campos incompletos</div>
 
       <div class="p-fluid p-grid">
         <div class="p-field p-col">
