@@ -114,6 +114,7 @@ export class EquiposComponent implements OnInit {
     if (this.nuevoEquipo) {
       this.equipoHttp.agregar(this.equipo).subscribe((res) => {
         this.equipo.id = JSON.parse(JSON.stringify(res)).id;
+        this.equipos.push(this.equipo);
         this.data.push(this.formatEquipo(this.equipo));
         swal("Correcto!", "Registro agregado!", "success");
       });
