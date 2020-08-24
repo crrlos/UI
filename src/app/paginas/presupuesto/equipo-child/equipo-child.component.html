@@ -8,24 +8,22 @@
     <p-accordion>
       <p-accordionTab *ngFor="let equipo of area.equipos">
         <p-header>
-          <!-- {{equipo.equipo.equipo_nombre}} ||
-          {{equipo.equipo.capacidad + 'BTU'}} ||
-          {{equipo.precio_total_personalizado}} ||{{equipo.costo_btu}} -->
-          <div class="row" style="width:90%;display: inline-block">
-            <div class="col-md-3 text-right" style="display: inline-block">
+
+          <div class="p-grid">
+            <div class="p-text-nowrap p-col">
               {{equipo.equipo.nombre}}
             </div>
-            <div class="col-md-3 text-right" style="display: inline-block">
+            <div class="p-text-nowrap p-col">
               {{equipo.equipo.capacidad}} BTU
             </div>
-            <div class="col-md-3 text-right" style="display: inline-block">
+            <div class="p-text-nowrap p-col">
               <strong>P </strong>{{equipo.precioTotalPersonalizado | currency}}
             </div>
-            <div class="col-md-3 text-right" style="display: inline-block">
+            <div class="p-text-nowrap p-col">
               <strong>CT </strong>{{equipo.costoBTU | currency }}
             </div>
-
           </div>
+          
         </p-header>
         <div class="row">
           <div class="col-4">
