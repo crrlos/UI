@@ -5,6 +5,7 @@ import { EquipoHttpService } from 'src/app/servicios/http/equipo.service';
 import { ClienteHttpService } from 'src/app/servicios/http/cliente.service';
 import { ConfirmationService } from 'primeng/api';
 import { CotizacionesHttpService } from 'src/app/servicios/http/cotizaciones.service';
+import { Router } from '@angular/router';
 
 declare var swal : any;
 
@@ -19,7 +20,8 @@ export class PresupuestoComponent implements OnInit {
   constructor(
     private http: CotizacionesHttpService, 
     private clienteHttp: ClienteHttpService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router
     ) { }
 
     ngOnInit() { 
@@ -44,6 +46,7 @@ export class PresupuestoComponent implements OnInit {
   data:any[] = [];
   invalid:boolean;
 
+  
 
   tableConfiguration = {
     globalFilterFields: ["nombre"],
@@ -51,6 +54,16 @@ export class PresupuestoComponent implements OnInit {
       { field: "id", header: "Código" },
       { field: "cliente", header: "Cliente" },
       { field: "descripcion", header: "Descripción" },
+    ],
+    extraButtons : [
+      {
+        tooltip : 'Mostrar',
+        clickEvent: (rowData: any) =>{
+          this.router.navigate(['presupuesto', rowData.id]);
+        },
+        icon: 'pi-eye',
+        class: 'p-button-info'
+      }
     ],
     http: this.http,
     data: this.data,

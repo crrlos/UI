@@ -49,7 +49,6 @@
         <button
           class="p-button-rounded p-button-success p-ripple p-button p-component p-button-icon-only"
           type="button"
-          style="margin-right: 5px;"
           pTooltip="Editar"
           tooltipPosition="top"
           (click)="edit.emit(rowData)"
@@ -59,7 +58,7 @@
         </button>
 
         <button
-          class="p-button-rounded p-button-danger p-ripple p-button p-component p-button-icon-only"
+          class="p-button-rounded p-button-danger p-ripple p-button p-component p-button-icon-only ml-1"
           type="button"
           pTooltip="Eliminar"
           tooltipPosition="top"
@@ -68,6 +67,19 @@
           <span class="p-button-icon pi pi-trash"></span
           ><span class="p-button-label"></span>
         </button>
+
+        <button *ngFor="let config of configuration.extraButtons"
+          class="p-button-rounded {{config.class}} p-ripple p-button p-component p-button-icon-only ml-1"
+          type="button"
+          pTooltip="{{config.tooltip}}"
+          tooltipPosition="top"
+          (click)="config.clickEvent(rowData)"
+      >
+        <span class="p-button-icon pi {{config.icon}}"></span
+        ><span class="p-button-label"></span>
+      </button>
+
+
       </td>
     </tr>
   </ng-template>
