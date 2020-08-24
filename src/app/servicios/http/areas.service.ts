@@ -10,12 +10,9 @@ export class AreaHttpService {
 
   constructor(private http: HttpClient) { }
   areas(id) {
-    return this.http.get<Area[]>(`${HOST}/areas?id=${id}`);
+    return this.http.get<Area[]>(`${HOST}/areas/${id}`);
   }
-  agregar(area) {
-    area.nombre = area.area;
-    area.cotizacionId = area.cotizacion;
-
+  agregar(area : Area) {
     return this.http.post(`${HOST}/areas`, area);
   }
   actualizar(area) {
