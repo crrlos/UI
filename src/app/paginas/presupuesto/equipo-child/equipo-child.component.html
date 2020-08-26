@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col">
-    <button class="btn btn-primary m-2" (click)="f(true)">Agregar Equipo</button>
+    <button pButton label="Agregar equipo" class="p-button-sm" (click)="f(true)" ></button>
   </div>
 </div>
 <div class="row">
-  <div class="col-10 offset-1">
+  <div class="col mt-3">
     <p-accordion>
       <p-accordionTab *ngFor="let equipo of area.equipos">
         <p-header>
@@ -88,7 +88,7 @@
         <hr>
         <div class="row">
           <div class="col">
-            <button class="btn btn-primary m-2" (click)="f(false,equipo)">Agregar Material</button>
+            <button pButton label="Agregar material" class="p-button-sm" (click)="f(false,equipo)"></button>
 
           </div>
           <div class="col">
@@ -137,7 +137,7 @@
                   <td>{{material.precio * material.cantidad * material.porcentajeGanancia | currency}}</td>
                  <td>
                   <span style="float: left; margin-left: 3px; font-size: 20px" class="pointer text-danger"><i class="mdi mdi-delete" data-toggle="tooltip"
-                    data-placement="top" data-original-title="eliminar" (click)="confirmEliminar(equipo)"></i></span>
+                    data-placement="top" data-original-title="eliminar" (click)="eliminarMaterial(material,equipo)"></i></span>
                   </td>
                 </tr>
               </tbody>

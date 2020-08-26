@@ -17,7 +17,7 @@ export class MaterialEquipoAreaHttpService {
   actualizar(material: MaterialEquipoArea) {
     return this.http.put(`${HOST}/materialesequipoarea`, material);
   }
-  eliminar(material: MaterialEquipoArea) {
-    return this.http.delete(`${HOST}/materialesequipoarea`, { params: { id: material.id.toString() } });
+  eliminar(id : number) {
+    return this.http.delete(`${HOST}/materialesequipoarea/${id}`);
   }
 }

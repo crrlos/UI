@@ -6,7 +6,7 @@
 <p-tabView>
   <p-tabPanel header="Materiales y equipo">
     <div class="row">
-      <button class="btn btn-primary ml-2" (click)="mostrarDialogoArea()">Agregar área</button>
+      <button pButton label="Agregar área" class="p-button-sm ml-1" (click)="mostrarDialogoArea()"></button>
     </div>
     <br>
     <p-dialog header="Registrar área" [visible]="mostrarDialogo" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'300px'}">
@@ -23,7 +23,7 @@
       </p-footer>
     </p-dialog>
     
-    <p-scrollPanel [style]="{width: '100%', height: '500px'}">
+    <p-scrollPanel id="scrollpanel" [style]="{width: '100%', height: '500px'}">
       <div id="accordian-4">
         <div class="card m-t-30">
           <ng-template ngFor let-area [ngForOf]="areas" let-i="index">

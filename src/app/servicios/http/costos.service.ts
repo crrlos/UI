@@ -1,31 +1,28 @@
-import { HttpClient } from '@angular/common/http';
-import { HOST } from 'src/app/config';
-import { Injectable, Host } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { HOST } from "src/app/config";
+import { Injectable, Host } from "@angular/core";
+import {ManoDeObra} from 'src/app/interfaces/manoDeObra';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CostoHttpService {
-
-  
-  costos() {
-   return this.http.get(`${HOST}/costohumano`);
+  private  PATH : string = 'manodeobra';
+  costos(id : number) {
+    return this.http.get(`${HOST}/${this.PATH}/${id}`);
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  datos(id:number){
-    return this.http.get(`${HOST}/costohumanodetalle/${id}`);
+  datos(id: number) {
+    return this.http.get(`${HOST}/${this.PATH}/${id}`);
   }
 
-  agregar(cantidad, id,pid){
-    return this.http.post(`${HOST}/costohumanodetalle`,{
-      cantidad, costoId : id, proyectoId : pid
-    });
+  agregar(manoDeObra : ManoDeObra) {
+    return this.http.post(`${HOST}/${this.PATH}`, manoDeObra);
   }
 
-  eliminar(id){
-   return this.http.delete(`${HOST}/costohumanodetalle/${id}`); 
+  eliminar(id : number) {
+    return this.http.delete(`${HOST}/${this.PATH}/${id}`);
   }
- 
 }

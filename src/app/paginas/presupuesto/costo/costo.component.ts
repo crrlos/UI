@@ -1,79 +1,64 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { RouterState, ActivatedRoute } from '@angular/router';
-import {CostoHttpService} from 'src/app/servicios/http/costos.service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { RouterState, ActivatedRoute } from "@angular/router";
+import { CostoHttpService } from "src/app/servicios/http/costos.service";
+import { ManoDeObra } from 'src/app/interfaces/manoDeObra';
 
 @Component({
-  selector: 'app-costo',
-  templateUrl: './costo.component.html'
+  selector: "app-costo",
+  templateUrl: "./costo.component.html",
 })
 export class CostoComponent implements OnInit {
-  
-  costos:any = [];
-  costosIndividual:any =[];
+  costos: any = [];
+  costosIndividual: any = [];
 
-  costoSeleccionado:any;
-  cantidad:number;
+  costoSeleccionado: any;
+  cantidad: number;
 
-  id;
+  cotizacionId: number;
 
+  manoDeObra: ManoDeObra = {};
 
-  agregar(){
-    if(this.cantidad <= 0) return;
-
-    let costo = this.costos.find(c => c.detalle == this.costoSeleccionado.detalle);
-    
-    
-    this.http.agregar(this.cantidad, this.costoSeleccionado.id,this.id)
-    .subscribe(r=> {
-
-        if(costo){
-          costo.cantidad += this.cantidad;
-          costo.total = costo.cantidad * costo.costo;
-          return;
-        }
-      let clone = JSON.parse( JSON.stringify(this.costoSeleccionado));
-      clone.total = this.cantidad * this.costoSeleccionado.costo;
-      clone.cantidad = this.cantidad;
-      clone.id = r;
-      this.costos.push(clone);
+  agregar() {
+    this.manoDeObra.proyectoId = this.cotizacionId;
+    this.http.agregar(this.manoDeObra).subscribe((r) => {
+      console.log('agregado');
+      
     });
-    
   }
- 
-  constructor(private route: ActivatedRoute, private http: CostoHttpService){
-    route.params.subscribe(p=>{
+
+  constructor(private route: ActivatedRoute, private http: CostoHttpService) {
+    route.params.subscribe((p) => {
       this.cargarDatos(p.id);
-      this.id = p.id;
-    });
+      this.cotizacionId = p.id;
 
-  }
-  eliminar(id){
-    this.http.eliminar(id).subscribe(r =>{
-
-      this.costos.splice(this.costos.findIndex(c => c.id == id),1);
-
+      this.cargarCostos();
     });
   }
+  eliminar(id) {
+    this.http.eliminar(id).subscribe((r) => {
+      this.costos.splice(
+        this.costos.findIndex((c) => c.id == id),
+        1
+      );
+    });
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.cargarCostos();
   }
 
- sumarCostos(){
-   return this.costos.reduce((i,j) => i + j.total,0);
- }
-  cargarDatos(id:number){
-      this.http.datos(id).subscribe((r:any) => {
-        this.costos = r.detalle;
-        
-
-      });
+  sumarCostos() {
+    return 1;
+    //return this.costos.reduce((i, j) => i + j.total, 0);
   }
-  cargarCostos(){
-    this.http.costos().subscribe((costos:any) => {
-     this.costosIndividual = costos
+  cargarDatos(id: number) {
+    this.http.datos(id).subscribe((r: any) => {
+      this.costos = r.detalle;
     });
   }
-  
-
+  cargarCostos() {
+    this.http.costos(this.cotizacionId).subscribe((costos: any) => {
+      this.costos = costos;
+    });
+  }
 }

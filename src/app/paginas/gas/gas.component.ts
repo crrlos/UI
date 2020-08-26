@@ -3,6 +3,7 @@ import { Gas} from 'src/app/interfaces/interfaces';
 import { GasHttpService } from 'src/app/servicios/http/gases.service';
 import { ConfirmationService } from 'primeng/api';
 declare var swal : any;
+declare var $: any;
 @Component({
   selector: 'app-gases',
   templateUrl: './gas.component.html'
@@ -22,7 +23,18 @@ export class GasComponent implements OnInit {
 
   data: Gas[] = [];
 
+  valid : boolean = false;
+
   ngOnInit(): void {
+
+    $(document).load(()=>{
+      this.valid = true;
+      
+    });
+
+    console.log("valid es" + this.valid);
+    
+
     this.http.filtrar().subscribe((data) => {
       data.gases.forEach((m) => {
         this.data.push(m);

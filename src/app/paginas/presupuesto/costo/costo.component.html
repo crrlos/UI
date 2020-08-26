@@ -8,8 +8,6 @@
       <tr>
           <th>Descripción</th>
           <th>Costo</th>
-          <th>Cantidad</th>
-          <th>Total</th>
           <th>Acción</th>
       </tr>
   </ng-template>
@@ -17,8 +15,6 @@
       <tr>
           <td>{{costo.detalle}}</td>
           <td>{{costo.costo}}</td>
-          <td>{{costo.cantidad}}</td>
-          <td>{{costo.total}}</td>
           <td>
             <button (click)="eliminar(costo.id)">Eliminar</button>
           </td>
@@ -48,22 +44,17 @@
         </button>
       </div>
       <div class="modal-body">
+
+        
         
         <div class="form-group">
-          <label class="form-label">Concepto</label><br>
-          <p-dropdown required [showClear]="true" placeholder="Seleccione"
-          [(ngModel)]="costoSeleccionado"
-          [options]="costosIndividual" optionLabel="detalle" [style]="{'width':'300px'}"></p-dropdown>
+          <label class="form-label">Detalle</label><br>
+         <input pInputText [(ngModel)] = "manoDeObra.detalle" />
         </div>
         <div class="form-group">
-          <label>Cantidad</label>
-          <input type="number" required [(ngModel)]="cantidad" min="1" #name="ngModel" class="form-control" style="width: 300px;"/>
-          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
-            {{name.errors | json}}
-                    <div *ngIf="name.errors.required">
-                      Cantidad es requerida
-                    </div>
-            </div>
+          <label>Cantidad</label><br>
+          <input pInputText  [(ngModel)]="manoDeObra.costo">
+         
         </div>
       </div>
       <div class="modal-footer">
