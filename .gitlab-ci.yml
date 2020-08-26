@@ -16,4 +16,4 @@ build:
     - npm install
     - echo "import swal  from \"./core\";export default swal;export as namespace swal;" > /builds/rlobos.carlos/IrwinUI/node_modules/sweetalert/typings/sweetalert.d.ts
     - npm run build
-    - lftp -e "open ftp.site4now.net; user $USER $PASSWORD;set ftp:use-allo false; set ftp:passive-mode true; set ftp:prefer-epsv false;set ssl:verify-certificate no;mirror --reverse --verbose ./dist/irwin-ui /ui;bye"
+    - lftp -e "open ftp.site4now.net; -P 10; user $USER $PASSWORD;set ftp:use-allo false; set ftp:passive-mode true; set ftp:prefer-epsv false;set ssl:verify-certificate no;mirror --reverse --verbose ./dist/irwin-ui /ui;bye"
