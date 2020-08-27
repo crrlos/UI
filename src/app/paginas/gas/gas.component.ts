@@ -26,15 +26,6 @@ export class GasComponent implements OnInit {
   valid : boolean = false;
 
   ngOnInit(): void {
-
-    $(document).load(()=>{
-      this.valid = true;
-      
-    });
-
-    console.log("valid es" + this.valid);
-    
-
     this.http.filtrar().subscribe((data) => {
       data.gases.forEach((m) => {
         this.data.push(m);
