@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Gas} from 'src/app/interfaces/interfaces';
 import { GasHttpService } from 'src/app/servicios/http/gases.service';
 import { ConfirmationService } from 'primeng/api';
 declare var swal : any;
-declare var $: any;
 @Component({
   selector: 'app-gases',
   templateUrl: './gas.component.html'
@@ -26,6 +25,7 @@ export class GasComponent implements OnInit {
   valid : boolean = false;
 
   ngOnInit(): void {
+
     this.http.filtrar().subscribe((data) => {
       data.gases.forEach((m) => {
         this.data.push(m);
