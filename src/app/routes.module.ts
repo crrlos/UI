@@ -13,6 +13,7 @@ import { TecnologiaComponent } from './paginas/tecnologia/tecnologia.component';
 import { GasComponent } from './paginas/gas/gas.component';
 import { UnidadComponent } from './paginas/unidades/unidades.component';
 import { VoltajesComponent } from './paginas/voltajes/voltajes.component';
+import { CotizacionDetalleComponent } from './paginas/cotizacion-detalle/cotizacion-detalle.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,8 +27,8 @@ const routes: Routes = [
     { path: 'gases', component: GasComponent, data: { titulo: 'Gases refrigerantes' } },
     { path: 'voltajes', component: VoltajesComponent, data: { titulo: 'Voltajes' } },
     { path: 'equipos', component: EquiposComponent, data: { titulo: 'Equipos' } },
-    { path: 'presupuestos', component: CotizacionesComponent, data: { titulo: 'Presupuestos' } },
-    //{ path: 'presupuesto/:id', component: AreaComponent, data: { titulo: 'Presupuesto' } }
+    { path: 'cotizaciones', component: CotizacionesComponent, data: { titulo: 'Cotizaciones' } },
+    { path: 'cotizacionDetalle/:id', component: CotizacionDetalleComponent, data: { titulo: 'Detalle cotización' } }
   ]}
 ];
 

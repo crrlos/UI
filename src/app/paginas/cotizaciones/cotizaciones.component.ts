@@ -57,7 +57,7 @@ export class CotizacionesComponent implements OnInit {
       {
         tooltip : 'Mostrar',
         clickEvent: (rowData: any) =>{
-          this.router.navigate(['presupuesto', rowData.id]);
+          this.router.navigate(['cotizacionDetalle', rowData.id]);
         },
         icon: 'pi-eye',
         class: 'p-button-info'
