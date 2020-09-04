@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EquipoChildComponent } from './presupuesto/equipo-child/equipo-child.component';
-import { AreaComponent } from './presupuesto/area/area.component';
 import { MaterialesComponent } from './materiales/materiales.component';
 import { EquiposComponent } from './equipos/equipos.component';
-import { EquiposTablaComponent } from './equipos/equipos.tabla.component';
-import { PresupuestoComponent } from './presupuestos/presupuesto.component';
+import { CotizacionesComponent } from './cotizaciones/cotizaciones.component';
 import { PrimengModule } from './primeng.module';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -19,18 +16,14 @@ import { TecnologiaComponent } from './tecnologia/tecnologia.component';
 import { GasComponent } from './gas/gas.component';
 import { ServiciosModule } from '../servicios/servicios.module';
 import { UnidadComponent } from './unidades/unidades.component';
-import { CostoComponent } from './presupuesto/costo/costo.component';
 import { TablaComponent } from '../tabla/tabla.component';
 import { VoltajesComponent } from './voltajes/voltajes.component';
 
 @NgModule({
   declarations: [
-    EquipoChildComponent,
-    AreaComponent,
     MaterialesComponent,
     EquiposComponent,
-    EquiposTablaComponent,
-    PresupuestoComponent,
+    CotizacionesComponent,
     ClientesComponent,
     WrapperComponent,
     MarcasComponent,
@@ -38,7 +31,6 @@ import { VoltajesComponent } from './voltajes/voltajes.component';
     TecnologiaComponent,
     GasComponent,
     UnidadComponent,
-    CostoComponent,
     TablaComponent,
     VoltajesComponent
   ],

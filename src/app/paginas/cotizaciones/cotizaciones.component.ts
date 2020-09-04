@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Cliente, Cotizacion } from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
-import { EquipoHttpService } from 'src/app/servicios/http/equipo.service';
 import { ClienteHttpService } from 'src/app/servicios/http/cliente.service';
 import { ConfirmationService } from 'primeng/api';
 import { CotizacionesHttpService } from 'src/app/servicios/http/cotizaciones.service';
@@ -10,10 +8,10 @@ import { Router } from '@angular/router';
 declare var swal : any;
 
 @Component({
-  selector: 'app-presupuesto',
-  templateUrl: './presupuesto.component.html'
+  selector: 'app-cotizaciones',
+  templateUrl: './cotizaciones.component.html'
 })
-export class PresupuestoComponent implements OnInit {
+export class CotizacionesComponent implements OnInit {
 
 
 

@@ -5,8 +5,7 @@ import { LoginComponent } from './shared/login/login.component';
 import { MaterialesComponent } from './paginas/materiales/materiales.component';
 import { ClientesComponent } from './paginas/clientes/clientes.component';
 import { EquiposComponent } from './paginas/equipos/equipos.component';
-import { PresupuestoComponent } from './paginas/presupuestos/presupuesto.component';
-import { AreaComponent } from './paginas/presupuesto/area/area.component';
+import { CotizacionesComponent } from './paginas/cotizaciones/cotizaciones.component';
 import { WrapperComponent } from './paginas/wrapper/wrapper.component';
 import { MarcasComponent } from './paginas/marcas/marcas.component';
 import { TiposComponent } from './paginas/tipos/tipos.component';
@@ -27,8 +26,8 @@ const routes: Routes = [
     { path: 'gases', component: GasComponent, data: { titulo: 'Gases refrigerantes' } },
     { path: 'voltajes', component: VoltajesComponent, data: { titulo: 'Voltajes' } },
     { path: 'equipos', component: EquiposComponent, data: { titulo: 'Equipos' } },
-    { path: 'presupuestos', component: PresupuestoComponent, data: { titulo: 'Presupuestos' } },
-    { path: 'presupuesto/:id', component: AreaComponent, data: { titulo: 'Presupuesto' } }
+    { path: 'presupuestos', component: CotizacionesComponent, data: { titulo: 'Presupuestos' } },
+    //{ path: 'presupuesto/:id', component: AreaComponent, data: { titulo: 'Presupuesto' } }
   ]}
 ];
 
