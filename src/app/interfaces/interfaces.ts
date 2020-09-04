@@ -5,10 +5,10 @@ export interface Ubicacion {
   total?;
 }
 export interface Area {
-  id?:number;
-  nombre?:string;
-  cotizacionId?:number;
-  total?:number;
+  id?: number;
+  nombre?: string;
+  cotizacionId?: number;
+  total?: number;
   equipos?: EquipoArea[];
   insertar_equipo?: boolean; // permite saber en cual area se insertará el equipo
 }
@@ -26,64 +26,61 @@ export interface EquipoArea {
   costoBTU?: number;
 }
 export interface MaterialEquipoArea {
-  id?:number;
-  materialId?:number;
-  equiposAreaId?:number;
-  cantidad?:number;
-  precio?:number;
-  porcentajeGanancia?:number;
+  id?: number;
+  materialId?: number;
+  equiposAreaId?: number;
+  cantidad?: number;
+  precio?: number;
+  porcentajeGanancia?: number;
   material?: Material;
 }
 export interface Equipo {
   id?: number;
-  codigo? :string;
-  nombre?:string;
-  capacidad?:any;
-  precio? :number ;
-  porcentaje? :number;
-  total? :number;
-  totalMaterialesModificado? : number;
+  codigo?: string;
+  nombre?: string;
+  capacidad?: any;
+  precio?: number;
+  porcentaje?: number;
+  total?: number;
+  totalMaterialesModificado?: number;
   tipo?: TipoUnidad;
   marca?: Marca;
-  voltaje? : Voltaje;
+  voltaje?: Voltaje;
   tecnologia?: Tecnologia;
   gas?: Gas;
 }
 export interface Material {
-  id?:number;
-  codigo?:string;
-  nombre?:string;
-  cantidad?:number;
-  precio?:number;
-  porcentaje?:number;
-  tipo?: TipoUnidad;
-  tipoId?:number;
-  marcaId?:number;
-  marca?: Marca;
-  unidadMedidaId?:number;
+  id?: number;
+  codigo?: string;
+  nombre?: string;
   unidadMedida?: UnidadMedida;
-  material_activo?;
+  precioProveedor?: PrecioProveedor[]
+}
+export interface PrecioProveedor{
+  codigoMaterial? : string;
+  precio? : number;
+  nombre? : string;
 }
 export interface Voltaje {
-  id? : number;
+  id?: number;
   nombre?: String;
 }
 export interface TipoUnidad {
-  id? :number;
-  nombre? :string;
+  id?: number;
+  nombre?: string;
 }
 
 export interface Marca {
-  id?:number;
-  nombre?:string;
+  id?: number;
+  nombre?: string;
 }
 export interface Gas {
-  id?:number;
+  id?: number;
   nombre?: string;
 }
 export interface Tecnologia {
-  id?:number;
-  nombre?:string;
+  id?: number;
+  nombre?: string;
 }
 export interface UnidadMedida {
   id?: number;
@@ -116,7 +113,7 @@ export interface GasResponse {
 }
 export interface VoltajeResponse {
   voltajes: Voltaje[];
-  totalRecords :number;
+  totalRecords: number;
 }
 export interface CotizacionResponse {
   cotizaciones: Cotizacion[];
@@ -125,19 +122,19 @@ export interface CotizacionResponse {
 
 export interface MaterialResponse {
   materiales: Material[];
-  totalRecords;
+  totalRecords: number;
 }
 export interface Cliente {
-  id?:number;
-  nombre?:string;
-  direccion?:string;
-  telefono?:string;
+  id?: number;
+  nombre?: string;
+  direccion?: string;
+  telefono?: string;
 }
 export interface Cotizacion {
-  id?:number;
-  descripcion?:number;
+  id?: number;
+  descripcion?: number;
   cliente?: Cliente;
-  fecha?:string;
+  fecha?: string;
 }
 
 export interface UnidadResponse {

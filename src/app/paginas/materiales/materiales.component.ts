@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TipoUnidad, Marca, Material, UnidadMedida } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 import { FormGroup } from '@angular/forms';
@@ -11,10 +11,6 @@ import { ConfirmationService } from 'primeng/api';
 
 declare var swal : any;
 
-interface MaterialesTabla {
-  materiales: Material[];
-}
-
 @Component({
   selector: 'app-materiales',
   templateUrl: './materiales.component.html'
@@ -26,7 +22,6 @@ export class MaterialesComponent implements OnInit {
     private marcaHttp: MarcaHttpService,
     private materialHttp: MaterialHttpService,
     private unidadesHttp: UnidadHttpService,
-    private materialesHttp: MaterialHttpService,
     private confirmationService: ConfirmationService) { }
 
   material: Material;
@@ -51,9 +46,6 @@ export class MaterialesComponent implements OnInit {
     columns: [
       { field: "codigo", header: "Código" },
       { field: "nombre", header: "Nombre" },
-      { field: "precio", header: "Precio" },
-      { field: "marca", header: "Marca" },
-      { field: "tipo", header: "Tipo" },
       { field: "unidadMedida", header: "Unidad de Medida" },
     ],
     http: this.http,
@@ -87,9 +79,6 @@ export class MaterialesComponent implements OnInit {
       id: material.id,
       codigo : material.codigo,
       nombre : material.nombre,
-      precio : material.precio,
-      marca  : material.marca.nombre,
-      tipo   : material.tipo.nombre,
       unidadMedida : material.unidadMedida.nombre
     };
   }

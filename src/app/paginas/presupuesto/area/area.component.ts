@@ -102,7 +102,7 @@ export class AreaComponent implements OnInit {
       id: material.id,
       equiposAreaId: this.equipoArea.id,
       cantidad: 1,
-      precio: material.precio,
+     
       porcentajeGanancia: 1,
       material: material
     };

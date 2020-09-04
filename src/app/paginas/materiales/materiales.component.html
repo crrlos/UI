@@ -22,25 +22,10 @@ acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
             </div>
         </div>
 
-        <div class="p-fluid p-grid">
-          <div class="p-field p-col">
-              <label>Precio</label>
-              <input type="text" required name="precio" pInputText [(ngModel)]="material.precio" pKeyFilter="num"> 
-          </div>
-      </div>
-
+      
 
       <div class="p-fluid p-grid">
-        <div class="p-field p-col">
-            <label>Marca</label>
-            <p-dropdown appendTo="body" required name="marca"placeholder="Seleccione" [options]="marcas" [style]="{'width':'150px'}" [(ngModel)]="material.marca"
-                optionLabel="nombre"></p-dropdown>
-        </div>
-        <div class="p-field p-col">
-          <label>Tipo</label>
-          <p-dropdown appendTo="body" required name="tipo" placeholder="Seleccione" [options]="tipos" [style]="{'width':'150px'}" [(ngModel)]="material.tipo" optionLabel="nombre"></p-dropdown>
-      </div>
-
+       
       <div class="p-field p-col">
         <label>Unidad de medida</label>
         <p-dropdown appendTo="body" required name="unidad" placeholder="Seleccione" [options]="unidades" [style]="{'width':'150px'}" [(ngModel)]="material.unidadMedida" optionLabel="nombre"></p-dropdown>
