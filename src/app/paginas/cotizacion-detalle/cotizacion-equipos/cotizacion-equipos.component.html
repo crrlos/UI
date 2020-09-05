@@ -1,7 +1,9 @@
 <button pButton type="button" label="Agregar equipo" (click)="display = true" ></button>
 <div class="mt-5"></div>
 
-<p-table [value]="equipos" styleClass="p-datatable-striped p-datatable-sm">
+<p-table [value]="equipos" [scrollable]="true"  
+scrollHeight="400px"
+        [virtualScroll]="true" [virtualRowHeight]="34" styleClass="p-datatable-striped p-datatable-sm">
     <ng-template pTemplate="header">
         <tr>
             <th>Código</th>

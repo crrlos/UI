@@ -1,29 +1,37 @@
 import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { CotizacionEquiposHttpService } from "src/app/servicios/http/cotizacion-equipos.service";
 import { EquiposComponent } from '../../equipos/equipos.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-cotizacion-equipos",
   templateUrl: "./cotizacion-equipos.component.html"
 })
 export class CotizacionEquiposComponent implements OnInit {
-  @Input() equipos: any;
+  @Input() equipos: any[];
   timeout: any;
 
   @ViewChild(EquiposComponent,{static: true})
   equiposTabla : any;
 
   display = false;
+  cotizacionId : number;
 
   constructor(
+    private route: ActivatedRoute,
     private equipoHttp: CotizacionEquiposHttpService
     ) {}
 
   ngOnInit(): void {
+
+    this.route.params.subscribe(params => {
+      this.cotizacionId = params.id;
+    })
+
     this.equiposTabla.tableConfiguration.extraButtons = [
       {
         tooltip : 'Agregar',
-        clickEvent: this.agregarEquipo,
+        clickEvent: (equipo : any) => this.agregarEquipo(equipo),
         icon: 'pi-plus-circle',
         class: 'p-button-info'
       }
@@ -33,7 +41,24 @@ export class CotizacionEquiposComponent implements OnInit {
   }
 
   agregarEquipo(equipo: any){
-    console.log(equipo);
+
+    this.equipoHttp.add({
+      equipoId : equipo.id,
+      cotizacionId : this.cotizacionId,
+      precioVenta : equipo.precio
+    })
+    .subscribe(r => {
+        this.equipos.push({
+          id : r,
+          equipoId : equipo.id,
+          codigo : equipo.codigo,
+          nombreEquipo : equipo.nombre,
+          capacidad : equipo.capacidad,
+          tecnologia : equipo.tecnologia,
+          precioBase : equipo.precio,
+          precioVenta : equipo.precio
+        });
+    });
     
   }
 

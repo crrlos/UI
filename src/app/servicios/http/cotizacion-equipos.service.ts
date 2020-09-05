@@ -15,4 +15,7 @@ export class CotizacionEquiposHttpService {
   update(equipo : any){
     return this.http.put(`${HOST}/${this.path}`,equipo);
   }
+  add(equipo : any){
+    return this.http.post(`${HOST}/${this.path}`,equipo);
+  }
 }
