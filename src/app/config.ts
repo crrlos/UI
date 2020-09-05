@@ -1,1 +1,1 @@
- export const HOST: String = 'https://localhost:5001';
+export { HOST }  from 'src/environments/environment';
