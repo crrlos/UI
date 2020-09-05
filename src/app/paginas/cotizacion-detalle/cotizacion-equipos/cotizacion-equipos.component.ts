@@ -71,7 +71,7 @@ export class CotizacionEquiposComponent implements OnInit {
           equipo.precioVenta = equipo.precioBase;
           return;
         }
-
+      equipo.cotizacionId = this.cotizacionId;
       equipo.cargando = true;
       this.equipoHttp.update(equipo).subscribe((r) => {
         equipo.cargando = false;
