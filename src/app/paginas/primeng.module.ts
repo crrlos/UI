@@ -21,6 +21,7 @@ import {KeyFilterModule} from 'primeng/keyfilter';
 import {FieldsetModule} from 'primeng/fieldset';
 import {TabViewModule} from 'primeng/tabview';
 import {TooltipModule} from 'primeng/tooltip';
+
 @NgModule({
   exports: [
     CommonModule,
@@ -42,7 +43,7 @@ import {TooltipModule} from 'primeng/tooltip';
     KeyFilterModule,
     FieldsetModule,
     TabViewModule,
-    TooltipModule
+    TooltipModule,
   ], providers: [ConfirmationService, MessageService]
 })
 export class PrimengModule { }

@@ -13,6 +13,9 @@ export class TablaComponent implements OnInit {
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
 
+  mostrarBotonesBase = true;
+
   ngOnInit(): void {
+    
   }
 }

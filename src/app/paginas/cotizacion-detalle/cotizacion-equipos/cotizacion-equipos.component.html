@@ -1,4 +1,4 @@
-<button pButton type="button" label="Agregar equipo" ></button>
+<button pButton type="button" label="Agregar equipo" (click)="display = true" ></button>
 <div class="mt-5"></div>
 
 <p-table [value]="equipos" styleClass="p-datatable-striped p-datatable-sm">
@@ -41,3 +41,9 @@
        </div>
     </ng-template>
 </p-table>
+
+<p-dialog header="Seleccionar equipo" [(visible)]="display" [style]="{width: '90vw'}">
+    <app-equipos></app-equipos>
+</p-dialog>
+
+

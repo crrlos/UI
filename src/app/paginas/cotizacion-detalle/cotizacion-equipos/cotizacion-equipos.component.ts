@@ -1,17 +1,41 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { CotizacionEquiposHttpService } from "src/app/servicios/http/cotizacion-equipos.service";
+import { EquiposComponent } from '../../equipos/equipos.component';
 
 @Component({
   selector: "app-cotizacion-equipos",
-  templateUrl: "./cotizacion-equipos.component.html",
+  templateUrl: "./cotizacion-equipos.component.html"
 })
 export class CotizacionEquiposComponent implements OnInit {
   @Input() equipos: any;
   timeout: any;
 
-  constructor(private equipoHttp: CotizacionEquiposHttpService) {}
+  @ViewChild(EquiposComponent,{static: true})
+  equiposTabla : any;
 
-  ngOnInit(): void {}
+  display = false;
+
+  constructor(
+    private equipoHttp: CotizacionEquiposHttpService
+    ) {}
+
+  ngOnInit(): void {
+    this.equiposTabla.tableConfiguration.extraButtons = [
+      {
+        tooltip : 'Agregar',
+        clickEvent: this.agregarEquipo,
+        icon: 'pi-plus-circle',
+        class: 'p-button-info'
+      }
+    ];
+
+    this.equiposTabla.tabla.mostrarBotonesBase = false;
+  }
+
+  agregarEquipo(equipo: any){
+    console.log(equipo);
+    
+  }
 
   actualizar(equipo: any) {
     clearTimeout(this.timeout);
@@ -32,7 +56,7 @@ export class CotizacionEquiposComponent implements OnInit {
 
   sumarPrecioEquipos(equipos :any[]){
     if(!equipos) return;
-    
+
       let total  = 0;
 
       equipos.forEach(e => {
@@ -40,4 +64,5 @@ export class CotizacionEquiposComponent implements OnInit {
       });
       return total;
   }
+
 }

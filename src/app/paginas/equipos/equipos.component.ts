@@ -8,6 +8,7 @@ import { GasHttpService } from 'src/app/servicios/http/gases.service';
 import { TecnologiaHttpService } from 'src/app/servicios/http/tecnologias.service';
 import { EquipoHttpService } from 'src/app/servicios/http/equipo.service';
 import { ConfirmationService } from 'primeng/api';
+import { TablaComponent } from 'src/app/tabla/tabla.component';
 
 declare var swal : any;
 @Component({
@@ -25,6 +26,9 @@ export class EquiposComponent implements OnInit {
     private equipoHttp: EquipoHttpService,
     private confirmationService: ConfirmationService) 
     { }
+
+  @ViewChild(TablaComponent,{static: true}) 
+  tabla : TablaComponent;
 
   tipos: TipoUnidad[] = [];
   marcas: Marca[] = [];
@@ -61,6 +65,7 @@ export class EquiposComponent implements OnInit {
   };
 
   ngOnInit() {
+    
     this.tipoHttp.filtrar(event).subscribe(data => {
       this.tipos = data.tipos;
     });
