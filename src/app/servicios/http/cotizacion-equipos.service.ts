@@ -18,4 +18,7 @@ export class CotizacionEquiposHttpService {
   add(equipo : any){
     return this.http.post(`${HOST}/${this.path}`,equipo);
   }
+  delete(id : number){
+    return this.http.delete(`${HOST}/${this.path}/${id}`);
+  }
 }

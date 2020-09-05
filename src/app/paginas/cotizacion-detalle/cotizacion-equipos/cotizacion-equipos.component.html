@@ -1,51 +1,80 @@
-<button pButton type="button" label="Agregar equipo" (click)="display = true" ></button>
+<button
+  pButton
+  type="button"
+  label="Agregar equipo"
+  (click)="display = true"
+></button>
 <div class="mt-5"></div>
 
-<p-table [value]="equipos" [scrollable]="true"  
-scrollHeight="400px"
-        [virtualScroll]="true" [virtualRowHeight]="34" styleClass="p-datatable-striped p-datatable-sm">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Capacidad</th>
-            <th>Tecnología</th>
-            <th>Precio base</th>
-            <th>Precio de venta</th>
-            <th>% ganancia</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-equipo>
-        <tr>
-            <td>{{equipo.codigo}}</td>
-            <td>{{equipo.nombreEquipo}}</td>
-            <td>{{equipo.capacidad}}</td>
-            <td>{{equipo.tecnologia}}</td>
-            <td>{{equipo.precioBase | currency : 'USD'}}</td>
-            <td>
-                <span class="p-input-icon-right">
-                    <i *ngIf="equipo.cargando" class="pi pi-spin pi-spinner"></i>
-                    <input pInputText style="width: 90%;" [(ngModel)]="equipo.precioVenta"  (keyup)="actualizar(equipo)"/>
-                      
-                </span>
-                
-            </td>
-            <td>
-                <div >
-                    {{((equipo.precioVenta / equipo.precioBase) * 100)-100 | number}}
-                </div>
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="summary">
-       <div>
-           Total en equipos : {{ sumarPrecioEquipos(equipos) | currency: 'USD'}}
-       </div>
-    </ng-template>
+<p-table
+  [value]="equipos"
+  [scrollable]="true"
+  scrollHeight="400px"
+  
+  [virtualRowHeight]="34"
+  styleClass="p-datatable-striped p-datatable-sm"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Código</th>
+      <th>Nombre</th>
+      <th>Capacidad</th>
+      <th>Tecnología</th>
+      <th>Precio base</th>
+      <th>Precio de venta</th>
+      <th>% ganancia</th>
+      <th>Opción</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-equipo>
+    <tr>
+      <td>{{ equipo.codigo }}</td>
+      <td>{{ equipo.nombreEquipo }}</td>
+      <td>{{ equipo.capacidad }}</td>
+      <td>{{ equipo.tecnologia }}</td>
+      <td>{{ equipo.precioBase | currency: "USD" }}</td>
+      <td>
+        <span class="p-input-icon-right">
+          <i *ngIf="equipo.cargando" class="pi pi-spin pi-spinner"></i>
+          <input
+            pInputText
+            style="width: 90%"
+            [(ngModel)]="equipo.precioVenta"
+            (keyup)="actualizar(equipo)"
+          />
+        </span>
+      </td>
+      <td>
+        <div>
+          {{ (equipo.precioVenta / equipo.precioBase) * 100 - 100 | number }}
+        </div>
+      </td>
+      <td>
+        <button
+        class="p-button-rounded p-button-danger p-ripple p-button p-component p-button-icon-only ml-1"
+        type="button"
+        pTooltip="Eliminar"
+        tooltipPosition="top"
+        (click)="delete(equipo.id)"
+      >
+        <span class="p-button-icon pi pi-trash"></span
+        ><span class="p-button-label"></span>
+      </button>
+      </td>
+      
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div>
+      Total en equipos : {{ sumarPrecioEquipos(equipos) | currency: "USD" }}
+    </div>
+  </ng-template>
 </p-table>
 
-<p-dialog header="Seleccionar equipo" [(visible)]="display" [style]="{width: '90vw'}">
-    <app-equipos></app-equipos>
+<p-dialog
+  header="Seleccionar equipo"
+  [(visible)]="display"
+  [style]="{ width: '90vw' }"
+>
+  <app-equipos></app-equipos>
 </p-dialog>
-
-

@@ -89,5 +89,11 @@ export class CotizacionEquiposComponent implements OnInit {
       });
       return total;
   }
+  delete(id : number){
+    this.equipoHttp.delete(id).subscribe(r => {
+      this.equipos.splice(this.equipos.indexOf(e => e.id == id),1);
+    });
+    
+  }
 
 }
