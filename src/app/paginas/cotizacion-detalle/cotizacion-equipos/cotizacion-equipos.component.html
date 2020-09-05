@@ -35,4 +35,9 @@
             </td>
         </tr>
     </ng-template>
+    <ng-template pTemplate="summary">
+       <div>
+           Total en equipos : {{ sumarPrecioEquipos(equipos) | currency: 'USD'}}
+       </div>
+    </ng-template>
 </p-table>

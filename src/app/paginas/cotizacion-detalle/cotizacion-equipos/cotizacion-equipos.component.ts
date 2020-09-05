@@ -29,4 +29,13 @@ export class CotizacionEquiposComponent implements OnInit {
       });
     }, 1000);
   }
+
+  sumarPrecioEquipos(equipos :any[]){
+      let total  = 0;
+
+      equipos.forEach(e => {
+        total += e.precioVenta * 1;
+      });
+      return total;
+  }
 }
