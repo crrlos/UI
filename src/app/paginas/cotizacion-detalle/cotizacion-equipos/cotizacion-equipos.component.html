@@ -34,11 +34,11 @@
       <td>{{ equipo.tecnologia }}</td>
       <td>{{ equipo.precioBase | currency: "USD" }}</td>
       <td>
-        <span class="p-input-icon-right">
+        <span class="p-input-icon-right" style="width: 90%">
           <i *ngIf="equipo.cargando" class="pi pi-spin pi-spinner"></i>
           <input
             pInputText
-            style="width: 90%"
+            style="width: 95%"
             [(ngModel)]="equipo.precioVenta"
             (keyup)="actualizar(equipo)"
           />
