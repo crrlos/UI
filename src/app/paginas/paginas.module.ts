@@ -19,6 +19,9 @@ import { UnidadComponent } from './unidades/unidades.component';
 import { TablaComponent } from '../tabla/tabla.component';
 import { VoltajesComponent } from './voltajes/voltajes.component';
 import { CotizacionDetalleComponent } from './cotizacion-detalle/cotizacion-detalle.component';
+import { CotizacionEquiposComponent } from './cotizacion-detalle/cotizacion-equipos/cotizacion-equipos.component';
+import { CotizacionMaterialesComponent } from './cotizacion-detalle/cotizacion-materiales/cotizacion-materiales.component';
+import { CotizacionManoDeObraComponent } from './cotizacion-detalle/cotizacion-mano-de-obra/cotizacion-mano-de-obra.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { CotizacionDetalleComponent } from './cotizacion-detalle/cotizacion-deta
     UnidadComponent,
     TablaComponent,
     VoltajesComponent,
-    CotizacionDetalleComponent
+    CotizacionDetalleComponent,
+    CotizacionEquiposComponent,
+    CotizacionMaterialesComponent,
+    CotizacionManoDeObraComponent
   ],
   imports: [
     SharedModule,

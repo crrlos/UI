@@ -1,0 +1,38 @@
+<button pButton type="button" label="Agregar equipo" ></button>
+<div class="mt-5"></div>
+
+<p-table [value]="equipos" styleClass="p-datatable-striped p-datatable-sm">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Capacidad</th>
+            <th>Tecnología</th>
+            <th>Precio base</th>
+            <th>Precio de venta</th>
+            <th>% ganancia</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-equipo>
+        <tr>
+            <td>{{equipo.codigo}}</td>
+            <td>{{equipo.nombreEquipo}}</td>
+            <td>{{equipo.capacidad}}</td>
+            <td>{{equipo.tecnologia}}</td>
+            <td>{{equipo.precioBase | currency : 'USD'}}</td>
+            <td>
+                <span class="p-input-icon-right">
+                    <i *ngIf="equipo.cargando" class="pi pi-spin pi-spinner"></i>
+                    <input pInputText style="width: 90%;" [(ngModel)]="equipo.precioVenta"  (keyup)="actualizar(equipo)"/>
+                      
+                </span>
+                
+            </td>
+            <td>
+                <div >
+                    {{((equipo.precioVenta / equipo.precioBase) * 100)-100 | number}}
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

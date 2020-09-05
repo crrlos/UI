@@ -1,1 +1,1 @@
- export const HOST: String = 'http://rlobos333-001-site1.gtempurl.com';
+ export const HOST: String = 'https://localhost:5001';
