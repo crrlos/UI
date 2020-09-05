@@ -31,6 +31,8 @@ export class CotizacionEquiposComponent implements OnInit {
   }
 
   sumarPrecioEquipos(equipos :any[]){
+    if(!equipos) return;
+    
       let total  = 0;
 
       equipos.forEach(e => {
