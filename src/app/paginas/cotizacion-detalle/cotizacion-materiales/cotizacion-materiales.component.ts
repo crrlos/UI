@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { ActivatedRoute } from '@angular/router';
-import { MaterialesComponent } from '../../materiales/materiales.component';
 import { CotizacionMaterialesHttpService } from 'src/app/servicios/http/cotizacion-materiales.service';
+import { MaterialesComponent } from '../../materiales/materiales.component';
 
 @Component({
   selector: "app-cotizacion-materiales",
@@ -37,6 +37,7 @@ export class CotizacionMaterialesComponent implements OnInit {
       }
     ];
 
+    this.materialesTabla.mostrarRegistrosSinPrecio = false;
     this.materialesTabla.tabla.mostrarBotonesBase = false;
   }
 

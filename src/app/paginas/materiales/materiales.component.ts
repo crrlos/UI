@@ -39,6 +39,7 @@ export class MaterialesComponent implements OnInit {
 
   displayDialog = false;
   nuevoMaterial = false;
+  mostrarRegistrosSinPrecio = true;
 
   errores: boolean;
 
@@ -70,7 +71,12 @@ export class MaterialesComponent implements OnInit {
     }
     );
 
-    this.materialHttp.materiales(event).subscribe(data => {
+    this.materialHttp.materiales(event).subscribe((data : any) => {
+
+      if(!this.mostrarRegistrosSinPrecio){
+        data.materiales = data.materiales.filter((m : any) => m.precio > 0);
+      }
+
       data.materiales.forEach(m => {
         this.materiales.push(m);
         this.data.push(this.formatMaterial(m));
@@ -147,5 +153,4 @@ export class MaterialesComponent implements OnInit {
       swal("Oops", "Este registro no se pudo eliminar", "error");
     });
   }
-
 }

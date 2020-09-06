@@ -40,7 +40,7 @@ import { CotizacionManoDeObraComponent } from './cotizacion-detalle/cotizacion-m
     CotizacionDetalleComponent,
     CotizacionEquiposComponent,
     CotizacionMaterialesComponent,
-    CotizacionManoDeObraComponent
+    CotizacionManoDeObraComponent,
   ],
   imports: [
     SharedModule,
