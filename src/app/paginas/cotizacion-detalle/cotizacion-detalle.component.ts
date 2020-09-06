@@ -5,11 +5,19 @@ import { CotizacionMaterialesHttpService } from 'src/app/servicios/http/cotizaci
 
 @Component({
   selector: 'app-cotizacion-detalle',
-  templateUrl: './cotizacion-detalle.component.html'
+  templateUrl: './cotizacion-detalle.component.html',
+  styles:[`
+      th,td{
+               text-align: right;
+            }`]
 })
 export class CotizacionDetalleComponent implements OnInit {
 
-  data : any= {};
+  data : any = {
+    equipos: [],
+    materiales: [],
+    manoDeObra: []
+  };
 
   constructor(
     private cotizacionEquiposService : CotizacionEquiposHttpService,
@@ -31,4 +39,22 @@ export class CotizacionDetalleComponent implements OnInit {
     
   }
 
+  costoGanancia(coleccion : any[], propiedad : string){
+    let costo = 0;
+
+    coleccion.forEach(c => {
+      costo += c[propiedad] * 1;
+    });
+
+    return costo;
+  }
+
+  total(){
+    return this.costoGanancia(this.data.equipos,'precioVenta') -
+           this.costoGanancia(this.data.equipos,'precioBase') +
+           this.costoGanancia(this.data.materiales,'precioVenta') -
+           this.costoGanancia(this.data.materiales,'precioBase') +
+           this.costoGanancia(this.data.manoDeObra,'precio')
+           ;
+  }
 }

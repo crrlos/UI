@@ -1,11 +1,61 @@
-<p-tabView>
-    <p-tabPanel header="Equipos">
-       <app-cotizacion-equipos [equipos] = "data.equipos"></app-cotizacion-equipos>
-    </p-tabPanel>
-    <p-tabPanel header="Materiales">
-       <app-cotizacion-materiales [materiales]="data.materiales"></app-cotizacion-materiales>
-    </p-tabPanel>
-    <p-tabPanel header="Mano de obra">
-        <app-cotizacion-mano-de-obra></app-cotizacion-mano-de-obra>
-    </p-tabPanel>
-</p-tabView>
+<p-accordion [multiple]="true">
+    <p-accordionTab header="Resumen">
+        <div style="background-color: white;width: 50%;">
+            <table class="table table-bordered table-sm" >
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>Costo</th>
+                        <th>Precio de venta</th>
+                        <th>Ganancia</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>Equipos</td>
+                    <td>{{costoGanancia(data.equipos,'precioBase') | currency:'USD'}}</td>
+                    <td>{{costoGanancia(data.equipos,'precioVenta') | currency:'USD'}}</td>
+                    <td>{{
+                        costoGanancia(data.equipos,'precioVenta') - costoGanancia(data.equipos,'precioBase') 
+                        | currency:'USD'
+                    }}</td>
+                    
+                </tr>
+                <tr>
+                    <td>Materiales</td>
+                    <td>{{costoGanancia(data.materiales,'precioBase') | currency:'USD'}}</td>
+                    <td>{{costoGanancia(data.materiales,'precioVenta') | currency:'USD'}}</td>
+                    <td>{{
+                        costoGanancia(data.materiales,'precioVenta') - costoGanancia(data.materiales,'precioBase') 
+                        | currency:'USD'
+                    }}</td>
+                </tr>
+                <tr>
+                    <td>Mano de obra</td>
+                    <td>{{costoGanancia(data.manoDeObra,'precio') | currency:'USD' }}</td>
+                    <td>-</td>
+                    <td>{{costoGanancia(data.manoDeObra,'precio') | currency:'USD' }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Total cotización</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>{{total() | currency:'USD'}}</strong></td>
+                </tr>
+            </table>
+        </div>
+    </p-accordionTab>
+    <p-accordionTab header="Detalle">
+        <p-tabView>
+            <p-tabPanel header="Equipos">
+               <app-cotizacion-equipos [equipos] = "data.equipos"></app-cotizacion-equipos>
+            </p-tabPanel>
+            <p-tabPanel header="Materiales">
+               <app-cotizacion-materiales [materiales]="data.materiales"></app-cotizacion-materiales>
+            </p-tabPanel>
+            <p-tabPanel header="Mano de obra">
+                <app-cotizacion-mano-de-obra></app-cotizacion-mano-de-obra>
+            </p-tabPanel>
+        </p-tabView>
+    </p-accordionTab>
+    
+</p-accordion>
