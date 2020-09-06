@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TipoUnidad, Marca, Material, UnidadMedida } from 'src/app/interfaces/interfaces';
 import { HttpService } from 'src/app/servicios/http.service';
 import { FormGroup } from '@angular/forms';
@@ -7,6 +7,7 @@ import { MarcaHttpService } from 'src/app/servicios/http/marcas.service';
 import { MaterialHttpService } from 'src/app/servicios/http/material.service';
 import { UnidadHttpService } from 'src/app/servicios/http/unidad.service';
 import { ConfirmationService } from 'primeng/api';
+import { TablaComponent } from 'src/app/tabla/tabla.component';
 
 
 declare var swal : any;
@@ -22,7 +23,11 @@ export class MaterialesComponent implements OnInit {
     private marcaHttp: MarcaHttpService,
     private materialHttp: MaterialHttpService,
     private unidadesHttp: UnidadHttpService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService
+    ) { }
+  
+  @ViewChild(TablaComponent,{static: true}) 
+  tabla : TablaComponent;
 
   material: Material;
   materiales:Material[] = [];
@@ -74,12 +79,13 @@ export class MaterialesComponent implements OnInit {
     
   }
 
-  formatMaterial(material: Material){
+  formatMaterial(material: any){
     return {
       id: material.id,
       codigo : material.codigo,
       nombre : material.nombre,
-      unidadMedida : material.unidadMedida.nombre
+      unidadMedida : material.unidadMedida.nombre,
+      precio : material.precio
     };
   }
  

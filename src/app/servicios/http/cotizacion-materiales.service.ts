@@ -4,19 +4,19 @@ import { HOST } from 'src/app/config';
 @Injectable({
   providedIn: 'root'
 })
-export class CotizacionEquiposHttpService {
-  path = 'cotizacionEquipos';
+export class CotizacionMaterialesHttpService {
+  path = 'cotizacionmateriales';
 
   constructor(private http: HttpClient) { }
 
   details(idCotizacion : number){
     return this.http.get(`${HOST}/${this.path}/${idCotizacion}`);
   }
-  update(equipo : any){
-    return this.http.put(`${HOST}/${this.path}`,equipo);
+  update(material : any){
+    return this.http.put(`${HOST}/${this.path}`,material);
   }
-  add(equipo : any){
-    return this.http.post(`${HOST}/${this.path}`,equipo);
+  add(material : any){
+    return this.http.post(`${HOST}/${this.path}`,material);
   }
   delete(id : number){
     return this.http.delete(`${HOST}/${this.path}/${id}`);

@@ -1,1 +1,76 @@
-<p>cotizacion-materiales works!</p>
+<button
+  pButton
+  type="button"
+  label="Agregar material"
+  (click)="display = true"
+></button>
+<div class="mt-5"></div>
+
+<p-table
+  [value]="materiales"
+  [scrollable]="true"
+  scrollHeight="400px"
+  
+  [virtualRowHeight]="34"
+  styleClass="p-datatable-striped p-datatable-sm"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Código</th>
+      <th>Nombre</th>
+      <th>Precio base</th>
+      <th>Precio de venta</th>
+      <th>% ganancia</th>
+      <th>Opción</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-material>
+    <tr>
+      <td>{{ material.codigo }}</td>
+      <td>{{ material.nombre }}</td>
+      <td>{{ material.precioBase | currency: "USD" }}</td>
+      <td>
+        <span class="p-input-icon-right" style="width: 90%">
+          <i *ngIf="material.cargando" class="pi pi-spin pi-spinner"></i>
+          <input
+            pInputText
+            style="width: 95%"
+            [(ngModel)]="material.precioVenta"
+            (keyup)="actualizar(material)"
+          />
+        </span>
+      </td>
+      <td>  
+        <div>
+          {{ (material.precioVenta / material.precioBase) * 100 - 100 | number }}
+        </div>
+      </td>
+      <td>
+        <button
+        class="p-button-rounded p-button-danger p-ripple p-button p-component p-button-icon-only ml-1"
+        type="button"
+        pTooltip="Eliminar"
+        tooltipPosition="top"
+        (click)="delete(material.id)"
+      >
+        <span class="p-button-icon pi pi-trash"></span
+        ><span class="p-button-label"></span>
+      </button>
+      </td>
+      
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div>
+      Total en materiales : {{ sumarPrecioMateriales(materiales) | currency: "USD" }}
+    </div>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  header="Seleccionar material"
+  [(visible)]="display"
+  [style]="{ width: '90vw' }"
+>
+  <app-materiales></app-materiales>
+</p-dialog>

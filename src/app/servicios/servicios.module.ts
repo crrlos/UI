@@ -9,6 +9,7 @@ import { UnidadHttpService } from './http/unidad.service';
 import { VoltajesHttpService } from './http/voltajes.service';
 import { CotizacionesHttpService } from './http/cotizaciones.service';
 import { CotizacionEquiposHttpService } from './http/cotizacion-equipos.service';
+import { CotizacionMaterialesHttpService } from './http/cotizacion-materiales.service';
 
 @NgModule({
   providers: [
@@ -21,7 +22,8 @@ import { CotizacionEquiposHttpService } from './http/cotizacion-equipos.service'
     UnidadHttpService,
     VoltajesHttpService,
     CotizacionesHttpService,
-    CotizacionEquiposHttpService
+    CotizacionEquiposHttpService,
+    CotizacionMaterialesHttpService
   ]
 })
 export class ServiciosModule { }
