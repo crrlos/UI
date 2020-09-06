@@ -56,6 +56,12 @@ export interface Material {
   unidadMedida?: UnidadMedida;
   precioProveedor?: PrecioProveedor[]
 }
+export interface ManoDeObra{
+  id?: number;
+  codigo?: string;
+  descripcion?:string;
+  precio?: number;
+}
 export interface PrecioProveedor{
   codigoMaterial? : string;
   precio? : number;

@@ -22,6 +22,7 @@ import { CotizacionDetalleComponent } from './cotizacion-detalle/cotizacion-deta
 import { CotizacionEquiposComponent } from './cotizacion-detalle/cotizacion-equipos/cotizacion-equipos.component';
 import { CotizacionMaterialesComponent } from './cotizacion-detalle/cotizacion-materiales/cotizacion-materiales.component';
 import { CotizacionManoDeObraComponent } from './cotizacion-detalle/cotizacion-mano-de-obra/cotizacion-mano-de-obra.component';
+import { ManoDeObraComponent } from './mano-de-obra/mano-de-obra.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CotizacionManoDeObraComponent } from './cotizacion-detalle/cotizacion-m
     CotizacionEquiposComponent,
     CotizacionMaterialesComponent,
     CotizacionManoDeObraComponent,
+    ManoDeObraComponent,
   ],
   imports: [
     SharedModule,

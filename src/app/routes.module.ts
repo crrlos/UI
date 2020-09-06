@@ -14,6 +14,7 @@ import { GasComponent } from './paginas/gas/gas.component';
 import { UnidadComponent } from './paginas/unidades/unidades.component';
 import { VoltajesComponent } from './paginas/voltajes/voltajes.component';
 import { CotizacionDetalleComponent } from './paginas/cotizacion-detalle/cotizacion-detalle.component';
+import { ManoDeObraComponent } from './paginas/mano-de-obra/mano-de-obra.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
     { path: 'voltajes', component: VoltajesComponent, data: { titulo: 'Voltajes' } },
     { path: 'equipos', component: EquiposComponent, data: { titulo: 'Equipos' } },
     { path: 'cotizaciones', component: CotizacionesComponent, data: { titulo: 'Cotizaciones' } },
-    { path: 'cotizacionDetalle/:id', component: CotizacionDetalleComponent, data: { titulo: 'Detalle cotización' } }
+    { path: 'cotizacionDetalle/:id', component: CotizacionDetalleComponent, data: { titulo: 'Detalle cotización' } },
+    { path: 'manodeobra', component: ManoDeObraComponent, data: { titulo: 'Mano de obra' } },
   ]}
 ];
 
