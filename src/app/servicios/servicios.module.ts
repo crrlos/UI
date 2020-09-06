@@ -10,6 +10,7 @@ import { VoltajesHttpService } from './http/voltajes.service';
 import { CotizacionesHttpService } from './http/cotizaciones.service';
 import { CotizacionEquiposHttpService } from './http/cotizacion-equipos.service';
 import { CotizacionMaterialesHttpService } from './http/cotizacion-materiales.service';
+import { CotizacionManoDeObraHttpService } from './http/cotizacion-mano-de-obra.service';
 import { ManoDeObraHttpService } from './http/manodeobra.service';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ManoDeObraHttpService } from './http/manodeobra.service';
     CotizacionesHttpService,
     CotizacionEquiposHttpService,
     CotizacionMaterialesHttpService,
+    CotizacionManoDeObraHttpService,
     ManoDeObraHttpService
   ]
 })

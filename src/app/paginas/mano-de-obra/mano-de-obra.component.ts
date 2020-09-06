@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Material, ManoDeObra } from 'src/app/interfaces/interfaces';
 import { FormGroup } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { ManoDeObraHttpService } from 'src/app/servicios/http/manodeobra.service';
+import { TablaComponent } from 'src/app/tabla/tabla.component';
 
 
 declare var swal : any;
@@ -17,6 +18,9 @@ export class ManoDeObraComponent implements OnInit {
     private http: ManoDeObraHttpService,
     private confirmationService: ConfirmationService
     ) { }
+
+    @ViewChild(TablaComponent,{static: true})
+    tabla : any;
   
 
   manoDeObra: ManoDeObra;

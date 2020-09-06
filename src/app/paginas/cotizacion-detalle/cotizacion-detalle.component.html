@@ -31,9 +31,9 @@
                 </tr>
                 <tr>
                     <td>Mano de obra</td>
-                    <td>{{costoGanancia(data.manoDeObra,'precio') | currency:'USD' }}</td>
+                    <td>{{costoGanancia(data.manodeobra,'precio') | currency:'USD' }}</td>
                     <td>-</td>
-                    <td>{{costoGanancia(data.manoDeObra,'precio') | currency:'USD' }}</td>
+                    <td>{{costoGanancia(data.manodeobra,'precio') | currency:'USD' }}</td>
                 </tr>
                 <tr>
                     <td><strong>Total cotización</strong></td>
@@ -53,7 +53,7 @@
                <app-cotizacion-materiales [materiales]="data.materiales"></app-cotizacion-materiales>
             </p-tabPanel>
             <p-tabPanel header="Mano de obra">
-                <app-cotizacion-mano-de-obra></app-cotizacion-mano-de-obra>
+                <app-cotizacion-mano-de-obra [manodeobra] = "data.manodeobra"></app-cotizacion-mano-de-obra>
             </p-tabPanel>
         </p-tabView>
     </p-accordionTab>
