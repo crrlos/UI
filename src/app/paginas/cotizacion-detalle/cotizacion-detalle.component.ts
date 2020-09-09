@@ -50,7 +50,7 @@ export class CotizacionDetalleComponent implements OnInit {
   costoGanancia(coleccion : any[], propiedad : string){
     let costo = 0;
 
-    coleccion.forEach(c => {
+    coleccion?.forEach(c => {
       costo += c[propiedad] * 1;
     });
 
