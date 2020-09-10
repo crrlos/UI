@@ -4,7 +4,7 @@ acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
 
 
 <form #f="ngForm">
-    <p-dialog header="Material" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width':'600px'}">
+    <p-dialog header="Material" [(visible)]="displayDialog" showEffect="fade" [modal]="true" [style]="{'width':'600px'}">
         <div class="ui-g ui-fluid" *ngIf="material">
             <div class="text-danger text-center" *ngIf="errores">Hay campos incompletos</div>
 
@@ -52,3 +52,77 @@ acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
 >
 
 </app-tabla>
+
+<p-dialog [(visible)]="displayEditarPrecio" position="top" [style]="{width: '1000px'}">
+
+  <table class="table">
+    <tr>
+      <th>Código</th>
+      <th>Precio</th>
+      <th>Proveedor</th>
+      <th>Opción</th>
+    </tr>
+    <tr style="background-color: darkgray;">
+      <td>
+        <input type="text" pInputText [(ngModel)] = "precioMaterial.codigo"/>
+      </td>
+      <td>
+        <input type="text" pInputText [(ngModel)] = "precioMaterial.precio"/>
+      </td>
+      <td>
+        <p-dropdown appendTo="body"  name="proveedores" [options]="proveedores" [style]="{'width':'100%'}" 
+        [showClear]="true" placeholder="Seleccione"
+        [(ngModel)] = "precioMaterial.proveedor"
+        optionLabel="nombre"></p-dropdown>
+      </td>
+      <td>
+        <button
+          class="p-button-rounded p-button-info p-ripple p-button p-component p-button-icon-only ml-1"
+          type="button"
+          pTooltip="Agregar"
+          tooltipPosition="top"
+          (click) ="agregarPrecio()"
+        >
+          <span class="p-button-icon pi pi-plus"></span
+          ><span class="p-button-label"></span>
+        </button>
+      </td>
+    </tr>
+    <tr *ngFor="let precioProveedor of materialSeleccionado?.precioProveedor">
+      <td>
+        <input type="text" pInputText [(ngModel)] = "precioProveedor.codigoMaterial"/>
+      </td>
+      <td>
+        <input type="text" pInputText [(ngModel)] = "precioProveedor.precio"/>
+      </td>
+      <td>
+        <p-dropdown appendTo="body"  name="proveedores" 
+        [required]="true" 
+        [options]="proveedores" 
+        [style]="{'width':'100%'}" 
+        [(ngModel)] = "precioProveedor.proveedor"
+        [showClear]="true" placeholder="Seleccione"
+          optionLabel="nombre"></p-dropdown>
+      </td>
+      <td>
+        <button
+          class="p-button-rounded p-button-danger p-ripple p-button p-component p-button-icon-only ml-1"
+          type="button"
+          pTooltip="Eliminar"
+          tooltipPosition="top"
+          (click)="eliminarPrecio(precioProveedor.id)"
+        >
+          <span class="p-button-icon pi pi-trash"></span
+          ><span class="p-button-label"></span>
+        </button>
+      </td>
+    </tr>
+
+    
+  </table>
+
+  
+
+  
+
+</p-dialog>

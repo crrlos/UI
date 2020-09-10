@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Equipo, TipoUnidad, Marca, Tecnologia, Gas, Voltaje } from 'src/app/interfaces/interfaces';
-import { HttpService } from 'src/app/servicios/http.service';
 import { FormGroup } from '@angular/forms';
 import { TiposHttpService } from 'src/app/servicios/http/tipos.service';
 import { MarcaHttpService } from 'src/app/servicios/http/marcas.service';
@@ -9,6 +8,7 @@ import { TecnologiaHttpService } from 'src/app/servicios/http/tecnologias.servic
 import { EquipoHttpService } from 'src/app/servicios/http/equipo.service';
 import { ConfirmationService } from 'primeng/api';
 import { TablaComponent } from 'src/app/tabla/tabla.component';
+import { VoltajesHttpService } from 'src/app/servicios/http/voltajes.service';
 
 declare var swal : any;
 @Component({
@@ -18,7 +18,7 @@ declare var swal : any;
 export class EquiposComponent implements OnInit {
 
   constructor(
-    private http: HttpService, 
+    private voltajesHttp : VoltajesHttpService,
     private tipoHttp: TiposHttpService,
     private marcaHttp: MarcaHttpService,
     private gasHttp: GasHttpService,
@@ -60,7 +60,6 @@ export class EquiposComponent implements OnInit {
       { field: "voltaje", header: "Voltaje" },
       { field: "tecnologia", header: "Tecnología" },
     ],
-    http: this.http,
     data: this.data,
   };
 
@@ -81,7 +80,7 @@ export class EquiposComponent implements OnInit {
       this.tecnologias = tecnologias.tecnologias;
     }
     );
-    this.http.voltajes().subscribe(voltajes => {
+    this.voltajesHttp.filtrar().subscribe(voltajes => {
       this.voltajes = voltajes.voltajes;
     }
     );

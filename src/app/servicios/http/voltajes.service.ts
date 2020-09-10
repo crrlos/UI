@@ -17,9 +17,7 @@ export class VoltajesHttpService {
   eliminar(id: number) {
     return this.http.delete(`${HOST}/voltajes/${id}`);
   }
-  filtrar(event?) {
-    return this.http.get<VoltajeResponse>(`${HOST}/voltajes`, {
-      params: event,
-    });
+  filtrar() {
+    return this.http.get<VoltajeResponse>(`${HOST}/voltajes`);
   }
 }

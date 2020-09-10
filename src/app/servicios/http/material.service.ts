@@ -28,12 +28,9 @@ export class MaterialHttpService {
     
     let m2: any = {};
 
-    //m2.marcaId = material.marca.id;
-    //m2.tipoId = material.tipo.id;
     m2.unidadMedidaId = material.unidadMedida.id;
     m2.codigo = material.codigo;
     m2.nombre = material.nombre;
-    //m2.precio = material.precio * 1;
 
     return this.http.post(`${HOST}/materiales`, m2);
   }
@@ -41,4 +38,19 @@ export class MaterialHttpService {
   eliminar(id:number){
     return this.http.delete(`${HOST}/materiales/${id}`);
   }
+
+  agregarPrecio(data : any){
+
+    data.proveedorId = data.proveedor.id;
+    data.codigoMaterial = data.codigo;
+    delete data.proveedor;
+
+    return this.http.post(`${HOST}/materiales/agregarprecio`,data);
+  }
+  eliminarPrecio(id : number)
+  {
+    return this.http.delete(`${HOST}/materiales/eliminarprecio/?id=${id}`);
+  }
+
+
 }

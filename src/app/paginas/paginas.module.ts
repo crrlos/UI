@@ -42,7 +42,7 @@ import { ManoDeObraComponent } from './mano-de-obra/mano-de-obra.component';
     CotizacionEquiposComponent,
     CotizacionMaterialesComponent,
     CotizacionManoDeObraComponent,
-    ManoDeObraComponent,
+    ManoDeObraComponent
   ],
   imports: [
     SharedModule,

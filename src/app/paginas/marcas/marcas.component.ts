@@ -8,6 +8,7 @@ declare var swal: any;
   templateUrl: "./marcas.component.html",
 })
 export class MarcasComponent implements OnInit {
+
   constructor(
     private http: MarcaHttpService,
     private confirmationService: ConfirmationService

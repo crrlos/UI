@@ -63,6 +63,9 @@ export interface ManoDeObra{
   precio?: number;
 }
 export interface PrecioProveedor{
+  id?: number;
+  proveedorId? : number;
+  materialId?:number;
   codigoMaterial? : string;
   precio? : number;
   nombre? : string;
