@@ -1,4 +1,4 @@
-export const HOST = 'http://rlobos333-001-site1.gtempurl.com';
+export const HOST = 'http://irwincotv1-001-site1.ftempurl.com';
 
 
 export const environment = {
